@@ -1,0 +1,232 @@
+<div bsModal #receiptTenplate="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" *ngIf="this.getToken('role') == 'TRUSTV'">{{'UPLOAD.UploadReceipt'|translate}}
+                </h4>
+                <h4 class="modal-title" *ngIf="this.getToken('role') != 'TRUSTV'">{{'UPLOAD.ViewReceipt'|translate}}
+                </h4>
+
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden=" true">&times;</span>
+                </button>
+            </div>
+            <form class="form-horizontal" #receiptForm="ngForm">
+                <div class="modal-body">
+                    <div class="float-right" *ngIf="!receiptList?.length">
+                        <button type="button" class="btn btn-success" (click)="addReceipt(images, 'ADD', 0)"
+                            data-toggle="modal">{{'COMMON.AddNew' |
+                            translate}}</button>
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table datatable-basic table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                    <th>{{"INVOICE.Attachments"|translate}}</th>
+                                    <th>{{'COMMON.Action'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of receiptList; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data.fileType}}</td>
+                                    <td>{{data?.fileName}}</td>
+                                    <td class="text-center">
+                                        <a href="javascript:;" class="list-icons-item"
+                                            *ngIf="this.getToken('role')=='TRUSTV'"
+                                            (click)="addReceipt(images, 'EDIT', data?.attachmentId)"><i
+                                                data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                class="far fa-edit"></i></a>
+
+
+                                        <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                            (click)="clickReceipt(template,  data?.attachmentId)"><i data-toggle="modal"
+                                                data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a>
+
+                                        <a class="list-icons-item" (click)="deleteReceipt(data?.attachmentId)"
+                                            *ngIf="this.getToken('role')=='TRUSTV'">
+                                            <i data-toggle=" tooltip" tooltip="Delete" class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="odd" *ngIf="(!receiptList?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- row -->
+                    <div class="form-group row" *ngIf="this.getToken('role') == 'TRUSTV'">
+                        <!-- Label for Terms and Conditions -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                        <div class="col-lg-10 col-sm-12 col-form-label">
+                            <p>I hereby agree & confirm that, I have taken enough effort to double check the presented
+                                details here and submitting
+                                details without any favoritism to anyone involved for this activity.</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <div *ngIf="this.getToken('role')!='TRUSTV'">
+                        <h5>{{'MANAGESCHOOL.Approval' | translate }}</h5>
+                        <hr />
+
+                        <div class="form-group row">
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}
+                                <span class="required"> *</span></label>
+                            <div class="form-inline col-md-3" style="margin-bottom: 9px;">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio1" [(ngModel)]="receiptData.status" value="APR"
+                                        name="customRadio" class="custom-control-input" #status="ngModel">
+                                    <label class="custom-control-label" for="customRadio1">{{'COMMON.Approve' |
+                                        translate
+                                        }}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio2" [(ngModel)]="receiptData.status" value="REJ"
+                                        name="customRadio" class="custom-control-input" #status="ngModel">
+                                    <label class="custom-control-label" for="customRadio2">{{'COMMON.Reject' | translate
+                                        }}</label>
+                                </div>
+                            </div>
+                            <div class="error-block" *ngIf="(status.touched && status.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks' |
+                                translate
+                                }}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-sm-12 col-form-label">
+                                <app-nspl-multiline-text [data]="receiptData.remarks" [(ngModel)]="receiptData.remarks"
+                                    [required]="true" placeholder="{{'COMMON.EnterRemarks'|translate}}" name="remarks">
+                                </app-nspl-multiline-text>
+
+                            </div>
+                        </div>
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- Label for Terms and Conditions -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions
+                                :</label>
+                            <div class="col-lg-7 col-sm-12 col-form-label">
+                                <p>I hereby agree & confirm that, I have taken enough effort to double check the
+                                    presented
+                                    details here
+                                    and taking decisions without any favoritism to anyone involved for this activity.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="updateInvoice('UPLOAD')" data-dismiss="modal"
+                        *ngIf="this.getToken('role') == 'TRUSTV'"
+                        [disabled]="!receiptList?.length">{{'COMMON.Submit'|translate}}</button>
+
+                    <button type="button" class="btn btn-primary" (click)="approveReceipt(receiptData)"
+                        data-dismiss="modal" *ngIf="this.getToken('role')!='TRUSTV'"
+                        [disabled]="receiptForm.invalid || isClickedOnce">{{'COMMON.Submit'|translate}}</button>
+
+                    <button type="button" class="btn btn-danger" (click)="clickCancel()"
+                        data-dismiss="modal">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title">View Receipt Image</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="viewReceipt.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal">
+        <div class="modal-body">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngIf="base64Image">
+                        <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                    </div>
+                </div>
+
+                <div class="carousel-inner" *ngIf="!base64Image">
+                    <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="viewReceipt.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /form -->
+</ng-template>
+
+<ng-template #images>
+
+    <div class="modal-header">
+        <h4 class="modal-title">{{'UPLOAD.UploadReceipt'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal" #receiptForm="ngForm">
+        <div class="modal-body">
+            <!-- form group -->
+            <div class="form-group form-group-feedback form-group-feedback-left">
+                <!-- row -->
+                <div class="row">
+                    <!-- Upload -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">Upload
+                        Receipt Images<span class="required"> *</span></label>
+                    <div class="col-lg-9 col-md-12 col-sm-12">
+                        <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                            name="uploadImage" [isErrorMsg]="false" [maxlength]="'1'">
+                        </app-nspl-file-browse>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /form group -->
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" [disabled]="receiptForm.invalid || isSubmitting" class="btn btn-primary"
+                (click)="uploadReceipts()">
+                {{'COMMON.Submit'|translate}}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="addModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /form -->
+
+</ng-template>

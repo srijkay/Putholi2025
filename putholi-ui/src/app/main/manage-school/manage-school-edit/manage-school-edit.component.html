@@ -1,0 +1,658 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home'
+                    | translate}}</span> -
+                {{'MANAGESCHOOL.SchoolAddTitle' | translate}}</h4>
+
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> -
+                {{'MANAGESCHOOL.SchoolEditTitle' | translate}}</h4>
+
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>{{'COMMON.Home' | translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/manage-school/manage-school-list']"
+                    class="breadcrumb-item">
+                    {{'SIDEBAR.ManageSchool' | translate}}</a>
+                <span *ngIf="isNew" class="breadcrumb-item active"> {{'MANAGESCHOOL.SchoolAddTitle' | translate}}</span>
+                <span *ngIf="!isNew" class="breadcrumb-item active"> {{'MANAGESCHOOL.SchoolEditTitle' |
+                    translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">{{'MANAGESCHOOL.SchoolAddTitle' | translate}}
+                    </h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">{{'MANAGESCHOOL.SchoolEditTitle' | translate}}
+                    </h6>
+
+                </div>
+
+            </div>
+        </div>
+        <br />
+
+        <tabset #staticTabs>
+            <tab heading="{{'MANAGESCHOOL.SchoolInformation'|translate}}">
+                <form class="form-horizontal" (ngSubmit)="onSchool(schoolEditform,schoolEditData)"
+                    #schoolEditform="ngForm">
+
+                    <div class="card-body">
+                        <!-- school Information -->
+                        <h5 class="fs-17 mb-0" style="margin-top: -25px;">{{'MANAGESCHOOL.SchoolInformation' |
+                            translate}}
+                        </h5>
+                        <hr />
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for registration number -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="schoolEditData.schoolRegNo" [maxlength]="'25'"
+                                    placeholder="{{'MANAGESCHOOL.RegistrationNumber'| translate}}"
+                                    [disabled]="schoolEditData.schoolStatus=='REJ'?true:false"
+                                    [(ngModel)]=" schoolEditData.schoolRegNo" [required]="true" name="schoolRegNo">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for school name -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="schoolEditData.schoolName" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.SchoolName' | translate}}"
+                                    [(ngModel)]="schoolEditData.schoolName" [required]="true" name="schoolName"
+                                    NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for school type -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ng-select name="schoolType" [items]="schoolTypeList" class="chosen-select"
+                                    bindLabel="description" bindValue="code" [(ngModel)]="schoolEditData.schoolType"
+                                    #schoolType="ngModel" [clearable]='true' [searchable]='false'
+                                    [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select' | translate}}" required
+                                    [ngClass]="{ 'isInvalid': schoolType.touched && schoolType.invalid }">
+                                </ng-select>
+                                <span class="error-block" *ngIf="((schoolType.touched) && schoolType.invalid)">
+                                    This field cannot be left blank
+                                </span>
+                            </div>
+
+                            <!-- label for no.of students -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                                | translate}}
+                                <span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-number [data]="schoolEditData.noOfStudents" [maxlength]="'5'"
+                                    placeholder="{{'MANAGESCHOOL.NumberofStudents' | translate}}" [minvalue]="'1'"
+                                    [(ngModel)]="schoolEditData.noOfStudents" [required]="true" name="noOfStudents"
+                                    appBlockCopyPaste>
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for no.of teachers -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                                | translate}}
+                                <span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-number [data]="schoolEditData.noOfTeachers" [maxlength]="'3'"
+                                    placeholder="{{'MANAGESCHOOL.NumberofTeachers' | translate}}" [minvalue]="'1'"
+                                    [(ngModel)]="schoolEditData.noOfTeachers" [required]="true" name="noOfTeachers"
+                                    appBlockCopyPaste>
+                                </app-nspl-number>
+                            </div>
+
+
+                            <!-- label for Educational District -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                                | translate}}
+                                <span class="required"> *</span></label>
+
+
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ng-select [items]="DistrictList" class="chosen-select"
+                                    placeholder="{{'MANAGESCHOOL.EducationalDistrict' | translate}}" [clearable]='true'
+                                    [searchable]='true' [(ngModel)]="schoolEditData.educationalDistrict"
+                                    bindLabel="description" bindValue="code" [dropdownPosition]="'auto'"
+                                    name="educationalDistrict" #educationalDistrict="ngModel" [disabled]="!isNew"
+                                    required
+                                    [ngClass]="{ 'isInvalid': educationalDistrict.touched && educationalDistrict.invalid}">
+                                </ng-select>
+                                <span class="error-block"
+                                    *ngIf="(educationalDistrict.touched && educationalDistrict.invalid)">
+                                    This field cannot be left blank
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for School Description -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolDescription'
+                                | translate}}
+                                <span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-multiline-text [data]="schoolEditData.schoolDescription" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.SchoolDescription' | translate}}"
+                                    [(ngModel)]="schoolEditData.schoolDescription" [required]="true"
+                                    name="schoolDescription">
+                                </app-nspl-multiline-text>
+                            </div>
+
+
+                            <!-- label for School URL -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolURL'
+                                | translate}}
+                                <span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="schoolEditData.schoolUrl" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.SchoolURL' | translate}}"
+                                    [(ngModel)]="schoolEditData.schoolUrl" [required]="true" name="schoolUrl">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- Contact Information -->
+                        <h5>{{'MANAGESCHOOL.ContactInformation' | translate}}</h5>
+                        <hr />
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Primary Contact Name -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.primaryName" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.PrimaryContactName' | translate}}"
+                                    [(ngModel)]="contactInfo.primaryName" [required]="true" name="primaryName"
+                                    NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for Secondary Contact Name -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.secondaryName" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.SecondaryContactName' | translate}}"
+                                    [(ngModel)]="contactInfo.secondaryName" [required]="true" name="secondaryName"
+                                    NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Primary Contact Number -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-number [data]="contactInfo.primaryNumber" [maxlength]="'10'"
+                                    [minlength]="'10'" placeholder="{{'MANAGESCHOOL.PrimaryMobileNumber' | translate}}"
+                                    [(ngModel)]="contactInfo.primaryNumber" [required]="true" name="primaryNumber"
+                                    appBlockCopyPaste>
+                                </app-nspl-number>
+                            </div>
+
+
+                            <!-- label for secondary Contact Number -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-number [data]="contactInfo.secondaryNumber" [maxlength]="'10'"
+                                    [minlength]="'10'" [(ngModel)]="contactInfo.secondaryNumber" [required]="true"
+                                    placeholder="{{'MANAGESCHOOL.SecondaryMobileNumber' | translate}}"
+                                    name="secondaryNumber" appBlockCopyPaste>
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Primary Contact email -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.primaryEmail" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.PrimaryContactEmail' | translate}}"
+                                    [(ngModel)]="contactInfo.primaryEmail" [required]="true" name="primaryEmail"
+                                    [controlInput]="'Email'">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for Secondary Contact email -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.secondaryEmail" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.SecondaryContactEmail' | translate}}"
+                                    [(ngModel)]="contactInfo.secondaryEmail" [required]="true" name="secondaryEmail"
+                                    [controlInput]="'Email'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Primary Contact Designation -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryRole'
+                                | translate}} <span class="required">*</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.primaryDesignation"
+                                    placeholder="{{'MANAGESCHOOL.PrimaryRole' | translate}}"
+                                    [(ngModel)]="contactInfo.primaryDesignation" [required]="true"
+                                    name="primaryDesignation" [maxlength]="'255'" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for Secondary Contact designation -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryRole'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="contactInfo.secondaryDesignation"
+                                    placeholder="{{'MANAGESCHOOL.SecondaryRole' | translate}}"
+                                    [(ngModel)]="contactInfo.secondaryDesignation" [required]="true"
+                                    name="secondaryDesignation" [maxlength]="'255'" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                        <!-- /contact information -->
+
+
+                        <!-- Address Information -->
+                        <h5>{{'MANAGESCHOOL.AddressInformation' | translate}}</h5>
+                        <hr />
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for address 1 -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="addressInfo.addressLine1" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.AddressLine1' | translate}}"
+                                    [(ngModel)]="addressInfo.addressLine1" [required]="true" name="addressLine1">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for address 2 -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2'
+                                |
+                                translate}}</label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="addressInfo.addressLine2" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.AddressLine2' | translate}}"
+                                    [(ngModel)]="addressInfo.addressLine2" name="addressLine2">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for locality -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'
+                                |
+                                translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="addressInfo.locality" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.Locality' | translate}}" NsplAplhaWithSpac
+                                    [(ngModel)]="addressInfo.locality" [required]="true" name="locality">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for city -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' |
+                                translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="addressInfo.city" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.City' | translate}}" [(ngModel)]="addressInfo.city"
+                                    [required]="true" name="city" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for District -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'
+                                |
+                                translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ng-select [items]="DistrictList" class="chosen-select"
+                                    placeholder="{{'MANAGESCHOOL.District'|translate}}" [clearable]='true'
+                                    [searchable]='true' [(ngModel)]="addressInfo.district" bindLabel="description"
+                                    bindValue="code" [dropdownPosition]="'auto'" name="district" #district="ngModel"
+                                    [disabled]="schoolEditData.schoolStatus=='REJ'?true:false" required
+                                    [ngClass]="{ 'isInvalid': district.touched && district.invalid}">
+                                </ng-select>
+                                <span class="error-block" *ngIf="(district.touched && district.invalid)">
+                                    This field cannot be left blank
+                                </span>
+                            </div>
+
+                            <!-- label state -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State'
+                                |
+                                translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="addressInfo.state" placeholder="Tamil Nadu"
+                                    [(ngModel)]="addressInfo.state" [disabled]="true" name="state" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Country  -->
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country'|translate}}<span
+                                    class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ng-select [items]="countryList" class="chosen-select"
+                                    placeholder="{{'MANAGESCHOOL.Country'|translate}}" [clearable]='true'
+                                    [searchable]='false' [(ngModel)]="addressInfo.country" bindLabel="description"
+                                    bindValue="code" [dropdownPosition]="'auto'" name="country" #country="ngModel"
+                                    disabled [ngClass]="{ 'isInvalid': country.touched && country.invalid }">
+                                </ng-select>
+                                <span class="error-block" *ngIf="(country.touched && country.invalid)">
+                                    {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                                </span>
+                            </div>
+
+                            <!-- label for pincode -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                                translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <app-nspl-number [data]="addressInfo.pincode"
+                                    placeholder="{{'MANAGESCHOOL.Pincode' | translate}}"
+                                    [(ngModel)]="addressInfo.pincode" [required]="true" name="pincode" [maxlength]="'6'"
+                                    [minlength]="'6'" appBlockCopyPaste>
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <div class="form-group row"
+                            *ngIf="this.getToken('role')=='BENIF' && schoolEditData?.schoolStatus == 'REJ' && !isNew">
+                            <!-- label for Comments  -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                                {{'MANAGESCHOOL.MessageToTrust'| translate}}
+                                <span class="required"> *</span></label>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <app-nspl-multiline-text [data]="schoolEditData.comments" [maxlength]="'255'"
+                                    placeholder="{{'MANAGESCHOOL.Comments' | translate}}"
+                                    [(ngModel)]="schoolEditData.comments" [required]="true" name="comments">
+                                </app-nspl-multiline-text>
+                            </div>
+                        </div>
+
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+
+                                        <button type="submit" [disabled]="schoolEditform.invalid"
+                                            class="btn btn-primary">{{'APPROVALWORKFLOW.Save&Continue'|translate}}
+                                        </button>&nbsp;&nbsp;
+
+                                        <button type="button" class="btn btn-danger"
+                                            [routerLink]="['/main/manage-school/manage-school-list']">
+                                            {{'COMMON.Cancel'|translate}}
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </tab>
+
+            <tab heading="{{'MANAGESCHOOL.UploadSchoolImages'|translate}}">
+                <div class="card-body">
+                    <div class="float-right">
+                        <button type="button" class="btn btn-success" (click)="addSchoolImages(images, 'ADD', 0)"
+                            data-toggle="modal" *ngIf="preImages.length<5">{{'COMMON.AddSchoolImages' |
+                            translate}}</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <br />
+                        <table class="table datatable-basic table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                    <th>{{"INVOICE.Attachments"|translate}}</th>
+                                    <th>{{'COMMON.Action'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of preImages; index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data?.fileType}}</td>
+                                    <td>{{data?.fileName}}</td>
+                                    <td class="text-center">
+                                        <a href="javascript:;" class="list-icons-item"
+                                            (click)="addSchoolImages(images, 'EDIT', data?.attachmentId)"><i
+                                                data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                class="far fa-edit"></i></a>
+                                        <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                            (click)="clickPreImages(template, 'VIEW', data?.attachmentId)"><i
+                                                data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                class="far fa-eye"></i></a>
+
+                                        <a href="javascript:;" class="list-icons-item"
+                                            (click)="deletePreImages(data?.attachmentId)">
+                                            <i data-toggle="tooltip" tooltip="Delete" class="far fa-trash-alt"></i></a>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr class="odd" *ngIf="(!preImages?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                        <div class="col-lg-10 col-sm-12 col-form-label">
+                            <p>I hereby agree & confirm that, I have taken enough effort to double check the presented
+                                details here and submitting details without any favoritism to anyone involved for this
+                                activity.</p>
+                        </div>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <button type="button" (click)="gotoHome()" class="btn btn-primary"
+                                        [disabled]="isClickedSubmitted">
+                                        {{'COMMON.Submit'|translate}}
+                                    </button> &nbsp;
+
+                                    <button type="button" class="btn btn-danger" (click)="onClickPrevoius()">
+                                        {{'COMMON.Back'|translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>
+<!-- /content area -->
+
+<!-- Upload Image PopUp area -->
+<ng-template #images>
+    <div class="modal-header">
+        <h4 *ngIf="isAddImage" class="modal-title">{{'MANAGESCHOOL.AddSchoolImages' | translate}}</h4>
+        <h4 *ngIf="!isAddImage" class="modal-title">{{'MANAGESCHOOL.EditSchoolImages' | translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal" #requiredEditForm="ngForm">
+        <div class="modal-body">
+
+            <div class="form-group row">
+
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                    {{'DEORESPONSE.UploadPicture'|translate}} <span class="required">*</span></label>
+                <div class="col-lg-9 col-md-12 col-sm-12">
+
+                    <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                        name="uploadPicture" [maxlength]="'1'" [accept]="'image/png, image/jpg, image/jpeg'"
+                        [allowedExtensions]="['.png', '.jpg', '.jpeg']" [allowedExtensions]="['.png', '.jpg', '.jpeg']">
+                    </app-nspl-file-browse>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" [disabled]="isClickedOnce || uploadImage==null || this.uploadImage[0] == undefined"
+                class="btn btn-primary" *ngIf="isAddImage" (click)="saveSchoolImages(schoolEditData)">{{'COMMON.Submit'
+                | translate}}</button>
+
+            <button type="submit" [disabled]="requiredEditForm.invalid" class="btn btn-primary" *ngIf="!isAddImage"
+                (click)="saveSchoolImages(schoolEditData)">{{'COMMON.Update' | translate}}</button>
+
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="addModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+
+    </form>
+    <!-- /form -->
+</ng-template>
+<!-- /Upload Image PopUp area -->
+
+<!-- View PopUp area -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title">{{'MANAGESCHOOL.ViewSchoolImages' | translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="quotateModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" *ngIf="base64Image">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                </div>
+            </div>
+
+            <div class="carousel-inner" *ngIf="!base64Image">
+                <iframe [src]="transform()" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- /form -->
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+            (click)="quotateModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+    </div>
+</ng-template>
+<!-- /View PopUp area -->

@@ -1,0 +1,237 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="this.getToken('role')!= 'TRUSTV'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'COMMON.PendingWorkflow'|translate}}</h4>
+            <h4 *ngIf="this.getToken('role')== 'TRUSTV'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SIDEBAR.ManageRequirement'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+    </div>
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span *ngIf="this.getToken('role')!= 'TRUSTV'"
+                    class="breadcrumb-item active">{{'COMMON.PendingWorkflow'|translate}}</span>
+                <span *ngIf="this.getToken('role')== 'TRUSTV'" class="breadcrumb-item active">
+                    {{'SIDEBAR.ManageRequirement'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 *ngIf="this.getToken('role')!= 'TRUSTV'" class="card-title">
+                        {{'COMMON.PendingWorkflow'|translate}}</h5>
+                    <h5 *ngIf="this.getToken('role')== 'TRUSTV'" class="card-title">
+                        {{'SIDEBAR.ManageRequirement'|translate}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <br />
+            <!-- <div class="float-right">
+                <div class="col-md-12">
+                    <input class='form-control text' type="text" name="genericSearchData"
+                        [(ngModel)]="filterObj.genericSearchData" (keyup)="applyFilter()" placeholder="Search"
+                        id="genericSearchData" required #genericSearchData="ngModel" autocomplete="off" />
+                </div>
+            </div> -->
+            <div class="table-responsive" *ngIf="this.getToken('role')!='TRUSTV'">
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.RegistrationNumber'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'schoolRegNo'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}</th>
+                            <th>{{'MANAGESCHOOL.SchoolName' | translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolType' | translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'schoolType'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            <th>{{'MANAGEUSER.ContactNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'primaryContact'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.Locality'|translate}}</th>
+                            <th>{{'COMMON.Status' | translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'status'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of consolidateList">
+
+                            <td>{{data?.schoolRegNo}}</td>
+                            <td>{{data?.consolidateId}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.schoolType}}</td>
+                            <td>{{data?.primaryContact}}</td>
+                            <td>{{data?.locality}}</td>
+
+                            <!-- <td *ngIf="this.getToken('role')!='ADMIN'">
+                                <span class="badge badge-warning">{{data?.status}}</span>
+
+                            </td> -->
+                            <td>
+                                <span class="badge badge-warning">{{data?.status}}</span>
+
+                            </td>
+                            <!-- <td *ngIf="data?.status=='Volunteer Rejected'"> <span
+                                    class="badge badge-danger">{{data?.status}}</span></td> -->
+
+                            <td class="text-center" *ngIf="this.getToken('role')=='ADMIN'">
+                                <a href="javascript:;" class="list-icons-item tdata" tooltip="Send Mail to DEO"
+                                    *ngIf="data?.consolidateStatusCode=='APR'"
+                                    [routerLink]="['/main/email-send/', data?.schoolInfoId, data?.createdBy]"> <i
+                                        class="icon-envelope"></i></a>
+
+                                <a href="javascript:;" class="list-icons-item tdata" tooltip="Upload DEO Response"
+                                    *ngIf="data?.consolidateStatusCode=='ADMDEO'"
+                                    [routerLink]="['/main/deo-response/', data?.schoolInfoId, data?.createdBy]"> <i
+                                        class="icon-file-upload2"></i></a>
+
+                                <a href="javascript:;" class="list-icons-item tdata" tooltip="Resend Mail to DEO"
+                                    *ngIf="data?.consolidateStatusCode=='ADMDEO'"
+                                    [routerLink]="['/main/email-send/', data?.schoolInfoId, data?.createdBy]"> <i
+                                        class="icon-envelope"></i></a>
+
+                                <a href="javascript:;" class="list-icons-item" tooltip="Assign Volunteer to School"
+                                    *ngIf="data?.consolidateStatusCode=='DEOAPR'|| data?.consolidateStatusCode=='VOLREJ'"
+                                    [routerLink]="['/main/assign-volunteer/', data?.schoolInfoId]"><i
+                                        class="fa fa-user-pen"></i></a>
+                            </td>
+                            <td class="text-center" *ngIf="this.getToken('role')!='ADMIN'">
+                                <a href="javascript:;" class="list-icons-item tdata" tooltip="Review DEO Response"
+                                    [routerLink]="['/main/deo-response/', data?.schoolInfoId, data?.createdBy]"> <i
+                                        class="icon-file-upload2"></i></a>
+                            </td>
+                        </tr>
+                        <tr class="odd" *ngIf="(!consolidateList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive" *ngIf="this.getToken('role')=='TRUSTV'">
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.SchoolID'|translate}}</th>
+                            <th>{{'MANAGESCHOOL.SchoolName'|translate}}</th>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}</th>
+                            <th>{{'REQUIREMENT.RequirementId'|translate}}</th>
+                            <th> {{'REQUIREMENT.RequirementType' | translate}}</th>
+                            <th>{{'REQUIREMENT.PendingAmount'|translate}}</th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th>{{'COMMON.Action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of reqInfo">
+                            <td>{{data?.schoolInfoId}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.consolidateId}}</td>
+                            <td>{{data?.requirementId}}</td>
+                            <td>{{data?.requirementType=='NE'?'New':'Maintenance'}}</td>
+                            <td>{{data?.pendingAmount}}</td>
+                            <td
+                                *ngIf="data.reqStatusCode != 'PARREJ' && data?.reqStatusCode !='REJINV' && data?.reqStatusCode !='REJQUO' && data?.reqStatusCode !='RECREJ' && data?.reqStatusCode !='PAYFAL' && data?.reqStatusCode !='PARFAL'">
+                                <span class="badge badge-success">{{data?.reqStatus}}</span>
+                            </td>
+                            <td
+                                *ngIf="data.reqStatusCode == 'PARREJ' || data?.reqStatusCode =='REJINV' || data?.reqStatusCode =='REJQUO' || data?.reqStatusCode =='RECREJ' || data?.reqStatusCode =='PAYFAL'||data?.reqStatusCode =='PARFAL'">
+                                <span class="badge badge-danger">{{data?.reqStatus}}</span>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;"
+                                    *ngIf="(data?.reqStatusCode!='QUOARV'&& data?.reqStatusCode != 'REVQUO' && data?.reqStatusCode != 'APRQUO' && data?.reqStatusCode != 'REDALL'&& data?.reqStatusCode != 'GNRORD'&& data?.reqStatusCode!='INVREV' && data?.reqStatusCode!='INVAPR' && data?.reqStatusCode!='APRREC' && data?.reqStatusCode!='PARAPR')||data?.reqStatusCode=='VOLACP'"
+                                    tooltip="Upload Quotations / Invoices" class="list-icons-item"
+                                    (click)="onClick(data?.schoolInfoId, data?.requirementId, 'Q', data?.pendingAmount)">
+                                    <i class="fas fa-file-upload"></i>
+                                </a>
+
+                                <a href="javascript:;"
+                                    (click)="onClick(data?.schoolInfoId, data?.requirementId, 'Q', data?.pendingAmount)"
+                                    tooltip="view Quotations and invoices" class="list-icons-item"
+                                    *ngIf="data?.reqStatusCode =='QUOARV' || data?.reqStatusCode == 'REVQUO' || data?.reqStatusCode == 'APRQUO' || data?.reqStatusCode == 'REDALL'|| data?.reqStatusCode == 'GNRORD'|| data?.reqStatusCode=='INVREV'|| data?.reqStatusCode=='INVAPR' || data?.reqStatusCode=='APRREC' || data?.reqStatusCode=='PARAPR'">
+                                    <i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        <tr class="odd" *ngIf="(!reqInfo?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /content area -->
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

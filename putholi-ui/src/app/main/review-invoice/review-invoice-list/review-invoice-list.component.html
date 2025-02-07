@@ -1,0 +1,104 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SIDEBAR.ReviewInvoice'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'UPLOAD.ReviewInvoice'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'SIDEBAR.ReviewInvoice'|translate}}</h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.SchoolID'|translate}}</th>
+                            <th>{{'MANAGESCHOOL.SchoolName'|translate}}</th>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}</th>
+                            <th>{{'REQUIREMENT.RequirementId'|translate}}</th>
+                            <th>{{'REQUIREMENT.AssetType' | translate}}</th>
+                            <th>{{'REQUIREMENT.AssetName' | translate}}</th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th>{{'COMMON.Action'|translate}}</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of reviewInvoice">
+                            <td>{{data?.schoolInfoId}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.consolidateId}}</td>
+                            <td>{{data?.requirementId}}</td>
+                            <td>{{data?.assetType}}</td>
+                            <td>{{data?.assetName}}</td>
+                            <td> <span class="badge badge-warning">{{data?.reqStatus}}</span></td>
+                            <td class="text-center">
+                                <a href="javascript:;" *ngIf="data?.reqStatus!='Upload Receipt'"
+                                    (click)="onClick(data?.schoolInfoId, 'IA', data?.requirementId)"
+                                    tooltip="Review Invoice" class="list-icons-item"> <i class="fa fa-edit"></i></a>
+
+                                <a href="javascript:;" *ngIf="data?.reqStatus=='Upload Receipt'"
+                                    (click)="onClick(data?.schoolInfoId, 'UR', data?.requirementId)"
+                                    tooltip="Review Receipt" class="list-icons-item"> <i class="fa fa-edit"></i></a>
+
+                            </td>
+
+                        </tr>
+                        <tr class="odd" *ngIf="(!reviewInvoice?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+<!-- /content area -->

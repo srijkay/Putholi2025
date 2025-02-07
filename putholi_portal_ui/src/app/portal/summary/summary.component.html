@@ -1,0 +1,271 @@
+<!-- ======= Header ======= -->
+<div>
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+        <div class="container d-flex align-items-center">
+            <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                    class="img-fluid"></a>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                    <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                            <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                            <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                            <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                            <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                            <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                            <!-- <li><a href="#" class="nav-link scrollto">Working Model</a></li> -->
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                            <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+                  <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                        </ul>
+                    </li>
+                    <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                            <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                            <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                    <li><a class="nav-link scrollto" href="javascript:;"
+                            [routerLink]="['/portal/trackingdonation']">Track
+                            Money</a></li>
+                    <li><a class="nav-link active scrollto" href="javascript:;"
+                            [routerLink]="['/portal/school-list']">Donate</a>
+                    </li>
+                    <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+
+    <!-- Start #main -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="titleparent">
+                        <div class="titleleft margin-right-auto">
+                            <h2>Summary</h2>
+                        </div>
+                        <div class="titleright">
+                            <ol>
+                                <li><a href="javascript:;" [routerLink]="['/portal/donate/',schoolInfoId]">Donate
+                                        Now</a>
+                                </li>
+                                <li>Summary</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+
+        <!-- ======= Portfolio Details Section ======= -->
+        <section id="portfolio-details" class="portfolio-details">
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-12" style="margin-bottom:40px;">
+                        <div class="portfolio-info">
+                            <h3>Summary of Payment details</h3>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Donor First Name</td>
+                                                    <td>{{summaryList?.firstName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Donor Last Name</td>
+                                                    <td>{{summaryList?.lastName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Donor Email ID</td>
+                                                    <td>{{summaryList?.emailId}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Donor Phone Number</td>
+                                                    <td>{{summaryList?.phoneNumber}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>School Name</td>
+                                                    <td>{{schoolDetails?.schoolName}}</td>
+                                                </tr>
+
+                                                <tr *ngIf="applConfigData.paymentMode">
+                                                    <td>Donated Amount</td>
+                                                    <td *ngIf="applConfigData.paymentMode!='OPTUPI'"> Donation Amount :
+                                                        <b>
+                                                            {{this.getToken('donatedAmount')}}</b><br />
+                                                        <span>Bank Processing Fee:
+                                                            <b>{{applConfigData.configValue}}</b> </span><br />
+                                                        Amount to School : <b> {{Contribute -
+                                                            (applConfigData.configValue)}}</b><br />
+
+                                                    </td>
+
+                                                    <td *ngIf="applConfigData.paymentMode=='OPTUPI'"> Donation Amount :
+                                                        <b>
+                                                            {{this.getToken('donatedAmount')}}</b><br />
+                                                        Bank Processing Fee:
+                                                        <b>0</b><br />
+                                                        Amount to School : <b> {{Contribute -
+                                                            0}}</b><br />
+
+                                                    </td>
+
+
+                                                </tr>
+
+
+                                                <tr *ngIf="!applConfigData.paymentMode">
+                                                    <td>Donated Amount</td>
+                                                    <td> Donation Amount :
+                                                        <b> {{this.getToken('donatedAmount')}}</b>
+                                                        <br />
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Requirements</td>
+                                                    <td><strong *ngFor="let data of requirementInfo; last as l">
+                                                            {{data?.assetName}} {{l?'':', '}}
+                                                        </strong></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Payment Mode</td>
+                                                    <td>
+                                                        <!-- label for credit card -->
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadio1"
+                                                                [(ngModel)]="applConfigData.paymentMode" value="OPTCRDC"
+                                                                name="customRadio" #paymentMode="ngModel"
+                                                                class="custom-control-input" required>
+                                                            &nbsp;
+                                                            <label class="custom-control-label"
+                                                                for="customRadio1">Credit Card</label>
+                                                        </div>
+
+                                                        <!-- label for debit card -->
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadio2"
+                                                                [(ngModel)]="applConfigData.paymentMode"
+                                                                value="OPTDBCRD" name="customRadio"
+                                                                #paymentMode="ngModel" class="custom-control-input"
+                                                                required> &nbsp;
+                                                            <label class="custom-control-label" for="customRadio2">Debit
+                                                                Card</label>
+                                                        </div>
+
+
+                                                        <!-- label for net baking -->
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadio3"
+                                                                [(ngModel)]="applConfigData.paymentMode" value="OPTNBK"
+                                                                name="customRadio" #paymentMode="ngModel"
+                                                                class="custom-control-input" required> &nbsp;
+                                                            <label class="custom-control-label" for="customRadio3">Net
+                                                                Banking</label>
+                                                        </div>
+
+                                                        <!-- label for upi -->
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadio4"
+                                                                [(ngModel)]="applConfigData.paymentMode" value="OPTUPI"
+                                                                name="customRadio" #paymentMode="ngModel"
+                                                                class="custom-control-input" required> &nbsp;
+                                                            <label class="custom-control-label"
+                                                                for="customRadio4">UPI/Gpay/Phone Pe</label>
+                                                        </div>
+
+
+                                                        <!-- label for neft-rtgs -->
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadio5"
+                                                                [(ngModel)]="applConfigData.paymentMode"
+                                                                value="NEFT-RTGS" name="customRadio"
+                                                                #paymentMode="ngModel" class="custom-control-input"
+                                                                required> &nbsp;
+                                                            <label class="custom-control-label"
+                                                                for="customRadio5">NEFT-RTGS</label>
+                                                        </div>
+
+                                                        <!-- /row -->
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- row -->
+                            <div class="row mb-3">
+                                <div class="col-sm-2">
+                                    <button class="form-button" href="javascript:;" (click)="clickPayment()">Pay
+                                        Now</button>
+                                </div>
+                                <!-- 
+                                <div class="col-sm-6" *ngIf="paymentData.paymentType=='UPI'">
+                                   <img src="assets/img/scanner_page.jpg" height="600" width="550">
+                                </div> -->
+
+                                <div class="col-sm-2">
+                                    <button class="form-button" href="javascript:;"
+                                        [routerLink]="['/portal/donate/', schoolInfoId]">Cancel</button>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Portfolio Details Section -->
+
+    </main>
+    <!-- End #main -->
+
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="section-bg">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="http://newrta.com/">NEWRTA</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End  Footer -->
+
+</div>

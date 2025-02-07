@@ -1,0 +1,160 @@
+<!-- page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{"COMMON.Home"|translate}} -
+                    {{'SIDEBAR.Reports'|translate}}</span></h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home' | translate }}</a>
+                <!-- <a href="javascript:;" [routerLink]="['/main/pending-workflow']" class="breadcrumb-item">
+                    {{'COMMON.PendingWorkflow'|translate}}</a> -->
+                <span class="breadcrumb-item active"> {{'SIDEBAR.Reports'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+
+        <!-- card-header -->
+        <div class="card-header">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center col-md-10">
+                    <h6 class="fs-17 font-weight-600 mb-0">Approved Vendor's Report</h6>
+                </div>
+
+                <div class="pull-right">
+                    <app-nspl-table-export [totalRecordCount]="totalRecordCount" [tableName]="quotationTableList"
+                        [fileName]="nameofthefile" [noOfRecordsPerPage]="noOfRecordsPerPage" [pageNo]=page>
+                    </app-nspl-table-export>
+                </div>
+            </div>
+        </div>
+        <!-- /card-header -->
+
+        <div class="card-body">
+
+
+            <div class="table-responsive">
+                <br />
+                <table id="quotationTableList" class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{"QUOTATION.CompanyName"|translate}}</th>
+                            <th>{{"QUOTATION.Address"|translate}}</th>
+                            <th>{{'QUOTATION.PhoneNumber' |translate}}</th>
+                            <th>{{'UPLOAD.QuotationBy'|translate}}</th>
+                            <th>{{'QUOTATION.QuotationDate'|translate}}</th>
+                            <th>{{'REQUIREMENT.TotalAmount'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX"
+                            *ngFor="let data of quotationInfoList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td>{{data?.companyName}}</td>
+                            <td>{{data?.address}}</td>
+                            <td>{{data?.phoneNumber}}</td>
+                            <td>{{data?.quotationPreparedBy}}</td>
+                            <td>{{data?.quotationDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                            <td>{{data?.totalAmount|number : '1.2-2'}}</td>
+
+                        </tr>
+                        <tr class="odd" *ngIf="(!quotationInfoList?.length)  ">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <div style="float: right;" *ngIf="quotationInfoList.length > 0">
+                    <ngb-pagination [collectionSize]="quotationInfoList.length" [(page)]="page" [pageSize]="pageSize"
+                        [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center col-md-10">
+                    <h6 class="fs-17 font-weight-600 mb-0">Unapproved Vendor's Report</h6>
+                </div>
+
+                <div class="pull-right">
+                    <app-nspl-table-export [totalRecordCount]="totalRecordCount" [tableName]="quotationTableList"
+                        [fileName]="nameofthefile" [noOfRecordsPerPage]="noOfRecordsPerPage" [pageNo]=page>
+                    </app-nspl-table-export>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <br />
+                <table id="unapprovedInfoList" class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{"QUOTATION.CompanyName"|translate}}</th>
+                            <th>{{"QUOTATION.Address"|translate}}</th>
+                            <th>{{'QUOTATION.PhoneNumber' |translate}}</th>
+                            <th>{{'UPLOAD.QuotationBy'|translate}}</th>
+                            <th>{{'QUOTATION.QuotationDate'|translate}}</th>
+                            <th>{{'REQUIREMENT.TotalAmount'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX"
+                            *ngFor="let data of unapprovedVendorsInfo| slice: (pageNumber-1) * pagesize : (pageNumber-1) * pagesize + pagesize">
+                            <td>{{data?.companyName}}</td>
+                            <td>{{data?.address}}</td>
+                            <td>{{data?.phoneNumber}}</td>
+                            <td>{{data?.quotationPreparedBy}}</td>
+                            <td>{{data?.quotationDate|date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                            <td>{{data?.totalAmount|number : '1.2-2'}}</td>
+                        </tr>
+                        <tr class="odd" *ngIf="(!unapprovedVendorsInfo?.length)  ">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                <br />
+                <div style="float: right;" *ngIf="unapprovedVendorsInfo.length > 0">
+                    <ngb-pagination [collectionSize]="unapprovedVendorsInfo.length" [(page)]="pageNumber"
+                        [pageSize]="pagesize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Content area -->

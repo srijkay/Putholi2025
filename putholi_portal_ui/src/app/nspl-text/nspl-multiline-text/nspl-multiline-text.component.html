@@ -1,0 +1,7 @@
+<textarea class="form-control" [attr.minlength]="minlength" [attr.maxlength]="maxlength" [rows]="rows" [cols]="cols"
+    [(ngModel)]="data" [disabled]="disabled" autocomplete="off" (change)="onChange()" (input)="onChange()"
+    [placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur(data)" pattern="/^[_'.A-Za-z0-9-]*$/"
+    [ngStyle]="styleObject()"></textarea>
+<span ng-show="Error != null" class="help-block-error">{{Error}}</span>
+
+<!-- style="background-color:{{bgColor}};border-color:{{boColor}};text-transform: {{textTransformation}}; max-width:100%;" -->

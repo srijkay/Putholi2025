@@ -1,0 +1,186 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> -
+                Email Settings Add</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> -
+                Email Settings Edit</h4>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    Home</a>
+                <a href="javascript:;" [routerLink]="['/main/email-settings/email-list']" class="breadcrumb-item">
+                    Email Settings</a>
+
+                <span *ngIf="isNew" class="breadcrumb-item active">Email Settings Add</span>
+                <span *ngIf="!isNew" class="breadcrumb-item active">Email Settings Edit</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">Email Add</h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">Email Edit</h6>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <form class="form-horizontal" (ngSubmit)="onEmail(emailSettingform,emailSettingData)"
+            #emailSettingform="ngForm">
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Host  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Host
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="emailSettingData.host" placeholder="Host"
+                                [(ngModel)]="emailSettingData.host" [required]="true" name="host" NsplAphaOnly>
+                            </app-nspl-text>
+
+                        </div>
+                        <!-- Username  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Username
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="emailSettingData.username" placeholder="username"
+                                [(ngModel)]="emailSettingData.username" [required]="true" name="username" NsplAphaOnly>
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Password  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Password
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <input [type]="show?'text':'password'" class="form-control" name="password" id="password"
+                                placeholder="Password" [(ngModel)]="emailSettingData.password" [required]="true"
+                                #password="ngModel" autocomplete="off"
+                                [ngClass]="{ 'isInvalid': (password.touched) && password.invalid }" maxlength="25" />
+                            <span style="position:absolute; right:31px; top:9px; cursor: pointer;"
+                                (click)="onClick('secret')">
+                                <i class="fa fa-eye" style="color: black" *ngIf="!show"></i>
+                                <i class="fa fa-eye-slash" style="color: black" aria-hidden="true" *ngIf="show"></i>
+                            </span>
+                        </div>
+                        <!-- Email  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Email
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="emailSettingData.emailSet" placeholder="Email Set"
+                                [(ngModel)]="emailSettingData.emailSet" [required]="true" name="emailSet"
+                                [controlInput]="'Email'">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- From Email  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">From Email
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="emailSettingData.fromEmail" placeholder="From Email"
+                                [(ngModel)]="emailSettingData.fromEmail" [required]="true" name="fromEmail"
+                                [controlInput]="'Email'">
+                            </app-nspl-text>
+                        </div>
+                        <!-- Port  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Port
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="emailSettingData.port" placeholder="port"
+                                [(ngModel)]="emailSettingData.port" [required]="true" name="port">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Protocol  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Protocol
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="protocol" [items]="protocolList" class="chosen-select" bindLabel="name"
+                                bindValue="code" [(ngModel)]="emailSettingData.protocol" #protocol="ngModel"
+                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'" placeholder="select"
+                                [required]="true">
+                            </ng-select>
+                        </div>
+                        <!-- Status  -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Status
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="status" [items]="statusList" class="chosen-select" bindLabel="name"
+                                bindValue="code" [(ngModel)]="emailSettingData.status" #status="ngModel"
+                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'" placeholder="select"
+                                [required]="true">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+
+                </div>
+                <!-- /Form Body -->
+
+            </div>
+            <!-- /Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button class="btn btn-primary" [disabled]="emailSettingform.invalid" href="javascript:;"
+                    type="submit">Create</button>&nbsp;&nbsp;
+                <button class="btn btn-info" [disabled]="emailSettingform.invalid" href="javascript:;"
+                    type="submit">Test</button>&nbsp;&nbsp;
+                <button [routerLink]="['/main/email-settings/email-list']" class="btn btn-danger"
+                    type="button">Cancel</button>
+            </div>
+            <!-- /Card Footer -->
+        </form>
+        <!-- /Form -->
+
+    </div>
+
+
+
+</div>
+<!-- /content area -->

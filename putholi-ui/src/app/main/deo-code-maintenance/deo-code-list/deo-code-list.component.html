@@ -1,0 +1,277 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'DEOCODEMAINTENANCE.DeoCodeMaintenance'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" class="breadcrumb-item" [routerLink]="['/main/dashboard']"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'DEOCODEMAINTENANCE.DeoCodeMaintenance'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- row -->
+                <div class="row">
+                    <!-- Code -->
+                    <div class="col-md-2">
+                        <label class="col-md-3 control-label">{{'DEOCODEMAINTENANCE.City'|translate}}</label>
+                    </div>
+                    <div class="col-md-8">
+
+                        <ng-select [items]="DeoCodesArray" class="my-calendar" bindLabel="city" bindValue="code"
+                            [searchable]='false' [clearable]='false' name="city" #city="ngModel"
+                            placeholder="{{'DEOCODEMAINTENANCE.City'|translate}}" [(ngModel)]="deoSelectCode.city">
+                        </ng-select>
+
+                    </div>
+
+                </div>
+                <!-- /row -->
+            </div>
+            <br>
+            <div class="col-md-6">
+                <!-- row -->
+                <div class="row">
+                    <!-- Code -->
+                    <div class="col-md-4">
+                        <label class="col-md-7 control-label">{{'DEOCODEMAINTENANCE.District'|translate}}</label>
+                    </div>
+                    <div class="col-md-8">
+
+                        <ng-select [items]="DeoCodesArray" class="my-calendar" bindLabel="district" bindValue="code"
+                            [searchable]='false' [clearable]='false' name="district" #district="ngModel"
+                            placeholder="{{'DEOCODEMAINTENANCE.District'|translate}}"
+                            [(ngModel)]="deoSelectCode.district">
+                        </ng-select>
+
+                    </div>
+
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+        <br>
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="card">
+                    <!-- Card Header -->
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title"> {{'DEOCODEMAINTENANCE.ManageDeoCodeMaintenance'|translate}}</h5>
+                            </div>
+                            <div class="text-right">
+                                <div class="actions">
+                                    <a href="javascript:;"
+                                        [routerLink]="['/main/deo-code-maintenance/deo-code-edit','New']"><button
+                                            type="button" class="btn btn-success">
+                                            {{'COMMON.AddNew'|translate}}
+                                        </button></a>&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Card Header -->
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div>
+                            <div>
+                                <div>
+                                    <br />
+                                    <form #filterForm="ngForm" (ngSubmit)="applyFilter()">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <!-- Label for Code-->
+                                                <label> {{'DEOCODEMAINTENANCE.DeoName'|translate}}</label>
+                                                <input class='form-control text' type="text" name="deoName"
+                                                    [(ngModel)]="filterObj.deoName"
+                                                    placeholder=" {{'DEOCODEMAINTENANCE.DeoName'|translate}}"
+                                                    id="deoName" required #deoName="ngModel" autocomplete="off" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <!-- Label for district-->
+                                                <label> {{'DEOCODEMAINTENANCE.District'|translate}}</label>
+                                                <ng-select [items]="DistrictList" class="my-calendar"
+                                                    bindLabel="description" bindValue="description" [searchable]='false'
+                                                    [clearable]='false' name="district" #district="ngModel"
+                                                    placeholder="{{'DEOCODEMAINTENANCE.District'|translate}}"
+                                                    [(ngModel)]="filterObj.district">
+                                                </ng-select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <!-- Label for Description-->
+                                                <label> {{'DEOCODEMAINTENANCE.Town'|translate}}</label>
+                                                <input class='form-control text' type="text" name="town"
+                                                    [(ngModel)]="filterObj.town"
+                                                    placeholder="{{'DEOCODEMAINTENANCE.Town'|translate}}" id="town"
+                                                    required #town="ngModel" autocomplete="off" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <!-- Label for Status-->
+                                                <label> {{'COMMON.Status'|translate}}</label>
+                                                <ng-select [items]="statusDetails" class="chosen-select"
+                                                    placeholder="{{'COMMON.Status'|translate}}" [clearable]='true'
+                                                    [searchable]='false' [(ngModel)]="filterObj.active" bindLabel="name"
+                                                    bindValue="code" [dropdownPosition]="'auto'" name="active"
+                                                    #active="ngModel" required>
+                                                </ng-select>
+                                            </div>
+
+
+                                            <div class="col-md-3" style="margin-top: 25px;">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="submit" class="btn btn-primary pull-right">
+                                                        {{'COMMON.ApplyFilter'|translate}}
+                                                    </button> &nbsp;
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="margin-top: 25px;" *ngIf="isFilterApplied">
+                                                <div class="col-md-9">
+                                                    <button type="button" class="btn btn-danger pull-right"
+                                                        (click)="resetFilter()">
+                                                        {{'COMMON.ResetFilter'|translate}}
+                                                    </button> &nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <!-- Table -->
+                            <br />
+                            <table class="table datatable-basic table-bordered">
+                                <!-- Table Head -->
+                                <thead>
+                                    <tr>
+                                        <th>{{'DEOCODEMAINTENANCE.DeoName'|translate}}
+                                            <app-nspl-table-sort [sortCol]="deoCodesList" [sortTypeName]="'deoName'"
+                                                [defaultSort]="'asc'">
+                                            </app-nspl-table-sort>
+                                        </th>
+                                        <th>{{'DEOCODEMAINTENANCE.District'|translate}}
+                                            <app-nspl-table-sort [sortCol]="deoCodesList" [sortTypeName]="'district'"
+                                                [defaultSort]="'asc'">
+                                            </app-nspl-table-sort>
+                                        </th>
+                                        <th>{{'DEOCODEMAINTENANCE.Town'|translate}}
+                                            <app-nspl-table-sort [sortCol]="deoCodesList" [defaultSort]="'town'"
+                                                [defaultSort]="'asc'">
+                                            </app-nspl-table-sort>
+                                        </th>
+                                        <th>{{'COMMON.Status'|translate}}</th>
+                                        <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                                    </tr>
+                                </thead>
+                                <!-- /Table Head -->
+
+                                <!-- Table Body -->
+                                <tbody>
+                                    <ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+                                    <tr class="odd gradeX" *ngFor="let data of deoCodesList">
+                                        <td>{{data?.deoName}}</td>
+                                        <td>{{data?.district}}</td>
+                                        <td>{{data?.town}}</td>
+
+                                        <td *ngIf="data?.active=='Y'"><span class="badge badge-success">Active</span>
+                                        </td>
+                                        <td *ngIf="data?.active=='N'"><span class="badge badge-warning">InActive</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="javascript:;" class="list-icons-item"
+                                                [routerLink]="['/main/deo-code-maintenance/deo-code-edit/',data?.id]"><i
+                                                    class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="javascript:;" class="list-icons-item"
+                                                [routerLink]="['/main/deo-code-maintenance/deo-code-view/',data?.id]"><i
+                                                    class="fa fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd" *ngIf="(!deoCodesList?.length) && (!loading)">
+                                        <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                {{'RECORDS.NoRecords'|translate}}</b>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                <!-- /Table Body -->
+                            </table>
+                            <!-- Table -->
+                        </div>
+                        <br />
+                        <div class="row" *ngIf='totalItem>0'>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="btn-group">
+                                    <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name"
+                                        bindValue="id" placeholder="Select" [(ngModel)]="pagesize"
+                                        [ngModelOptions]="{standalone: true}" [clearable]='false' [searchable]='false'
+                                        [dropdownPosition]="'top'">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="dataTables_info" id="sample_editable_1_info">
+                                    {{'PAGINATION.Showing'|translate}}
+                                    {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                                    {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                                    {{'PAGINATION.entries'|translate}}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="dataTables_paginate paging_bootstrap">
+                                    <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                                        [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl
+                                        [totalItems]="totalItem" [maxSize]="5" [(ngModel)]="currentPage"
+                                        [ngModelOptions]="{standalone: true}" (pageChanged)="pageChanged($event)"
+                                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                        lastText="&raquo;">
+                                    </pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Card Body -->
+
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+</div>
+<!-- /content area -->

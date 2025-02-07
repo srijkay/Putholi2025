@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.newrta</groupId>
+		<artifactId>putholi</artifactId>
+		<version>1.0.0-RELEASE</version>
+	</parent>
+
+	<groupId>com.newrta.putholi</groupId>
+	<artifactId>putholi-ui</artifactId>
+	<version>0.0.1-RELEASE</version>
+	<name>Putholi UI</name>
+	<description>UI Project For Putholi</description>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>./dist</directory>
+				<targetPath>static</targetPath>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<configuration>
+					<workingDirectory>./</workingDirectory>
+					<nodeVersion>v10.16.0</nodeVersion>
+					<npmVersion>6.10.2</npmVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- optional: default phase is "generate-resources" -->
+						<phase>generate-resources</phase>
+
+						<configuration>
+							<!-- optional: The default argument is actually "install", so unless 
+								you need to run some other npm command, you can remove this whole <configuration> 
+								section. -->
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,167 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'MODULE.Module Management'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/module/module-list']" class="breadcrumb-item">
+                    {{'MODULE.Module Management'|translate}}</a>
+
+                <span class="breadcrumb-item active">{{'MODULE.View Module Details'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'MODULE.View Module Details'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Card Body -->
+        <div class="card-body" style="margin-left:170px">
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Code -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module Code'|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.moduleCode}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Description -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module
+                    Description'|translate}}<span class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.moduleDesc}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Description others-->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module Description
+                    Other'|translate}}<span class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.moduleDescOther}}</p>
+                </div>
+            </div>
+            <!--/ row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Status -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Order
+                    Number'|translate}}<span class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.orderNo}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Status -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"COMMON.Status"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.active=='Y'?'Active':'Inactive'}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+
+            <div class="form-group row">
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedBy'|translate}}
+                    :</label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.createdBy}}</p>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedDate'|translate}}
+                    :</label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.createdDate |date:'dd/MM/yyyy'}}</p>
+                </div>
+            </div>
+
+
+            <div class="form-group row" *ngIf="moduleDetails?.updatedBy">
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.LastModifiedBy' |
+                    translate}} :</label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.updatedBy}}</p>
+                </div>
+            </div>
+
+
+            <div class="form-group row" *ngIf="moduleDetails?.updateDate">
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.LastModifiedDate' |
+                    translate}} :</label>
+                <div class="col-md-3">
+                    <p>{{moduleDetails?.updateDate|date:'dd/MM/yyyy'}}</p>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <!-- /Card Body -->
+
+        <!-- Card Footer -->
+        <div class="card-footer">
+            <button type="button" [routerLink]="['/main/module/module-list']"
+                class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+        </div>
+        <!-- /Card Footer -->
+
+
+    </div>
+
+</div>
+<!-- /content area -->

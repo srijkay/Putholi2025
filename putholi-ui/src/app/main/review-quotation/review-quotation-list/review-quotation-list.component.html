@@ -1,0 +1,130 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'UPLOAD.ReviewQuotation'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'UPLOAD.ReviewQuotation'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'UPLOAD.ReviewQuotation'|translate}}</h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.SchoolID'|translate}}</th>
+                            <th>{{'MANAGESCHOOL.SchoolName'|translate}}</th>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}</th>
+                            <th>{{'REQUIREMENT.RequirementId'|translate}}</th>
+                            <th>{{'REQUIREMENT.AssetType' | translate}}</th>
+                            <th>{{'REQUIREMENT.AssetName' | translate}}</th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th>{{'COMMON.Action'|translate}}</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of reqInfo">
+                            <td>{{data?.schoolInfoId}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.consolidateId}}</td>
+                            <td>{{data?.requirementId}}</td>
+                            <td>{{data?.assetType}}</td>
+                            <td>{{data?.assetName}}</td>
+                            <td> <span class="badge badge-warning">{{data?.reqStatus}}</span></td>
+                            <td class="text-center">
+                                <a href="javascript:;" (click)="onClick(data?.schoolInfoId, data?.requirementId)"
+                                    tooltip="Review Quotation" class="list-icons-item"> <i
+                                        class="fas fa-file-upload"></i></a>
+
+                            </td>
+
+                        </tr>
+                        <tr class="odd" *ngIf="(!reqInfo?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+<!-- /content area -->

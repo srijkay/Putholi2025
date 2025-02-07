@@ -1,0 +1,157 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'APPLICATIONCONFIG.ApplicationConfiguration'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'APPLICATIONCONFIG.ApplicationConfiguration'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'APPLICATIONCONFIG.ApplicationConfigurationList'|translate}}</h5>
+                </div>
+                <div class="text-right">
+                    <div class="actions">
+                        <a href="javascript:;" [routerLink]="['/main/appl-config/appl-edit','New']"><button
+                                class="btn btn-success">
+                                {{'COMMON.AddNew'|translate}}
+                            </button></a>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <br />
+            <div class="float-right">
+                <div class="col-md-12">
+                    <input class='form-control text' type="text" name="genericSearchData"
+                        [(ngModel)]="filterObj.genericSearchData" (keyup)="applyFilter()" placeholder="Search"
+                        id="genericSearchData" required #genericSearchData="ngModel" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <!-- Table  -->
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <!-- Table  Head-->
+                    <thead>
+                        <tr>
+                            <th>{{'APPLICATIONCONFIG.SlNo'|translate}}
+                                <app-nspl-table-sort [sortCol]="configList" [sortTypeName]="'configId'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+
+                            <th>{{'APPLICATIONCONFIG.ConfigFor'|translate}}
+                                <app-nspl-table-sort [sortCol]="configList" [sortTypeName]="'configFor'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'APPLICATIONCONFIG.ConfigValue'|translate}}
+                                <app-nspl-table-sort [sortCol]="configList" [sortTypeName]="'configValue'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <!-- /Table  Head-->
+
+                    <!-- Table Body-->
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of configList">
+                            <td>{{data?.configId}}</td>
+                            <td>{{data?.configFor}}</td>
+                            <td>{{data?.configValue}}</td>
+                            <td class="text-center">
+                                <a href="javascript:;" [routerLink]="['/main/appl-config/appl-edit/',data?.configFor]"
+                                    class="list-icons-item"><i tooltip="Edit" class="far fa-edit"></i>
+                                </a>
+                                <a href="javascript:;" [routerLink]="['/main/appl-config/appl-view/',data?.configFor]"
+                                    class="list-icons-item"><i tooltip="View" class="far fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="odd" *ngIf="(!configList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- /Table Body-->
+                </table>
+                <!-- /Table  -->
+            </div>
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Body -->
+    </div>
+</div>
+<!-- /content area -->
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

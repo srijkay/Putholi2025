@@ -1,0 +1,125 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                class="img-fluid"></a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                         <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                        <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                        <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                        <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                        <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+              <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                        <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+                        Money</a></li>
+                <li><a class="nav-link active scrollto" href="javascript:;"
+                        [routerLink]="['/portal/school-list']">Donate</a>
+                </li>
+                <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+
+
+    </div>
+</header>
+<!-- End Header -->
+
+<!-- Start #main -->
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="titleparent">
+                    <div class="titleleft margin-right-auto">
+                        <h2>Pre-Work Gallery</h2>
+                    </div>
+                    <div class="titleright">
+                        <ol>
+                            <li><a href="javascript:;" [routerLink]="['home']">Home</a></li>
+                            <li>Pre-Work Gallery</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+                <h3 class="section-title">Pre-Work Gallery</h3>
+            </header>
+
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-12">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-app">Pictures</li>
+                        <li data-filter=".filter-web">Stories</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app" *ngFor="let data of requirementImages">
+                    <div class="portfolio-wrap">
+                        <img src="{{data?.fileData}}" class="img-fluid" alt="" style="height: 300px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Portfolio Section -->
+</main>
+<!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="section-bg">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="http://newrta.com/">NEWRTA</a>
+        </div>
+    </div>
+</footer>
+<!-- End  Footer -->

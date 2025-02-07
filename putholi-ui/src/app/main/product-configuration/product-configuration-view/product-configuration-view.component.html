@@ -1,0 +1,245 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{"PRODUCTCONFIG.ViewProductConfiguration"|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+
+                <span class="breadcrumb-item active">{{"PRODUCTCONFIG.ViewProductConfiguration"|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{"PRODUCTCONFIG.ViewProductConfiguration"|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Card Body -->
+        <div class="card-body">
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Company Name -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyName"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyName}}</p>
+                </div>
+                <!-- Company Code -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyCode"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyCode}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Company Slogan -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanySlogan"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companySlogan}}</p>
+                </div>
+                <!-- Company Address -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyAddress"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyAddress}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- City -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"MANAGESCHOOL.City"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.city}}</p>
+                </div>
+                <!-- Province -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.Province"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.province}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Postal Code -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.PostalCode"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.postalCode}}</p>
+                </div>
+                <!-- Company Phone -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyPhone"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyPhone}}</p>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- Company Phone2 -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyPhone2"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyPhone2}}</p>
+                </div>
+
+                <!-- Company Email -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyEmail"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyEmail}}</p>
+                </div>
+                <!-- Fax -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.Fax"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.fax}}</p>
+                </div>
+
+                <!-- Website -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.WebSite"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.webSite}}</p>
+                </div>
+
+                <!-- Company Registration No -->
+                <!-- <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyRegistration
+                    No"|translate}}
+                    <span class=""> :</span></label>
+                <div class="col-md-3">
+                    <p> <img class="d-block w-100" [src]="transform()" alt="First slide"
+                        style="height: 300px !important; width: 300px !important;"></p>
+                </div> -->
+                <!-- Tax Identification No -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.TaxIdentificationNo"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.taxIdentificationNo}}</p>
+                </div>
+
+                <!-- Time Zone -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.Timezone"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.timezone}}</p>
+                </div>
+
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.primaryContactName}}</p>
+                </div>
+
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PhoneNumber'|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.primaryContactNumber}}</p>
+                </div>
+
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.emailId}}</p>
+                </div>
+                <!-- Company Report Logo -->
+                <!-- <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyReportLogo"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p>{{productConfigData?.companyReportLogo}}</p>
+                </div> -->
+            </div>
+            <!-- /row -->
+
+            <div class="row">
+                <!-- Company Logo -->
+                <label
+                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"PRODUCTCONFIG.CompanyLogo"|translate}}<span
+                        class=""> :</span></label>
+                <div class="col-md-3">
+                    <p> <img class="d-block w-100" [src]="transform()" alt="First slide"
+                            style="height: 300px !important; width: 300px !important;"></p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Card Body -->
+
+        <!-- Card Footer -->
+        <div class="card-footer">
+            <a type="button" href="javascript:;" [routerLink]="['/main/product-config']"
+                class="btn btn-danger">{{'COMMON.Cancel'|translate}}</a>
+        </div>
+        <!-- /Card Footer -->
+
+
+
+    </div>
+
+</div>
+<!-- /content area -->

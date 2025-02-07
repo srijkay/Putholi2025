@@ -1,0 +1,82 @@
+.content-inner {
+  height: calc(100vh - 24px - 0px - -24px);
+  max-height: fit-content;
+}
+
+.content-login {
+  padding: 1.25rem 1.25rem;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+
+}
+
+
+body {
+  background: #f2f2f2;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-size: 16px;
+  background-color: #ffff;
+  border: #bbe1d0 2px solid;
+  padding: 5px;
+  z-index: 100;
+  border-radius: 20px;
+}
+
+.check {
+  color: #fff;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: -44px;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  z-index: 9;
+  background: #25B372;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 2px 2px #25B372;
+}
+
+.check i {
+  font-size: 58px;
+  position: relative;
+  top: 4px;
+}
+
+.content {
+  text-align: center;
+  padding-top: 100px;
+  min-height: 50px
+}
+
+.content a {
+  width: 200px;
+  height: 35px;
+  color: #fff;
+  border-radius: 30px;
+  padding: 5px 10px;
+  background: #d7141a;
+  transition: all ease-in-out 0.3s;
+}
+
+.content a:hover {
+  text-decoration: none;
+  background: #000;
+}
+
+.content .modal-footer {
+  border: none;
+  padding-bottom: 20px;
+}

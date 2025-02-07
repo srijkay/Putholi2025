@@ -1,0 +1,10 @@
+<div class="numberData">
+    <input type="text" autocomplete="off" [required]="required" class="form-control numberfield" [disabled]="disabled"
+        [minlength]="minlength" [(ngModel)]="data" [ngModelOptions]="{standalone: true}" (input)="onChange()"
+        (change)="onChange()" (focus)="onFocus()" (blur)="onBlur(data)" [ngStyle]="styleObject()" data-m-dec="6"
+        [maxlength]="maxlength" variable-options="true" angular-currency="angularCurrency" (keypress)="keyPress($event)"
+        [placeholder]="placeholder" [name]="name" />
+
+    <span *ngIf="Error != null" class="help-block-error">{{Error}}</span>
+    <span *ngIf="(helpText != null && showHelpText)" class="help-block">{{helpText}}</span>
+</div>

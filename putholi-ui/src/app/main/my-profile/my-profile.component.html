@@ -1,0 +1,508 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'MANAGEUSER.MyProfileCover'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'HEADER.Myprofile'|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <div class="row">
+
+        <div class="col-md-4 order-xl-2 mb-4 mb-xl-0" style="margin-top: 33px;">
+            <div class="card card-profile shadow">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a href="javascript:;">
+                                <!-- <img [src]="(user.photo? user.photo: 'assets/img/avatar-profile2.jpg')"
+                                 -->
+                                <img [src]="(user.photo? user.photo: '/assets/images/avatar-profile2.jpg')"
+                                    class="img-fluid rounded-circles-shadow-md">
+
+                                <div class="upload-file">
+                                    <label style="cursor: pointer;">
+                                        <input style="cursor: pointer;" class='file-input' type="file"
+                                            name="profile_photo" accept="image/*"
+                                            (change)="fileChangeEvent($event,template)" (click)="clearFile()"
+                                            id="profile" class="hide-style">
+                                    </label>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <i class="fa fa-ellipsis-v menu-icon pull-right" style="cursor: pointer; float: right;"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                    <div class="dropdown-menu  menu-icon" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="javascript:;" (click)="openfile($event)"><i
+                                class="fa fa-edit menu-icon"></i>{{'MANAGEUSER.UpdatePhoto'|translate}}</a><br>
+                        <a class="dropdown-item" href="javascript:;" *ngIf="this.getToken('profilePic')"
+                            (click)="removePhoto()"><i class="fa fa-trash menu-icon"></i>
+                            {{'MANAGEUSER.RemovePhoto'|translate}}</a>
+                    </div>
+                </div>
+
+                <div class="card-body pt-0 pt-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center mt-md-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <h3>
+                            {{profileData?.firstName}} {{profileData?.lastName}}<span class="font-weight-light"></span>
+                        </h3>
+
+                        <div>
+                            <i class="ni education_hat mr-2"></i><b>{{'MANAGEUSER.Role'|translate}} </b> -
+                            {{roleDetails?.description}}
+                        </div>
+                        <hr class="my-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 order-xl-0">
+            <div class="card mb-4">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-10">
+                            <h3 class="mb-0">{{'HEADER.Myprofile'|translate}}</h3>
+                        </div>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-primary" (click)="onEdit()"
+                                *ngIf="!isEdit">{{'COMMON.Edit'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View My Profile -->
+                <div class="card-body" *ngIf="!isEdit">
+                    <br />
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for full name -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.FullName'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.fullName}}</p>
+                        </div>
+
+                        <!-- label for username -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Username'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.userName}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for gender -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Gender'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.gender === 'M'? 'Male' :'Female'}}</p>
+                        </div>
+
+                        <!-- label for mobile number -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.MobileNumber'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.mobileNumber}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for email -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Email'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.emailId}}</p>
+                        </div>
+
+                        <!-- label for Address Line 1 -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.addressLine1}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Address Line 2 -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.addressLine2}}</p>
+                        </div>
+
+                        <!-- label for Locality -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.locality}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for City -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.city}}</p>
+                        </div>
+
+
+                        <!-- label for District -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.district?.description}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for State -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p *ngIf="profileData?.state=='TN'">Tamil Nadu</p>
+                        </div>
+
+                        <!-- label for Country -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>India</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for Pincode -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode'|translate}}
+                            :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.pincode}}</p>
+                        </div>
+
+                        <!-- label for identification Number -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGESCHOOL.AadharCardNumber'|translate}} :</label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{profileData?.identificationNumber}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                </div>
+
+                <!-- Edit my profile -->
+                <form class="form-horizontal" #statusForm="ngForm" (ngSubmit)='submitForm(statusForm, profileData)'
+                    *ngIf="isEdit">
+                    <div class="card-body">
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for fullname -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.FullName'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="fullName" [data]="profileData.fullName"
+                                    [(ngModel)]="profileData.fullName" placeholder="{{'MANAGEUSER.FullName'|translate}}"
+                                    [disabled]="true">
+                                </app-nspl-text>
+
+                            </div>
+                            <!-- label for username -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Username'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="userName" [data]="profileData.userName"
+                                    [(ngModel)]="profileData.userName" [disabled]="true"
+                                    placeholder="{{'MANAGEUSER.Username'|translate}}">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for gender -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Gender'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <ng-select [items]="genderDetails" [searchable]='false' [(ngModel)]="profileData.gender"
+                                    bindLabel="name" bindValue="code" name="gender" #gender="ngModel" disabled>
+                                </ng-select>
+                            </div>
+                            <!-- label for mobile number -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.MobileNumber'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-number name="mobileNumber" [data]="profileData.mobileNumber"
+                                    [(ngModel)]="profileData.mobileNumber" [minlength]="'10'" [maxlength]="'10'"
+                                    [required]="true" placeholder="{{'MANAGEUSER.MobileNumber'|translate}}">
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for email -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Email'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="emailId" [data]="profileData.emailId"
+                                    [(ngModel)]="profileData.emailId" [disabled]="true"
+                                    placeholder="{{'MANAGEUSER.Email'|translate}}" [controlInput]="'Email'">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for address Line 1 -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="addressLine1" [data]="profileData.addressLine1"
+                                    [(ngModel)]="profileData.addressLine1"
+                                    placeholder="{{'MANAGESCHOOL.AddressLine1'|translate}}">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for address Line 2 -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="addressLine2" [data]="profileData.addressLine2"
+                                    [(ngModel)]="profileData.addressLine2"
+                                    placeholder="{{'MANAGESCHOOL.AddressLine2'|translate}}">
+                                </app-nspl-text>
+                            </div>
+
+                            <!-- label for Locality -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="locality" [data]="profileData.locality"
+                                    [(ngModel)]="profileData.locality"
+                                    placeholder="{{'MANAGESCHOOL.Locality'|translate}}" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for City -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="city" [data]="profileData.city" [(ngModel)]="profileData.city"
+                                    placeholder="{{'MANAGESCHOOL.City'|translate}}" NsplAplhaWithSpac>
+                                </app-nspl-text>
+                            </div>
+
+
+                            <!-- label for District -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <ng-select name="district" [items]="DistrictList" class="chosen-select"
+                                    bindLabel="description" bindValue="code" required [(ngModel)]="profileData.district"
+                                    #district="ngModel" [clearable]='true' [searchable]='true'
+                                    [dropdownPosition]="'auto'" placeholder="select district"
+                                    [ngClass]="{ 'isInvalid': district.touched && district.invalid }">
+                                </ng-select>
+
+                                <span class="error-block" *ngIf="(district.touched && district.invalid)">
+                                    {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for State -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-text name="state" [data]="profileData.state" [(ngModel)]="profileData.state"
+                                    [disabled]="true" placeholder="{{'MANAGESCHOOL.State'|translate}}">
+                                </app-nspl-text>
+                            </div>
+
+
+                            <!-- label for blood group -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country'|translate}}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <ng-select [items]="countryList" class="chosen-select"
+                                    placeholder="{{'MANAGESCHOOL.Country'|translate}}" [clearable]='true'
+                                    [searchable]='false' [(ngModel)]="profileData.country" bindLabel="description"
+                                    bindValue="code" [dropdownPosition]="'auto'" name="country" #country="ngModel"
+                                    disabled [ngClass]="{ 'isInvalid': country.touched && country.invalid }">
+                                </ng-select>
+
+                                <div class="error-block" *ngIf="(country.touched && country.invalid)">
+                                    {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for emergency contact name -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                {{'MANAGESCHOOL.Pincode'|translate}} <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-number name="pincode" [data]="profileData.pincode"
+                                    [(ngModel)]="profileData.pincode" [minlength]="'6'" [maxlength]="'6'"
+                                    [required]="true" placeholder="{{'MANAGESCHOOL.Pincode'|translate}}">
+                                </app-nspl-number>
+                            </div>
+
+                            <!-- label for emergency contact number -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                {{'MANAGESCHOOL.AadharCardNumber'|translate}} <span class="required">*</span></label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <app-nspl-number name="identificationNumber" [data]="profileData.identificationNumber"
+                                    [(ngModel)]="profileData.identificationNumber" [minlength]="'12'" [maxlength]="'12'"
+                                    [required]="true" placeholder="{{'MANAGESCHOOL.AadharCardNumber'|translate}}">
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" [disabled]="statusForm.invalid"
+                            class="btn btn-primary">{{'COMMON.Update'|translate}}</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger"
+                            (click)="onCancel()">{{'COMMON.Cancel'|translate}}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- /dashboard content -->
+</div>
+<!-- /content area -->
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left"></h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <input type="file" (change)="fileChangeEvent($event)" />  -->
+
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1/1"
+            [imageQuality]="92" [resizeToWidth]="0" format="png" (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()">
+        </image-cropper>
+        <br>
+        <span style="color:red" *ngIf="isExceed"><strong>{{'MANAGEUSER.Error'|translate}}</strong></span>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="button" *ngIf="!isExceed" style="font-size: 14px;" class="btn btn-primary pull-right"
+                    (click)="submitcropped()">{{'MANAGEUSER.Apply & Save'|translate}}</button>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

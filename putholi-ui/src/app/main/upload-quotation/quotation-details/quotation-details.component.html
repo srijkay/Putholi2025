@@ -1,0 +1,330 @@
+<div bsModal #quotate="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 *ngIf="quotateType=='ADD'" class="modal-title">{{'UPLOAD.AddQuotations' | translate}}</h4>
+                <h4 *ngIf="quotateType=='EDIT'" class="modal-title">{{'UPLOAD.EditQuotations' | translate}}</h4>
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal" (ngSubmit)="onSubmit(quotateForm,quotateData)" #quotateForm="ngForm">
+                <div class="modal-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for choose quotation -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 files">
+                            <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                                name="uploadImage" [maxlength]="'1'">
+                            </app-nspl-file-browse>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for company name -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.CompanyName' | translate}}<span class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.companyName"
+                                placeholder="{{'QUOTATION.CompanyName' | translate}}" [required]="true"
+                                [(ngModel)]="quotateData.companyName" name="companyName" [maxlength]="'50'"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for quotation date -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.QuotationDate' |
+                            translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <input class='form-control' autocomplete="off" type="text" name="quotationDate" bsDatepicker
+                                [bsConfig]="dateValidationConfig" [(ngModel)]="quotateData.quotationDate"
+                                placeholder="{{'QUOTATION.DDMMYYYY' | translate}}" id="quotationDate" required
+                                #quotationDate="ngModel" (bsValueChange)="onValueChange($event, 'QUOT')"
+                                [ngClass]="{ 'isInvalid': quotationDate.touched && quotationDate.invalid }" />
+
+
+                            <div class="error-block" *ngIf="((quotationDate.touched) && quotationDate.invalid)">
+                                This field cannot be left blank
+                            </div>
+                            <div class="error-block" *ngIf="isQuotateDate">
+                                Invalid Date
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for address -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Address' | translate}}<span class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.address"
+                                placeholder="{{'QUOTATION.Address' | translate}}" [required]="true"
+                                [(ngModel)]="quotateData.address" [maxlength]="'255'" name="address">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for quotation valid date -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.QuotationValidDate' |
+                            translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <input class="form-control" type="text" name="quotationValidDate" id="quotationValidDate"
+                                placeholder="{{'QUOTATION.DDMMYYYY' | translate}}" class="form-control" bsDatepicker
+                                [bsConfig]="dateOfJoinValue" autocomplete="off"
+                                (bsValueChange)="onValueChange($event, 'VALID')"
+                                [(ngModel)]="quotateData.quotationValidDate" [required]="true"
+                                #quotationValidDate="ngModel"
+                                [ngClass]="{ 'isInvalid': quotationValidDate.touched && quotationValidDate.invalid }" />
+
+                            <div class="error-block"
+                                *ngIf="((quotationValidDate.touched) && quotationValidDate.invalid)">
+                                This field cannot be left blank
+                            </div>
+                            <div class="error-block" *ngIf="isissueValid">
+                                Invalid Date
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for street -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Street' | translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.street" placeholder="{{'QUOTATION.Street' | translate}}"
+                                [maxlength]="'50'" [(ngModel)]="quotateData.street" name="street" [required]="true"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for discount -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.DiscountDetails' | translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.discountDetails"
+                                placeholder=" {{'QUOTATION.DiscountDetails' | translate}}" [maxlength]="'100'"
+                                [(ngModel)]="quotateData.discountDetails" name="discountDetails" [required]="true">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for city -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.City' |
+                            translate}}<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.city" placeholder="{{'QUOTATION.City' | translate}}"
+                                [(ngModel)]="quotateData.city" name="city" [maxlength]="'50'" [required]="true"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for item description -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.ItemDescription' |
+                            translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="quotateData.itemDescription" [maxlength]="'255'"
+                                placeholder="{{'QUOTATION.ItemDescription' | translate}}"
+                                [(ngModel)]="quotateData.itemDescription" [required]="true" name="itemDescription">
+                            </app-nspl-multiline-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row" id="checkClass">
+
+                        <!-- label for pincode -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Pincode' |translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="pincode" [data]="quotateData.pincode" [required]="true" class="AAA"
+                                [(ngModel)]="quotateData.pincode" [minlength]="'6'" [maxlength]="'6'"
+                                placeholder=" {{'QUOTATION.Pincode' |translate}}" [name]="'pincode'" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+
+                        <!-- label for quantity -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Quantity' |translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quantity" [data]="quotateData.quantity" [maxlength]="'3'"
+                                [(ngModel)]="quotateData.quantity" [required]="true" [minvalue]="'1'"
+                                placeholder="{{'QUOTATION.Quantity' |translate}}" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for phone number -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.PhoneNumber'
+                            |translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="phoneNumber" [data]="quotateData.phoneNumber"
+                                [(ngModel)]="quotateData.phoneNumber" [minlength]="'10'" [maxlength]="'10'"
+                                [required]="true" placeholder="{{'QUOTATION.PhoneNumber' |translate}}"
+                                appBlockCopyPaste>
+                            </app-nspl-number>
+
+                        </div>
+
+                        <!-- label for unit price -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.UnitPrice' |translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="unitPrice" [data]="quotateData.unitPrice" [maxlength]="'10'"
+                                [(ngModel)]="quotateData.unitPrice" [required]="true"
+                                placeholder="{{'QUOTATION.UnitPrice' |translate}}" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Comment/SpecialInstruction' | translate}}<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="quotateData.comments" [(ngModel)]="quotateData.comments"
+                                [required]="true" placeholder=" {{'QUOTATION.Comment/SpecialInstruction' | translate}}"
+                                name="comments" [maxlength]="'255'">
+                            </app-nspl-multiline-text>
+                        </div>
+
+
+                        <!-- label for tax -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.Taxin%' |
+                            translate}}<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="tax" [data]="quotateData.tax" [(ngModel)]="quotateData.tax"
+                                [required]="true" placeholder="{{'QUOTATION.Taxin%' | translate}}" [maxlength]="'3'"
+                                [isErrorMsg]="false" [maxvalue]="'100'" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for quotation prepared by -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.QuotationPreparedBy' | translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotateData.quotationPreparedBy"
+                                placeholder="{{'QUOTATION.QuotationPreparedBy' | translate}}"
+                                [(ngModel)]="quotateData.quotationPreparedBy" [required]="true"
+                                name="quotationPreparedBy" [maxlength]="'255'" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for shipping cost -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.ShippingCost' | translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="shippingCost" [data]="quotateData.shippingCost" [maxlength]="'4'"
+                                [(ngModel)]="quotateData.shippingCost" [required]="true"
+                                placeholder="{{'QUOTATION.ShippingCost' | translate}}" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for warranty -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Warranty' | translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-2 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="quotateData.days"
+                                placeholder="{{'QUOTATION.Warranty' | translate}}" [maxlength]="'4'"
+                                [(ngModel)]="quotateData.days" [required]="true" name="days" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+
+                        <div class="col-lg-2 col-md-12 col-sm-12">
+                            <ng-select name="months" [items]="monthList" class="chosen-select" bindLabel="name"
+                                bindValue="code" [(ngModel)]="quotateData.months" #months="ngModel" [clearable]='true'
+                                [searchable]='false' [dropdownPosition]="'auto'"
+                                placeholder="{{'COMMON.Select' | translate}}" [required]="true"
+                                [ngClass]="{ 'isInvalid': months.touched && months.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="(months.touched && months.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+
+                        <!-- label for total amount -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.TotalAmount' |
+                            translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="totalAmount" [data]="quotateData.totalAmount" [maxlength]="'10'"
+                                [(ngModel)]="quotateData.totalAmount" [required]="true"
+                                placeholder="{{'QUOTATION.TotalAmount' | translate}}" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <br>
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Label for Terms and Conditions -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                        <div class="col-lg-10 col-sm-12 col-form-label">
+                            <p>I hereby agree & confirm that, I have taken enough effort to double check the presented
+                                details here and submitting
+                                details without any favoritism to anyone involved for this activity.</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!--  -->
+
+                <div class="modal-footer">
+                    <button *ngIf="quotateType=='ADD'" type="submit" class="btn btn-primary"
+                        [disabled]="quotateForm.invalid || quotateData.tax>100 || quotateData.quantity<=0 || isissueValid || isQuotateDate">{{'COMMON.Submit'|translate}}
+                    </button>
+                    <button *ngIf="quotateType!='ADD'" type="submit" class="btn btn-primary"
+                        [disabled]="quotateForm.invalid || quotateData.tax>100 || isissueValid || quotateData.quantity<=0 || isQuotateDate">{{'COMMON.Update'|
+                        translate}} </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel' | translate}}</button>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+</div>

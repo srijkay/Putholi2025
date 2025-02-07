@@ -1,0 +1,217 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'MENU.Menu Management'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'MENU.Menu Management'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'MENU.Menu Management'|translate}}</h5>
+                </div>
+                <div class="text-right">
+                    <div class="actions">
+                        <a href="javascript:;" [routerLink]="['/main/menu/menu-detail/', 'new']"><button
+                                class="btn btn-success">
+                                {{'COMMON.AddNew'|translate}}
+                            </button></a>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <br />
+            <form #filterForm="ngForm" (ngSubmit)="applyFilter()">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Label for Code-->
+                        <label> {{'MENU.Menu Code'|translate}} </label>
+                        <input class='form-control text' type="text" name="menuCode" [(ngModel)]="filterObj.menuCode"
+                            placeholder="{{'MENU.Menu Code'|translate}}" id="menuCode" required #menuCode="ngModel"
+                            autocomplete="off" />
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Label for Description-->
+                        <label>{{'MENU.Menu Description'|translate}}</label>
+                        <input class='form-control text' type="text" name="menuName" [(ngModel)]="filterObj.menuName"
+                            placeholder="{{'MENU.Menu Description'|translate}}" id="menuName" required
+                            #menuName="ngModel" autocomplete="off" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <!-- Label for Module Name-->
+                        <label>{{'MENU.Module Name'|translate}}</label>
+                        <input class='form-control text' type="text" name="moduleCode"
+                            [(ngModel)]="filterObj.moduleCode" placeholder="{{'MENU.Module Name'|translate}}"
+                            id="moduleCode" required #moduleCode="ngModel" autocomplete="off" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <!-- Label for Status-->
+                        <label> {{'COMMON.Status'|translate}}</label>
+                        <ng-select [items]="statusDetails" class="chosen-select"
+                            placeholder="{{'COMMON.Status'|translate}}" [clearable]='true' [searchable]='false'
+                            [(ngModel)]="filterObj.status" bindLabel="name" bindValue="code" [dropdownPosition]="'auto'"
+                            name="status" #status="ngModel" required>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-top: 25px;">
+                        <div class="col-md-offset-1 col-md-9">
+                            <button type="submit" class="btn btn-primary pull-right">
+                                {{'COMMON.ApplyFilter'|translate}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top: 25px;" *ngIf="isFilterApplied">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-danger" (click)="resetFilter()">
+                                {{'COMMON.ResetFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <!-- Table  -->
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <!-- Table  Head-->
+                    <thead>
+                        <tr>
+                            <th>{{'MENU.Menu Code'|translate}}
+                                <app-nspl-table-sort [sortCol]="menuDetails" [sortTypeName]="'menuCode'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+
+                            <th>{{'MENU.Menu Description'|translate}}
+                                <app-nspl-table-sort [sortCol]="menuDetails" [sortTypeName]="'menuName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MENU.Menu Description Other'|translate}}
+                                <app-nspl-table-sort [sortCol]="menuDetails" [sortTypeName]="'menuNameOther'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status'|translate}}
+                                <app-nspl-table-sort [sortCol]="menuDetails" [sortTypeName]="'active'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+
+
+
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <!-- /Table  Head-->
+
+                    <!-- Table Body-->
+                    <tbody>
+
+                        <tr class="odd gradeX" *ngFor="let data of menuDetails">
+                            <td>{{data?.menuCode}}</td>
+                            <td>{{data?.menuName}}</td>
+                            <td>{{data?.menuNameOther}}</td>
+                            <td *ngIf="data?.status=='Y' "><span class="label label-sm label-success">Active</span>
+                            </td>
+                            <td *ngIf="data?.status=='N' "><span class="label label-sm label-warning">Inactive</span>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;" class="list-icons-item"
+                                    [routerLink]="['/main/menu/menu-detail/',data?.menuId]" routerLinkActive="active"><i
+                                        class="fa fa-edit"></i></a>
+                                <a href="javascript:;" class="list-icons-item"
+                                    [routerLink]="['/main/menu/menu-view/',data?.menuId]">
+                                    <i class="fa fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        <tr class="odd" *ngIf="(!menuDetails?.length) &&(!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    <!-- /Table Body-->
+                </table>
+                <!-- /Table  -->
+            </div>
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Body -->
+    </div>
+</div>
+<!-- /content area -->
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

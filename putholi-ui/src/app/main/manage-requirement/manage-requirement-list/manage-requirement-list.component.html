@@ -1,0 +1,309 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="this.getToken('role')=='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'
+                    | translate}}</span> -
+                {{'REQUIREMENT.RequireListTitle' | translate}}</h4>
+            <h4 *ngIf="this.getToken('role')!='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'
+                    | translate}}</span> -
+                {{'REQUIREMENT.ApprovalRequirements' | translate}}</h4>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate}}</a>
+
+                <span *ngIf="this.getToken('role')=='BENIF'"
+                    class="breadcrumb-item active">{{'REQUIREMENT.RequireListTitle' | translate}}</span>
+                <span *ngIf="this.getToken('role')!='BENIF'"
+                    class="breadcrumb-item active">{{'REQUIREMENT.ApprovalRequirements' | translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 *ngIf="this.getToken('role')=='BENIF'" class="card-title">{{'REQUIREMENT.RequireCardHeading' |
+                        translate}}</h5>
+                    <h5 *ngIf="this.getToken('role')!='BENIF'" class="card-title">
+                        {{'REQUIREMENT.ApprovalRequirementsList' | translate}}</h5>
+                </div>
+                <div class="text-right">
+                    <div class="actions"
+                        [hidden]="(consolidateStatusList?.length && this.getToken('schoolStatus')!='Open For Requirements')|| this.getToken('role')!='BENIF'">
+                        <a href="javascript:;" (click)="addRequirements()"><button class="btn btn-success">
+                                {{'REQUIREMENT.AddRequirements' | translate}}
+                            </button></a>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+
+            <h3 *ngIf="this.getToken('role')=='BENIF'">School Information</h3>
+            <div class="table-responsive" *ngIf="this.getToken('role')=='BENIF'">
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.RegistrationNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolRegNo'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolName' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolType' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolType'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.District'| translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'district'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGEUSER.ContactNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'primaryContact'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolStatus'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <!-- <th class="text-center">{{'COMMON.Action' | translate}}</th> -->
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of schoolList">
+                            <td>{{data?.schoolRegNo}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.schoolType}}</td>
+                            <td>{{data?.district}}</td>
+                            <td>{{data?.primaryContact}}</td>
+                            <td *ngIf="data?.schoolStatus=='REJECTED'|| data?.schoolStatusCode=='DEOREJ'"><span
+                                    class="badge badge-danger">{{data?.schoolStatus}}</span> </td>
+                            <td *ngIf="data?.schoolStatus!='REJECTED' && data?.schoolStatusCode!='DEOREJ'"><span
+                                    class="badge badge-warning">{{data?.schoolStatus}}</span> </td>
+
+                            <!-- <td class="text-center">
+
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-school/manage-school-view',data?.schoolInfoId]"
+                                    class="list-icons-item">
+                                    <i *ngIf="this.getToken('role')=='BENIF'" tooltip="View" class="far fa-eye"></i>
+                                </a>
+
+                            </td> -->
+
+
+                        </tr>
+
+                        <tr class="odd" *ngIf="(!schoolList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <h3 *ngIf="consolidateList.length && this.getToken('role')=='BENIF'"> Completed Requirements Information</h3>
+
+            <div class="table-responsive" *ngIf="consolidateList.length && this.getToken('role')=='BENIF'">
+                <br />
+                <table class="table datatable-basic table-bordered" id="tempTable">
+                    <thead>
+                        <tr>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'consolidateId'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolName'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'REQUIREMENT.Noofrequirements'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'noOfRequirements'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+
+                            <th>{{'REQUIREMENT.SubmittedDate'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateList" [sortTypeName]="'createdDate'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <ng-container>
+                            <tr class="odd gradeX" *ngFor="let data of consolidateList">
+
+                                <td>{{data?.consolidateId}}</td>
+                                <td>{{data?.schoolName}}</td>
+                                <td>{{data?.noOfRequirements}}</td>
+                                <td>{{data?.createdDate|date:'dd/MM/yyyy'}}</td>
+                                <td *ngIf="data?.status!='REJECTED' && data?.consolidateStatusCode!='DEOREJ'"> <span
+                                        class="badge badge-warning">
+                                        {{data?.status}}</span></td>
+                                <td *ngIf="data?.status=='REJECTED'|| data?.consolidateStatusCode=='DEOREJ'"> <span
+                                        class="badge badge-danger">
+                                        {{data?.status}}</span></td>
+
+                                <td class="text-center"
+                                    *ngIf="data?.consolidateStatusCode == 'REJ'|| data?.consolidateStatusCode=='DEOREJ'">
+                                    <a href="javascript:;"
+                                        (click)="onEdit(data?.consolidateId, data?.schoolInfoId, data?.status)"
+                                        class="list-icons-item">
+                                        <i data-toggle="tooltip" tooltip="Edit" class="far fa-edit"></i>
+
+                                    </a>
+                                </td>
+                                <td class="text-center"
+                                    *ngIf="data?.consolidateStatusCode != 'ADDREQ' && data?.consolidateStatusCode!='DEOREJ'">
+                                    <a href="javascript:;"
+                                        (click)="onEdit(data?.consolidateId, data?.schoolInfoId, data?.status)"
+                                        class="list-icons-item  ">
+                                        <i data-toggle="tooltip" tooltip="View" class="far fa-eye"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                        </ng-container>
+                        <tr class="odd" *ngIf="(!consolidateList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+
+
+
+            <h3 > Requirements Information</h3>
+            <div class="table-responsive" >
+                <br />
+                <table class="table datatable-basic table-bordered" id="tempTable">
+                    <thead>
+                        <tr>
+                            <th>{{'REQUIREMENT.ConsolidateReference'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateStatusList" [sortTypeName]="'consolidateId'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolName'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateStatusList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'REQUIREMENT.Noofrequirements'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateStatusList" [sortTypeName]="'noOfRequirements'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+
+                            <th>{{'REQUIREMENT.SubmittedDate'|translate}}
+                                <app-nspl-table-sort [sortCol]="consolidateStatusList" [sortTypeName]="'createdDate'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <ng-container>
+                            <tr class="odd gradeX" *ngFor="let data of consolidateStatusList">
+
+                                <td>{{data?.consolidateId}}</td>
+                                <td>{{data?.schoolName}}</td>
+                                <td>{{data?.noOfRequirements}}</td>
+                                <td>{{data?.createdDate|date:'dd/MM/yyyy'}}</td>
+                                <td *ngIf="data?.status!='REJECTED' && data?.consolidateStatusCode!='DEOREJ'"> <span
+                                        class="badge badge-warning">
+                                        {{data?.status}}</span></td>
+                                <td *ngIf="data?.status=='REJECTED'|| data?.consolidateStatusCode=='DEOREJ'"> <span
+                                        class="badge badge-danger">
+                                        {{data?.status}}</span></td>
+                                <td class="text-center"
+                                    *ngIf="data?.consolidateStatusCode == 'ADDREQ'|| data?.consolidateStatusCode=='DEOREJ'">
+                                    <a href="javascript:;"
+                                        (click)="onEdit(data?.consolidateId, data?.schoolInfoId, data?.status)"
+                                        class="list-icons-item">
+                                        <i data-toggle="tooltip" tooltip="Edit" class="far fa-edit"></i>
+
+                                    </a>
+                                </td>
+                                <td class="text-center"
+                                    *ngIf="data?.consolidateStatusCode != 'ADDREQ' && data?.consolidateStatusCode!='DEOREJ'">
+                                    <a href="javascript:;"
+                                        (click)="onEdit(data?.consolidateId, data?.schoolInfoId, data?.status)"
+                                        class="list-icons-item  ">
+                                        <i data-toggle="tooltip" tooltip="View" class="far fa-eye"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                        </ng-container>
+                        <tr class="odd" *ngIf="(!consolidateStatusList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /content area -->
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

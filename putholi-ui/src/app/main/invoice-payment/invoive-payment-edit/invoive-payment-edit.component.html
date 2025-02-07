@@ -1,0 +1,253 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                <span> {{isNew ? ('INVOICEPAYMENT.AddPaymentInvoice'|translate) :
+                    ('INVOICEPAYMENT.EditPaymentInvoice'|translate)}}</span>
+            </h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/invoice-payment']"
+                    class="breadcrumb-item">{{'SIDEBAR.InvoicePayment'|translate}}</a>
+                <span *ngIf="isNew"
+                    class="breadcrumb-item active">{{'INVOICEPAYMENT.AddPaymentInvoice'|translate}}</span>
+                <span *ngIf="!isNew"
+                    class="breadcrumb-item active">{{'INVOICEPAYMENT.EditPaymentInvoice'|translate}}</span>
+            </div>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">
+                        {{'INVOICEPAYMENT.AddPaymentInvoice'|translate}}</h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">
+                        {{'INVOICEPAYMENT.EditPaymentInvoice'|translate}}</h6>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <form class="form-horizontal" (ngSubmit)="onSubmit(invoicePaymentForm,invoicePaymentData)"
+            #invoicePaymentForm="ngForm">
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for upload file -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.UploadFile'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-10 col-md-12 col-sm-12">
+                            <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                                name="uploadImage" [maxlength]="'1'">
+                            </app-nspl-file-browse>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for UTR Number -->
+                        <!-- <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.UTRNumber'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoicePaymentData.utrNumber"
+                                placeholder="{{'INVOICEPAYMENT.UTRNumber'|translate}}" [disabled]="!isNew"
+                                [(ngModel)]="invoicePaymentData.utrNumber" [required]="true" name="utrNumber">
+                            </app-nspl-text>
+                        </div> -->
+
+                        <!-- label for Beneficiary Name -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.BeneficiaryName'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoicePaymentData.vendorName"
+                                [(ngModel)]="invoicePaymentData.vendorName"
+                                placeholder="{{'INVOICEPAYMENT.BeneficiaryName'|translate}}" [required]="true"
+                                name="vendorName" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for PhoneNumber -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.PhoneNumber'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="invoicePaymentData.mobileNumber" [minlength]="'10'"
+                                [maxlength]="'10'" placeholder="{{'INVOICEPAYMENT.PhoneNumber'|translate}}"
+                                [(ngModel)]="invoicePaymentData.mobileNumber" name="mobileNumber">
+                            </app-nspl-number>
+                            
+                        </div>
+
+                        <!-- lable for Category -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.Category'|translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="category" [items]="categoryDetails" class="chosen-select"
+                                bindLabel="description" bindValue="code" [(ngModel)]="invoicePaymentData.category"
+                                #category="ngModel" [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                placeholder="{{'INVOICEPAYMENT.Category'|translate}}" required
+                                [ngClass]="{ 'isInvalid': category.touched && category.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="((category.touched) && category.invalid)">
+                                This field cannot be left blank
+                            </div>
+                            
+                        </div>
+
+                        <!-- label for Others -->
+                        <label *ngIf="invoicePaymentData.category == 'OTHR'"
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.Others'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12" *ngIf="invoicePaymentData.category == 'OTHR'">
+                            <app-nspl-text [data]="invoicePaymentData.other" [(ngModel)]="invoicePaymentData.other"
+                                placeholder="{{'INVOICEPAYMENT.Others'|translate}}" [required]="true" name="other"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                          
+                        </div>
+
+                        <!-- label for beneficiary bank name -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.BankName'|translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="bankName" [items]="bankList" class="chosen-select" bindLabel="description"
+                                bindValue="code" [(ngModel)]="invoicePaymentData.bankName" #bankName="ngModel"
+                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                placeholder="{{'INVOICEPAYMENT.BankName'|translate}}" required
+                                [ngClass]="{ 'isInvalid': bankName.touched && bankName.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="((bankName.touched) && bankName.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+
+                        <!-- label for Account Number -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.AccountNumber'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoicePaymentData.accountNum"
+                                placeholder="{{'INVOICEPAYMENT.AccountNumber'|translate}}" [maxlength]="'25'"
+                                [(ngModel)]="invoicePaymentData.accountNum" [required]="true" name="accountNum">
+                            </app-nspl-text>
+                          
+                        </div>
+
+                        <!-- label for IFSC Code -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.IFSCCode'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoicePaymentData.ifscCode" [maxlength]="'15'"
+                                placeholder="{{'INVOICEPAYMENT.IFSCCode'|translate}}"
+                                [(ngModel)]="invoicePaymentData.ifscCode" [required]="true" name="ifscCode">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for transaction date -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.PaymentDate'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <input class="form-control" type="text" name="transactionDate" id="transactionDate"
+                                placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                [bsConfig]="transactionDateValue" autocomplete="off"
+                                [(ngModel)]=" invoicePaymentData.transactionDate" [required]="true"
+                                #transactionDate="ngModel"
+                                [ngClass]="{ 'isInvalid': transactionDate.touched && transactionDate.invalid }" />
+
+                            <div class="error-block" *ngIf="((transactionDate.touched) && transactionDate.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+
+                        <!-- label for Amount -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.Amount'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="invoicePaymentData.amount" [maxlength]="'10'"
+                                placeholder="{{'INVOICEPAYMENT.Amount'|translate}}"
+                                [(ngModel)]="invoicePaymentData.amount" [required]="true" name="amount">
+                            </app-nspl-number>
+                        </div>
+                      
+                        <!-- label for address -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.Address'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="invoicePaymentData.address"
+                                placeholder="{{'INVOICEPAYMENT.Address'|translate}}" [maxlength]="'255'"
+                                [(ngModel)]="invoicePaymentData.address" name="address">
+                            </app-nspl-multiline-text>
+
+                        </div>
+                       
+                        <!-- label for Description -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.Comments'|translate}}<span
+                                class=""> </span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="invoicePaymentData.description"
+                                placeholder="{{'INVOICEPAYMENT.Comments'|translate}}"
+                                [(ngModel)]="invoicePaymentData.description" name="description">
+                            </app-nspl-multiline-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- Form Body -->
+            </div>
+            <!-- /Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" [disabled]="invoicePaymentForm.invalid" class="btn btn-primary"
+                    *ngIf="isNew">{{'COMMON.Submit'|translate}}</button>&nbsp;&nbsp;
+                <button type="submit" [disabled]="invoicePaymentForm.invalid" class="btn btn-primary"
+                    *ngIf="!isNew">{{'COMMON.Update'|translate}}</button>&nbsp;&nbsp;
+                <button href="javascript:;" [routerLink]="['/main/invoice-payment']" type="button"
+                    class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- Card Footer -->
+        </form>
+        <!-- /Form -->
+    </div>
+</div>
+<!-- /Content area -->

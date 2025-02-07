@@ -1,0 +1,556 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'PRODUCTCONFIG.EditProductConfiguration'|translate}}</h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+
+                <span class="breadcrumb-item active">{{'PRODUCTCONFIG.EditProductConfiguration'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0"> Edit Product Configuration</h6>
+                </div>
+
+                <div class="text-right">
+                    <div class="actions">
+                        <a href="javascript:;" [routerLink]="['/main/product-config/product-view']"><button
+                                type="submit" class="btn btn-success">
+                                View
+                            </button></a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+
+        <!-- Form -->
+        <form class="form-horizontal" (ngSubmit)="onproductConfig(productConfigform,productConfigData)"
+            #productConfigform="ngForm">
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Company Name -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Name<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companyName"
+                                [(ngModel)]="productConfigData.companyName" placeholder="Company Name" [required]="true"
+                                name="companyName">
+                            </app-nspl-text>
+                        </div>
+                        <!-- Company Code -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Code<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companyCode"
+                                [(ngModel)]="productConfigData.companyCode" placeholder="Company Code" [required]="true"
+                                name="companyCode">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Company Slogan -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Slogan<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companySlogan"
+                                [(ngModel)]="productConfigData.companySlogan" [required]="true"
+                                placeholder="Company Slogan" name="companySlogan" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+                        <!-- Company Address -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Address<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companyAddress"
+                                [(ngModel)]="productConfigData.companyAddress" placeholder="Company Address"
+                                [required]="true" name="companyAddress">
+                            </app-nspl-text>
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- City -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">City<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.city" placeholder="City"
+                                [(ngModel)]="productConfigData.city" [required]="true" name="city" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+                        <!-- Province -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Province<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.province" placeholder="Province"
+                                [(ngModel)]="productConfigData.province" [required]="true" name="province">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Postal Code -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Postalcode<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="productConfigData.postalCode"
+                                [(ngModel)]="productConfigData.postalCode" placeholder="Postalcode" [required]="true"
+                                name="postal code" [maxlength]="'6'" [minlength]="'6'">
+                            </app-nspl-number>
+                        </div>
+                        <!-- Company Phone -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Phone<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="productConfigData.companyPhone"
+                                [(ngModel)]="productConfigData.companyPhone" placeholder="Company Phone"
+                                [required]="true" name="companyPhone" [maxlength]="'10'" [maxlength]="'10'">
+                            </app-nspl-number>
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Company Phone2 -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Phone2<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="productConfigData.companyPhone2"
+                                [(ngModel)]="productConfigData.companyPhone2" placeholder="Company Phone2"
+                                [required]="true" name="companyPhone2" [minlength]="'10'" [maxlength]="'10'">
+                            </app-nspl-number>
+                        </div>
+                        <!-- Company Email -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Email<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companyEmail"
+                                [(ngModel)]="productConfigData.companyEmail" placeholder="Company Email"
+                                [required]="true" name="companyEmail" [controlInput]="'Email'">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Fax -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Fax<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.fax" placeholder="Fax"
+                                [(ngModel)]="productConfigData.fax" [required]="true" name="fax">
+                            </app-nspl-text>
+
+                        </div>
+                        <!-- WebSite -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Website<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.webSite" placeholder="Website"
+                                [(ngModel)]="productConfigData.webSite" [required]="true" name="webSite">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!--Company Logo -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Logo<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-file-browse [data]="productConfigData.companyLogo" [required]="true" [(ngModel)]="uploadProof"
+                                name="uploadProof" [isErrorMsg]="false" [maxlength]="'1'">
+                            </app-nspl-file-browse>
+                        </div>
+                        <!-- Company Registration No -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Company Registration
+                            Number<span class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.companyRegNo"
+                                [(ngModel)]="productConfigData.companyRegNo" placeholder="Company Registration No"
+                                [required]="true" name="companyRegNo" [maxlength]="'15'" [minlength]="'15'">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Tax Identification -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Tax Identification Number<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.taxIdentificationNo"
+                                [(ngModel)]="productConfigData.taxIdentificationNo"
+                                placeholder="Tax Identification Number" [required]="true" name="taxIdentificationNo">
+                            </app-nspl-text>
+                        </div>
+                        <!-- Timezone -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Timezone<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <select class="form-control" data-value="Select...">
+                                <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">
+                                    (GMT-12:00)
+                                    International Date Line West</option>
+                                <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">
+                                    (GMT-11:00)
+                                    Midway Island, Samoa</option>
+                                <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">
+                                    (GMT-10:00)
+                                    Hawaii</option>
+                                <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">
+                                    (GMT-09:00)
+                                    Alaska</option>
+                                <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">
+                                    (GMT-08:00)
+                                    Pacific Time (US & Canada)</option>
+                                <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">
+                                    (GMT-08:00)
+                                    Tijuana, Baja California</option>
+                                <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">
+                                    (GMT-07:00)
+                                    Arizona</option>
+                                <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">
+                                    (GMT-07:00)
+                                    Chihuahua, La Paz, Mazatlan</option>
+                                <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">
+                                    (GMT-07:00)
+                                    Mountain Time (US & Canada)</option>
+                                <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">
+                                    (GMT-06:00)
+                                    Central America</option>
+                                <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">
+                                    (GMT-06:00)
+                                    Central Time (US & Canada)</option>
+                                <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">
+                                    (GMT-06:00)
+                                    Guadalajara, Mexico City, Monterrey</option>
+                                <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">
+                                    (GMT-06:00)
+                                    Saskatchewan</option>
+                                <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">
+                                    (GMT-05:00)
+                                    Bogota, Lima, Quito, Rio Branco</option>
+                                <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">
+                                    (GMT-05:00)
+                                    Eastern Time (US & Canada)</option>
+                                <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">
+                                    (GMT-05:00)
+                                    Indiana (East)</option>
+                                <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">
+                                    (GMT-04:00)
+                                    Atlantic Time (Canada)</option>
+                                <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">
+                                    (GMT-04:00)
+                                    Caracas, La Paz</option>
+                                <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">
+                                    (GMT-04:00)
+                                    Manaus</option>
+                                <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">
+                                    (GMT-04:00)
+                                    Santiago</option>
+                                <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">
+                                    (GMT-03:30)
+                                    Newfoundland</option>
+                                <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">
+                                    (GMT-03:00)
+                                    Brasilia</option>
+                                <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">
+                                    (GMT-03:00)
+                                    Buenos Aires, Georgetown</option>
+                                <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">
+                                    (GMT-03:00)
+                                    Greenland</option>
+                                <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">
+                                    (GMT-03:00)
+                                    Montevideo</option>
+                                <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">
+                                    (GMT-02:00)
+                                    Mid-Atlantic</option>
+                                <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">
+                                    (GMT-01:00)
+                                    Cape Verde Is.</option>
+                                <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">
+                                    (GMT-01:00)
+                                    Azores</option>
+                                <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">
+                                    (GMT+00:00)
+                                    Casablanca, Monrovia, Reykjavik</option>
+                                <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">
+                                    (GMT+00:00)
+                                    Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                                <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">
+                                    (GMT+01:00)
+                                    Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                                <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">
+                                    (GMT+01:00)
+                                    Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                                <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">
+                                    (GMT+01:00)
+                                    Brussels, Copenhagen, Madrid, Paris</option>
+                                <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">
+                                    (GMT+01:00)
+                                    Sarajevo, Skopje, Warsaw, Zagreb</option>
+                                <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">
+                                    (GMT+01:00) West
+                                    Central Africa</option>
+                                <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Amman</option>
+                                <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Athens, Bucharest, Istanbul</option>
+                                <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Beirut</option>
+                                <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Cairo</option>
+                                <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">
+                                    (GMT+02:00)
+                                    Harare, Pretoria</option>
+                                <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                                <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Jerusalem</option>
+                                <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Minsk</option>
+                                <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">
+                                    (GMT+02:00)
+                                    Windhoek</option>
+                                <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">
+                                    (GMT+03:00)
+                                    Kuwait, Riyadh, Baghdad</option>
+                                <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3">
+                                    (GMT+03:00)
+                                    Moscow, St. Petersburg, Volgograd</option>
+                                <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">
+                                    (GMT+03:00)
+                                    Nairobi</option>
+                                <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">
+                                    (GMT+03:00)
+                                    Tbilisi</option>
+                                <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">
+                                    (GMT+03:30)
+                                    Tehran</option>
+                                <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">
+                                    (GMT+04:00) Abu
+                                    Dhabi, Muscat</option>
+                                <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">
+                                    (GMT+04:00) Baku
+                                </option>
+                                <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">
+                                    (GMT+04:00)
+                                    Yerevan</option>
+                                <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">
+                                    (GMT+04:30)
+                                    Kabul</option>
+                                <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">
+                                    (GMT+05:00)
+                                    Yekaterinburg</option>
+                                <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">
+                                    (GMT+05:00)
+                                    Islamabad, Karachi, Tashkent</option>
+                                <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">
+                                    (GMT+05:30)
+                                    Sri Jayawardenapura</option>
+                                <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">
+                                    (GMT+05:30)
+                                    Chennai, Kolkata, Mumbai, New Delhi</option>
+                                <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">
+                                    (GMT+05:45)
+                                    Kathmandu</option>
+                                <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">
+                                    (GMT+06:00)
+                                    Almaty, Novosibirsk</option>
+                                <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">
+                                    (GMT+06:00)
+                                    Astana, Dhaka</option>
+                                <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">
+                                    (GMT+06:30)
+                                    Yangon (Rangoon)</option>
+                                <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">
+                                    (GMT+07:00)
+                                    Bangkok, Hanoi, Jakarta</option>
+                                <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">
+                                    (GMT+07:00)
+                                    Krasnoyarsk</option>
+                                <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">
+                                    (GMT+08:00)
+                                    Beijing, Chongqing, Hong Kong, Urumqi</option>
+                                <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">
+                                    (GMT+08:00)
+                                    Kuala Lumpur, Singapore</option>
+                                <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">
+                                    (GMT+08:00)
+                                    Irkutsk, Ulaan Bataar</option>
+                                <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">
+                                    (GMT+08:00)
+                                    Perth</option>
+                                <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">
+                                    (GMT+08:00)
+                                    Taipei</option>
+                                <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">
+                                    (GMT+09:00)
+                                    Osaka, Sapporo, Tokyo</option>
+                                <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">
+                                    (GMT+09:00)
+                                    Seoul</option>
+                                <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">
+                                    (GMT+09:00)
+                                    Yakutsk</option>
+                                <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">
+                                    (GMT+09:30)
+                                    Adelaide</option>
+                                <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">
+                                    (GMT+09:30)
+                                    Darwin</option>
+                                <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">
+                                    (GMT+10:00)
+                                    Brisbane</option>
+                                <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">
+                                    (GMT+10:00)
+                                    Canberra, Melbourne, Sydney</option>
+                                <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">
+                                    (GMT+10:00)
+                                    Hobart</option>
+                                <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">
+                                    (GMT+10:00)
+                                    Guam, Port Moresby</option>
+                                <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">
+                                    (GMT+10:00)
+                                    Vladivostok</option>
+                                <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">
+                                    (GMT+11:00)
+                                    Magadan, Solomon Is., New Caledonia</option>
+                                <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">
+                                    (GMT+12:00)
+                                    Auckland, Wellington</option>
+                                <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">
+                                    (GMT+12:00)
+                                    Fiji, Kamchatka, Marshall Is.</option>
+                                <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">
+                                    (GMT+13:00)
+                                    Nuku'alofa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--/ row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Primary Contact Person -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Primary Contact Name<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.primaryContactName"
+                                [(ngModel)]="productConfigData.primaryContactName" placeholder="Primary Contact Name"
+                                [required]="true" name="primaryContactName" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+                        <!-- Primary Contact Phone -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Mobile Number<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="productConfigData.primaryContactNumber"
+                                [(ngModel)]="productConfigData.primaryContactNumber" [required]="true"
+                                name="primaryContactNumber" placeholder="Mobile Number" [minlength]="'10'"
+                                [maxlength]="'10'">
+                            </app-nspl-number>
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Primary Contact Email Id -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Primary Contact EmailId<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="productConfigData.emailId" placeholder="Primary Contact Email"
+                                [(ngModel)]="productConfigData.emailId" [required]="true" name="emailId"
+                                [controlInput]="'Email'"></app-nspl-text>
+                        </div>
+                        <!-- Company Report Logo -->
+
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /Form Body -->
+            </div>
+            <!-- /Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" [disabled]="productConfigform.invalid" class="btn btn-primary">Update</button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+        <!-- /Form -->
+
+    </div>
+
+
+</div>
+
+<!-- /content area -->

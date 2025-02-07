@@ -1,0 +1,92 @@
+<!-- Page header -->
+
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home'
+                    | translate}}</span> -
+                {{'ASSIGNVOLUNTEER.ReferVolunteer' | translate}}</h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+         
+    </div>
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" class="breadcrumb-item" [routerLink]="['/main/dashboard']"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate}}</a>
+                <span class="breadcrumb-item active"> {{'ASSIGNVOLUNTEER.ReferVolunteer' | translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'ASSIGNVOLUNTEER.ReferVolunteer' | translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <form action="#" class="form-horizontal" (ngSubmit)="referVolunteer(volunteerForm,volunteerdata)"
+            #volunteerForm="ngForm">
+
+            <div class="card-body" style="margin-left: 12px;">
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for email Id -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ASSIGNVOLUNTEER.EnterEmailIds' |
+                        translate}} :<span class="required"></span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="volunteerdata.emailId" [(ngModel)]="volunteerdata.emailId"
+                            [required]="true" placeholder="{{'ASSIGNVOLUNTEER.EnterEmailIds' | translate}}"
+                            name="emailId">
+                        </app-nspl-multiline-text>
+                        <span>{{'ASSIGNVOLUNTEER.SeperatedbyComma' | translate}}</span>
+
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <br>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                    <div class="col-lg-8 col-sm-12 col-form-label">
+                        <p>I hereby agree & confirm that, I have taken enough effort to double check the presented
+                            details here and submitting details without any favoritism to anyone involved for this
+                            activity.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="volunteerForm.invalid">{{'COMMON.Submit' |
+                    translate}}</button> &nbsp;
+
+                <a type="button" href="javascript:;" class="btn btn-danger">{{'COMMON.Cancel' | translate}}</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- /dashboard content -->
+
+</div>
+<!-- /content area -->

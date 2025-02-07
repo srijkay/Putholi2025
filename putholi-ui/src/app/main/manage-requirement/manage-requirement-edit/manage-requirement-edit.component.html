@@ -1,0 +1,817 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew && this.getToken('role') =='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'
+                    | translate}}</span> -
+                {{'REQUIREMENT.RequireAddTitle' | translate}}</h4>
+            <h4 *ngIf="!isNew && this.getToken('role') =='BENIF' "> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">Home</span> -
+                {{'REQUIREMENT.RequireEditTitle' | translate}}</h4>
+
+            <h4 *ngIf="this.getToken('role')!='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">Home</span> -
+                {{'REQUIREMENT.ViewApprovalRequirements' | translate}}</h4>
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate}}</a>
+                <a *ngIf="this.getToken('role')=='BENIF'" href="javascript:;"
+                    [routerLink]="['/main/manage-requirement/require-list']" class="breadcrumb-item">
+                    {{'REQUIREMENT.RequireListTitle' | translate}}</a>
+                <a *ngIf="this.getToken('role')!='BENIF'" href="javascript:;"
+                    [routerLink]="['/main/manage-requirement/require-list']" class="breadcrumb-item">
+                    {{'REQUIREMENT.ApprovalRequirements' | translate}}</a>
+
+                <span *ngIf="isNew && this.getToken('role')=='BENIF'"
+                    class="breadcrumb-item active">{{'REQUIREMENT.RequireAddTitle' | translate}}</span>
+                <span *ngIf="!isNew && this.getToken('role')=='BENIF'"
+                    class="breadcrumb-item active">{{'REQUIREMENT.RequireEditTitle' |
+                    translate}}</span>
+                <span *ngIf="this.getToken('role')!='BENIF'" class="breadcrumb-item active">
+                    {{'REQUIREMENT.ViewApprovalRequirements' | translate}}</span>
+
+            </div>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 *ngIf="isNew && this.getToken('role')=='BENIF'" class="card-title">
+                        {{'REQUIREMENT.RequireAddTitle' | translate}}</h5>
+                    <h5 *ngIf="!isNew && this.getToken('role')=='BENIF'" class="card-title">
+                        {{'REQUIREMENT.RequireEditTitle' | translate}}</h5>
+                    <h5 *ngIf="this.getToken('role')!='BENIF'" class="card-title">
+                        {{'REQUIREMENT.ViewApprovalRequirements' | translate}}</h5>
+
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Tabset -->
+        <tabset #staticTabs>
+            <!-- Tab_1_1 -->
+            <tab heading="{{'REQUIREMENT.ConsolidateRequirementsDetail' | translate}}" (tabChange)="selectTab($event)">
+                <div class="card-body">
+                    <!-- Form -->
+                    <form class="form-horizontal" #consolidateForm="ngForm">
+
+                        <!-- form-body -->
+                        <div class="form-body">
+
+                            <h5>{{'MANAGESCHOOL.SchoolInformation' | translate}}</h5>
+                            <hr>
+
+                            <!-- row -->
+
+                            <div class="form-group row" *ngIf="this.getToken('role')!='BENIF'">
+                                <!-- label for created By -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'COMMON.CreatedBy'| translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.createdBy}}</p>
+                                </div>
+                                <!-- label for District -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.District'| translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.district}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <div class="form-group row">
+                                <!-- label for registration number -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.RegistrationNumber'| translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.schoolRegNo}}</p>
+                                </div>
+                                <!-- label for school name -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.SchoolName'| translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.schoolName}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for school type -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.SchoolType'| translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.schoolType}}</p>
+                                </div>
+                                <!-- label for primary contact name -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.PrimaryMobileNumber' | translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for Locality -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.Locality'|translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                                </div>
+                                <!-- label for Pincode -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGESCHOOL.Pincode'|translate}} :</label>
+                                <div class="form-inline col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <div class="form-group row" *ngIf="isShowDeoResponse">
+                                <!-- label for View Images -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEORESPONSE.ReviewDEOResponse'|translate}}
+                                    :</label>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info" (click)="onPerson(personId)">
+                                        {{'COMMON.ClickHeretoViewImages'|translate}}
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <h5>{{'REQUIREMENT.ConsolidateRequirementsDetail'|translate}}</h5>
+                            <hr>
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for quantity -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Noofrequirements'
+                                    | translate}} <span class="required">*</span></label>
+                                <div class="col-lg-3 col-md-12 col-sm-12">
+                                    <app-nspl-number [data]="consolidateData.noOfRequirements" placeholder="{{'REQUIREMENT.Noofrequirements'|
+                                            translate}}" [(ngModel)]="consolidateData.noOfRequirements"
+                                        [required]="true" [disabled]="disableHidden" [maxlength]="'1'" [maxvalue]="'3'"
+                                        [minvalue]="'1'" name="noOfRequirements" appBlockCopyPaste>
+                                    </app-nspl-number>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                        </div>
+                        <!-- /form-body -->
+
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-primary" *ngIf="!disableHidden"
+                                            (click)="clickNextTab(consolidateData)"
+                                            [disabled]="consolidateForm.invalid || consolidateData.noOfRequirements>3 || consolidateData.noOfRequirements<1">
+                                            {{'REQUIREMENT.Save&Next'|translate}}
+                                        </button>&nbsp;&nbsp;&nbsp;
+
+                                        <button type="button" class="btn btn-primary" *ngIf="disableHidden"
+                                            (click)="clickNext()">
+                                            {{'COMMON.Continue'|translate}}
+                                        </button>&nbsp;&nbsp;&nbsp;
+
+                                        <button type="button" [routerLink]="['/main/manage-requirement/require-list']"
+                                            class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /Form -->
+                </div>
+            </tab>
+            <!-- /Tab_1_1 -->
+
+            <!-- Tab_1_2 -->
+            <tab heading="{{'REQUIREMENT.RequirementsDetail' | translate}}">
+                <div class="card-body">
+                    <br>
+                    <h5 class="" style="margin-top: -32px">{{'REQUIREMENT.RequirementList' |
+                        translate}}</h5>
+
+                    <div class="float-right" *ngIf="consolidateData.noOfRequirements > requirementList.length">
+                        <button type="button" class="btn btn-success" *ngIf="this.getToken('role')=='BENIF'"
+                            (click)="onEdit(reqEdit, 'NEW', 0)" data-toggle="modal">{{'COMMON.AddNewRequirements' |
+                            translate}} </button>
+
+                        <!-- <button type="button" class="btn btn-success"
+                            *ngIf=" (consolidateData.status==null||consolidateData.status==undefined)"
+                            (click)="onEdit(reqEdit, 'NEW', 0)" data-toggle="modal">{{'COMMON.AddNewRequirements' |
+                            translate}}</button> -->
+                    </div>
+                    <br>
+
+                    <div class="form-group row">
+                        <!-- label for registration number -->
+                        <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">
+                            {{'REQUIREMENT.ConsolidateReferenceNumber'|translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p>{{getToken('consolidateId')?getToken('consolidateId'):consolidateData.consolidateId}}</p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table datatable-basic table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'REQUIREMENT.RequirementType' | translate}}
+                                        <app-nspl-table-sort [sortCol]="requirementList"
+                                            [sortTypeName]="'requirementType'" [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{'REQUIREMENT.AssetType'|translate}}
+                                        <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'assetType'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{"REQUIREMENT.AssetName"|translate}}
+                                        <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'assetName'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{"REQUIREMENT.Quantity"|translate}}
+                                        <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'quantity'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{"COMMON.Status"|translate}}
+                                        <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'reqStatus'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+
+                                    <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of requirementList">
+                                    <td>{{data?.requirementType=='NE'?'New':'Maintenance'}}</td>
+                                    <td>{{data?.assetType}}</td>
+                                    <td>{{data?.assetName}}</td>
+                                    <td>{{data?.quantity}}</td>
+                                    <td *ngIf="data?.reqStatus!='REJ'&& data?.reqStatus!='DEOREJ'"> <span
+                                            class="badge badge-warning">
+                                            {{data?.reqStatusDescription}} </span> </td>
+                                    <td *ngIf="data?.reqStatus=='REJ'|| data?.reqStatus=='DEOREJ'"> <span
+                                            class="badge badge-danger">
+                                            {{data?.reqStatusDescription}}
+                                        </span> </td>
+
+                                    <td class="text-center">
+                                        <a href="javascript:;" class="list-icons-item"
+                                            *ngIf="this.getToken('role')=='BENIF' && (data?.reqStatus=='REJ'||data?.reqStatus=='DEOREJ' )"><i
+                                                (click)="onEdit(reqEdit, 'EDIT', data?.requirementId)"
+                                                data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                class="far fa-edit"></i></a>
+                                        <a href="javascript:;" data-toggle="modal"
+                                            (click)="onView(reqView, data?.requirementId)" class="list-icons-item">
+                                            <i *ngIf="this.getToken('role')=='BENIF'" data-toggle="modal"
+                                                data-toggle="tooltip" tooltip="View" class="far fa-eye"></i>
+                                            <i *ngIf="this.getToken('role')!='BENIF'" data-toggle="modal"
+                                                data-toggle="tooltip" tooltip="Action" class="far fa-edit"></i>
+                                        </a>
+
+                                        <a class="list-icons-item delete-row"
+                                            *ngIf="this.getToken('role')=='BENIF' && (data?.reqStatus=='REJ'||data?.reqStatus=='DEOREJ') "
+                                            (click)="onDelete(data?.requirementId)">
+                                            <i data-toggle="tooltip" tooltip="Delete" class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="odd" *ngIf="(!requirementList?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-info" [disabled]="disableHome"
+                                        (click)="goBackToList()">{{"COMMON.Home"|translate}}
+                                    </button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-primary" [disabled]="disableButton"
+                                        *ngIf="this.getToken('role')=='BENIF'"
+                                        (click)="goToHome()">{{"COMMON.Submit"|translate}}
+                                    </button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" (click)="onPrevious()"
+                                        class="btn btn-danger">{{"COMMON.Back"|translate}}</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <!-- /Tab_1_2 -->
+        </tabset>
+        <!-- /Tabset -->
+    </div>
+</div>
+<!-- /content area -->
+
+<!-- Approve PopUp area -->
+<ng-template #reqEdit>
+
+    <div class="modal-header">
+        <h4 *ngIf="isRequirement" class="modal-title">{{'REQUIREMENT.AddUserRequirements' | translate}}</h4>
+        <h4 *ngIf="!isRequirement" class="modal-title">{{'REQUIREMENT.EditUserRequirements' | translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal" (ngSubmit)='onConsolidate(requiredEditForm,requiredEditData)'
+        #requiredEditForm="ngForm">
+        <div class="modal-body">
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- label for requirement Type -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementType'
+                    |
+                    translate}}
+                    <span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="requirementType" [items]="requirementTypeList" class="chosen-select"
+                        bindLabel="description" bindValue="code" [(ngModel)]="requiredEditData.requirementType"
+                        #requirementType="ngModel" [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'COMMON.Select' | translate}}" required
+                        [ngClass]="{ 'isInvalid': requirementType.touched && requirementType.invalid }">
+                    </ng-select>
+
+                    <div class="error-block" *ngIf="(requirementType.touched && requirementType.invalid)">
+                        This field cannot be left blank
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row" *ngIf="requiredEditData.requirementType == 'MTN'">
+                <!-- label for requirement Type -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.TimePeriod'
+                    |
+                    translate}}
+                    <span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="timePeriod" [items]="timePeriodList" class="chosen-select" bindLabel="name"
+                        bindValue="code" [(ngModel)]="requiredEditData.timePeriod" #timePeriod="ngModel"
+                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'COMMON.Select' | translate}}" required
+                        [ngClass]="{ 'isInvalid': timePeriod.touched && timePeriod.invalid }">
+                    </ng-select>
+
+                    <div class="error-block" *ngIf="(timePeriod.touched && timePeriod.invalid)">
+                        This field cannot be left blank
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+
+
+            <!-- row -->
+            <div class="form-group row">
+
+                <!-- label for asset type -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetType' |
+                    translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="assetType" [items]="assetTypeList" class="chosen-select" bindLabel="name"
+                        bindValue="code" [(ngModel)]="requiredEditData.assetType" #assetType="ngModel"
+                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'COMMON.Select' | translate}}" required
+                        (change)="selectAssetType(requiredEditData.assetType)"
+                        [ngClass]="{ 'isInvalid': assetType.touched && assetType.invalid }">
+                    </ng-select>
+
+                    <div class="error-block" *ngIf="(assetType.touched && assetType.invalid)">
+                        This field cannot be left blank
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+
+
+            <!-- row -->
+            <div class="form-group row" *ngIf="requiredEditData.assetType != 'OTH'">
+
+                <!-- label for asset name -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName' |
+                    translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="assetName" [items]="assetNameList" class="chosen-select" bindLabel="description"
+                        bindValue="code" [(ngModel)]="requiredEditData.assetName" #assetName="ngModel"
+                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'COMMON.Select' | translate}}" required
+                        [ngClass]="{ 'isInvalid':assetName.touched && assetName.invalid }">
+                    </ng-select>
+
+                    <div class="error-block" *ngIf="(assetName.touched && assetName.invalid)">
+                        This field cannot be left blank
+                    </div>
+
+                </div>
+            </div>
+            <!-- /row -->
+            <!-- row -->
+            <div class="form-group row" *ngIf="requiredEditData.assetType == 'OTH'">
+
+                <!-- label for asset name -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName' |
+                    translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <app-nspl-text [data]="requiredEditData.assetName" placeholder="{{'REQUIREMENT.AssetName'|
+                    translate}}" [(ngModel)]="requiredEditData.assetName" [required]="true" [maxlength]="'25'"
+                        name="assetName" NsplAplhaWithSpac>
+                    </app-nspl-text>
+                </div>
+            </div>
+
+
+            <!-- row -->
+            <div class="form-group row">
+
+                <!-- label for quantity -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Quantity' |
+                    translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <app-nspl-number [data]="requiredEditData.quantity"
+                        placeholder="{{'REQUIREMENT.Quantity' | translate}}" [(ngModel)]="requiredEditData.quantity"
+                        [required]="true" name="quantity" [maxlength]="'3'">
+                    </app-nspl-number>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+
+                <!-- label for comments -->
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Comments/MessagetoTrust'
+                    | translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <app-nspl-multiline-text [data]="requiredEditData.comments" [maxlength]="'255'"
+                        placeholder="{{'REQUIREMENT.Comments/MessagetoTrust' | translate}}"
+                        [(ngModel)]="requiredEditData.comments" name="comments" [required]="true">
+                    </app-nspl-multiline-text>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <div class="form-group row">
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">
+                    {{'DEORESPONSE.UploadPicture'|translate}} <span class="required">*</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                        name="uploadImage" [maxlength]="'1'" [accept]="'image/png, image/jpg, image/jpeg'"
+                        [allowedExtensions]="['.png', '.jpg', '.jpeg']">
+                    </app-nspl-file-browse>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group row">
+                <label class="col-lg-4 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-form-label">
+                    <p> 1. Once this requirement is approved, I hereby agree to follow
+                        up and get approval from Government officials/CEO/BDO to fulfill this requirement through the
+                        trust.</p>
+
+                    <p> 2. Also, I'm aware that, if trust could not collect funds from public within certain period
+                        of time, this requirement may not be fulfilled either partially or fully and also there is no
+                        moral
+                        obligation to do so.</p>
+
+                    <p> 3. By clicking Submit, I agree to the above mentioned terms and conditions...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" [disabled]="requiredEditForm.invalid ||isClickedOnce" class="btn btn-primary"
+                *ngIf="isRequirement">{{'COMMON.Submit' | translate}}</button>
+
+            <button type="submit" [disabled]="requiredEditForm.invalid ||isClickedOnce" class="btn btn-primary"
+                *ngIf="!isRequirement">{{'COMMON.Update' | translate}}</button>
+
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="modalRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+
+    </form>
+    <!-- /form -->
+</ng-template>
+<!-- /Approve PopUp area -->
+
+<!-- View PopUp area -->
+
+
+
+<div bsModal #reqView="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'REQUIREMENT.ViewUserRequirements' | translate}}</h4>
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="reqModalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- form -->
+            <form class="form-horizontal" (ngSubmit)='onReqView(requiredViewForm,requiredViewData)'
+                #requiredViewForm="ngForm">
+
+                <div class="modal-body roll">
+                    <hr>
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for requirement type -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementType'
+                            |
+                            translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p>{{successData?.requirementType=='NE'?'New':'Maintenance'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row" *ngIf="successData?.timePeriod">
+                        <!-- label for requirement type -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.TimePeriod'
+                            | translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p *ngIf="successData?.timePeriod == '6M'">6 Months</p>
+                            <p *ngIf="successData?.timePeriod == '1Y'">1 Year</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for asset type -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetType' |
+                            translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p>{{successData?.assetType}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for asset name -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName' |
+                            translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p>{{successData?.assetName}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for quantity -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Quantity' |
+                            translate}} :<span class=""></span></label>
+                        <div class="form-inline col-md-3">
+                            <p>{{successData?.quantity}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for view picture -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.ViewPicture' |
+                            translate}} :</label>
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <button type="button" href="javascript:;"
+                                (click)="onImage(images,successData?.requirementId)" data-toggle="modal"
+                                class="btn btn-info">{{'COMMON.ClickHeretoViewImages' |
+                                translate}}</button>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for comments -->
+                        <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">
+                            {{'REQUIREMENT.Comments/MessagetoTrust' | translate}} : </label>
+                        <div class="form-inline col-md-3">
+                            <p>{{successData?.comments}}</p>
+                        </div>
+                    </div>
+
+                    <h5 style="margin-top: -8px;">{{'COMMON.ApprovalHistory' | translate }}</h5>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'COMMON.ActionBy' | translate }}</th>
+                                    <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                    <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                    <th>{{'COMMON.Status' | translate }}</th>
+                                    <th>{{'COMMON.Remarks' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                    <td>{{data?.actionBy}}</td>
+                                    <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{data?.role}}</td>
+                                    <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                    </td>
+                                    <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                    </td>
+                                    <td>{{data?.remarks}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div *ngIf="this.getToken('role')!='BENIF'">
+                        <h5>{{'MANAGESCHOOL.Approval' | translate }}</h5>
+                        <hr />
+                        <!-- row -->
+                        <div class="form-group row">
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}
+                                <span class="required"> *</span></label>
+                            <div class="form-inline col-md-4" style="margin-bottom: 9px;">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio1" #status="ngModel"
+                                        [(ngModel)]="requiredViewData.status" value="APR" name="customRadio"
+                                        class="custom-control-input" required>
+                                    <label class="custom-control-label" for="customRadio1">{{'COMMON.Approve' |
+                                        translate
+                                        }}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio2" [(ngModel)]="requiredViewData.status"
+                                        value="REJ" name="customRadio" #status="ngModel" class="custom-control-input"
+                                        required>
+                                    <label class="custom-control-label" for="customRadio2">{{'COMMON.Reject' | translate
+                                        }}</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for remarks -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks' |
+                                translate
+                                }}
+                                <span class="required">*</span></label>
+                            <div class="col-lg-4 col-sm-12 col-form-label">
+                                <app-nspl-multiline-text [data]="requiredViewData.remarks"
+                                    [(ngModel)]="requiredViewData.remarks" [required]="true"
+                                    placeholder="{{'COMMON.Remarks' | translate }}" name="remarks">
+                                </app-nspl-multiline-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- Label for Terms and Conditions -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions
+                                :</label>
+                            <div class="col-lg-7 col-sm-12 col-form-label">
+                                <p>I hereby agree & confirm that, I have taken enough effort to double check the
+                                    presented details here and taking decisions without any favoritism to anyone
+                                    involved for this activity.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" [disabled]="requiredViewForm.invalid || isClickedOnce"
+                        class="btn btn-primary pull-right" aria-label="Close" (click)="reqModalRef.hide()"
+                        *ngIf="this.getToken('role')!='BENIF'">{{'COMMON.Submit'
+                        | translate}}</button>
+                    <button type="button" class="btn btn-danger pull-right" aria-label="Close"
+                        (click)="reqModalRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+                </div>
+            </form>
+            <!-- /form -->
+        </div>
+    </div>
+</div>
+
+
+<!-- /View PopUp area -->
+
+<!-- show quotation Images-->
+<ng-template #images>
+
+    <div class="modal-header">
+
+        <h4 class="modal-title">{{'REQUIREMENT.ViewRequirementImages' | translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeImageModal() ">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" *ngIf="base64Image">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                </div>
+            </div>
+
+            <div class="carousel-inner" *ngIf="!base64Image">
+                <iframe [src]="transform()" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- /show quotation Images-->
+
+<!-- show quotation Images-->
+<ng-template #personId>
+    <div class="modal-header">
+
+        <h4 class="modal-title">{{'DEORESPONSE.DEOResponseFile'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" *ngIf="base64Image">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                </div>
+            </div>
+
+            <div class="carousel-inner" *ngIf="!base64Image">
+                <p> <b>Page Loading, Please wait... </b></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalRef.hide()">{{'COMMON.Cancel' |
+            translate}}</button>
+    </div>
+</ng-template>
+<!-- // show quotation Images-->

@@ -1,0 +1,4 @@
+<a (click)="sortData(); sortReverseModel=!sortReverseModel" style="cursor: pointer;float: right;">
+    <span>{{headerText}}</span>
+    <span *ngIf="!sortReverseModel" class="fa fa-caret-down"></span>
+    <span *ngIf="sortReverseModel" class="fa fa-caret-up"></span></a>

@@ -1,0 +1,240 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{"COMMON.Home"|translate}}</span> -
+                {{'MANAGEUSER.ManageUser'|translate}}</h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+
+                <span class="breadcrumb-item active"> {{'MANAGEUSER.ManageUser'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'MANAGEUSER.ManageUserList'|translate}}</h5>
+                </div>
+                <div class="text-right">
+                    <!-- <div class="actions">
+                        <button type="button" href="javascript:;" [routerLink]="['/main/manage-user/user-edit','New']"
+                            class="btn btn-success mr-1">{{'COMMON.AddNew'|translate}}</button>
+
+                    </div> -->
+                </div>
+
+                <div class="pull-left">
+                    <app-nspl-table-export [totalRecordCount]="totalRecordCount" [tableName]="manageUserTable"
+                        [fileName]="nameofthefile" [noOfRecordsPerPage]="noOfRecordsPerPage" [pageNo]=page>
+                    </app-nspl-table-export>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form #filterForm="ngForm" (ngSubmit)="applyFilter()">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <!-- Label for Username-->
+                        <label> {{'MANAGEUSER.Username'|translate}}</label>
+                        <input class='form-control text' type="text" name="genericSearchData"
+                            [(ngModel)]="filterObj.genericSearchData" placeholder="{{'MANAGEUSER.Username'|translate}}"
+                            id="genericSearchData" required #genericSearchData="ngModel" autocomplete="off" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <!-- Label for role-->
+                        <label> {{'MANAGEUSER.Role'|translate}}</label>
+                        <ng-select name="role" [items]="rolesDetails" class="chosen-select" bindLabel="description"
+                            bindValue="code" [(ngModel)]="filterObj.role" #role="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select'|translate}}"
+                            required>
+                        </ng-select>
+                    </div>
+
+                    <div class="col-md-3" *ngIf="this.getToken('role') == 'ADMIN'">
+                        <!-- Label for role-->
+                        <label> {{'COMMON.Status'|translate}}</label>
+                        <ng-select name="status" [items]="adminStatusList" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="filterObj.status" #status="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}"
+                            required>
+                        </ng-select>
+                    </div>
+
+                    <div class="col-md-3" *ngIf="this.getToken('role') == 'REVIEW'">
+                        <!-- Label for role-->
+                        <label> {{'COMMON.Status'|translate}}</label>
+                        <ng-select name="status" [items]="reviewStatusList" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="filterObj.status" #status="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}"
+                            required>
+                        </ng-select>
+                    </div>
+
+                    <div class="col-md-3" *ngIf="this.getToken('role') == 'APPRV'">
+                        <!-- Label for role-->
+                        <label> {{'COMMON.Status'|translate}}</label>
+                        <ng-select name="status" [items]="approverStatusList" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="filterObj.status" #status="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}"
+                            required>
+                        </ng-select>
+                    </div>
+
+
+                    <div class="col-md-3" style="margin-top: 25px;">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-primary pull-right">
+                                {{'COMMON.ApplyFilter'|translate}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top: 25px;" *ngIf="isFilterApplied">
+                        <div class="col-md-9">
+                            <button type="button" class="btn btn-danger" (click)="resetFilter()">
+                                {{'COMMON.ResetFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <br>
+            <div class="table-responsive">
+                <!-- Table -->
+                <table id="manageUserTable" class="table datatable-basic table-bordered">
+                    <!-- Table Head-->
+                    <thead>
+                        <tr>
+
+                            <th>{{'MANAGEUSER.Username'|translate}}</th>
+                            <th>{{'MANAGEUSER.Email-Id'|translate}}</th>
+                            <th>{{'MANAGEUSER.Role'|translate}}</th>
+                            <th>{{'MANAGEUSER.DateAdded'|translate}}</th>
+                            <th>{{'COMMON.Status'|translate}}</th>
+                            <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <!-- /Table Head-->
+
+                    <!-- Table Body-->
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of userList">
+
+                            <td>{{data?.userName}}</td>
+                            <td>{{data?.emailId}}</td>
+                            <td>{{ data?.referredBy==null? data?.role:"Referred Volunteer"}}</td>
+                            <td>{{data?.createdDate|date:'dd/MM/yyyy'}}</td>
+                            <td *ngIf="data?.statusCode=='APR'"><span
+                                    class="badge badge-success">{{data?.status}}</span>
+                            </td>
+                            <td *ngIf="data?.statusCode!='APR' && data?.statusCode!='REJ'">
+                                <span class="badge badge-warning">{{data?.status}}</span>
+                            </td>
+                            <td *ngIf="data?.statusCode=='REJ'"><span class="badge badge-danger">{{data?.status}}</span>
+                            </td>
+
+                            <td class="text-center">
+                                <!-- <a href="javascript:;" [routerLink]="['/main/manage-user/user-edit',data?.userName]"
+                                    class="list-icons-item"
+                                    *ngIf="(this.getToken('role')=='SUUSR')">
+                                    <i data-toggle="tooltip" tooltip="Edit" class="far fa-edit"></i></a> -->
+
+                                <a href="javascript:;" [routerLink]="['/main/manage-user/user-edit',data?.userName]"
+                                    class="list-icons-item" *ngIf="(data?.statusCode=='APR')">
+                                    <i data-toggle="tooltip" tooltip="Edit" class="far fa-edit"></i></a>
+
+
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-user/user-view',data?.userName, 'APR']"
+                                    tooltip="Action" class="list-icons-item"
+                                    *ngIf="data?.statusCode!='DELUSR'&& data?.statusCode!='DELAPR'&& data?.statusCode!='DELREV' && data?.statusCode!='DELSUA' && data?.statusCode!='DELADM'"><i
+                                        class="fa fa-eye"></i></a>
+
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-user/user-view',data?.userName, 'DEL']"
+                                    tooltip="Action" class="list-icons-item"
+                                    *ngIf="data?.statusCode=='DELUSR'|| data?.statusCode=='DELAPR'|| data?.statusCode=='DELREV' || data?.statusCode=='DELSUA' || data?.statusCode=='DELADM'"><i
+                                        class="fa fa-eye"></i></a>
+
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-user/user-view',data?.userName, 'DEL']"
+                                    tooltip="Delete" class="list-icons-item"
+                                    *ngIf="(this.getToken('role')=='ADMIN'||this.getToken('role')=='SUUSR')&& data?.statusCode=='APR'"><i
+                                        class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr class="odd" *ngIf="(!userList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- /Table Body-->
+                </table>
+                <!-- /Table-->
+            </div>
+            <br>
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!-- /content area -->
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

@@ -1,0 +1,209 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SIDEBAR.searchSchool'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <span class="breadcrumb-item active">{{'SIDEBAR.searchSchool'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+<div class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'SIDEBAR.searchSchool'|translate}} </h5>
+                </div>
+
+                <div class="pull-left">
+                    <app-nspl-table-export [totalRecordCount]="totalRecordCount" [tableName]="searchSchoolTable"
+                        [fileName]="nameofthefile" [noOfRecordsPerPage]="noOfRecordsPerPage" [pageNo]=page>
+                    </app-nspl-table-export>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form class="form-horizontal" #requirementsForm="ngForm" (ngSubmit)='applyFilter()'>
+                <div class="row form-group">
+                    <div class="col-md-2">
+                        <label class="control-label">{{'MANAGESCHOOL.SchoolName'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <input class='form-control text' autocomplete="off" type="text" name="schoolName"
+                                [(ngModel)]="filterObj.schoolName" placeholder="{{'MANAGESCHOOL.SchoolName'|translate}}"
+                                id="schoolName" #schoolName="ngModel" />
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label class="control-label">{{'MANAGESCHOOL.SchoolType'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <ng-select [items]="schoolTypeList" class="chosen-select"
+                                placeholder="{{'MANAGESCHOOL.SchoolType'|translate}}" [clearable]='true'
+                                [searchable]='false' [(ngModel)]="filterObj.schoolType" bindLabel="description"
+                                bindValue="description" [dropdownPosition]="'auto'" name="schoolType"
+                                #schoolType="ngModel" required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label">{{'COMMON.Status'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                            <ng-select [items]="statusList" class="chosen-select"
+                                placeholder="{{'COMMON.Status'|translate}}" [clearable]='true' [searchable]='false'
+                                [(ngModel)]="filterObj.status" bindLabel="description" bindValue="code"
+                                [dropdownPosition]="'auto'" name="status" #status="ngModel" required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3" style="margin-top: 25px;">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-primary pull-right">
+                                {{'COMMON.ApplyFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top: 25px;" *ngIf="isFilterApplied">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-danger pull-right" (click)="resetFilter()">
+                                {{'COMMON.ResetFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+            <div class="table-responsive">
+                <br />
+                <table id="searchSchoolTable" class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.RegistrationNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolRegNo'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolName' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolType' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolType'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGEUSER.ContactNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'primaryContact'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolStatus'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th class="text-center">{{'COMMON.Action' | translate}}</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+                        <tr class="odd gradeX" *ngFor="let data of schoolList">
+                            <td>{{data?.schoolRegNo}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.schoolType}}</td>
+                            <td>{{data?.primaryContact}}</td>
+                            <td *ngIf="data?.schoolStatus=='REJECTED'"><span
+                                    class="badge badge-danger">{{data?.schoolStatus}}</span> </td>
+                            <td *ngIf="data?.schoolStatus!='REJECTED'"><span
+                                    class="badge badge-warning">{{data?.schoolStatus}}</span> </td>
+                            <td class="text-center">
+
+                                <a href="javascript:;" class="list-icons-item">
+                                    <i tooltip="View" class="far fa-eye"
+                                        [routerLink]="['/main/search-school-details/', data?.schoolInfoId]"></i> </a>
+                            </td>
+
+
+                        </tr>
+
+                        <tr class="odd" *ngIf="(!schoolList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

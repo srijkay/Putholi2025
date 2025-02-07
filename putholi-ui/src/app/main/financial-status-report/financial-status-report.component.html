@@ -1,0 +1,161 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SIDEBAR.FinancialStatus'|translate}}</h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+
+                <span class="breadcrumb-item active"> {{'SIDEBAR.FinancialStatus'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+<!-- content -->
+<div class="content">
+
+    <!-- card -->
+    <div class="card">
+        <!-- card-header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0"> {{'FINANCIAL.FinancialStatusReport'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /card-header -->
+
+        <!-- card-body -->
+        <div class="card-body">
+            <br />
+            <!-- form -->
+            <form #filterForm="ngForm" (ngSubmit)="applyFilter()">
+                <!-- row -->
+                <div class="row">
+                    <!-- label for select year -->
+                    <label class="col-md-2 col-form-label font-weight-600"
+                        for="select year">{{'FINANCIAL.SelectYear'|translate}}</label>
+                    <div class="col-md-3">
+                        <input autocomplete="off" class="form-control" name="year" bsDatepicker
+                            [(ngModel)]="filterObj.year" #year="ngModel" id=" year" [bsConfig]="selectYearPicker"
+                            (onShown)="onOpenCalendar($event)" placeholder="{{'FINANCIAL.SelectYear'|translate}}">
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary pull-right">
+                            {{'COMMON.Search'|translate}}
+                        </button> &nbsp;
+                    </div>
+
+                </div>
+                <!-- /row -->
+                <br />
+                <!-- row -->
+                <div class="row" *ngIf="showDetails">
+                    <label class="col-md-5 font-weight-600"> Total School Expenses :</label>
+                    <div class="col-md-3 font-weight-600">
+                        <p>{{SchoolExpenses}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-info" (click)="showSchoolDetails()">Details</button>
+                    </div>
+
+                    <label class="col-md-5 font-weight-600">Donation Amount received from Individual Donors :</label>
+                    <div class="col-md-3 font-weight-600">
+                        <p>{{individual}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-info" (click)="showIndividualDonors()">Details</button>
+                    </div>
+
+
+                    <label class="col-md-5 font-weight-600">Donation Amount received from Corporate :</label>
+                    <div class="col-md-3 font-weight-600">
+                        <p>{{corporate}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-info" (click)="showCorporateDonors()">Details</button>
+                    </div>
+
+
+                    <label class="col-md-5 font-weight-600">Total Trust Expenses :</label>
+                    <div class="col-md-3 font-weight-600">
+                        <p>{{expenses}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-info" (click)="showTrustExpenses()">Details</button>
+                    </div>
+
+
+                    <label class="col-md-5 font-weight-600"> Total Income from Trust Members :</label>
+                    <div class="col-md-3 font-weight-600">
+                        <p>{{trustMemeber}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-info" (click)="showTrustMembers()">Details</button>
+                    </div>
+
+                </div>
+                <!-- /row -->
+            </form>
+            <!-- /form -->
+        </div>
+        <!-- /card-body -->
+
+    </div>
+    <!-- /card -->
+
+</div>
+<!-- /content -->
+
+<!-- school details -->
+<div *ngIf="isShowSchool">
+    <app-school-details [schoolDetails]="schoolDetails" (modalStatus)="modalStatus($event)"></app-school-details>
+</div>
+
+<!-- individual donor details -->
+<div *ngIf="isShowIndividual">
+    <app-individual-donation [individualDetails]="individualDetails" [donorDetails]="donorDetails"
+        (modalStatus)="modalStatus($event)"></app-individual-donation>
+</div>
+
+<!-- corporate donor details -->
+<div *ngIf="isShowCorporate">
+    <app-corporate-donation [corporateDetails]="corporateDetails" [donorDetails]="donorDetails"
+        (modalStatus)="modalStatus($event)"></app-corporate-donation>
+</div>
+
+<!-- trust expenses details -->
+<div *ngIf="isShowExpenses">
+    <app-trust-expenses [trustExpenses]="trustExpenses" (modalStatus)="modalStatus($event)"></app-trust-expenses>
+</div>
+
+<!-- trust member income details -->
+<div *ngIf="isShowMembers">
+    <app-trust-member-income [memberDetails]="memberDetails"
+        (modalStatus)="modalStatus($event)"></app-trust-member-income>
+</div>

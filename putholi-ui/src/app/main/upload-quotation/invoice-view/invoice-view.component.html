@@ -1,0 +1,378 @@
+<div bsModal #viewInvoice="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'UPLOAD.ViewInvoices'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal">
+                <div class="modal-body roll">
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for company name -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.CompanyName'|translate}}
+                            <span class="">:</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.companyName}}</p>
+                        </div>
+
+
+                        <!-- label for quotation date -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.InvoiceDate'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.invoiceDate}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for address -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Address'|translate}}
+                            <span class="">:</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.address}}</p>
+                        </div>
+
+
+                        <!-- label for quantity -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Quantity'|translate}}<span
+                                class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quantity}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for street -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Street'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.street}}</p>
+                        </div>
+
+                        <!-- label for unit price -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.UnitPrice'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedUnitPrice}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for city -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.City'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.city}}</p>
+                        </div>
+
+                        <!-- label for tax -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Tax'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedTax}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for pincode -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Pincode'|translate}}<span class="required"> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.pincode}}</p>
+                        </div>
+                        <!-- label for shipping cost -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.ShippingCost'|translate}}<span
+                                class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedShippingCost}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for phone number -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PhoneNumber'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.phoneNumber}}</p>
+                        </div>
+
+
+                        <!-- label for total amount -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.TotalAmount'|translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedAmount}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Comment/SpecialInstruction'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.comments}}</p>
+                        </div>
+
+                        <!-- label for Bank Name -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.BankName'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.bankName?.description}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountType'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.accountType?.description}}</p>
+                        </div>
+
+
+                        <!-- label for vendor code -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.VendorCode'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.vendorCode}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for invoice prepared by -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.InvoicePreparedBy'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.invoicePreparedBy}}</p>
+                        </div>
+
+                        <!-- label for IFSC code -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.IFSCCode'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.ifscCode}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for work status details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.WorkStatus'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.workStatus?.description}}</p>
+                        </div>
+
+                        <!-- label for payment mode details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PaymentMode'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.paymentMode?.description}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Discount details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.DiscountDetails'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.discountDetails}}</p>
+                        </div>
+
+                        <!-- label for Account details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountNumber'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.accountNumber}}</p>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for item description -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.ItemDescription'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.itemDescription}}</p>
+                        </div>
+
+                        <!-- label for warranty -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.ViewInvoiceImages'|translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <button type="button" data-toggle="modal" class="btn btn-info"
+                                (click)="openImage(invoiceImage)">{{'COMMON.ClickHere'|translate}}
+                            </button>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <div class="form-group row">
+                        <!-- label for utr number -->
+                        <label *ngIf="invoiceData?.utrNumber !=0"
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.UTRNumber'|translate}}
+                            :</label>
+                        <div class="col-lg-3" *ngIf="invoiceData?.utrNumber !=0">
+                            <p>{{invoiceData?.utrNumber}}</p>
+                        </div>
+
+                        <!-- label for utr date -->
+                        <label *ngIf="invoiceData?.utrDate"
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.UTRDate'|translate}}<span
+                                class=""> :</span></label>
+                        <div class="col-lg-3" *ngIf="invoiceData?.utrDate">
+                            <p>{{invoiceData?.utrDate| date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <div class="form-group row" *ngIf="invoiceData?.rejectedReason">
+                        <!-- label for rejected reason -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICEPAYMENT.RejectedReason'|translate}}
+                            :</label>
+                        <div class="col-lg-3">
+                            <p>{{invoiceData?.rejectedReason}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <h5>{{'COMMON.ApprovalHistory' | translate }}</h5>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'COMMON.ActionBy' | translate }}</th>
+                                    <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                    <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                    <th>{{'COMMON.Status' | translate }}</th>
+                                    <th>{{'COMMON.Remarks' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                    <td>{{data?.actionBy}}</td>
+                                    <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{data?.role}}</td>
+                                    <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                    </td>
+                                    <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                    </td>
+                                    <td>{{data?.remarks}}</td>
+
+                                </tr>
+                                <tr class="odd" *ngIf="(!approvalHistDtlsDTOs?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--  -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- show quotation Images-->
+
+<div bsModal #invoiceImage="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h4 class="modal-title">{{'INVOICE.ViewInvoiceImages' | translate}}</h4>
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="closeImages()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" *ngIf="base64Image">
+                            <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                        </div>
+                    </div>
+
+                    <div class="carousel-inner" *ngIf="!base64Image">
+                        <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /show quotation Images-->

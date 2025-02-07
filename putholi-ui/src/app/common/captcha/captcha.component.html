@@ -1,0 +1,18 @@
+<div class="captcha-container {{ config.cssClass}}">
+  <canvas id="captcahCanvas" width="280" height="80"></canvas>
+
+
+  <div class="captcha-actions row">
+    <div class="col-md-9">
+      <input type="text" [(ngModel)]="captchaData.captch_input" id='captch_input' name='captch_input'
+        #captch_input="ngModel" required (keyup)="checkCaptcha()" class="form-control" autocomplete="off"
+        [ngClass]="{ 'isInvalid': (captch_input.touched) && captch_input.invalid }"  />
+    </div>
+    <a href="javascript:void(0)" class="cpt-btn" (click)="playCaptcha()">🔈</a>
+    <a href="javascript:void(0)" class="cpt-btn reload" (click)="createCaptcha()">&#x21bb;</a>
+    <div class="error-block"
+      *ngIf="((captch_input.touched || captch_input.dirty) && (captch_input.valid) && (!isValidCaptcha))">
+      Invalid Captcha
+    </div>
+  </div>
+</div>

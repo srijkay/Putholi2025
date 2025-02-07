@@ -1,0 +1,7 @@
+<input [type]="controlType" autocomplete="off" [required]="required" class="form-control" [disabled]="disabled"
+    [minlength]="minlength" [(ngModel)]="data" [ngModelOptions]="{standalone: true}" (input)="onChange()"
+    [placeholder]="placeholder" (change)="onChange()" (focus)="onFocus()" (blur)="onBlur(data)"
+    [ngStyle]="styleObject()" [maxlength]="maxlength" />
+
+<span *ngIf="Error != null" class="help-block-error">{{Error}}</span>
+<span *ngIf="(helpText != null && showHelpText)" class="help-block">{{helpText}}</span>

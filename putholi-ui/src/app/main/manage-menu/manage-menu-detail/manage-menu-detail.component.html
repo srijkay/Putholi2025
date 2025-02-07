@@ -1,0 +1,164 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                <span *ngIf="isNew"> {{'COMMON.AddNew'|translate}}</span> <span *ngIf="!isNew">-{{'MENU.Edit
+                    Menu'|translate}}</span>
+            </h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/menu/menu-list']" class="breadcrumb-item">
+                    {{'MENU.Menu Management'|translate}}</a>
+
+                <span class="breadcrumb-item active" *ngIf="isNew">{{'COMMON.AddNew'|translate}}</span>
+                <span class="breadcrumb-item active" *ngIf="!isNew">{{'MENU.Edit Menu'|translate}}</span>
+
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="isNew">
+                        {{'COMMON.AddNew'|translate}}</h6>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="!isNew">
+                        {{'MENU.Edit Menu'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- Form -->
+
+        <form class="form-horizontal" (ngSubmit)="submitForm(menuDetailsForm,menuDetails)" #menuDetailsForm="ngForm">
+
+            <div class="card-body">
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Code -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MENU.Menu Code'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="menuDetails.menuCode" placeholder="{{'MENU.Menu Code'|translate}}"
+                            [(ngModel)]="menuDetails.menuCode" [required]="true" name="menuCode">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MENU.Menu
+                        Description'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="menuDetails.menuName" [(ngModel)]="menuDetails.menuName"
+                            placeholder="{{'MENU.Menu Description'|translate}}" [required]="true" name="menuName">
+                        </app-nspl-multiline-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description Others -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MENU.Menu Description
+                        Other'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="menuDetails.menuNameOther"
+                            [(ngModel)]="menuDetails.menuNameOther"
+                            placeholder="{{'MENU.Menu Description Other'|translate}}" [required]="true"
+                            name="menuNameOther">
+                        </app-nspl-multiline-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Order Number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MENU.Module
+                        Name'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select [items]="moduleDetails.content" class="chosen-select" name="moduleCode"
+                            #moduleCode="ngModel" placeholder="{{'MENU.Module Name' | translate}}" [clearable]='true'
+                            [searchable]='false' [(ngModel)]="menuDetails.moduleCode" bindLabel="moduleDesc"
+                            bindValue="moduleCode" [dropdownPosition]="'auto'" required>
+                        </ng-select>
+                        <div class="error-block" *ngIf="((moduleCode.touched) && moduleCode.invalid)">
+                            {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Status -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select name="status" [items]="statusDetails" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="menuDetails.status" #status="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}"
+                            required>
+                        </ng-select>
+                        <div class="error-block" *ngIf="((status.touched) && status.invalid)">
+                            {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button *ngIf="isNew" type="submit" [disabled]="menuDetailsForm.invalid"
+                    class="btn btn-primary">{{"COMMON.Submit"|translate}}</button>&nbsp;&nbsp;
+                <button *ngIf="!isNew" type="submit" [disabled]="menuDetailsForm.invalid"
+                    class="btn btn-primary">{{"COMMON.Update"|translate}}</button>&nbsp;&nbsp;
+                <button type="button" [routerLink]="['/main/menu/menu-list']"
+                    class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+
+        <!-- /Form -->
+
+    </div>
+
+
+
+</div>
+<!-- /content area -->

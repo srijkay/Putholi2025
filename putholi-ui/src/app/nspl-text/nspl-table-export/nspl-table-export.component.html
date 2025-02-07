@@ -1,0 +1,21 @@
+<div class="breadcrumb-elements-item dropdown p-0">
+    <a href="javascript:;" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-download mr-2"></i>
+        <b> Download Here</b>
+    </a>
+
+
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- <li><a onClick="document.getElementById(tableName).tableExport({ type: 'json', escape: 'false' });">JSON</a></li> -->
+        <!-- <li><a onClick="document.getElementById(tableName).tableExport({ type: 'xml', escape: 'false' });">XML</a></li> -->
+        <!-- <li><a onClick="document.getElementById(tableName).tableExport({ type: 'sql' });">SQL</a></li>  -->
+        <!-- <li><a ng-click="csplTableExportCtrl.exportToFile('png');">PNG</a></li> -->
+        <a class="dropdown-item" (click)="exportToFile('csv');"> <i class="fas fa-file-csv"> &nbsp; CSV</i></a>
+        <a class="dropdown-item" (click)="exportToFile('excel');"> <i class="fas fa-file-excel"> &nbsp; XLS </i></a>
+        <!-- <a class="dropdown-item" (click)="exportToFile('pdf');"> <i class="fas fa-file-pdf"> &nbsp; PDF </i></a> -->
+        <!-- <li><a ng-click="csplTableExportCtrl.exportToFile('txt');">TXT</a></li> -->
+        <!-- <li><a ng-click="csplTableExportCtrl.exportToFile('doc');">Word</a></li> -->
+        <!-- <li><a ng-click="csplTableExportCtrl.exportToFile('powerpoint');">PowerPoint</a></li> -->
+        <!-- <li><a ng-click="csplTableExportCtrl.exportToFile('pdf');">PDF</a></li> -->
+    </div>
+</div>

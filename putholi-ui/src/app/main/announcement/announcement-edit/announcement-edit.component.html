@@ -1,0 +1,166 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'ANNOUNCEMENT.AddAnnouncement'|translate}}</h4>
+
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'ANNOUNCEMENT.EditAnnouncement'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/announcement/announcement-list']"
+                    class="breadcrumb-item">{{'ANNOUNCEMENT.Announcement'|translate}}</a>
+                <span *ngIf="isNew" class="breadcrumb-item active">{{'ANNOUNCEMENT.AddAnnouncement'|translate}}</span>
+                <span *ngIf="!isNew" class="breadcrumb-item active">{{'ANNOUNCEMENT.EditAnnouncement'|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">{{'ANNOUNCEMENT.AddAnnouncement'|translate}}
+                    </h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">{{'ANNOUNCEMENT.EditAnnouncement'|translate}}
+                    </h6>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <form class="form-horizontal" (ngSubmit)="onAnnouncement(announcementform,announcementData)"
+            #announcementform="ngForm">
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Announcement Role -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.AnnouncementRole'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <ng-select name="announcementRole" [items]="rolesList" class="chosen-select"
+                                bindLabel="description" bindValue="code" [(ngModel)]="announcementData.announcementRole"
+                                #announcementRole="ngModel" [clearable]='true' [searchable]='false'
+                                [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select'|translate}}" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Announcement Title -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.AnnouncementTitle'|translate}}</label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="announcementData.announcementTitle"
+                                placeholder="{{'ANNOUNCEMENT.AnnouncementTitle'|translate}}"
+                                [(ngModel)]="announcementData.announcementTitle" name="announcementTitle">
+                            </app-nspl-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Effective Date -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.EffectiveDate'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="effectiveDate" id="effectiveDate"
+                                    placeholder="{{'ANNOUNCEMENT.EffectiveDate'|translate}}" class="form-control"
+                                    bsDatepicker [bsConfig]="effectiveValue" autocomplete="off"
+                                    [(ngModel)]="announcementData.effectiveDate" [required]="true"
+                                    #effectiveDate="ngModel">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Expiry Date -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.ExpiryDate'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="expiryDate" id="expiryDate"
+                                    placeholder="{{'ANNOUNCEMENT.ExpiryDate'|translate}}" class="form-control"
+                                    bsDatepicker [bsConfig]="expiryValue" autocomplete="off"
+                                    [(ngModel)]="announcementData.expiryDate" [required]="true" #expiryDate="ngModel">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Announcement Description -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'ANNOUNCEMENT.AnnouncementDescription'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="announcementData.announcementDescription"
+                                [(ngModel)]="announcementData.announcementDescription" [required]="true"
+                                placeholder=" {{'ANNOUNCEMENT.AnnouncementDescription'|translate}}"
+                                name="announcementDescription">
+                            </app-nspl-multiline-text>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /Form Body -->
+            </div>
+            <!-- /Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button class="btn btn-primary" [disabled]="announcementform.invalid" href="javascript:;" type="submit"
+                    *ngIf="isNew">{{'COMMON.Submit'|translate}}</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" [disabled]="announcementform.invalid" href="javascript:;" type="submit"
+                    *ngIf="!isNew">{{'COMMON.Update'|translate}}</button>&nbsp;&nbsp;
+                <button [routerLink]="['/main/announcement/announcement-list']" class="btn btn-danger"
+                    type="button">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer -->
+        </form>
+        <!-- /Form -->
+    </div>
+</div>

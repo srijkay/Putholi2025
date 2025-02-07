@@ -1,0 +1,10 @@
+<kendo-fileselect [restrictions]="myRestrictions" [(ngModel)]="data" [disabled]="disabled" (blur)="blur(data)"
+    (valueChange)="onChange()" [required]="required" [ngStyle]="styleObject()" [accept]="accept" [multiple]="false">
+</kendo-fileselect>
+
+<span style="color: #aaaaaa;">Acceptable Max file size : 1MB</span>
+<br />
+<span style="color: #aaaaaa;">Acceptable formats : *.jpg, *.png, .*jpeg</span>
+
+<span *ngIf="Error != null" class="help-block-error">{{Error}}</span>
+<span *ngIf="(helpText != null && showHelpText)" class="help-block">{{helpText}}</span>

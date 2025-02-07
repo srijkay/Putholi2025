@@ -1,0 +1,541 @@
+<!-- page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{"COMMON.Home"|translate}} -
+                    {{'ASSIGNVOLUNTEER.AssignVolunteertoSchool'|translate}}</span></h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home' | translate }}</a>
+                <a href="javascript:;" [routerLink]="['/main/pending-workflow']" class="breadcrumb-item">
+                    {{'COMMON.PendingWorkflow'|translate}}</a>
+                <span class="breadcrumb-item active"> {{'ASSIGNVOLUNTEER.AssignVolunteertoSchool'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0"> {{'ASSIGNVOLUNTEER.AssignVolunteertoSchool'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <form action="#" class="form-horizontal" (ngSubmit)="onSubmit(assignVolunteerForm,assignVolunteerData)"
+            #assignVolunteerForm="ngForm">
+
+            <!-- Card Body -->
+            <div class="card-body" style="margin-left: 12px;">
+
+                <!-- School Information  -->
+
+                <h5 style="margin-top: -25px;">{{'MANAGESCHOOL.SchoolInformation'|translate}} </h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for registration number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolRegNo}}</p>
+                    </div>
+
+                    <!-- label for school name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolName}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for school type -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolType}}</p>
+                    </div>
+
+                    <!-- label for no.of students -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.noOfStudents}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for no.of teachers -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.noOfTeachers}}</p>
+                    </div>
+
+                    <!-- label for no.of teachers -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.educationalDistrict}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- /School Information  -->
+
+                <!-- Contact Information -->
+
+                <h5>{{'MANAGESCHOOL.ContactInformation'|translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryName}}</p>
+                    </div>
+
+                    <!-- label for secondary contact name -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryName}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                    </div>
+
+                    <!-- label for secondary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryNumber}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for primary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                        | translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryEmail}}</p>
+                    </div>
+
+                    <!-- label for secondary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryEmail}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- /contact information -->
+
+
+                <!-- Address Information -->
+
+                <h5>{{'MANAGESCHOOL.AddressInformation'|translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for Address line 1 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.addressLine1}}</p>
+                    </div>
+
+                    <!-- label for address line 2 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.addressLine2}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for locality -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                    </div>
+
+                    <!-- label for city -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' | translate}}
+                        :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.city}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for district -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.district}}</p>
+                    </div>
+
+                    <!-- label for state -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p *ngIf="schoolInfo?.addressInfo?.state=='TN'">Tamil Nadu</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p *ngIf="schoolInfo?.addressInfo?.country=='IND'">India</p>
+                    </div>
+
+                    <!-- label for pincode -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedBy' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.createdBy}}</p>
+                    </div>
+
+                    <!-- label for Message To School Trust -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600" *ngIf="schoolInfo?.comments">
+                        {{'MANAGESCHOOL.MessageToTrust' | translate}} :</label>
+                    <div class="col-md-3" *ngIf="schoolInfo?.comments">
+                        <p>{{schoolInfo?.comments}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- Approval -->
+                <h5>{{"REQUIREMENT.RequirementInformation"|translate}}</h5>
+                <hr />
+
+                <div class="form-group row">
+                    <!-- label for registration number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'REQUIREMENT.ConsolidateReferenceNumber'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.consolidateRefInfo?.consolidateId}}</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{'REQUIREMENT.RequirementType'|translate}}</th>
+                                <th>{{'REQUIREMENT.AssetType'|translate}}</th>
+                                <th>{{'REQUIREMENT.AssetName'|translate}}</th>
+                                <th>{{'REQUIREMENT.Quantity'|translate}}</th>
+                                <th>{{'REQUIREMENT.SubmittedDate'|translate}}</th>
+                                <th>{{'COMMON.Status'|translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX" *ngFor="let data of requirementList">
+                                <td>{{data?.requirementType=='NE'?'New':'Maintenance'}}</td>
+                                <td>{{data?.assetType}}</td>
+                                <td>{{data?.assetName}}</td>
+                                <td>{{data?.quantity}}</td>
+                                <td>{{data?.createdDate|date:'dd/MM/yyyy'}}</td>
+                                <td><span class="badge badge-success">{{data?.reqStatus}}</span>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <h5> {{'SCHOOLINFO.VolunteerAcknowledgement'|translate}}</h5>
+                <hr />
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tempTable">
+                        <thead>
+                            <tr>
+                                <th>{{'COMMON.ActionBy' | translate }}</th>
+                                <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                <th>{{'COMMON.Status' | translate }}</th>
+                                <th>{{'COMMON.Remarks' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                <td>{{data?.actionBy}}</td>
+                                <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                <td>{{data?.role}}</td>
+                                <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                </td>
+                                <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                </td>
+                                <td>{{data?.remarks}}</td>
+
+                            </tr>
+                            <tr class="odd" *ngIf="(!approvalHistDtlsDTOs?.length)">
+                                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                        {{'RECORDS.NoRecords'|translate}}</b>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+
+                <!-- Assign Volunteer to School -->
+
+                <h5> {{'ASSIGNVOLUNTEER.AssignVolunteertoSchool'|translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'|translate}}
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                        <ng-select name="district" [items]="DistrictList" (change)="chooseDistrict($event)"
+                            class="chosen-select" bindLabel="description" bindValue="code" required
+                            [(ngModel)]="assignVolunteerData.district" #district="ngModel" [clearable]='true'
+                            [searchable]='true' [dropdownPosition]="'auto'" placeholder="select district"
+                            [ngClass]="{ 'isInvalid': district.touched && district.invalid }">
+                        </ng-select>
+
+                        <span class="error-block" *ngIf="(district.touched && district.invalid)">
+                            {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                        </span>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'ASSIGNVOLUNTEER.SelectAvailableVolunteers'|translate}} <span
+                            class="required">*</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select [items]="VolunteerList" class="chosen-select" (change)="selectChange($event)"
+                            placeholder=" {{'ASSIGNVOLUNTEER.SelectAvailableVolunteers'|translate}}" [clearable]='true'
+                            [searchable]='false' [(ngModel)]="assignVolunteerData.volunteername" bindLabel="userName"
+                            bindValue="userName" [dropdownPosition]="'auto'" name="volunteername"
+                            #volunteername="ngModel" required
+                            [ngClass]="{ 'isInvalid': volunteername.touched && volunteername.invalid }">
+                        </ng-select>
+                        <span class="error-block" *ngIf="(volunteername.touched && volunteername.invalid)">
+                            {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                        </span>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                        *ngIf="volunteerDetails?.district">{{'MANAGESCHOOL.District' | translate}} :</label>
+                    <div class="form-inline col-md-3" *ngIf="volunteerDetails?.district">
+                        <p>{{volunteerDetails?.district?.description}}</p>
+                    </div>
+
+                    <!-- label for Message To School Trust -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                        *ngIf="volunteerDetails?.mobileNumber">
+                        {{'MANAGEUSER.MobileNumber' | translate}} :</label>
+                    <div class="form-inline col-md-3" *ngIf="volunteerDetails?.mobileNumber">
+                        <p>{{volunteerDetails?.mobileNumber}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks'|translate}}
+                        <span class="required">*</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="assignVolunteerData.remarks"
+                            [(ngModel)]="assignVolunteerData.remarks" [required]="true"
+                            placeholder="{{'COMMON.EnterRemarks'|translate}}" name="remarks">
+                        </app-nspl-multiline-text>
+
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ASSIGNVOLUNTEER.AssignedVolunteer'|translate}}:
+                    </label>
+                    <div class="col-lg-3 col-md-12 col-sm-12">
+                        <p style="margin-top:8px;">{{assignVolunteerValue}}</p>
+                    </div>
+
+                    <!-- <div class="col-lg-3 col-md-12 col-sm-12" *ngIf="assignVolunteerValue">
+                        <button type="button" data-toggle="modal" class="btn btn-warning" (click)="reAssign(template)">
+                            {{'ASSIGNVOLUNTEER.ModifyVolunteer'|translate}}</button>
+                    </div> -->
+                </div>
+                <!-- /row -->
+
+                <!-- /Assign Volunteer to School -->
+
+
+            </div>
+
+            <!--/Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" [disabled]="assignVolunteerForm.invalid" class="btn btn-primary center">
+                    {{'COMMON.Submit'|translate}}</button> &nbsp;
+                <button type="button" class="btn btn-danger"
+                    [routerLink]="['/main/pending-workflow']">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer -->
+        </form>
+        <!-- /Form -->
+    </div>
+
+
+    <div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+        <div class="modal-dialog" style="top: 120px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{'ASSIGNVOLUNTEER.ChangeVolunteer'|translate}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" (click)="template.hide()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ASSIGNVOLUNTEER.ChangeVolunteer'|translate}}</label>
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <ng-select [items]="VolunteerList" class="chosen-select" (change)="onChange($event)"
+                                placeholder=" {{'ASSIGNVOLUNTEER.SelectAvailableVolunteers'|translate}}"
+                                [clearable]='true' [searchable]='false' [(ngModel)]="assignVolunteerData.volunteerName"
+                                bindLabel="userName" bindValue="userName" [dropdownPosition]="'auto'"
+                                name="volunteerName" #volunteerName="ngModel" required
+                                [ngClass]="{ 'isInvalid': volunteerName.touched && volunteerName.invalid }">
+                            </ng-select>
+                            <span class="error-block" *ngIf="(volunteerName.touched && volunteerName.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="changeVolunteer()">
+                        {{'COMMON.Submit'|translate}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="template.hide()">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /dashboard content -->
+</div>
+<!-- /Content area -->

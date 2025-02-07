@@ -1,0 +1,264 @@
+<div bsModal #invoice="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add Payment Details</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+            <form class="form-horizontal" #requirementForm="ngForm">
+                <div class="modal-body">
+                    <!-- form group -->
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Select Payment Method
+                            <span class="required"> *</span></label>
+                        <div class="col-sm-8">
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio1" [(ngModel)]="invoicePayment.paymentMethod"
+                                    value="IB" name="customRadio" class="custom-control-input" required
+                                    (click)="internetBanking('IB')">
+                                <label class="custom-control-label" for="customRadio1">Internet Banking
+                                </label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio2" [(ngModel)]="invoicePayment.paymentMethod"
+                                    value="CP" name="customRadio" class="custom-control-input" required
+                                    (click)="internetBanking('CP')">
+                                <label class="custom-control-label" for="customRadio2">Cheque Payment</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isBank">
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Payment From<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.paymentFrom" placeholder="Payment From"
+                                    [required]="true" [(ngModel)]="invoicePayment.paymentFrom" name="paymentFrom"
+                                    [maxlength]="'50'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Payment To<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.paymentTo" placeholder="Payment to"
+                                    [required]="true" [(ngModel)]="invoicePayment.paymentTo" name="paymentTo"
+                                    [maxlength]="'25'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Bank Name<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.bankName" placeholder="Bank Name"
+                                    [maxlength]="'50'" [required]="true" [(ngModel)]="invoicePayment.bankName"
+                                    name="bankName">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Transaction Reference
+                                Number<span class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.referenceNumber"
+                                    placeholder="Transaction Reference Number" [required]="true" [maxlength]="'255'"
+                                    [(ngModel)]="invoicePayment.referenceNumber" name="referenceNumber">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Date of Payment<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <input class="form-control" type="text" name="paymentDate" id="paymentDate"
+                                    placeholder="{{'QUOTATION.DDMMYYYY' | translate}}" class="form-control" bsDatepicker
+                                    [bsConfig]="dateOfJoinValue" autocomplete="on" 
+                                    [(ngModel)]="invoicePayment.paymentDate" [required]="true" #paymentDate="ngModel"
+                                    [ngClass]="{ 'isInvalid': paymentDate.touched && paymentDate.invalid }" />
+
+                                <div class="error-block" *ngIf="((paymentDate.touched) && paymentDate.invalid)">
+                                    This field cannot be left blank
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Paid Amount<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-number name="paidAmount" [data]="invoicePayment.paidAmount" [maxlength]="'12'"
+                                    [(ngModel)]="invoicePayment.paidAmount" [disabled]="true" placeholder="Paid Amount"
+                                    [noOfDecimals]="'2'">
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Amount Collected By<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.amountCollectedBy"
+                                    placeholder="Amount Collected By" [required]="true" [maxlength]="'255'"
+                                    [(ngModel)]="invoicePayment.amountCollectedBy" name="amountCollectedBy">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+
+                    <div *ngIf="isCheque">
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Account Holder Name<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.accountHolderName" [maxlength]="'255'"
+                                    placeholder="Account Holder Name" [required]="true"
+                                    [(ngModel)]="invoicePayment.accountHolderName" name="accountHolderName">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Paid Amount<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-number name="paidAmount" [data]="invoicePayment.paidAmount" [maxlength]="'12'"
+                                    [(ngModel)]="invoicePayment.paidAmount" [disabled]="true" placeholder="Paid Amount"
+                                    [noOfDecimals]="'2'">
+                                </app-nspl-number>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Date of Payment<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <input class="form-control" type="text" name="paymentDate" id="paymentDate"
+                                    placeholder="{{'QUOTATION.DDMMYYYY' | translate}}" class="form-control" bsDatepicker
+                                    [bsConfig]="dateOfJoinValue" autocomplete="off"
+                                    [(ngModel)]="invoicePayment.paymentDate" [required]="true" #paymentDate="ngModel"
+                                    [ngClass]="{ 'isInvalid': paymentDate.touched && paymentDate.invalid }" />
+
+                                <div class="error-block" *ngIf="((paymentDate.touched) && paymentDate.invalid)">
+                                    This field cannot be left blank
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Cheque Number<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.chequeNumber" placeholder="Cheque Number"
+                                    [maxlength]="'50'" [required]="true" [(ngModel)]="invoicePayment.chequeNumber"
+                                    name="chequeNumber">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Bank of Drawn<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.bankName" placeholder="Bank of Drawn"
+                                    [required]="true" [(ngModel)]="invoicePayment.bankName" name="bankName"
+                                    [maxlength]="'50'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="row mb-3">
+                            <!-- Upload -->
+                            <label class="col-lg-5 col-sm-12 col-form-label font-weight-600">Payee<span
+                                    class="required">
+                                    *</span></label>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <app-nspl-text [data]="invoicePayment.payee" placeholder="Payee" [required]="true"
+                                    [(ngModel)]="invoicePayment.payee" name="payee" [maxlength]="'50'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+                    <!-- /form group -->
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" [disabled]="requirementForm.invalid" class="btn btn-primary"
+                        (click)="saveInvoicePayment(invoicePayment)">
+                        {{'COMMON.Submit'|translate}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel' | translate}}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

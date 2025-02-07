@@ -1,0 +1,253 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="this.getToken('role')=='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> -
+                {{'SIDEBAR.ManageSchool' | translate}}</h4>
+            <h4 *ngIf="this.getToken('role')!='BENIF'"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> -
+                {{'MANAGESCHOOL.ApprovalSchool' | translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate}}</a>
+                <span *ngIf="this.getToken('role')=='BENIF'" class="breadcrumb-item active">{{'SIDEBAR.ManageSchool' |
+                    translate}}
+                </span>
+                <span *ngIf="this.getToken('role')!='BENIF'" class="breadcrumb-item active">
+                    {{'MANAGESCHOOL.ApprovalSchool' | translate}}
+                </span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 *ngIf="this.getToken('role')=='BENIF'" class="card-title">{{'MANAGESCHOOL.SchoolCardHeading' |
+                        translate}}</h5>
+                    <h5 *ngIf="this.getToken('role')!='BENIF'" class="card-title">{{'MANAGESCHOOL.SchoolApprovalList' |
+                        translate}}</h5>
+
+                </div>
+                <div class="text-right">
+                    <!--  -->
+                    <a *ngIf="this.getToken('role')=='BENIF'&&(!schoolList?.length)">
+                        <button type="button" href="javascript:;"
+                            [routerLink]="['/main/manage-school/manage-school-edit','New']" class="btn btn-success">
+                            {{'COMMON.AddSchool' | translate}}
+                        </button></a> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <br />
+            <form class="form-horizontal" #schoolForm="ngForm" (ngSubmit)='applyFilter()'
+                *ngIf="this.getToken('role')!='BENIF'">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">{{'MANAGESCHOOL.SchoolName'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <input class='form-control text' autocomplete="off" type="text" name="schoolName"
+                                [(ngModel)]="filterObj.schoolName" placeholder="{{'MANAGESCHOOL.SchoolName'|translate}}"
+                                id="schoolName" #schoolName="ngModel" />
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label class="control-label">{{'MANAGESCHOOL.SchoolType'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <ng-select [items]="schoolTypeList" class="chosen-select"
+                                placeholder="{{'MANAGESCHOOL.SchoolType'|translate}}" [clearable]='true'
+                                [searchable]='false' [(ngModel)]="filterObj.schoolType" bindLabel="description"
+                                bindValue="description" [dropdownPosition]="'auto'" name="schoolType"
+                                #schoolType="ngModel" required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">{{'MANAGESCHOOL.District'|translate}}</label>
+                        <div class="input-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <ng-select [items]="DistrictList" class="chosen-select"
+                                placeholder="{{'MANAGESCHOOL.District'|translate}}" [clearable]='true'
+                                [searchable]='false' [(ngModel)]="filterObj.district" bindLabel="description"
+                                bindValue="code" [dropdownPosition]="'auto'" name="district" #district="ngModel"
+                                required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" style="margin-top: 25px;">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-primary pull-right">
+                                {{'COMMON.ApplyFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top: 25px;" *ngIf="isFilterApplied">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-danger pull-right" (click)="resetFilter()">
+                                {{'COMMON.ResetFilter'|translate}}
+                            </button> &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <br />
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGESCHOOL.RegistrationNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolRegNo'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolName' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolName'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.SchoolType' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolType'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGESCHOOL.District'| translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'district'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'MANAGEUSER.ContactNumber' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'primaryContact'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th>{{'COMMON.Status' | translate}}
+                                <app-nspl-table-sort [sortCol]="schoolList" [sortTypeName]="'schoolStatus'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
+                            <th class="text-center">{{'COMMON.Action' | translate}}</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+                        <tr class="odd gradeX" *ngFor="let data of schoolList">
+                            <td>{{data?.schoolRegNo}}</td>
+                            <td>{{data?.schoolName}}</td>
+                            <td>{{data?.schoolType}}</td>
+                            <td>{{data?.district}}</td>
+                            <td>{{data?.primaryContact}}</td>
+                            <td *ngIf="data?.schoolStatus=='REJECTED'|| data?.schoolStatusCode=='DEOREJ'"><span
+                                    class="badge badge-danger">{{data?.schoolStatus}}</span> </td>
+                            <td *ngIf="data?.schoolStatus!='REJECTED' && data?.schoolStatusCode!='DEOREJ'"><span
+                                    class="badge badge-warning">{{data?.schoolStatus}} </span> </td>
+
+                            <td class="text-center">
+                                <a href="javascript:;" class="list-icons-item"
+                                    *ngIf="this.getToken('role')=='BENIF' && (data?.schoolStatusCode == 'REJ')"
+                                    [routerLink]="['/main/manage-school/manage-school-edit',data?.schoolInfoId]">
+                                    <i tooltip="Edit" class="far fa-edit"></i>
+                                </a>
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-school/manage-school-view',data?.schoolInfoId]"
+                                    class="list-icons-item">
+                                    <i *ngIf="this.getToken('role')=='BENIF' && data?.schoolStatusCode !='APR'"
+                                        tooltip="View" class="far fa-eye"></i>
+                                    <i *ngIf="this.getToken('role')!='BENIF' && data?.schoolStatusCode !='APR'"
+                                        tooltip="Action" class="far fa-edit"></i>
+                                    <i *ngIf="this.getToken('role')=='BENIF' && data?.schoolStatusCode =='APR'"
+                                        tooltip="View" class="far fa-eye"></i>
+                                </a>
+                                <a href="javascript:;" class="list-icons-item"
+                                    *ngIf="this.getToken('role')=='BENIF'&&(data?.schoolStatusCode == 'REJ' || data?.schoolStatusCode=='DEOREJ' ||  data?.schoolStatusCode=='APR')">
+                                    <i *ngIf="schoolInfo.consolidateRefInfo==null"
+                                        (click)="deleteSchool(data?.schoolInfoId)" tooltip="Delete"
+                                        class="fa fa-trash"></i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+
+                        <tr class="odd" *ngIf="(!schoolList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}} </b>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- /content area -->

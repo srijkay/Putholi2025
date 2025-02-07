@@ -1,0 +1,320 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> -
+                {{'BENEFICIARY.ViewApprovalBeneficiary' | translate }}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home' | translate }}</a>
+
+                <a href="javascript:;" [routerLink]="['/main/manage-beneficiary']" class="breadcrumb-item">
+                    {{'BENEFICIARY.AccessApproval' | translate }} </a>
+
+                <span class="breadcrumb-item active">{{'BENEFICIARY.ViewApprovalBeneficiary' | translate }}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="this.getToken('role')=='BENIF'" class="fs-17 font-weight-600 mb-0">
+                        {{'BENEFICIARY.BeneficiaryViewTitle' | translate }}</h6>
+                    <h6 *ngIf="this.getToken('role')!='BENIF'" class="fs-17 font-weight-600 mb-0">
+                        {{'BENEFICIARY.ViewApprovalBeneficiary' | translate }}</h6>
+                </div>
+            </div>
+        </div>
+
+        <form class="form-horizontal" (ngSubmit)='onBeneficiary(benApprovalForm,benApprovalData)'
+            #benApprovalForm="ngForm">
+
+            <div class="card-body">
+                <br>
+
+                <h5>{{'MANAGESCHOOL.PersonalInformation' | translate }}</h5>
+                <hr />
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.FullName' | translate
+                        }}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.firstName}} {{beneficiaryData?.lastName}}</p>
+                    </div>
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Username' | translate
+                        }}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.userName}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Gender' | translate
+                        }}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.gender=='F'?'Female':'Male'}}</p>
+                    </div>
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.IdentificationNumber'
+                        | translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.identificationNumber}}</p>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Role' | translate
+                        }}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.role?.description}}</p>
+                    </div>
+
+                </div>
+
+
+                <h5>{{'MANAGESCHOOL.ContactInformation' | translate }}</h5>
+                <hr />
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Email' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.emailId}}</p>
+                    </div>
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.MobileNumber' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.mobileNumber}}</p>
+                    </div>
+                </div>
+
+                <h5>{{'MANAGESCHOOL.AddressInformation' | translate }}</h5>
+                <hr />
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.addressLine1}}</p>
+                    </div>
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.addressLine2}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.locality}}</p>
+                    </div>
+
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.district?.description}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{beneficiaryData?.city}}</p>
+                    </div>
+
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p *ngIf="beneficiaryData?.state=='TN'">TamilNadu</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{country?.description}}</p>
+                    </div>
+
+                    <!-- label for pincode -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{beneficiaryData?.pincode}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- label for pincode -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                        *ngIf="beneficiaryData?.referredBy">{{'MANAGESCHOOL.ReferredBy' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3" *ngIf="beneficiaryData?.referredBy">
+                        <p>{{beneficiaryData?.referredBy}}</p>
+                    </div>
+
+                    <!-- label for view pictures -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.ViewPicture' |
+                        translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <button type="button" href="javascript:;" (click)="onPerson(personId)" data-toggle="modal"
+                            class="btn btn-info">{{'COMMON.ClickHeretoViewImages'|translate}}</button>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <div class="approval">
+                    <h5>{{'COMMON.ApprovalHistory' | translate }}</h5>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'COMMON.ActionBy' | translate }}</th>
+                                    <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                    <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                    <th>{{'COMMON.Status' | translate }}</th>
+                                    <th>{{'COMMON.Remarks' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                    <td>{{data?.actionBy}}</td>
+                                    <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{data?.role}}</td>
+                                    <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                    </td>
+                                    <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                    </td>
+                                    <td>{{data?.remarks}}</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <br />
+
+                <h5>{{'MANAGESCHOOL.Approval' | translate }}</h5>
+                <hr />
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status' | translate
+                        }}<span class="required"> *</span></label>
+                    <div class="col-md-3" style="margin-bottom: 9px;">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
+                                [(ngModel)]="benApprovalData.status" #status="ngModel" value="APR" required>
+                            <label class="custom-control-label" for="customRadio1">{{'COMMON.Approve' | translate
+                                }}</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input"
+                                [(ngModel)]="benApprovalData.status" #status="ngModel" value="REJ" required>
+                            <label class="custom-control-label" for="customRadio2">{{'COMMON.Reject' | translate
+                                }}</label>
+                        </div>
+
+                    </div>
+
+                    <div class="error-block" *ngIf="(status.touched && status.invalid)">
+                        This field cannot be left blank
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks' | translate
+                        }}<span class="required">
+                            *</span></label>
+                    <div class="col-lg-4 col-sm-12 col-form-label">
+                        <app-nspl-multiline-text [data]="benApprovalData.remarks" [(ngModel)]="benApprovalData.remarks"
+                            [required]="true" placeholder="{{'COMMON.EnterRemarks'|translate}}" name="remarks">
+                        </app-nspl-multiline-text>
+
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                    <div class="col-lg-7 col-sm-12 col-form-label">
+                        <p>I hereby agree & confirm that, I have taken enough effort to double check the presented
+                            details here
+                            and taking decisions without any favoritism to anyone involved for this activity.
+
+                            {{benApprovalForm.invalid }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" [disabled]="benApprovalForm.invalid || isClickedOnce"
+                    class="btn btn-primary">{{'COMMON.Submit'|translate}}</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" href="javascript:;"
+                    [routerLink]="['/main/manage-beneficiary/manage-beneficiary-list']">{{'COMMON.Cancel'|translate}}</button>&nbsp;&nbsp;
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<!-- /content area -->
+
+<!-- show quotation Images-->
+<ng-template #personId>
+    <div class="modal-header">
+
+        <h4 class="modal-title">{{'BENEFICIARY.ViewIDProofimages'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalRef.hide()">{{'COMMON.Cancel' |
+            translate}}</button>
+    </div>
+</ng-template>
+<!-- // show quotation Images-->

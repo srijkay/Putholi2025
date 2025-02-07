@@ -1,0 +1,219 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'DEOCODEMAINTENANCE.AddDeoDetails'|translate}}</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{"COMMON.Home"|translate}}</span> -
+                {{'DEOCODEMAINTENANCE.EditDeoDetails'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/deo-code-maintenance/deo-code-list']"
+                    class="breadcrumb-item">
+                    {{'DEOCODEMAINTENANCE.DeoCodeMaintenance'|translate}}</a>
+
+                <span class="breadcrumb-item active"
+                    *ngIf="isNew">{{'DEOCODEMAINTENANCE.AddDeoDetails'|translate}}</span>
+                <span class="breadcrumb-item active"
+                    *ngIf="!isNew">{{'DEOCODEMAINTENANCE.EditDeoDetails'|translate}}</span>
+
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="isNew">
+                        {{'DEOCODEMAINTENANCE.AddDeoDetails'|translate}}</h6>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="!isNew">
+                        {{'DEOCODEMAINTENANCE.EditDeoDetails'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- Form -->
+
+
+        <form class="form-horizontal" (ngSubmit)="onDeoCode(deoCodeform,deoCodeData)" #deoCodeform="ngForm">
+
+
+
+            <div class="card-body">
+
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for deoName -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.DeoName'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="deoCodeData.deoName" [(ngModel)]="deoCodeData.deoName"
+                            placeholder="{{'DEOCODEMAINTENANCE.DeoName'|translate}}" [required]="true" name="deoName"
+                            NsplAplhaWithSpac>
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for city -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.City'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="deoCodeData.city" [(ngModel)]="deoCodeData.city"
+                            placeholder="{{'DEOCODEMAINTENANCE.City'|translate}}" [required]="true" name="city"
+                            NsplAplhaWithSpac>
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for district -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.District'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <!-- Label for district-->
+                        <ng-select [items]="DistrictList" class="my-calendar" bindLabel="description" bindValue="description"
+                            [searchable]='false' [clearable]='false' name="district" #district="ngModel"
+                            placeholder="{{'DEOCODEMAINTENANCE.District'|translate}}"
+                            [(ngModel)]="deoCodeData.district">
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for Town  -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.Town'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="deoCodeData.town" [(ngModel)]="deoCodeData.town"
+                            placeholder="{{'DEOCODEMAINTENANCE.Town'|translate}}" [required]="true" name="town"
+                            NsplAplhaWithSpac>
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for phone number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.PhoneNumber'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-number [data]="deoCodeData.phoneNumber" [(ngModel)]="deoCodeData.phoneNumber"
+                            placeholder="{{'DEOCODEMAINTENANCE.PhoneNumber'|translate}}" [required]="true"
+                            name="phoneNumber">
+                        </app-nspl-number>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Label for deo email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.DeoEmail'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="deoCodeData.deoEmail" [(ngModel)]="deoCodeData.deoEmail"
+                            placeholder="{{'DEOCODEMAINTENANCE.DeoEmail'|translate}}" [required]="true" name="deoEmail"
+                            [controlInput]="'Email'">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description Others -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'DEOCODEMAINTENANCE.DeoAddress'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="deoCodeData.deoOfficeAddress" [(ngModel)]="deoCodeData.deoOfficeAddress"
+                            placeholder="{{'DEOCODEMAINTENANCE.DeoAddress'|translate}}" [required]="true"
+                            name="deoOfficeAddress">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Status -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select name="active" [items]="statusList" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="deoCodeData.active" #active="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="select status" required>
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <a href="javascript:;" *ngIf="isNew"><button type="submit" [disabled]="deoCodeform.invalid"
+                        class="btn btn-primary">{{"COMMON.Submit"|translate}}</button></a>&nbsp;&nbsp;
+                <a href="javascript:;" *ngIf="!isNew"><button type="submit" [disabled]="deoCodeform.invalid"
+                        class="btn btn-primary">{{"COMMON.Update"|translate}}</button></a>&nbsp;&nbsp;
+                <a href="javascript:;" [routerLink]="['/main/deo-code-maintenance/deo-code-list']"><button type="button"
+                        class="btn btn-danger">{{"COMMON.Cancel"|translate}}</button></a>
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+
+
+
+        <!-- /Form -->
+
+    </div>
+
+
+
+</div>
+<!-- /content area -->

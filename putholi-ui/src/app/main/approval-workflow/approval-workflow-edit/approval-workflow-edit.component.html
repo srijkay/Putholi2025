@@ -1,0 +1,441 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'APPROVALWORKFLOW.AddFeatureDetails'|translate}}</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'APPROVALWORKFLOW.EditFeatureDetails'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/approval-workflow/approval-workflow-list']"
+                    class="breadcrumb-item">{{'APPROVALWORKFLOW.FeaturesManagement'|translate}}</a>
+                <span *ngIf="isNew"
+                    class="breadcrumb-item active">{{'APPROVALWORKFLOW.AddFeatureDetails'|translate}}</span>
+                <span *ngIf="!isNew"
+                    class="breadcrumb-item active">{{'APPROVALWORKFLOW.EditFeatureDetails'|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">
+                        {{'APPROVALWORKFLOW.AddFeatureDetails'|translate}}</h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">
+                        {{'APPROVALWORKFLOW.EditFeatureDetails'|translate}}</h6>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <tabset #staticTabs>
+            <tab heading="{{'APPROVALWORKFLOW.FeatureInformation'|translate}}">
+                <div class="card-body">
+                    <form class="form-horizontal" (ngSubmit)="onFeature(featureManageform,featureManageData)"
+                        #featureManageform="ngForm">
+
+                        <!-- Form Body -->
+                        <div class="form-body">
+                            <h5 class="fs-17 mb-0" style="margin-top: -25px;">{{'APPROVALWORKFLOW.ModuleInformation' |
+                                translate}}
+                            </h5>
+                            <hr />
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for feature Name -->
+                                <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                                    {{'APPROVALWORKFLOW.FeatureName'|translate}}<span class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <app-nspl-text [data]="featureManageData.featureName"
+                                        placeholder=" {{'APPROVALWORKFLOW.FeatureName'|translate}}"
+                                        [(ngModel)]="featureManageData.featureName" [required]="true"
+                                        name="featureName">
+                                    </app-nspl-text>
+                                </div>
+
+                                <!-- label for approval module  -->
+                                <label
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.Module'|translate}}<span
+                                        class="required">
+                                        *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ng-select name="module" [items]="menuDetails.content" class="chosen-select"
+                                        bindLabel="menuName" bindValue="menuCode"
+                                        [(ngModel)]="featureManageData.menuCode" #menuCode="ngModel" [clearable]='true'
+                                        [searchable]='false' [dropdownPosition]="'auto'"
+                                        placeholder="{{'APPROVALWORKFLOW.Module'|translate}}" required>
+                                    </ng-select>
+
+                                    <div class="error-block" *ngIf="((menuCode.touched) && menuCode.invalid)">
+                                        {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for status -->
+                                <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                                    {{'COMMON.Status'|translate}}<span class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ng-select name="status" [items]="statusList" class="chosen-select" bindLabel="name"
+                                        bindValue="code" [(ngModel)]="featureManageData.status" #status="ngModel"
+                                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                        placeholder="{{'COMMON.Status'|translate}}" required>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <h5 class="fs-17 mb-0">{{'APPROVALWORKFLOW.FilterInformation' | translate}}
+                            </h5>
+                            <hr />
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for filter type  -->
+                                <label
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.FilterType'|translate}}<span
+                                        class="required">
+                                        *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ng-select name="filterType" [items]="filterTypeList"
+                                        (change)="filterChange($event)" class="chosen-select" bindLabel="name"
+                                        bindValue="code" [(ngModel)]="featureManageData.filterType"
+                                        #filterType="ngModel" [clearable]='true' [searchable]='false'
+                                        [dropdownPosition]="'auto'"
+                                        placeholder="{{'APPROVALWORKFLOW.FilterType'|translate}}" required>
+                                    </ng-select>
+                                </div>
+
+                                <!-- label for user name list  -->
+                                <label *ngIf="filterInfo =='USR'"
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.User'|translate}}<span
+                                        class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12" *ngIf="filterInfo =='USR'">
+                                    <ng-select name="userName" [items]="userEditData.content" class="chosen-select"
+                                        bindLabel="userName" bindValue="userName"
+                                        [(ngModel)]="featureManageData.userName" #userName="ngModel" [clearable]='true'
+                                        [searchable]='false' [dropdownPosition]="'auto'"
+                                        placeholder="{{'APPROVALWORKFLOW.User'|translate}}" required>
+                                    </ng-select>
+                                </div>
+
+
+                                <!-- label for role list  -->
+                                <label *ngIf="filterInfo =='ROL'"
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.Role'|translate}}<span
+                                        class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12" *ngIf="filterInfo =='ROL'">
+                                    <ng-select name="role" [items]="rolesList" class="chosen-select"
+                                        bindLabel="description" bindValue="code" [(ngModel)]="featureManageData.role"
+                                        #role="ngModel" [clearable]='true' [searchable]='false' required
+                                        [dropdownPosition]="'auto'" placeholder="{{'APPROVALWORKFLOW.Role'|translate}}">
+                                    </ng-select>
+
+                                </div>
+
+                                <!-- label for organisation type  -->
+                                <label *ngIf="filterInfo =='ORG'"
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.Organisation'|translate}}<span
+                                        class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12" *ngIf="filterInfo =='ORG'">
+                                    <ng-select name="organisation" [items]="organisationList" class="chosen-select"
+                                        bindLabel="name" bindValue="code" [(ngModel)]="featureManageData.organisation"
+                                        #organisation="ngModel" [clearable]='true' [searchable]='false' required
+                                        [dropdownPosition]="'auto'" placeholder="select organisation">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <h5 class="fs-17 mb-0">{{'APPROVALWORKFLOW.ApprovalInformation' | translate}}
+                            </h5>
+                            <hr />
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for is auto approval  -->
+                                <label
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.IsApprovalApplicable'|translate}}<span
+                                        class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ng-select name="isApprovalApplicable" [items]="isApprovalApplicableList"
+                                        class="chosen-select" bindLabel="name" bindValue="code"
+                                        (change)="selectApplicable($event)"
+                                        placeholder="{{'APPROVALWORKFLOW.IsApprovalApplicable'|translate}}"
+                                        [(ngModel)]="featureManageData.isApprovalApplicable"
+                                        #isApprovalApplicable="ngModel" [clearable]='true' [searchable]='false'
+                                        [dropdownPosition]="'auto'" placeholder="Yes" required>
+                                    </ng-select>
+                                </div>
+
+                                <label *ngIf="featureManageData.isApprovalApplicable =='Y'"
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.IsAutoApproval'|translate}}<span
+                                        class="required"> *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12"
+                                    *ngIf="featureManageData.isApprovalApplicable =='Y'">
+                                    <ng-select name="isAutoApproval" [items]="isAutoApprovalList" class="chosen-select"
+                                        bindLabel="name" bindValue="code" [(ngModel)]="featureManageData.isAutoApproval"
+                                        #isAutoApproval="ngModel" [clearable]='true' [searchable]='false'
+                                        [dropdownPosition]="'auto'" (change)="selectApprover($event)"
+                                        placeholder="{{'APPROVALWORKFLOW.IsAutoApproval'|translate}}" required>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row" *ngIf="featureManageData.isAutoApproval =='N'  ">
+                                <!-- label for level of approval  -->
+                                <label
+                                    class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.LevelofApproval'|translate}}<span
+                                        class="required">
+                                        *</span></label>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ng-select name="levelofApproval" [items]="levelofApprovalList"
+                                        class="chosen-select" bindLabel="name" bindValue="code"
+                                        [(ngModel)]="featureManageData.levelofApproval" #levelofApproval="ngModel"
+                                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                        placeholder="{{'APPROVALWORKFLOW.LevelofApproval'|translate}}" required>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                        </div>
+                        <!-- /Form Body -->
+
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button type="submit" class="btn btn-primary"
+                                            [disabled]="featureManageform.invalid">{{'APPROVALWORKFLOW.Save&Continue'|translate}}
+                                        </button>&nbsp;&nbsp;&nbsp;
+                                        <button type="button" [routerLink]="['/main/approval-workflow']"
+                                            class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form -->
+                </div>
+                <!-- /card-body -->
+            </tab>
+
+            <tab heading="{{'APPROVALWORKFLOW.ApproverLevelsInformation'|translate}}">
+
+                <!-- row -->
+                <div class="card-body">
+                    <h5 class="" style="margin-top: -32px;">{{'APPROVALWORKFLOW.ApprovalInformation' | translate}} </h5>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-success"
+                            (click)="openModel(template, 'ADD', 0)">{{'COMMON.AddNew'|translate}}</button>
+                    </div>
+                    <div class="table-responsive">
+                        <br />
+                        <!-- Table -->
+                        <table class="table datatable-basic table-bordered" id="tempTable">
+                            <!-- Table Head -->
+                            <thead>
+                                <tr>
+                                    <th>{{'APPROVALWORKFLOW.Level'|translate}}
+                                        <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'level'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{'APPROVALWORKFLOW.Type'|translate}}
+                                        <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'type'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th>{{'APPROVALWORKFLOW.ApproverRoles'|translate}}
+                                        <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'approverRoles'"
+                                            [defaultSort]="'asc'">
+                                        </app-nspl-table-sort>
+                                    </th>
+                                    <th class="text-center">{{'COMMON.Action'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <!-- /Table Head -->
+
+                            <!-- Table Body -->
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approverLevels">
+                                    <td *ngIf="data?.level =='LE1'">Level 1</td>
+                                    <td *ngIf="data?.level =='LE2'">Level 2</td>
+                                    <td *ngIf="data?.level =='LE3'">Level 3</td>
+                                    <td *ngIf="data?.level =='LE4'">Level 4</td>
+
+                                    <td *ngIf="data?.type == 'PER'">Parallel Either</td>
+                                    <td *ngIf="data?.type == 'PAB'"> Parallel Both</td>
+                                    <td *ngIf="data?.type == 'SEQ'"> Sequence</td>
+
+                                    <td>{{data?.approverRolesNames}}</td>
+
+                                    <td class="text-center"><a href="javascript:;" class="list-icons-item"
+                                            (click)="openModel(template, 'EDIT', data?.approverId)"><i
+                                                data-toggle="tooltip" tooltip="Edit" class="far fa-edit"></i></a>
+
+                                        <a href="javascript:;" class="list-icons-item"
+                                            (click)="deleteLevels(data?.approverId)"><i data-toggle="tooltip"
+                                                tooltip="Delete" class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="odd" *ngIf="(!approverLevels?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- /Table Body -->
+                        </table>
+                        <!-- /Table -->
+                    </div>
+                    <br />
+
+                    <div class="form-actions fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary"
+                                        [routerLink]="['/main/approval-workflow']">{{"COMMON.Submit"|translate}}
+                                    </button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" (click)="onPrevious()"
+                                        class="btn btn-danger">{{"COMMON.Back"|translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /card-body -->
+            </tab>
+        </tabset>
+    </div>
+</div>
+
+<!-- Add and Edit Approver Levels Template -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 *ngIf="isAdd" class="modal-title">{{'APPROVALWORKFLOW.AddApproverLevels'|translate}}</h4>
+        <h4 *ngIf="!isAdd" class="modal-title">{{'APPROVALWORKFLOW.EditApproverLevels'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- Form -->
+    <form class="form-horizontal" #approvalEditForm="ngForm" (ngSubmit)="onReqEdit(approvalEditForm,approverForm)">
+        <div class="modal-body">
+            <!-- row -->
+            <div class="form-group row">
+                <!-- label for level of approval  -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                    {{'APPROVALWORKFLOW.Level'|translate}}<span class="required">
+                        *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="level" [items]="levelofApprovalList" class="chosen-select" bindLabel="name"
+                        bindValue="code" [(ngModel)]="approverForm.level" #level="ngModel" [clearable]='true'
+                        [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'APPROVALWORKFLOW.LevelofApproval'|translate}}" required>
+                    </ng-select>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row">
+                <!-- label for type list -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                    {{'APPROVALWORKFLOW.Type'|translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="type" [items]="typesList" class="chosen-select" bindLabel="name" bindValue="code"
+                        [(ngModel)]="approverForm.type" #type="ngModel" [clearable]='true' [searchable]='false'
+                        [dropdownPosition]="'auto'" placeholder="{{'APPROVALWORKFLOW.Type'|translate}}" required>
+                    </ng-select>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row  -->
+            <!-- lable for approver roles -->
+            <div class="form-group row" *ngIf="approverForm.type !='SEQ'">
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                    {{'APPROVALWORKFLOW.ApproverRoles'|translate}}<span class="required"> *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="approverRoles" [items]="rolesList" class="chosen-select" bindLabel="description"
+                        [multiple]="true" bindValue="code" [(ngModel)]="approverForm.approverRoles"
+                        #approverRoles="ngModel" [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'APPROVALWORKFLOW.ApproverRoles'|translate}}" required>
+                    </ng-select>
+                </div>
+            </div>
+            <!-- /row -->
+
+            <!-- row -->
+            <div class="form-group row" *ngIf="approverForm.type =='SEQ'">
+                <!-- label for approver roles -->
+                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                    {{'APPROVALWORKFLOW.ApproverRoles'|translate}}<span class="required">
+                        *</span></label>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ng-select name="approverRoles" [items]="rolesList" class="chosen-select" bindLabel="description"
+                        bindValue="code" [(ngModel)]="approverForm.approverRoles" #approverRoles="ngModel"
+                        [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                        placeholder="{{'APPROVALWORKFLOW.ApproverRoles'|translate}}" required>
+                    </ng-select>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+
+        <!-- Card-Footer -->
+        <div class="modal-footer">
+            <button type="submit" [disabled]="approvalEditForm.invalid" class="btn btn-primary"
+                *ngIf="isAdd">{{'COMMON.Submit' | translate}}</button>
+
+            <button type="submit" [disabled]="approvalEditForm.invalid" class="btn btn-primary"
+                *ngIf="!isAdd">{{'COMMON.Update' | translate}}</button>
+
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="modelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /Form -->
+</ng-template>
+<!-- /Add and Edit Approver Levels Template -->

@@ -1,0 +1,128 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> - {{'BENEFICIARY.ApprovalBeneficiary' | translate }}</h4>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate}}</a>
+
+                <span class="breadcrumb-item active">{{'BENEFICIARY.AccessApproval' | translate }}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'BENEFICIARY.ApprovalBeneficiaryList' | translate }}</h5>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <br />
+            <div class="table-responsive">
+                <table class="table datatable-basic table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{'MANAGEUSER.Username' | translate }}</th>
+                            <th>{{'MANAGESCHOOL.Name' | translate }}</th>
+                            <th>{{'MANAGESCHOOL.EmailId' | translate }}</th>
+                            <th>{{'MANAGEUSER.Role' | translate }}</th>
+                            <th>{{'MANAGEUSER.MobileNumber' | translate }}</th>
+                            <th>{{'COMMON.Status' | translate }}</th>
+                            <th class="text-center">{{'COMMON.Action' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let data of beneficiaryList">
+                            <td>{{data?.userName}}</td>
+                            <td>{{data?.firstName}}</td>
+                            <td>{{data?.emailId}}</td>
+                            <td>{{data?.role}}</td>
+                            <td>{{data?.mobileNumber}}</td>
+
+                            <td *ngIf="data?.statusCode!='REJREV' ||data?.statusCode=='REJAPR'"><span
+                                    class="badge badge-warning">{{data.status}}</span></td>
+                            <td *ngIf="data?.statusCode=='REJREV'"><span
+                                    class="badge badge-danger">{{data.status}}</span></td>
+                            <td *ngIf="data?.statusCode=='REJAPR'"><span
+                                    class="badge badge-danger">{{data.status}}</span></td>
+
+                            <td class="text-center">
+                                <a href="javascript:;"
+                                    [routerLink]="['/main/manage-beneficiary/manage-beneficiary-approval/', data?.userName]"
+                                    class="list-icons-item"><i data-toggle="tooltip" tooltip="Action"
+                                        class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr class="odd" *ngIf="(!beneficiaryList?.length) && (!loading)">
+                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                    {{'RECORDS.NoRecords'|translate}}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row" *ngIf='totalItem>0'>
+                <div class="col-md-4 col-sm-12">
+                    <div class="btn-group">
+                        <ng-select (change)="rangeChanged(pagesize)" [items]="rangeList" bindLabel="name" bindValue="id"
+                            placeholder="Select" [(ngModel)]="pagesize" [ngModelOptions]="{standalone: true}"
+                            [clearable]='false' [searchable]='false' [dropdownPosition]="'top'">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_info" id="sample_editable_1_info">{{'PAGINATION.Showing'|translate}}
+                        {{(number*size) + 1}} {{'PAGINATION.to'|translate}}
+                        {{(number*size) + noofelements}} {{'PAGINATION.of'|translate}} {{totalElements}}
+                        {{'PAGINATION.entries'|translate}}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap">
+                        <pagination class="page" [boundaryLinks]="showBoundaryLinks" [rotate]="'true'"
+                            [itemsPerPage]='pagesize' name="currentPage" ngDefaultControl [totalItems]="totalItem"
+                            [maxSize]="5" [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+                            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+
+<!-- /content area -->

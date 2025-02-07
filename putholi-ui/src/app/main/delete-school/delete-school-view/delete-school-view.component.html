@@ -1,0 +1,457 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> -
+                {{'SIDEBAR.DeleteSchool' | translate}}</h4>
+
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>{{'COMMON.Home' | translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/delete-school']"
+                    class="breadcrumb-item">{{'MANAGESCHOOL.DeleteSchool' | translate}}</a>
+                <span class="breadcrumb-item active">
+                    {{'MANAGESCHOOL.ViewDeleteSchool' | translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">
+                        {{'MANAGESCHOOL.ViewDeleteSchool' | translate}}</h6>
+                </div>
+            </div>
+        </div>
+        <form class="form-horizontal" (ngSubmit)="onSchoolForm(manageSchoolform,manageSchoolData)"
+            #manageSchoolform="ngForm">
+
+
+            <div class="card-body">
+                <!-- School Information  -->
+
+                <h5>{{'MANAGESCHOOL.SchoolInformation' | translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for registration number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.schoolRegNo}}</p>
+                    </div>
+
+                    <!-- label for school name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.schoolName}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for school type -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.schoolType?.description}}</p>
+                    </div>
+
+                    <!-- label for no.of students -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.noOfStudents}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for no.of teachers -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.noOfTeachers}}</p>
+                    </div>
+
+                    <!-- label for no.of teachers -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.educationalDistrict?.description}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+                <!-- /School Information  -->
+
+                <!-- Contact Information -->
+
+                <h5>{{'MANAGESCHOOL.ContactInformation' | translate}}</h5>
+                <hr />
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.primaryName}}</p>
+                    </div>
+
+                    <!-- label for secondary contact name -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.secondaryName}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.primaryNumber}}</p>
+                    </div>
+
+                    <!-- label for secondary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.secondaryNumber}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for primary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.primaryEmail}}</p>
+                    </div>
+
+                    <!-- label for secondary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                        | translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{contactsInfo?.secondaryEmail}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+                <!-- /contact information -->
+
+
+                <!-- Address Information -->
+
+                <h5>{{'MANAGESCHOOL.AddressInformation' | translate}}</h5>
+                <hr />
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for Address line 1 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.addressLine1}}</p>
+                    </div>
+
+                    <!-- label for address line 2 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.addressLine2}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for locality -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.locality}}</p>
+                    </div>
+
+                    <!-- label for city -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' | translate}}
+                        :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.city}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for district -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.district?.description}}</p>
+                    </div>
+
+                    <!-- label for state -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p *ngIf="addressInfo?.state=='TN'">Tamil Nadu</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.country?.description}}</p>
+                    </div>
+
+                    <!-- label for pincode -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{addressInfo?.pincode}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedBy' |
+                        translate}} :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{successData?.createdBy}}</p>
+                    </div>
+
+                    <!-- label for Message To School Trust -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600" *ngIf="successData?.comments">
+                        {{'MANAGESCHOOL.MessageToTrust' | translate}} :</label>
+                    <div class="form-inline col-md-3" *ngIf="successData?.comments">
+                        <p>{{successData?.comments}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <h5>{{'MANAGESCHOOL.SchoolImages' | translate }}</h5>
+                <hr />
+                <!-- row -->
+                <div class="table-responsive">
+                    <br />
+                    <table class="table datatable-basic table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                <th>{{"INVOICE.Attachments"|translate}}</th>
+                                <th>{{'COMMON.Action'|translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX" *ngFor="let data of imagesList; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{data.fileType}}</td>
+                                <td>{{data?.fileName}}</td>
+                                <td class="text-center">
+                                    <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                        (click)="onSchoolTemplate(schoolImages, data?.attachmentId)"><i
+                                            data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                            class="far fa-eye"></i></a>
+                                </td>
+
+
+                            </tr>
+
+                            <tr class="odd" *ngIf="(!imagesList?.length)">
+                                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                        {{'RECORDS.NoRecords'|translate}}</b>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Approval -->
+
+                <h5>{{'COMMON.ApprovalHistory' | translate }}</h5>
+                <hr />
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tempTable">
+                        <thead>
+                            <tr>
+                                <th>{{'COMMON.ActionBy' | translate }}</th>
+                                <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                <th>{{'COMMON.Status' | translate }}</th>
+                                <th>{{'COMMON.Remarks' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                <td>{{data?.actionBy}}</td>
+                                <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                <td>{{data?.role}}</td>
+                                <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                </td>
+                                <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                </td>
+                                <td>{{data?.remarks}}</td>
+
+                            </tr>
+                            <tr class="odd" *ngIf="(!approvalHistDtlsDTOs?.length)">
+                                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                        {{'RECORDS.NoRecords'|translate}}</b>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="this.getToken('role')!='BENIF'">
+                    <h5>{{'MANAGESCHOOL.Approval' | translate }}</h5>
+                    <hr />
+
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}
+                            <span class="required"> *</span></label>
+                        <div class="form-inline col-md-3" style="margin-bottom: 9px;">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio1"  [(ngModel)]="manageSchoolData.status" value="APR"
+                                    name="customRadio" class="custom-control-input" #select="ngModel" required>
+                                <label class="custom-control-label" for="customRadio1">{{'COMMON.Approve' | translate
+                                    }}</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio2" [(ngModel)]="manageSchoolData.status" value="REJ"
+                                    name="customRadio" class="custom-control-input" #select="ngModel" required>
+                                <label class="custom-control-label" for="customRadio2">{{'COMMON.Reject' | translate
+                                    }}</label>
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks' | translate
+                            }}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-sm-12 col-form-label">
+                            <app-nspl-multiline-text [data]="manageSchoolData.remarks"
+                                [(ngModel)]="manageSchoolData.remarks" [required]="true" [maxlength]="'512'"
+                                placeholder="{{'COMMON.EnterRemarks'|translate}}" name="remarks">
+                            </app-nspl-multiline-text>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-primary" type="submit" [disabled]="manageSchoolform.invalid || isClickedOnce"
+                    *ngIf="this.getToken('role')!='BENIF'">{{'COMMON.Submit' | translate}}</button>&nbsp;&nbsp;
+                <button [routerLink]="['/main/delete-school']" class="btn btn-danger" type="button">{{'COMMON.Cancel' |
+                    translate}}</button>&nbsp;&nbsp;
+            </div>
+        </form>
+    </div>
+    <!-- /dashboard content -->
+
+</div>
+<!-- /content area -->
+
+
+<!-- show quotation Images-->
+<ng-template #schoolImages>
+    <div class="modal-header">
+
+        <h4 class="modal-title">{{'MANAGESCHOOL.ViewSchoolImages' | translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 295px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalRef.hide()">{{'COMMON.Cancel' |
+            translate}}</button>
+    </div>
+</ng-template>
+<!-- // show quotation Images-->

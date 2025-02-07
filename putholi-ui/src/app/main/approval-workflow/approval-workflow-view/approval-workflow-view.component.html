@@ -1,0 +1,271 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'APPROVALWORKFLOW.ViewFeatureDetails'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/approval-workflow/approval-workflow-list']"
+                    class="breadcrumb-item">{{'APPROVALWORKFLOW.FeaturesManagement'|translate}}</a>
+                <span class="breadcrumb-item active">{{'APPROVALWORKFLOW.ViewFeatureDetails'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'APPROVALWORKFLOW.ViewFeatureDetails'|translate}}</h6>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <!-- Form -->
+            <form action="#" class="form-horizontal">
+
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <h5 class="fs-17 mb-0">{{'APPROVALWORKFLOW.ModuleInformation' |
+                        translate}}
+                    </h5>
+                    <hr />
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for feature Name -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'APPROVALWORKFLOW.FeatureName'|translate}}<span> :</span></label>
+                        <div class="col-md-3">
+                            <p>{{featureManageData?.featureName}}</p>
+                        </div>
+
+                        <!-- label for module  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'APPROVALWORKFLOW.Module'|translate}}<span> :</span></label>
+                        <div class="col-md-3">
+                            <p *ngIf="featureManageData?.module=='MNS'">Manage School</p>
+                            <p *ngIf="featureManageData?.module=='MNB'">Manage Beneficiary</p>
+                            <p *ngIf="featureManageData?.module=='MRQ'">manage Requirement</p>
+                            <p *ngIf="featureManageData?.module=='PWF'">Pending Workflow</p>
+                            <p *ngIf="featureManageData?.module=='REV'">Review Invoice</p>
+                            <p *ngIf="featureManageData?.module=='CNV'">Change Volunteer</p>
+                            <p *ngIf="featureManageData?.module=='MNC'">Manage User</p>
+                            <p *ngIf="featureManageData?.module=='MNR'">Manage Role</p>
+                            <p *ngIf="featureManageData?.module=='CEM'">Code Maintenance</p>
+                            <p *ngIf="featureManageData?.module=='PCN'">Product Configuration</p>
+                            <p *ngIf="featureManageData?.module=='APC'">Application Configuration</p>
+                            <p *ngIf="featureManageData?.module=='FRM'">Feature Management</p>
+                            <p *ngIf="featureManageData?.module=='ANN'">Announcement</p>
+                            <p *ngIf="featureManageData?.module=='EMS'">Email Settings</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for status -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'COMMON.Status'|translate}}<span> :</span></label>
+                        <div class="col-md-3">
+                            <p>{{featureManageData?.status=='Y'?'TRUE':'FALSE'}}</p>
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <h5 class="fs-17 mb-0">{{'APPROVALWORKFLOW.FilterInformation' |
+                        translate}}
+                    </h5>
+                    <hr />
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for filter type  -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'APPROVALWORKFLOW.FilterType'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3">
+                            <p *ngIf="featureManageData?.filterType=='USR'">User</p>
+                            <p *ngIf="featureManageData?.filterType=='ORG'">Organisation</p>
+                            <p *ngIf="featureManageData?.filterType=='ROL'">Role</p>
+                        </div>
+
+
+                        <!-- label for user list  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                            *ngIf="featureManageData?.userName">
+                            {{'APPROVALWORKFLOW.User'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3" *ngIf="featureManageData?.userName">
+                            <p>{{featureManageData?.userName}}</p>
+                        </div>
+
+                        <!-- label for role list  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                            *ngIf="featureManageData?.role">
+                            {{'APPROVALWORKFLOW.Role'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3" *ngIf="featureManageData?.role">
+                            <p>{{role.description}}</p>
+
+                        </div>
+
+                        <!-- label for organisation type  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                            *ngIf="featureManageData?.organisation">
+                            {{'APPROVALWORKFLOW.Organisation'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3" *ngIf="featureManageData?.organisation">
+                            <p>{{featureManageData?.organisation}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+
+
+                    <h5 class="fs-17 mb-0">{{'APPROVALWORKFLOW.ApprovalInformation' |
+                        translate}}
+                    </h5>
+                    <hr />
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for is auto approval  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'APPROVALWORKFLOW.IsApprovalApplicable'|translate}}<span> :</span></label>
+                        <div class="col-md-3">
+                            <p>{{featureManageData?.isApprovalApplicable=='Y'?'TRUE':'FALSE'}}</p>
+                        </div>
+
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                            *ngIf="featureManageData?.isAutoApproval">
+                            {{'APPROVALWORKFLOW.IsAutoApproval'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3">
+                            <p>{{featureManageData?.isAutoApproval=='Y'?'TRUE':'FALSE'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row" *ngIf="featureManageData?.levelofApproval">
+                        <!-- label for level of approval  -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'APPROVALWORKFLOW.LevelofApproval'|translate}}<span>
+                                : </span></label>
+                        <div class="col-md-3">
+                            <p *ngIf="featureManageData?.levelofApproval =='LE1'">Level 1</p>
+                            <p *ngIf="featureManageData?.levelofApproval =='LE2'">Level 2</p>
+                            <p *ngIf="featureManageData?.levelofApproval =='LE3'">Level 3</p>
+                            <p *ngIf="featureManageData?.levelofApproval =='LE4'">Level 4</p>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+
+
+
+
+
+                    <table class="table datatable-basic table-bordered" *ngIf="featureManageData?.levelofApproval">
+                        <!-- Table Head -->
+                        <thead>
+                            <tr>
+                                <th>{{'APPROVALWORKFLOW.Level'|translate}}
+                                    <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'level'"
+                                        [defaultSort]="'asc'">
+                                    </app-nspl-table-sort>
+                                </th>
+                                <th>{{'APPROVALWORKFLOW.Type'|translate}}
+                                    <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'type'"
+                                        [defaultSort]="'asc'">
+                                    </app-nspl-table-sort>
+                                </th>
+                                <th>{{'APPROVALWORKFLOW.ApproverRoles'|translate}}
+                                    <app-nspl-table-sort [sortCol]="approverLevels" [sortTypeName]="'approverRoles'"
+                                        [defaultSort]="'asc'">
+                                    </app-nspl-table-sort>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table Body -->
+                        <tbody>
+                            <tr class="odd gradeX" *ngFor="let data of approverLevels">
+                                <td *ngIf="data?.level =='LE1'">Level 1</td>
+                                <td *ngIf="data?.level =='LE2'">Level 2</td>
+                                <td *ngIf="data?.level =='LE3'">Level 3</td>
+                                <td *ngIf="data?.level =='LE4'">Level 4</td>
+
+                                <td *ngIf="data?.type == 'PER'">Parallel Either</td>
+                                <td *ngIf="data?.type == 'PAB'"> Parallel Both</td>
+                                <td *ngIf="data?.type == 'SEQ'"> Sequence</td>
+
+                                <td>{{data?.approverRolesNames}}</td>
+                            </tr>
+
+
+                        </tbody>
+                        <!-- /Table Body -->
+                    </table>
+
+
+                </div>
+                <!-- /Form Body -->
+
+            </form>
+            <!-- /Form -->
+        </div>
+        <!-- Card Body -->
+
+        <!-- Card Footer -->
+        <div class="card-footer">
+            <a type="button" href="javascript:;" [routerLink]="['/main/approval-workflow/approval-workflow-list']"
+                class="btn btn-danger">{{'COMMON.Cancel'|translate}}</a>
+        </div>
+        <!-- Card Footer -->
+
+
+    </div>
+
+
+
+</div>
+<!-- /Content area -->

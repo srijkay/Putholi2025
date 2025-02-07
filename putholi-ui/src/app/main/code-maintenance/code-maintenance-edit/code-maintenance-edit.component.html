@@ -1,0 +1,160 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'CODEMAINTENANCE.AddCodeMaintenance'|translate}}</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{"COMMON.Home"|translate}}</span> -
+                {{'CODEMAINTENANCE.EditCodeMaintenance'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/code-maintenance/codes-list']" class="breadcrumb-item">
+                    {{'CODEMAINTENANCE.CodeMaintenance'|translate}}</a>
+
+                <span class="breadcrumb-item active"
+                    *ngIf="isNew">{{'CODEMAINTENANCE.AddCodeMaintenance'|translate}}</span>
+                <span class="breadcrumb-item active"
+                    *ngIf="!isNew">{{'CODEMAINTENANCE.EditCodeMaintenance'|translate}}</span>
+
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="isNew">
+                        {{'CODEMAINTENANCE.AddCodeMaintenance'|translate}}</h6>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="!isNew">
+                        {{'CODEMAINTENANCE.EditCodeMaintenance'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- Form -->
+
+        <form class="form-horizontal" (ngSubmit)="onCode(codeMaintenanceform,codeMaintenanceData)"
+            #codeMaintenanceform="ngForm">
+
+            <div class="card-body">
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Code -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'CODEMAINTENANCE.CodeType'|translate}}<span
+                            class=""> :</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <p>{{this.getToken('description')}}</p>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Code -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'CODEMAINTENANCE.Code'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="codeMaintenanceData.code" placeholder="code" [disabled]="!isNew"
+                            [(ngModel)]="codeMaintenanceData.code" [submitted]="submitted" [required]="true" name="code" [maxlength]="'6'">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'CODEMAINTENANCE.Description'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="codeMaintenanceData.description"
+                            [(ngModel)]="codeMaintenanceData.description" placeholder="description" [required]="true"
+                            name="description" NsplAplhaWithSpac [submitted]="submitted" [maxlength]="'150'">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description Others -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'CODEMAINTENANCE.DescriptionOther'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="codeMaintenanceData.descriptionOther"
+                            [(ngModel)]="codeMaintenanceData.descriptionOther" placeholder="description others"
+                            [required]="true" name="descriptionOther" [submitted]="submitted" NsplAplhaWithSpac [maxlength]="'150'">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Status -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select name="active" [items]="statusList" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="codeMaintenanceData.active" #active="ngModel"
+                            [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                            placeholder="select status" required>
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" [disabled]="codeMaintenanceform.invalid" *ngIf="isNew"
+                    class="btn btn-primary">{{"COMMON.Submit"|translate}}</button>&nbsp;&nbsp;
+
+                <button type="submit" [disabled]="codeMaintenanceform.invalid" *ngIf="!isNew"
+                    class="btn btn-primary">{{"COMMON.Update"|translate}}</button>&nbsp;&nbsp;
+                <a href="javascript:;" [routerLink]="['/main/code-maintenance/codes-list']"><button type="button"
+                        class="btn btn-danger">{{"COMMON.Cancel"|translate}}</button></a>
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+
+        <!-- /Form -->
+
+    </div>
+
+
+
+</div>
+<!-- /content area -->

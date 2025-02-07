@@ -1,0 +1,205 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'FUNDALLOTMENT.FundAllotment'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/fund-allotment/fund-allotment-list']"
+                    class="breadcrumb-item">
+                    {{'FUNDALLOTMENT.FundAllotment'|translate}}</a>
+                <span class="breadcrumb-item active"> {{'FUNDALLOTMENT.FundAllotment'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- row -->
+    <div class="row">
+        <!-- Total Balance -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comment-dollar"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {{dashboardStatistics.totalAmount|number : '1.2-2'}}
+                    </div>
+                    <div class="desc">
+                        {{'FUNDALLOTMENT.TotalBalance'|translate}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Donar Collected Fund -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-signal"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{dashboardStatistics.collectedAmount|number : '1.2-2'}}</div>
+                    <div class="desc" style="margin-top: 19px !important;">
+                        {{'FUNDALLOTMENT.DonarCollectedFund'|translate}}</div>
+                </div>
+
+            </div>
+        </div>
+        <!--Interest Fund -->
+        <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat yellow">
+                <div class="visual">
+                    <i class="fa fa-user-plus"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="height: 61px;">8000</div>
+                    <div class="desc">{{'FUNDALLOTMENT.InterestFund'|translate}}</div>
+                </div>
+
+            </div>
+        </div> -->
+        <!-- Trust Fund -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-chart-pie"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{dashboardStatistics.trustFund==null? 0:dashboardStatistics.trustFund|number :
+                        '1.2-2'}}</div>
+                    <div class="desc">{{'FUNDALLOTMENT.TrustFund'|translate}}</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /row -->
+
+    <!-- Card -->
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'FUNDALLOTMENT.NewRequirementDetails'|translate}}
+                    </h5>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+
+
+
+        <!-- Form -->
+        <form action="#" class="form-horizontal" (ngSubmit)="onFund(fundAllotmentForm,fundAllotmentData)"
+            #fundAllotmentForm="ngForm">
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- School Information -->
+                <br>
+                <div class="form-group row">
+
+                    <!-- label for registration number -->
+
+
+                    <h5 class="text-muted" style="margin-left:11px">{{'MANAGESCHOOL.SchoolInformation'|translate}} :
+                    </h5>
+                    <div class="form-inline col-md-3" style="margin-top:-2px;">
+                        <p>{{schoolInfo.schoolName}}, &nbsp;{{schoolInfo?.addressInfo?.locality}},
+                            &nbsp; {{schoolInfo?.addressInfo?.pincode}}</p>
+                    </div>
+                </div>
+
+                <br>
+                <!-- /School Information -->
+                <div class="table-responsive">
+                    <table class="table datatable-basic table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{'UPLOAD.Requirement'|translate}}</th>
+                                <th>{{'INVOICE.Units'|translate}}</th>
+                                <th>{{"FUNDALLOTMENT.FundRequired"|translate}}</th>
+                                <th>{{"FUNDALLOTMENT.FundCollected"|translate}}</th>
+                                <th>{{"FUNDALLOTMENT.TrustFund"|translate}}</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of requirementDetails; last as l index as i">
+                                <td>{{data?.assetName}}</td>
+                                <td>{{data?.quantity}}</td>
+                                <td> {{ quotationAmount(data?.quotationInfo, l, i) }}</td>
+                                <td>{{quotationfundAmount(data?.quotationInfo, l, i) }}</td>
+                                <td><input type="text" name="trustAmount"
+                                        [value]="quotationAmount(data?.quotationInfo, l, i)-quotationfundAmount(data?.quotationInfo, l, i)"
+                                        disabled>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br />
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Select Expense Category -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'FUNDALLOTMENT.SelectExpenseCategory'|translate}}
+                        <!-- <span class="required">*</span> -->
+                    </label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select name="expenseCategory" [items]="expenseCategoryList" class="chosen-select"
+                            bindLabel="name" bindValue="code" [(ngModel)]="fundAllotmentData.expenseCategory"
+                            #expenseCategory="ngModel" [clearable]='true' [searchable]='false' required
+                            [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select'|translate}}">
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /Card Body -->
+
+            <!-- Form -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" href="javascript:;" [disabled]="fundAllotmentForm.invalid"
+                    class="btn btn-primary">{{'COMMON.Submit'|translate}}</button>&nbsp;&nbsp;
+                <button type="button" href="javascript:;" [routerLink]="['/main/fund-allotment']"
+                    class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+
+        </form>
+        <!-- /Card Footer -->
+    </div>
+    <!-- /Card -->
+
+</div>
+<!-- /content area -->

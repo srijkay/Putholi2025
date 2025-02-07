@@ -1,0 +1,816 @@
+<div class="page-content login-cover">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+        <!-- Inner content -->
+        <div class="content-inner">
+
+            <!-- Content area -->
+            <div class="content-login d-flex justify-content-center align-items-center">
+
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <form class="register-form" (ngSubmit)="onMemberForm(memberform,memberData,suceess)"
+                            #memberform="ngForm">
+                            <div class="text-center mb-3">
+                                <img src="assets/images/logo.png">
+                                <br /><br />
+                                <h5 class="mb-0">Register as Trust Volunteer</h5>
+                                <span class="d-block text-muted">Your credentials</span>
+                            </div>
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Role<span
+                                            class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                        <select class="form-control" name="selectRole" id="selectRole" disabled
+                                            [(ngModel)]="memberData.selectRole" required #selectRole="ngModel"
+                                            [ngClass]="{ 'isInvalid': (submitted || selectRole.touched) && selectRole.invalid }">
+                                            <option [ngValue]="undefined" selected hidden>Select Role</option>
+                                            <option value="ADM">Administrator</option>
+                                            <option value="REV">Reviewer</option>
+                                            <option value="APR">Approver</option>
+                                            <option value="TRUSTV" selected>Referred Volunteer</option>
+                                            <option value="TRUSTM">Trust Member</option>
+                                        </select>
+
+
+                                        <span class="error-block"
+                                            *ngIf="((submitted || selectRole.touched) && selectRole.invalid)">
+                                            This field cannot be left blank
+                                        </span>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-vcard text-muted"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- label for First Name -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">First Name
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.firstName" placeholder="First Name"
+                                            [(ngModel)]="memberData.firstName" [submitted]="submitted" [required]="true"
+                                            name="firstName" [maxlength]="'25'" NsplAplhaWithSpac>
+                                        </app-nspl-text>
+
+                                        
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-font text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- middleName -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Middle Name
+                                        <span class=""></span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.middleName" placeholder="Middle Name"
+                                            [(ngModel)]="memberData.middleName" name="middleName" NsplAphaOnly>
+                                        </app-nspl-text>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-user text-muted"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- label for last name -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Last Name
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.lastName" placeholder="Last Name"
+                                            [(ngModel)]="memberData.lastName" [submitted]="submitted" [required]="true"
+                                            name="lastName" [maxlength]="'15'" NsplAphaOnly>
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-font-size text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for gender -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Gender
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <select class="form-control" name="gender" id="gender"
+                                            [(ngModel)]="memberData.gender" required #gender="ngModel"
+                                            [ngClass]="{ 'isInvalid': (submitted || gender.touched) && gender.invalid }">
+                                            <option [ngValue]="undefined" selected hidden>Select Gender</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+
+                                        </select>
+                                        <span class="error-block"
+                                            *ngIf="((submitted || gender.touched) && gender.invalid)">
+                                            This field cannot be left blank
+                                        </span>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-user text-muted"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- label for mobile -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Mobile
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-number [data]="memberData.mobileNumber" placeholder="Mobile Number"
+                                            [(ngModel)]="memberData.mobileNumber" [submitted]="submitted"
+                                            [required]="true" name="mobileNumber" [maxlength]="'10'" [minlength]="'10'"
+                                            appBlockCopyPaste>
+                                        </app-nspl-number>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-phone2 text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+
+                                    <!-- label for Address Line1 -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Address Line 1
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.addressLine1" placeholder="Address Line1"
+                                            [(ngModel)]="memberData.addressLine1" [submitted]="submitted"
+                                            [required]="true" name="addressLine1">
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-home2 text-muted"></i>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- label for Address Line2 -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Address Line 2
+                                        <span class="required"></span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.addressLine2" placeholder="Address Line2"
+                                            [(ngModel)]="memberData.addressLine2" name="addressLine2">
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-home text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for Locality -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Locality
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.locality" placeholder="Locality"
+                                            [(ngModel)]="memberData.locality" [submitted]="submitted" [required]="true"
+                                            name="locality" NsplAplhaWithSpac>
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-map4 text-muted"></i>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- label for district -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">District
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                        <ng-select name="district" [items]="DistrictList" class="chosen-select"
+                                            bindLabel="description" bindValue="code" required
+                                            [(ngModel)]="memberData.district" #district="ngModel" [clearable]='true'
+                                            [searchable]='true' [dropdownPosition]="'auto'"
+                                            placeholder="select district"
+                                            [ngClass]="{ 'isInvalid': (submitted || district.touched) && district.invalid }">
+                                        </ng-select>
+
+                                        <span class="error-block"
+                                            *ngIf="((submitted || district.touched) && district.invalid)">
+                                            This field cannot be left blank
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for city -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">City
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.city" placeholder="City"
+                                            [(ngModel)]="memberData.city" [submitted]="submitted" [required]="true"
+                                            name="city" NsplAplhaWithSpac>
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-map text-muted"></i>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- label for state -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">State
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.state" placeholder="State"
+                                            [(ngModel)]="memberData.state" [required]="true" name="state" disabled>
+                                        </app-nspl-text>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-office text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for country -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Country
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <select class="form-control" name="country" id="country" placeholder="country"
+                                            [(ngModel)]="memberData.country" required #country="ngModel" disabled
+                                            [ngClass]="{ 'isInvalid': (submitted||country.touched) && country.invalid }">
+                                            <option [ngValue]="undefined" selected hidden>Select Country</option>
+                                            <option value="AF">Afghanistan</option>
+                                            <option value="AL">Albania</option>
+                                            <option value="DZ">Algeria</option>
+                                            <option value="AS">American Samoa</option>
+                                            <option value="AD">Andorra</option>
+                                            <option value="AO">Angola</option>
+                                            <option value="AI">Anguilla</option>
+                                            <option value="AQ">Antarctica</option>
+                                            <option value="AR">Argentina</option>
+                                            <option value="AM">Armenia</option>
+                                            <option value="AW">Aruba</option>
+                                            <option value="AU">Australia</option>
+                                            <option value="AT">Austria</option>
+                                            <option value="AZ">Azerbaijan</option>
+                                            <option value="BS">Bahamas</option>
+                                            <option value="BH">Bahrain</option>
+                                            <option value="BD">Bangladesh</option>
+                                            <option value="BB">Barbados</option>
+                                            <option value="BY">Belarus</option>
+                                            <option value="BE">Belgium</option>
+                                            <option value="BZ">Belize</option>
+                                            <option value="BJ">Benin</option>
+                                            <option value="BM">Bermuda</option>
+                                            <option value="BT">Bhutan</option>
+                                            <option value="BO">Bolivia</option>
+                                            <option value="BA">Bosnia and Herzegowina</option>
+                                            <option value="BW">Botswana</option>
+                                            <option value="BV">Bouvet Island</option>
+                                            <option value="BR">Brazil</option>
+                                            <option value="IO">British Indian Ocean Territory</option>
+                                            <option value="BN">Brunei Darussalam</option>
+                                            <option value="BG">Bulgaria</option>
+                                            <option value="BF">Burkina Faso</option>
+                                            <option value="BI">Burundi</option>
+                                            <option value="KH">Cambodia</option>
+                                            <option value="CM">Cameroon</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="CV">Cape Verde</option>
+                                            <option value="KY">Cayman Islands</option>
+                                            <option value="CF">Central African Republic</option>
+                                            <option value="TD">Chad</option>
+                                            <option value="CL">Chile</option>
+                                            <option value="CN">China</option>
+                                            <option value="CX">Christmas Island</option>
+                                            <option value="CC">Cocos (Keeling) Islands</option>
+                                            <option value="CO">Colombia</option>
+                                            <option value="KM">Comoros</option>
+                                            <option value="CG">Congo</option>
+                                            <option value="CD">Congo, the Democratic Republic of the
+                                            </option>
+                                            <option value="CK">Cook Islands</option>
+                                            <option value="CR">Costa Rica</option>
+                                            <option value="CI">Cote d'Ivoire</option>
+                                            <option value="HR">Croatia (Hrvatska)</option>
+                                            <option value="CU">Cuba</option>
+                                            <option value="CY">Cyprus</option>
+                                            <option value="CZ">Czech Republic</option>
+                                            <option value="DK">Denmark</option>
+                                            <option value="DJ">Djibouti</option>
+                                            <option value="DM">Dominica</option>
+                                            <option value="DO">Dominican Republic</option>
+                                            <option value="EC">Ecuador</option>
+                                            <option value="EG">Egypt</option>
+                                            <option value="SV">El Salvador</option>
+                                            <option value="GQ">Equatorial Guinea</option>
+                                            <option value="ER">Eritrea</option>
+                                            <option value="EE">Estonia</option>
+                                            <option value="ET">Ethiopia</option>
+                                            <option value="FK">Falkland Islands (Malvinas)</option>
+                                            <option value="FO">Faroe Islands</option>
+                                            <option value="FJ">Fiji</option>
+                                            <option value="FI">Finland</option>
+                                            <option value="FR">France</option>
+                                            <option value="GF">French Guiana</option>
+                                            <option value="PF">French Polynesia</option>
+                                            <option value="TF">French Southern Territories</option>
+                                            <option value="GA">Gabon</option>
+                                            <option value="GM">Gambia</option>
+                                            <option value="GE">Georgia</option>
+                                            <option value="DE">Germany</option>
+                                            <option value="GH">Ghana</option>
+                                            <option value="GI">Gibraltar</option>
+                                            <option value="GR">Greece</option>
+                                            <option value="GL">Greenland</option>
+                                            <option value="GD">Grenada</option>
+                                            <option value="GP">Guadeloupe</option>
+                                            <option value="GU">Guam</option>
+                                            <option value="GT">Guatemala</option>
+                                            <option value="GN">Guinea</option>
+                                            <option value="GW">Guinea-Bissau</option>
+                                            <option value="GY">Guyana</option>
+                                            <option value="HT">Haiti</option>
+                                            <option value="HM">Heard and Mc Donald Islands</option>
+                                            <option value="VA">Holy See (Vatican City State)</option>
+                                            <option value="HN">Honduras</option>
+                                            <option value="HK">Hong Kong</option>
+                                            <option value="HU">Hungary</option>
+                                            <option value="IS">Iceland</option>
+                                            <option value="IND">India</option>
+                                            <option value="ID">Indonesia</option>
+                                            <option value="IR">Iran (Islamic Republic of)</option>
+                                            <option value="IQ">Iraq</option>
+                                            <option value="IE">Ireland</option>
+                                            <option value="IL">Israel</option>
+                                            <option value="IT">Italy</option>
+                                            <option value="JM">Jamaica</option>
+                                            <option value="JP">Japan</option>
+                                            <option value="JO">Jordan</option>
+                                            <option value="KZ">Kazakhstan</option>
+                                            <option value="KE">Kenya</option>
+                                            <option value="KI">Kiribati</option>
+                                            <option value="KP">Korea, Democratic People's Republic of
+                                            </option>
+                                            <option value="KR">Korea, Republic of</option>
+                                            <option value="KW">Kuwait</option>
+                                            <option value="KG">Kyrgyzstan</option>
+                                            <option value="LA">Lao People's Democratic Republic</option>
+                                            <option value="LV">Latvia</option>
+                                            <option value="LB">Lebanon</option>
+                                            <option value="LS">Lesotho</option>
+                                            <option value="LR">Liberia</option>
+                                            <option value="LY">Libyan Arab Jamahiriya</option>
+                                            <option value="LI">Liechtenstein</option>
+                                            <option value="LT">Lithuania</option>
+                                            <option value="LU">Luxembourg</option>
+                                            <option value="MO">Macau</option>
+                                            <option value="MK">Macedonia, The Former Yugoslav Republic of
+                                            </option>
+                                            <option value="MG">Madagascar</option>
+                                            <option value="MW">Malawi</option>
+                                            <option value="MY">Malaysia</option>
+                                            <option value="MV">Maldives</option>
+                                            <option value="ML">Mali</option>
+                                            <option value="MT">Malta</option>
+                                            <option value="MH">Marshall Islands</option>
+                                            <option value="MQ">Martinique</option>
+                                            <option value="MR">Mauritania</option>
+                                            <option value="MU">Mauritius</option>
+                                            <option value="YT">Mayotte</option>
+                                            <option value="MX">Mexico</option>
+                                            <option value="FM">Micronesia, Federated States of</option>
+                                            <option value="MD">Moldova, Republic of</option>
+                                            <option value="MC">Monaco</option>
+                                            <option value="MN">Mongolia</option>
+                                            <option value="MS">Montserrat</option>
+                                            <option value="MA">Morocco</option>
+                                            <option value="MZ">Mozambique</option>
+                                            <option value="MM">Myanmar</option>
+                                            <option value="NA">Namibia</option>
+                                            <option value="NR">Nauru</option>
+                                            <option value="NP">Nepal</option>
+                                            <option value="NL">Netherlands</option>
+                                            <option value="AN">Netherlands Antilles</option>
+                                            <option value="NC">New Caledonia</option>
+                                            <option value="NZ">New Zealand</option>
+                                            <option value="NI">Nicaragua</option>
+                                            <option value="NE">Niger</option>
+                                            <option value="NG">Nigeria</option>
+                                            <option value="NU">Niue</option>
+                                            <option value="NF">Norfolk Island</option>
+                                            <option value="MP">Northern Mariana Islands</option>
+                                            <option value="NO">Norway</option>
+                                            <option value="OM">Oman</option>
+                                            <option value="PK">Pakistan</option>
+                                            <option value="PW">Palau</option>
+                                            <option value="PA">Panama</option>
+                                            <option value="PG">Papua New Guinea</option>
+                                            <option value="PY">Paraguay</option>
+                                            <option value="PE">Peru</option>
+                                            <option value="PH">Philippines</option>
+                                            <option value="PN">Pitcairn</option>
+                                            <option value="PL">Poland</option>
+                                            <option value="PT">Portugal</option>
+                                            <option value="PR">Puerto Rico</option>
+                                            <option value="QA">Qatar</option>
+                                            <option value="RE">Reunion</option>
+                                            <option value="RO">Romania</option>
+                                            <option value="RU">Russian Federation</option>
+                                            <option value="RW">Rwanda</option>
+                                            <option value="KN">Saint Kitts and Nevis</option>
+                                            <option value="LC">Saint LUCIA</option>
+                                            <option value="VC">Saint Vincent and the Grenadines</option>
+                                            <option value="WS">Samoa</option>
+                                            <option value="SM">San Marino</option>
+                                            <option value="ST">Sao Tome and Principe</option>
+                                            <option value="SA">Saudi Arabia</option>
+                                            <option value="SN">Senegal</option>
+                                            <option value="SC">Seychelles</option>
+                                            <option value="SL">Sierra Leone</option>
+                                            <option value="SG">Singapore</option>
+                                            <option value="SK">Slovakia (Slovak Republic)</option>
+                                            <option value="SI">Slovenia</option>
+                                            <option value="SB">Solomon Islands</option>
+                                            <option value="SO">Somalia</option>
+                                            <option value="ZA">South Africa</option>
+                                            <option value="GS">South Georgia and the South Sandwich Islands
+                                            </option>
+                                            <option value="ES">Spain</option>
+                                            <option value="LK">Sri Lanka</option>
+                                            <option value="SH">St. Helena</option>
+                                            <option value="PM">St. Pierre and Miquelon</option>
+                                            <option value="SD">Sudan</option>
+                                            <option value="SR">Suriname</option>
+                                            <option value="SJ">Svalbard and Jan Mayen Islands</option>
+                                            <option value="SZ">Swaziland</option>
+                                            <option value="SE">Sweden</option>
+                                            <option value="CH">Switzerland</option>
+                                            <option value="SY">Syrian Arab Republic</option>
+                                            <option value="TW">Taiwan, Province of China</option>
+                                            <option value="TJ">Tajikistan</option>
+                                            <option value="TZ">Tanzania, United Republic of</option>
+                                            <option value="TH">Thailand</option>
+                                            <option value="TG">Togo</option>
+                                            <option value="TK">Tokelau</option>
+                                            <option value="TO">Tonga</option>
+                                            <option value="TT">Trinidad and Tobago</option>
+                                            <option value="TN">Tunisia</option>
+                                            <option value="TR">Turkey</option>
+                                            <option value="TM">Turkmenistan</option>
+                                            <option value="TC">Turks and Caicos Islands</option>
+                                            <option value="TV">Tuvalu</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="UA">Ukraine</option>
+                                            <option value="AE">United Arab Emirates</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="US">United States</option>
+                                            <option value="UM">United States Minor Outlying Islands</option>
+                                            <option value="UY">Uruguay</option>
+                                            <option value="UZ">Uzbekistan</option>
+                                            <option value="VU">Vanuatu</option>
+                                            <option value="VE">Venezuela</option>
+                                            <option value="VN">Viet Nam</option>
+                                            <option value="VG">Virgin Islands (British)</option>
+                                            <option value="VI">Virgin Islands (U.S.)</option>
+                                            <option value="WF">Wallis and Futuna Islands</option>
+                                            <option value="EH">Western Sahara</option>
+                                            <option value="YE">Yemen</option>
+                                            <option value="ZM">Zambia</option>
+                                            <option value="ZW">Zimbabwe</option>
+                                        </select>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-compass4 text-muted"></i>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- label for pincode -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Pincode
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-number [data]="memberData.pincode" placeholder="pincode"
+                                            [(ngModel)]="memberData.pincode" [submitted]="submitted" [required]="true"
+                                            name="pincode" [maxlength]="'6'" [minlength]="'6'">
+                                        </app-nspl-number>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-direction text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for email -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Email
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.emailId" placeholder="Email"
+                                            [(ngModel)]="memberData.emailId" [submitted]="submitted" [required]="true"
+                                            name="emailId" [controlInput]="'Email'" [disabled]="true">
+                                        </app-nspl-text>
+
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-mail5 text-muted"></i>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- label for Aadhar Card Number -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Aadhar Card Number
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-number [data]="memberData.identificationNumber"
+                                            placeholder="Aadhar Card Number" [maxlength]="'12'" [minlength]="'12'"
+                                            [(ngModel)]="memberData.identificationNumber" [submitted]="submitted"
+                                            [required]="true" name="identificationNumber">
+                                        </app-nspl-number>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-accessibility text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for Registration Fee
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Registration Fee
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-number [data]="memberData.registrationFee" placeholder="10000"
+                                            [(ngModel)]="memberData.registrationFee" [required]="true"
+                                            name="registrationFee" [disabled]="true">
+                                        </app-nspl-number>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-cash text-muted"></i>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- label for referred by -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Referred By
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.referredBy" placeholder="Referred By"
+                                            [(ngModel)]="memberData.referredBy"
+                                            [disabled]="true" name="referredBy">
+                                        </app-nspl-text>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-user text-muted"></i>
+                                        </div>
+                                    </div>
+
+                                      <!-- label for referred email-->
+                                      <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Referred Email
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="profileData.emailId" placeholder="Referred By"
+                                            [(ngModel)]="profileData.emailId" 
+                                            [disabled]="true" name="email">
+                                        </app-nspl-text>
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-envelop text-muted"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for upload proof -->
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Upload proof
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-10 col-md-12 col-sm-12">
+                                        <app-nspl-file-browse [data]="uploadProof" [required]="true"
+                                            [submitted]="submitted" [(ngModel)]="uploadProof" name="uploadProof"
+                                            [maxlength]="'1'">
+                                        </app-nspl-file-browse>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /row -->
+
+
+                            <p style="color: mediumseagreen; font-size: 17px; width: 899px;">Your password must be
+                                <strong>
+                                    8-20</strong> characters long, contain atleast one letter and number and special
+                                character <strong>(!, @, $, *)</strong> , and must not contain space or emoji
+                            </p>
+                            <p> Enter your personal details below</p>
+
+                            <!-- label for username -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Username
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="memberData.userName" placeholder="Username"
+                                            [(ngModel)]="memberData.userName" [submitted]="submitted" [required]="true"
+                                            name="userName" NsplShortname>
+                                        </app-nspl-text>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-user text-muted"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- label for password -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Password
+                                        <span class="required">*</span></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <input [type]="show?'text':'password'" class="form-control" name="secretKey"
+                                            id="secretKey" placeholder="Password" [(ngModel)]="memberData.secretKey"
+                                            required #secretKey="ngModel" autocomplete="off" (keypress)="RestrictSpace($event)"
+                                            [ngClass]="{ 'isInvalid': (submitted || secretKey.touched) && secretKey.invalid }"
+                                            maxlength="25" appBlockCopyPaste />
+                                        <span style="position:absolute; right:31px; top:9px; cursor: pointer;"
+                                            (click)="onClick('secret')">
+                                            <i class="fa fa-eye" style="color: black" *ngIf="!show"></i>
+                                            <i class="fa fa-eye-slash" style="color: black" aria-hidden="true"
+                                                *ngIf="show"></i>
+                                        </span>
+
+
+                                        <div *ngIf="memberData.secretKey">
+                                            <app-password-strength [passwordToCheck]="memberData.secretKey"
+                                                (notifyParent)="getData($event)">
+                                            </app-password-strength>
+                                        </div>
+                                        <div class="form-control-feedback">
+                                            <i class="icon-lock4 text-muted"></i>
+                                        </div>
+                                        <div class="error-block"
+                                            *ngIf="((submitted || secretKey.touched) && secretKey.invalid)">
+                                            This field cannot be left blank
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- label for confirm password -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Confirm
+                                        Password
+                                        <span class="required">*</span></label>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <input [type]="display?'text':'password'" class="form-control"
+                                            name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"
+                                            [(ngModel)]="memberData.confirmPassword" required #confirmPassword="ngModel"
+                                            autocomplete="off" (keypress)="RestrictSpace($event)"
+                                            [ngClass]="{ 'isInvalid': (submitted || confirmPassword.touched) && confirmPassword.invalid }"
+                                            maxlength="25" appBlockCopyPaste />
+                                        <span style="position:absolute; right:31px; top:9px; cursor: pointer;"
+                                            (click)="onClick('cnfrm')">
+                                            <i class="fa fa-eye" style="color: black" *ngIf="!display"></i>
+                                            <i class="fa fa-eye-slash" style="color: black" aria-hidden="true"
+                                                *ngIf="display"></i>
+                                        </span>
+
+
+                                        <div class="form-control-feedback">
+                                            <i class="icon-lock5 text-muted"></i>
+                                        </div>
+                                        <div class="error-block"
+                                            *ngIf="((submitted || confirmPassword.touched) && confirmPassword.invalid)">
+                                            This field is cannot be left blank
+                                        </div>
+
+                                        <div class="error-block"
+                                            *ngIf="((confirmPassword.touched) && confirmPassword.valid &&(memberData.confirmPassword != memberData.secretKey))">
+                                            Password and Confirm Password should be same
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- label for captcha -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <label class="col-lg-2 col-sm-12 col-form-label font-weight-600"></label>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex align-items-center">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="terms" class="custom-control-input"
+                                        (change)="onSelect($event)">
+                                    <span class="custom-control-label">I agree with the &nbsp;<a href="javascript:;">
+                                            Terms</a>&nbsp; and &nbsp; 
+                                        <a href="javascript:;"> Privacy Policy </a></span>
+                                </label>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-md-5">
+                                    <button type="button" [routerLink]="['/login']"
+                                        class="btn btn-danger">Back</button>&nbsp;&nbsp;
+
+                                        <button type="submit" [disabled]="isClickedSubmitted || !check || !isEnable ||memberform.invalid ||
+                                        (memberData.confirmPassword != memberData.secretKey)|| !isValidCaptcha"
+                                            class="btn btn-primary">Signup</button>
+    
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /inner content -->
+
+    </div>
+    <!-- /main content -->
+
+</div>
+
+
+<!-- show quotation Images-->
+<ng-template #suceess>
+
+    <div class="container ">
+        <div class="centered">
+            <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+            <div class="content">
+                <h3>Registration Success !</h3>
+                <div class="modal-body">
+                    <p class="text-center">Thank you for your Registration as Refer Volunteer, <br /> our internal team will
+                        review and provide update on your access within 3 business days.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal" (click)="closeModel()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- /show quotation Images-->

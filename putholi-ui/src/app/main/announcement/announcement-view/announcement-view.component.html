@@ -1,0 +1,163 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'ANNOUNCEMENT.ViewAnnouncement'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/announcement/announcement-list']"
+                    class="breadcrumb-item">{{'ANNOUNCEMENT.Announcement'|translate}}</a>
+                <span class="breadcrumb-item active">{{'ANNOUNCEMENT.ViewAnnouncement'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+       
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'ANNOUNCEMENT.ViewAnnouncement'|translate}}</h6>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <!-- Form -->
+            <form action="#" class="form-horizontal">
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Announcement Code -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.AnnouncementCode'|translate}}
+                        :</label>
+                    <div class="col-md-3">
+                        <p *ngIf="announcementList?.announcementRole=='ADM'">Administrator</p>
+                        <p *ngIf="announcementList?.announcementRole=='APPR'">Approver</p>
+                        <p *ngIf="announcementList?.announcementRole=='REV'">Reviewer</p>
+                        <p *ngIf="announcementList?.announcementRole=='TUM'">Trust Member</p>
+                        <p *ngIf="announcementList?.announcementRole=='TUV'">Trust Volunteer</p>
+                        <p *ngIf="announcementList?.announcementRole=='BRNF'">Beneficiary</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Effective Date -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.EffectiveDate'|translate}}
+                        :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.effectiveDate|date:'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Expiry Date -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'ANNOUNCEMENT.ExpiryDate'|translate}}
+                        :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.expiryDate|date:"dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Announcement Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'ANNOUNCEMENT.AnnouncementDescription'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.announcementDescription}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row" *ngIf="announcementList?.createdBy">
+                    <!-- Announcement Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'COMMON.CreatedBy'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.createdBy}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row" *ngIf="announcementList?.createdDate">
+                    <!-- Announcement Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'COMMON.CreatedDate'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.createdDate|date:"dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row" *ngIf="announcementList?.lastModifiedBy">
+                    <!-- Announcement Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'COMMON.LastModifiedBy'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.lastModifiedBy}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row" *ngIf="announcementList?.lastModifiedDate">
+                    <!-- Announcement Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                        {{'COMMON.LastModifiedDate'|translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{announcementList?.lastModifiedDate|date:"dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+            </form>
+            <!-- /Form -->
+        </div>
+        <!--/Card Body -->
+
+        <!-- Card Footer -->
+        <div class="card-footer">
+            <button [routerLink]="['/main/announcement/announcement-list']" class="btn btn-danger"
+                type="button">{{'COMMON.Cancel'|translate}}</button>
+        </div>
+        <!-- /Card Footer -->
+    </div>
+</div>

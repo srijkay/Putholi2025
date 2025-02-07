@@ -1,0 +1,214 @@
+<div class="page-content login-cover">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+        <!-- Inner content -->
+        <div class="content-inner">
+
+            <!-- Content area -->
+            <div class="content-login d-flex justify-content-center align-items-center">
+
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <form class="register-form" #registerform="ngForm">
+                            <div class="text-center mb-3">
+                                <img src="assets/images/logo.png">
+                                <br /><br />
+                                <h5 class="mb-0">Summary of New Member</h5>
+                                <!-- <span class="d-block text-muted">Your credentials</span> -->
+                            </div>
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-5 col-form-label font-weight-600">
+                                        Username<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <p>{{registerData?.userName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-5 col-form-label font-weight-600">Email Id
+                                        <span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <p>{{registerData?.emailId}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-5 col-form-label font-weight-600">
+                                        Role<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <p>{{registerData?.role != null && registerData?.role != undefined? 'Trust
+                                            Member' : roleDetailList?.description}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left"
+                                *ngIf="registerData?.mobileNumber">
+                                <div class="row">
+                                    <!-- label for mobile number -->
+                                    <label class="col-lg-5 col-sm-5 col-form-label font-weight-600">
+                                        Mobile Number<span class=""> :</span></label>
+                                    <div class="col-lg-4 col-md-7 col-sm-7">
+                                        <p>{{registerData?.mobileNumber}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-7 col-form-label font-weight-600">
+                                        Registration Fee<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <p>{{applConfigData.configValue}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left"
+                                *ngIf="applConfigData.paymentMode">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-7 col-form-label font-weight-600">
+                                        Bank Charges<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <p *ngIf="applConfigData?.paymentMode !='OPTUPI'">
+                                            {{bankCharges.configValue}}</p>
+                                        <p *ngIf="applConfigData?.paymentMode =='OPTUPI'">
+                                            0 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row" *ngIf="applConfigData.paymentMode">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-7 col-form-label font-weight-600">
+                                        Amount to Trust<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7"
+                                        *ngIf="applConfigData?.paymentMode !='OPTUPI'">
+                                        <p>{{applConfigData.configValue-bankCharges.configValue}}</p>
+                                    </div>
+
+                                    <div class="col-lg-7 col-md-7 col-sm-7"
+                                        *ngIf="applConfigData?.paymentMode =='OPTUPI'">
+                                        <p>{{applConfigData.configValue}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <div class="row">
+                                    <!-- label for select role -->
+                                    <label class="col-lg-5 col-sm-7 col-form-label font-weight-600">
+                                        Paymeny Mode<span class=""> :</span></label>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadio1"
+                                                [(ngModel)]="applConfigData.paymentMode" value="OPTCRDC"
+                                                name="customRadio" #paymentMode="ngModel" class="custom-control-input"
+                                                required>
+                                            <label class="custom-control-label" for="customRadio1">Credit Card</label>
+                                        </div>
+                                        <br />
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadio2"
+                                                [(ngModel)]="applConfigData.paymentMode" value="OPTDBCRD"
+                                                name="customRadio" #paymentMode="ngModel" class="custom-control-input"
+                                                required>
+                                            <label class="custom-control-label" for="customRadio2">Debit Card</label>
+                                        </div>
+                                        <br />
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadio3"
+                                                [(ngModel)]="applConfigData.paymentMode" value="OPTNBK"
+                                                name="customRadio" #paymentMode="ngModel" class="custom-control-input"
+                                                required>
+                                            <label class="custom-control-label" for="customRadio3">Net Banking</label>
+                                        </div>
+                                        <br />
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadio4"
+                                                [(ngModel)]="applConfigData.paymentMode" value="OPTUPI"
+                                                name="customRadio" #paymentMode="ngModel" class="custom-control-input"
+                                                required>
+                                            <label class="custom-control-label"
+                                                for="customRadio4">UPI/Gpay/Phone Pe</label>
+                                        </div>
+                                        <br />
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadio5"
+                                                [(ngModel)]="applConfigData.paymentMode" value="NEFT-RTGS"
+                                                name="customRadio" #paymentMode="ngModel" class="custom-control-input"
+                                                required>
+                                            <label class="custom-control-label" for="customRadio5">NEFT-RTGS</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+
+
+
+                            <div class="form-group row">
+                                <div class="col-md-5">
+                                    <button type="button" [routerLink]="['/register']"
+                                        class="btn btn-danger">Back</button>&nbsp;&nbsp;
+                                    <button type="button" name="submit " id="submit" class="btn btn-primary"
+                                        (click)="getPaymentDetails()">Pay Now
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /inner content -->
+
+    </div>
+    <!-- /main content -->
+
+</div>

@@ -1,0 +1,329 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SENDMAIL.SendMailtoDEO'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home'|translate}}</a>
+
+                <a href="javascript:;" [routerLink]="['/main/pending-workflow']" class="breadcrumb-item">
+                    {{'COMMON.PendingWorkflow'|translate}}</a>
+                <span class="breadcrumb-item active"> {{'SENDMAIL.SendMailtoDEO'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+    <!-- Single mail -->
+    <div class="card">
+
+        <!-- Action toolbar -->
+        <div class="navbar navbar-light navbar-expand-lg border-bottom-0 py-lg-2 rounded-top">
+            <div class="text-center d-lg-none w-100">
+                <button type="button" class="navbar-toggler w-100 h-100" data-toggle="collapse"
+                    data-target="#inbox-toolbar-toggle-write">
+                    <i class="icon-circle-down2"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /action toolbar -->
+
+        <form class="form-horizontal" #mailForm="ngForm">
+            <!-- Mail details -->
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="align-top py-0" style="width: 1%">
+                                <div class="py-2 mr-sm-3">{{"SENDMAIL.To"|translate}}:</div>
+                            </td>
+                            <td class="align-top py-0">
+                                <div class="d-sm-flex flex-sm-wrap">
+                                    <input type="text" [(ngModel)]="mailData.to" name="to" id="to"
+                                        class="form-control h-auto flex-fill w-auto py-2 px-0 border-0 rounded-0"
+                                        placeholder="Add recipients" #to="ngModel"
+                                        [ngClass]="{ 'isInvalid': to.touched && to.invalid }" required>
+
+                                    <!-- <select class="form-control h-auto flex-fill w-auto py-2 px-0 border-0 rounded-0"
+                                        [(ngModel)]="mailData.to" name="to" id="to" #to="ngModel" required>
+                                        <option *ngFor="let email of emailList" [value]="email.email">{{
+                                            email.deoEmail}}</option>
+                                    </select> -->
+                                    <ul class="list-inline list-inline-dotted text-nowrap pt-sm-2 pb-2 mb-0 ml-sm-3">
+                                        <li class="list-inline-item" [hidden]="showCc"><a href="javascript:;"
+                                                (click)="carbonCopy('CC')">{{"SENDMAIL.Cc"|translate}}</a></li>
+                                        <!-- <li class="list-inline-item" [hidden]="showBcc"><a href="javascript:;"
+                                                (click)="carbonCopy('BCC')">{{"SENDMAIL.Bcc"|translate}}</a></li> -->
+                                    </ul>
+                                </div>
+                                <!-- <div class="error-block" *ngIf="(to.touched && to.invalid )">
+                                    This field cannot be left blank
+                                </div> -->
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="showCc">
+                            <td class="align-top py-0" style="width: 1%">
+                                <div class="py-2 mr-sm-3">{{"SENDMAIL.Cc"|translate}}:</div>
+                            </td>
+                            <td class="align-top py-0">
+                                <div class="d-sm-flex flex-sm-wrap">
+                                    <input type="text" [(ngModel)]="mailData.mailcc" name="mailcc" id="mailcc"
+                                        class="form-control h-auto flex-fill w-auto py-2 px-0 border-0 rounded-0"
+                                        placeholder="Add recipients" #mailcc="ngModel" required>
+
+                                </div>
+                                <div class="error-block" *ngIf="(mailcc.touched && mailcc.invalid )">
+                                    This field cannot be left blank
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="showBcc">
+                            <td class="align-top py-0" style="width: 1%">
+                                <div class="py-2 mr-sm-3">{{"SENDMAIL.Bcc"|translate}}:</div>
+                            </td>
+                            <td class="align-top py-0">
+                                <input type="text" class="form-control h-auto py-2 px-0 border-0 rounded-0"
+                                    placeholder="Add recipients">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-top py-0">
+                                <div class="py-2 mr-sm-3">{{'SENDMAIL.Subject'|translate}}:</div>
+                            </td>
+                            <td class="align-top py-0">
+
+                                <p style="margin-top:9px">{{schoolInfo?.schoolName}},
+                                    &nbsp;{{schoolInfo?.addressInfo?.locality}}</p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /mail details -->
+
+            <!-- Mail container -->
+            <div class="card-body">
+                <h3>Dear Sir/Madam</h3>
+                <div>
+                    <p style="text-indent: 60px;">We received below mentioned requirements from the school mentioned, we
+                        will try out best to fulfill the needs as mentioned here by approaching the larger audience
+                        through our trust and keep you updated with final status on this below mentioned requirement
+                        details.
+                        Kindly go through below and provide your approval to take up this further.
+                    </p>
+                </div>
+
+                <div>
+                    <p style="text-indent: 60px;"> Requesting your approval to proceed with below mentioned requirements
+                        for <b> {{schoolInfo?.schoolName}}.</b> </p>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <span class="text-muted"
+                            style="font-size: 17px;">{{'MANAGESCHOOL.SchoolInformation'|translate}}:</span>
+
+                        <div class="mb-6">
+
+                            <ul class="list list-unstyled mb-0">
+
+                                <div class="row">
+                                    <!-- label for registration number -->
+                                    <label
+                                        class="col-sm-4 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'|translate}}
+                                    </label><span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.schoolRegNo}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- label for school name -->
+                                    <label
+                                        class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'|translate}}
+                                    </label>
+                                    <span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.schoolName}}</p>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+
+                                <div class="row">
+                                    <!-- label for registration number -->
+                                    <label
+                                        class="col-sm-4 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'|translate}}
+                                    </label><span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.schoolType}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- label for school name -->
+                                    <label
+                                        class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.ContactNumber'|translate}}
+                                    </label>
+                                    <span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+                                <div class="row">
+                                    <!-- label for registration number -->
+                                    <label
+                                        class="col-sm-4 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'|translate}}
+                                    </label><span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- label for school name -->
+                                    <label
+                                        class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode'|translate}}</label>
+                                    <span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span class="text-muted"
+                            style="font-size: 17px;">{{"BENEFICIARY.BeneficiaryInformation"|translate}}:</span>
+
+                        <div class="mb-6">
+
+                            <ul class="list list-unstyled mb-0">
+
+                                <div class="row">
+                                    <!-- label for Full name -->
+                                    <label
+                                        class="col-sm-4 col-form-label font-weight-600">{{'MANAGEUSER.FullName'|translate}}
+                                    </label><span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{profileData?.fullName}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- label for email -->
+                                    <label
+                                        class="col-lg-4 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Email'|translate}}
+                                    </label>
+                                    <span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        <p>{{profileData?.emailId}}</p>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+
+                                <div class="row">
+                                    <!-- label for Contact number -->
+                                    <label
+                                        class="col-sm-4 col-form-label font-weight-600">{{'MANAGEUSER.ContactNumber'|translate}}
+                                    </label><span class="req font-weight-600">:</span>
+                                    <div class="form-inline col-md-6">
+                                        {{profileData?.mobileNumber}}
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="">
+                    <span class="text-muted"
+                        style="font-size: 17px;">{{"REQUIREMENT.RequirementInformation"|translate}}:</span>
+
+                    <div class="form-group row">
+                        <!-- label for registration number -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'REQUIREMENT.ConsolidateReferenceNumber'|translate}} :</label>
+                        <div class="form-inline col-md-3">
+                            <p>{{schoolInfo?.consolidateRefInfo?.consolidateId}}</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{'REQUIREMENT.RequirementType'|translate}}</th>
+                                    <th>{{'REQUIREMENT.AssetType'|translate}}</th>
+                                    <th>{{'REQUIREMENT.AssetName'|translate}}</th>
+                                    <th>{{'REQUIREMENT.Quantity'|translate}}</th>
+                                    <th>{{'REQUIREMENT.SubmittedDate'|translate}}</th>
+                                    <th>{{'COMMON.Status'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of requirementList">
+                                    <td>{{data?.requirementType=='NE'?'New':'Maintenance'}}</td>
+                                    <td>{{data?.assetType}}</td>
+                                    <td>{{data?.assetName}}</td>
+                                    <td>{{data?.quantity}}</td>
+                                    <td>{{data?.createdDate|date:'dd/MM/yyyy'}}</td>
+                                    <td><span class="badge badge-success">{{data?.reqStatus}}</span>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="">
+                    <textarea rows="5" id="message" name="message" [(ngModel)]="mailData.message" #message="ngModel"
+                        placeholder="{{'SENDMAIL.MessageHere'|translate}}"></textarea>
+                </div>
+
+
+            </div>
+            <!-- /single mail -->
+            <div class="card-footer">
+                <button type="button" [disabled]="mailForm.invalid" class="btn btn-primary center"
+                    (click)="getMailData()"> <i
+                        class="icon-paperplane mr-2"></i>{{"SENDMAIL.SendMail"|translate}}</button>
+                &nbsp;
+
+                <button type="button" href="javascript:;" [routerLink]="['/main/pending-workflow']"
+                    class="btn btn-danger">{{"COMMON.Cancel"|translate}}</button>
+            </div>
+        </form>
+        <!-- /dashboard content -->
+    </div>
+    <!-- /content area -->
+</div>

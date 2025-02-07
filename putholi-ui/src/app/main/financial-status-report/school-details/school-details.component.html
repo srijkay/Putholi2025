@@ -1,0 +1,27 @@
+<div bsModal #school="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+
+    <!-- modal dialog -->
+    <div class="modal-dialog modal-lg">
+
+        <!-- modal content -->
+        <div class="modal-content">
+
+            <!-- modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{'FINANCIAL.TotalSchoolExpenses'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- /modal header -->
+            <hr />
+            <!-- modal body -->
+            <div class="modal-body">
+            </div>
+            <!-- /modal-body -->
+        </div>
+        <!-- /modal content -->
+    </div>
+    <!-- /modal dialog -->
+</div>

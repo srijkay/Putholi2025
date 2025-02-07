@@ -1,0 +1,456 @@
+<div class="sidebar sidebar-light sidebar-main sidebar-expand-lg">
+    <!-- Sidebar content -->
+    <div class="sidebar-content">
+        <!-- User menu -->
+        <div class="sidebar-section">
+            <div class="sidebar-user-material">
+                <div class="sidebar-section-body">
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <!-- <button type="button"
+                                class="btn btn-outline-light border-transparent btn-icon btn-sm rounded-pill">
+                                <i class="icon-wrench"></i>
+                            </button> -->
+                        </div>
+                        <a href="javascript:;" class="flex-1 text-center"><img
+                                [src]="(this.getToken('profilePic')?this.base64Image+this.getToken('profilePic'):'assets/images/header-profile.png')"
+                                class="img-fluid rounded-circle shadow-sm" alt=""></a>
+
+                        <div class="flex-1 text-right">
+                            <button type="button"
+                                class="btn btn-outline-light border-transparent btn-icon rounded-pill btn-sm sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+                                <i class="icon-transmission"></i>
+                            </button>
+
+                            <button type="button"
+                                class="btn btn-outline-light border-transparent btn-icon rounded-pill btn-sm sidebar-mobile-main-toggle d-lg-none">
+                                <i class="icon-cross2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h6 class="mb-0 text-white text-shadow-dark mt-3">
+                            {{userProfileData?.role}}</h6>
+
+                        <span class="font-size-sm text-white text-shadow-dark"
+                            style="text-transform: lowercase;">{{this.getToken('emailId')}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /user menu -->
+
+        <!-- Main navigation -->
+        <div class="sidebar-section">
+            <ul class="nav nav-sidebar" data-nav-type="accordion">
+                <!-- Main -->
+                <li class="nav-item-header">
+                    <div class="text-uppercase font-size-xs line-height-xs mt-1">{{'SIDEBAR.Main'|translate}}</div> <i
+                        class="icon-menu" title="Main"></i>
+                </li>
+
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link" [routerLink]="['/main/dashboard']"
+                        routerLinkActive="active">
+                        <i class="icon-home4"></i>
+                        <span>
+                            {{'SIDEBAR.Dashboard'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Refer Volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='TRUSTM'">
+                    <a href="javascript:;" class="nav-link" [routerLink]="['/main/refer-volunteer']"
+                        routerLinkActive="active">
+                        <i class="fa fa-user"></i>
+                        <span>
+                            {{'SIDEBAR.ReferVolunteer'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Approval Requests -->
+                <li class="nav-item nav-item-submenu" id="submenu"
+                    *ngIf="this.getToken('role')=='ADMIN'|| this.getToken('role')=='REVIEW'|| this.getToken('role')=='APPRV'">
+                    <a href="javascript:;" class="nav-link"><i class="fa fa-users"></i> <span>
+                            {{'SIDEBAR.ApprovalRequests'|translate}}</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+
+                        <!-- Access Approval -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/manage-beneficiary']"
+                                routerLinkActive="active">
+
+                                <span>
+                                    {{'SIDEBAR.AccessApproval'|translate}}&nbsp;&nbsp;
+                                    <span
+                                        class="badge badge-info badge-pill">{{this.getToken('userApprovalCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- School Approval -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/manage-school']"
+                                routerLinkActive="active">
+
+                                <span>
+                                    {{'SIDEBAR.SchoolApproval'|translate}}&nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('schoolCount')}}</span>
+
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Requirement Approval -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/manage-requirement']"
+                                routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.RequirementApproval'|translate}}&nbsp;&nbsp;
+                                    <span
+                                        class="badge badge-info badge-pill">{{this.getToken('consolidateCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Pending Workflow -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/pending-workflow']"
+                                routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.PendingWorkflow'|translate}}&nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('pendingStatus')}}</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Manage School -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='BENIF'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/manage-school']"
+                        routerLinkActive="active">
+                        <i class="fa fa-school"></i>
+                        <span>
+                            {{'SIDEBAR.ManageSchool'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Manage Requirement -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='BENIF'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/manage-requirement']"
+                        routerLinkActive="active">
+                        <i class="fa fa-asterisk"></i>
+                        <span>
+                            {{'SIDEBAR.ManageRequirement'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Manage Assigned School for Trust volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='TRUSTV'">
+                    <a href="javascript:;" class="nav-link" [routerLink]="['/main/assign-school']"
+                        routerLinkActive="active">
+                        <i class="fa fa-school"></i>
+                        <span>
+                            {{'SIDEBAR.ManageSchool'|translate}}&nbsp;&nbsp;
+                            <span
+                                class="badge badge-info badge-pill">{{this.getToken('manageAssignedSchoolStatusCount')}}</span>
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Manage Requirement for Trust volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='TRUSTV'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/pending-workflow']"
+                        routerLinkActive="active">
+                        <i class="fa fa-asterisk"></i>
+                        <span>
+                            {{'SIDEBAR.ManageRequirement'|translate}}&nbsp;&nbsp;
+                            <span class="badge badge-info badge-pill">{{this.getToken('pendingSchoolStatus')}}</span>
+                        </span>
+                    </a>
+                </li>
+
+                <!--  Search School for Trust Volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role') =='TRUSTV'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-school']"
+                        routerLinkActive="active">
+                        <i class="icon-folder-search"></i>
+                        <span>
+                            {{'SIDEBAR.searchSchool'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Search Requirements for Trust volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role') =='TRUSTV'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-requirements']"
+                        routerLinkActive="active">
+                        <i class="icon-folder-search"></i>
+                        <span>
+                            {{'SIDEBAR.searchRequirements'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Quotation & Fund Allotment -->
+                <li class="nav-item nav-item-submenu" id="submenu"
+                    *ngIf="this.getToken('role')=='ADMIN'|| this.getToken('role')=='REVIEW'|| this.getToken('role')=='APPRV'">
+                    <a href="javascript:;" class="nav-link"><i class="fa fa-money-check-alt"></i> <span>
+                            {{'SIDEBAR.QuotationAndFundAllotment'|translate}}</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+
+                        <!-- Review Quotation -->
+                        <li class="nav-item"
+                            *ngIf="this.getToken('role')=='APPRV' || this.getToken('role')=='ADMIN' || this.getToken('role')=='REVIEW'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/review-quotate']"
+                                routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.ReviewQuotation'|translate}}&nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('quotationCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Fund Allotment -->
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="odd gradeX" class="nav-link "
+                                [routerLink]="['/main/fund-allotment']" routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.FundAllotment'|translate}}&nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('fundCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Invoice & Receipts -->
+                <li class="nav-item nav-item-submenu" id="submenu"
+                    *ngIf="this.getToken('role')=='ADMIN'|| this.getToken('role')=='REVIEW'|| this.getToken('role')=='APPRV'">
+                    <a href="javascript:;" class="nav-link"><i class="fa fa-file-invoice"></i> <span>
+                            {{'SIDEBAR.InvoiceAndReceipts'|translate}}</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+
+                        <!-- Review Invoice -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/review-invoice']"
+                                routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.ReviewInvoice'|translate}}&nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('invoiceCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Invoice Payment -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/invoice-payment']"
+                                routerLinkActive="active">
+                                <!-- <i class="fa fa-rupee-sign"></i> -->
+                                <span>
+                                    {{'SIDEBAR.InvoicePayment'|translate}}
+                                    &nbsp;&nbsp;
+                                    <span class="badge badge-info badge-pill">{{this.getToken('expenseCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Change Volunteer -->
+                <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/change-volunteer']"
+                        routerLinkActive="active">
+                        <i class="icon-user"></i>
+                        <span>
+                            {{'SIDEBAR.ChangeVolunteer'|translate}}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Delete School -->
+                <li class="nav-item"
+                    *ngIf="this.getToken('role')=='ADMIN'||this.getToken('role')=='REVIEW'||this.getToken('role')=='APPRV'">
+                    <a href="javascript:;" class="nav-link " [routerLink]="['/main/delete-school']"
+                        routerLinkActive="active">
+                        <i class="fa fa-school"></i>
+                        <span>
+                            {{'SIDEBAR.DeleteSchool'|translate}}&nbsp;&nbsp;
+                            <span class="badge badge-info badge-pill">{{this.getToken('deleteSchoolCount')}}</span>
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Reports -->
+                <li class="nav-item nav-item-submenu" id="submenu"
+                    *ngIf="this.getToken('role')=='ADMIN' || this.getToken('role')=='REVIEW'||this.getToken('role')=='APPRV' || this.getToken('role')=='SUADM' ||this.getToken('role')=='SUUSR'">
+                    <a href="javascript:;" class="nav-link"><i class="fa fa-file"></i> <span>
+                            {{'SIDEBAR.Reports'|translate}}</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+
+                        <!--  financial Reports -->
+                        <!-- <li class="nav-item">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/financial-status']"
+                                routerLinkActive="active">
+                                <span>
+                                    {{'SIDEBAR.FinancialStatus'|translate}}
+                                </span>
+                            </a>
+                        </li> -->
+
+                        <!--  School Reports -->
+                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR'">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-school']"
+                                routerLinkActive="active">
+                                <!-- <i class="icon-folder-search"></i> -->
+                                <span>
+                                    {{'SIDEBAR.searchSchool'|translate}}
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Requirements Report -->
+                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR'">
+                            <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-requirements']"
+                                routerLinkActive="active">
+                                <!-- <i class="icon-folder-search"></i> -->
+                                <span>
+                                    {{'SIDEBAR.searchRequirements'|translate}}
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Vendor's Report -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/reports']"
+                                routerLinkActive="active">{{'REPORT.Reports'|translate}}
+                            </a>
+                        </li>
+
+                        <!-- Registration Fee Details -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/collection-reports']"
+                                routerLinkActive="active">{{'SIDEBAR.CollectionAmountReport'|translate}}
+                            </a>
+                        </li>
+
+                        <!-- Donation Details -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/donation-reports']"
+                                routerLinkActive="active">{{'SIDEBAR.DonationAmountReport'|translate}}
+                            </a>
+                        </li>
+
+                        <!-- Cleanup Report -->
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/deleted-reports']"
+                                routerLinkActive="active">{{'SIDEBAR.DeleteReport'|translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Management Center -->
+                <li class="nav-item nav-item-submenu" id="submenu"
+                    *ngIf="this.getToken('role')=='ADMIN' || this.getToken('role')=='REVIEW'||this.getToken('role')=='APPRV' || this.getToken('role')=='SUADM' ||this.getToken('role')=='SUUSR'">
+                    <a href="javascript:;" class="nav-link"><i class="fa fa-cogs"></i> <span>
+                            {{'SIDEBAR.ManagementCenter'|translate}}</span></a>
+
+                    <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:;" [routerLink]="['/main/manage-user/user-list']"
+                                routerLinkActive="active">
+                                <span> {{'SIDEBAR.ManageUser'|translate}}&nbsp;&nbsp;
+
+                                    <span class="badge badge-info badge-pill">
+                                        {{this.getToken('superUserStatusCount')}}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item"
+                            *ngIf="this.getToken('role')=='ADMIN' || this.getToken('role')=='SUADM'||this.getToken('role')=='SUUSR'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/role-mgnt/role-list']"
+                                routerLinkActive="active">{{'SIDEBAR.ManageRole'|translate}}
+                            </a>
+                        </li> -->
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/code-maintenance/codes-list']"
+                                routerLinkActive="active">{{'SIDEBAR.CodeMaintenance'|translate}}
+                            </a>
+                        </li>
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link"
+                                [routerLink]="['/main/deo-code-maintenance/deo-code-list']"
+                                routerLinkActive="active">{{'SIDEBAR.DeoCodeMaintenance'|translate}}
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/product-config/product-edit']"
+                                routerLinkActive="active">{{'SIDEBAR.ProductConfiguration'|translate}}
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/appl-config/appl-list']"
+                                routerLinkActive="active">{{'SIDEBAR.ApplicationConfiguration'|translate}}
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href='javascript:;' class="nav-link" routerLink='/main/menu/menu-list'
+                                routerLinkActive="active">
+                                {{'SIDEBAR.ManageMenu'|translate}}</a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href='javascript:;' class="nav-link" routerLink='/main/module/module-list'
+                                routerLinkActive="active">
+                                {{'SIDEBAR.ManageModule'|translate}} </a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link"
+                                [routerLink]="['/main/approval-workflow/approval-workflow-list']"
+                                routerLinkActive="active">{{'SIDEBAR.FeaturesManagement'|translate}}
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link"
+                                [routerLink]="['/main/announcement/announcement-list']"
+                                routerLinkActive="active">{{'SIDEBAR.Announcement'|translate}}
+                            </a>
+                        </li>
+
+
+                        <!-- <li class="nav-item" *ngIf="this.getToken('role')=='ADMIN'">
+                            <a href="javascript:;" class="nav-link" [routerLink]="['/main/email-settings/email-list']"
+                                routerLinkActive="active">{{'SIDEBAR.EmailSettings'|translate}}</a>
+                        </li> -->
+                    </ul>
+                </li>
+                <!-- /main -->
+            </ul>
+        </div>
+        <!-- /main navigation -->
+    </div>
+    <!-- /sidebar content -->
+</div>

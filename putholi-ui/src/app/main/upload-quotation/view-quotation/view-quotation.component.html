@@ -1,0 +1,299 @@
+<div bsModal #viewQuotate="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'UPLOAD.ViewQuotations' |translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal">
+                <div class="modal-body roll">
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for company name -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.CompanyName' |
+                            translate}}
+                            <span class="">:</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.companyName}}</p>
+                        </div>
+
+                        <!-- label for quotation date -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.QuotationDate' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.quotationDate|date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for address -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.Address' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.address}}</p>
+                        </div>
+
+                        <!-- label for quotation valid date -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.QuotationValidDate' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.quotationValidDate|date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for street -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Street' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.street}}</p>
+                        </div>
+
+                        <!-- label for discount -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.DiscountDetails' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.discountDetails}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for city -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.City' |
+                            translate}}<span class="">
+                                :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.city}}</p>
+                        </div>
+
+                        <!-- label for item description -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.ItemDescription' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.itemDescription}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for pincode -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.Pincode' |
+                            translate}}<span class="">
+                                :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.pincode}}</p>
+                        </div>
+
+                        <!-- label for quantity -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Quantity' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.quantity}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for phone number -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.PhoneNumber' |
+                            translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.phoneNumber}}</p>
+                        </div>
+
+                        <!-- label for unit price -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.UnitPrice' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.unitPrice}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Comment/SpecialInstruction' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+
+                            <p>{{quotateData?.comments}}</p>
+                        </div>
+
+
+                        <!-- label for tax -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Taxin%' | translate}}<span class="">
+                                :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.tax}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for quotation prepared by -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.QuotationPreparedBy' | translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.quotationPreparedBy}}</p>
+                        </div>
+
+                        <!-- label for shipping cost -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.ShippingCost' | translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.shippingCost}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for warranty -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.Warranty' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.warranty}}</p>
+                        </div>
+
+                        <!-- label for total amount -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.TotalAmount' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{quotateData?.totalAmount}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for warranty -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'QUOTATION.ViewQuotationImages' | translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <button type="button" data-toggle="modal" class="btn btn-info"
+                                (click)="openImages(template)">{{'COMMON.ClickHere' |translate}}</button>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+                    <h5>{{'COMMON.ApprovalHistory' | translate }}</h5>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'COMMON.ActionBy' | translate }}</th>
+                                    <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                    <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                    <th>{{'COMMON.Status' | translate }}</th>
+                                    <th>{{'COMMON.Remarks' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                    <td>{{data?.actionBy}}</td>
+                                    <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{data?.role}}</td>
+                                    <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                    </td>
+                                    <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                    </td>
+                                    <td>{{data?.remarks}}</td>
+
+                                </tr>
+                                <tr class="odd" *ngIf="(!approvalHistDtlsDTOs?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel' | translate}}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- show quotation Images-->
+<!-- <ng-template #template> -->
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h4 class="modal-title">{{'QUOTATION.ViewQuotationImages' | translate}}</h4>
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="closeImages()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" *ngIf="base64Image">
+                            <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                        </div>
+                    </div>
+        
+                    <div class="carousel-inner" *ngIf="!base64Image">
+                        <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /show quotation Images-->

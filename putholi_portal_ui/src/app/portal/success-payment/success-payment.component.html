@@ -1,0 +1,139 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                class="img-fluid"></a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                         <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                        <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                        <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                        <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                        <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+              <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                        <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+                        Money</a></li>
+                <li><a class="nav-link active scrollto" href="javascript:;"
+                        [routerLink]="['/portal/school-list']">Donate</a>
+                </li>
+                <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+
+
+    </div>
+</header>
+<!-- End Header -->
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" style="margin-top:10px;">
+                    <h2 *ngIf="statusMessage == 'Success'">
+                        Payment Successfully</h2>
+                    <h2 *ngIf="statusMessage != 'Success'">
+                        Payment Failed</h2>
+
+                </div>
+                <div class="col-lg-6" style="display: flex;justify-content: right;margin-top:15px;">
+                    <ol>
+                        <li><a href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                        <li *ngIf="statusMessage == 'Success'">
+                            Payment Successfully</li>
+                        <li *ngIf="statusMessage != 'Success'">
+                            Payment Failed</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-12" style="margin-bottom:40px;" *ngIf="statusMessage == 'Success'">
+                    <div class="portfolio-info">
+                        <h3>Many thanks for your contribution. Your payment is received and here is your Tracking ID:
+                            {{keyValuePairs?.order_id}}.
+
+                            <br /><br />
+                            <p> Your Bank Reference Number is <b>{{keyValuePairs["bank_ref_no"]}}</b></p>
+                        </h3>
+
+
+                        Here is a quick link to <a href="javascript:;"
+                            [routerLink]="['/portal/trackingdonation']"><strong> Track Your Donation </strong></a>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12" style="margin-bottom:40px;" *ngIf="statusMessage != 'Success'">
+                    <div class="portfolio-info">
+                        <h3>Your payment has failed. Please try again </h3>
+
+                        <div class="col-lg-6">
+                            <button type="button" href="javascript:;" class="card-button-profile"
+                               [routerLink]="['/portal/summary/', this.getToken('schoolId')]">Retry Payment</button>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+</main><!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" style="margin-top:100px" class="section-bg">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="http://newrta.com/">NEWRTA</a>
+        </div>
+    </div>
+</footer>
+<!-- End  Footer -->

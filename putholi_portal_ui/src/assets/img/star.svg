@@ -1,0 +1,72 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+	<title>New Project</title>
+	<defs>
+		<image  width="1280" height="720" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAALQAQMAAAD1s08VAAAAAXNSR0IB2cksfwAAAANQTFRFAAAAp3o92gAAAAF0Uk5TAEDm2GYAAACHSURBVHic7cExAQAAAMKg9U9tCU+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgaxN8AAQfAspoAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+		.s0 { fill: #02ccc0 } 
+		.s1 { fill: #feb546 } 
+		.s2 { fill: #ff5b7e } 
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s0" d="m546.6 213.8q-9.4 0.9-10.6 13.6-1.2-12.7-10.5-13.6 9.3-0.9 10.5-13.6 1.2 12.7 10.6 13.6z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s1" d="m388.6 120.6q-12.4 1.2-14 18.1-1.6-16.9-14-18.1 12.4-1.1 14-18.1 1.6 17 14 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s2" d="m318.8 266.2q-8.3 0.7-9.4 12.1-1.1-11.4-9.4-12.1 8.3-0.8 9.4-12.2 1.1 11.4 9.4 12.2z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s2" d="m1133.9 549.4q-12.5 1.2-14.1 18.2-1.6-17-14-18.2 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s0" d="m181.5 394.3q-12.5 1.2-14.1 18.1-1.6-16.9-14-18.1 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s0" d="m1097.1 376.2q-12.4 1.2-14 18.1-1.6-16.9-14.1-18.1 12.5-1.2 14.1-18.1 1.6 16.9 14 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s2" d="m1020.9 124.2q-12.5 1.2-14.1 18.1-1.6-16.9-14-18.1 12.4-1.2 14-18.1 1.6 16.9 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="s1" d="m969.1 245q-6.8 0.7-7.7 11.4-0.8-10.7-7.6-11.4 6.8-0.8 7.6-11.5 0.9 10.7 7.7 11.5z"/>
+	</g>
+	<g id="&lt;Group&gt; copy">
+		<path id="&lt;Path&gt;" class="s0" d="m592.6 467.8q-9.4 0.9-10.6 13.6-1.2-12.7-10.5-13.6 9.3-0.9 10.5-13.6 1.2 12.7 10.6 13.6z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 2">
+		<path id="&lt;Path&gt;" class="s1" d="m191.6 197.6q-12.4 1.2-14 18.1-1.6-16.9-14-18.1 12.4-1.1 14-18.1 1.6 17 14 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 3">
+		<path id="&lt;Path&gt;" class="s2" d="m400.8 448.2q-8.3 0.7-9.4 12.1-1.1-11.4-9.4-12.1 8.3-0.8 9.4-12.2 1.1 11.4 9.4 12.2z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 4">
+		<path id="&lt;Path&gt;" class="s2" d="m729.9 573.4q-12.5 1.2-14.1 18.2-1.6-17-14-18.2 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 10">
+		<path id="&lt;Path&gt;" class="s2" d="m770.8 274.2q-8.3 0.7-9.4 12.1-1.1-11.4-9.4-12.1 8.3-0.8 9.4-12.2 1.1 11.4 9.4 12.2z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 11">
+		<path id="&lt;Path&gt;" class="s2" d="m929.9 331.4q-12.5 1.2-14.1 18.2-1.6-17-14-18.2 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 5">
+		<path id="&lt;Path&gt;" class="s0" d="m263.5 576.3q-12.5 1.2-14.1 18.1-1.6-16.9-14-18.1 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 12">
+		<path id="&lt;Path&gt;" class="s2" d="m725.9 387.4q-12.5 1.2-14.1 18.2-1.6-17-14-18.2 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 13">
+		<path id="&lt;Path&gt;" class="s0" d="m505.5 576.3q-12.5 1.2-14.1 18.1-1.6-16.9-14-18.1 12.4-1.1 14-18.1 1.6 17 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 7">
+		<path id="&lt;Path&gt;" class="s0" d="m973.1 582.2q-12.4 1.2-14 18.1-1.6-16.9-14.1-18.1 12.5-1.2 14.1-18.1 1.6 16.9 14 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 8">
+		<path id="&lt;Path&gt;" class="s2" d="m584.9 316.2q-12.5 1.2-14.1 18.1-1.6-16.9-14-18.1 12.4-1.2 14-18.1 1.6 16.9 14.1 18.1z"/>
+	</g>
+	<g id="&lt;Group&gt; copy 9">
+		<path id="&lt;Path&gt;" class="s1" d="m845.1 451q-6.8 0.7-7.7 11.4-0.8-10.7-7.6-11.4 6.8-0.8 7.6-11.5 0.9 10.7 7.7 11.5z"/>
+	</g>
+</svg>

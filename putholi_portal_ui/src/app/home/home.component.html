@@ -1,0 +1,857 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent">
+  <div class="container d-flex align-items-center">
+    <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-home.png" id="myDiv" class="img-fluid"></a>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+
+        <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+              class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#about" class="nav-link scrollto">About us</a></li>
+            <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+            <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+              class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+            <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+            <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+            <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+            <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+              class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+            <!-- <li><a href="javascript:;" class="nav-link scrollto">Videos</a></li>
+            <li><a href="javascript:;" class="nav-link scrollto">Stories</a></li> -->
+          </ul>
+        </li>
+        <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+              class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+            <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+            <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+          </ul>
+        </li> -->
+        <!-- <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+        <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+            Money</a></li>
+        <li><a class="nav-link active scrollto" href="javascript:;" [routerLink]="['/portal/school-list']">Donate</a>
+        </li>
+        <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+
+
+  </div>
+</header>
+<!-- End Header -->
+
+<!-- ======= home Section ======= -->
+<section id="hero" class="clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <a><img src="assets/img/logo.png" alt="logo" class="logo-view"></a>
+      </div>
+    </div>
+    <div class="row justify-content-center align-self-center" data-aos="fade-up">
+      <div class="col-lg-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
+        <!-- ======= imagescrolls Section ======= -->
+        <section id="imagescrolls" class="imagescrolls">
+          <div class="container" data-aos="zoom-in">
+
+            <header class="section-header">
+              <h3>Latest Works</h3>
+            </header>
+
+            <div class="row justify-content-center">
+              <div class="col-lg-9">
+
+                <div class="imagescrolls-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                  <div class="swiper-wrapper">
+
+                    <div class="swiper-slide" *ngFor="let data of schoolImages">
+                      <div class="imagescroll-item">
+                        <img src="{{data?.fileData}}" width="100%" height="240">
+                      </div>
+                      <div class="swiper-pagination"></div>
+                    </div>
+                    <!-- End imagescrolls item -->
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section><!-- End Testimonials Section -->
+      </div>
+
+      <div class="col-lg-6 intro-img order-lg-last order-first" data-aos="zoom-out" data-aos-delay="100">
+        <img src="assets/img/intro-img.svg" alt="" class="img-fluid img-margin">
+      </div>
+    </div>
+
+  </div>
+</section><!-- End home -->
+
+<main id="main">
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+
+        <div class="col-lg-5 col-md-6">
+          <div class="about-img" data-aos="fade-right" data-aos-delay="100">
+            <img src="assets/img/about-img.jpg" alt="">
+          </div>
+        </div>
+
+        <div class="col-lg-7 col-md-6">
+          <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+            <h2>About Us</h2>
+            <p>Putholi trust is a non-profit organization. This has been created and dedicated only for Developing &
+              Maintaining infrastructure of Government Schools within Tamilnadu for now. Also, we dont spend any money
+              from donors for maintenance or any miscellaneous expenses costing to trust or trust related activities.
+            </p>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- End About Section -->
+
+  <!-- ======= Putholi Privacy Policy Documents Section ======= -->
+  <section id="documents" class="documents">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-7 col-md-6">
+          <div class="documents-content" data-aos="fade-left" data-aos-delay="100">
+            <h2>Putholi Policy Documents</h2>
+
+            <div >
+              <a id="doc" [routerLink]="['/privacy-policy']"  >
+                Privacy policy
+              </a>
+            </div>
+            <br>
+            <div>
+              <a id="doc" [routerLink]="['/refund-cancellation']" >
+                Refund and cancellation Policy
+              </a>
+            </div>
+            <br>
+            <div>
+              <a id="doc" [routerLink]="['/terms-and-conditions']" >
+                Terms and Conditions
+              </a>
+            </div>
+            <br>
+            <div>
+              <a id="doc" [routerLink]="['/registration-policy']"  >
+                Registration Policy
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6">
+          <div class="documents-img" data-aos="fade-right" data-aos-delay="100">
+            <img src="assets/img/documentsImage.jpg" alt="" >
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!--  End Putholi Privacy Policy Documents Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3>Revamp Government Schools</h3>
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua.</p> -->
+      </header>
+
+      <div class="row g-5">
+        <div class="col-md-6 col-lg-4 bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-sl">
+            <div class="card-image">
+              <img src="assets/img/donate.jpg" alt="">
+            </div>
+
+            <a class="card-action" href="javascript:;"><i class="fa fa-heart"></i></a>
+            <div class="card-heading">
+              Donate to School
+            </div>
+            <div class="card-text">
+              To contribute your fund for development of a selected school.
+            </div>
+            <a href="javascript:;" [routerLink]="['/portal/school-list']" class="card-button">Donate Now </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-sl">
+            <div class="card-image">
+              <img src="assets/img/money.jpg" alt="">
+            </div>
+
+            <a class="card-action" href="javascript:;"><i class="fa fa-star"></i></a>
+            <div class="card-heading">
+              Track Your Money
+            </div>
+            <div class="card-text">
+              Provide your tracking number to view the status of your contribution.
+            </div>
+            <a href="javascript:;" [routerLink]="['/portal/trackingdonation']" class="card-button"> Track Money</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-sl">
+            <div class="card-image">
+              <img src="assets/img/login.jpg" alt="">
+            </div>
+
+            <a class="card-action" href="javascript:;"><i class="fa fa-paper-plane"></i></a>
+            <div class="card-heading">
+              Login/Register
+            </div>
+            <div class="card-text">
+              Click here to register as Beneficiary / Annual Member.
+            </div>
+            <a [href]="env.adminUrl" class="card-button"> Login/Register</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
+
+  <!-- ======= Call To Action Section ======= -->
+  <form class="form-horizontal" (ngSubmit)="onNews(newsLetterform,newsLetterData)" #newsLetterform="ngForm">
+    <section id="call-to-action" class="call-to-action">
+      <div class="container" data-aos="zoom-out">
+        <div class="row">
+          <div class="col-lg-9 text-center text-lg-start">
+            <h3 class="cta-title">Newsletter</h3>
+            <p class="cta-text">To subscribe to our emails, simply enter your email address and follow the
+              confirmation
+              prompts. You will be able to unsubscribe at any time through a link in any emails.</p>
+          </div>
+          <div class="col-lg-3 text-center">
+            <input type="email" name="newsletter" class="cta-textbox" placeholder="Enter emailId"
+              [(ngModel)]="newsLetterData.newsletter" required #newsletter="ngModel" autocomplete="off"
+              [ngClass]="{ 'isInvalid': (newsletter.touched) && newsletter.invalid }" /><br>
+            <a class="cta-btn align-middle" href="javascript:;">Click to Subscribe!</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+  <!--  End Call To Action Section -->
+  <br>
+
+  <!-- ======= Features Section ======= -->
+  <section id="features" class="features">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3 class="section-title" style="padding-bottom:40px">Our Features</h3>
+      </header>
+
+      <div class="row feature-item">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          <img src="assets/img/features-1.svg" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0" data-aos="fade-left" data-aos-delay="150">
+          <h4>Our Philosophy</h4>
+          <p>Be Transparent to everyone & ensure Donor's contribution is spent 100% to the school. No
+            miscellaneous expenses for the trust are included from the donor's contribution.</p>
+
+          <p>To Provide Transparent & Dedicated Service to the society by building & maintaining the infrastructure
+            needs of the government schools through Donor's contribution for the respective schools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="vision">
+    <div class="container" data-aos="fade-up">
+      <div class="row feature-item mt-5 pt-5">
+        <div class="col-lg-6 wow fadeInUp order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <img src="assets/img/features-2.svg" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-lg-6 wow fadeInUp pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-right" data-aos-delay="150">
+
+          <h4>Our Mission and Vision</h4>
+
+          <p>
+            <b>Our Vision :</b> To ensure every child gets free,fair & quality education along with government support.
+          </p>
+          <p>
+            <b>Our mission :</b> Help every child in government school develop and achieve their potential during the
+            most formative years of their lives
+          </p>
+          <p>
+            <b>What We Do :</b>Our registered charity in Tamilnadu, India, which will support only to revamp the
+            existing government schools in tamilnadu for now. We have developed this website to bring out the
+            transparency in developing the school and also on the funds received from all kind hearted people living
+            locally / other states/ across world .Whatever we do, we make sure it is exactly what our government school
+            needs at the right time, guided by the representative from the school / head teacher/ government officials
+            and with no fuss.
+          </p>
+
+          <p style="margin-top: -21px">Please note that this trust does not support any private or self financing or
+            govt-aided schools within
+            tamilnadu or anywhere else and also this trust will not respond to any request for help/support from a
+            school which is not registered with this website.</p>
+
+          <p style="margin-top: -21px">We strongly believe that, <b>SMALL HELP CAN MAKE BIG DIFFERENCE WHEN YOU REALLY
+              NEED IT.</b></p>
+
+          <p style="margin-top: -21px">Looking forward for your support.</p>
+
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- End Features Section -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <section id="portfolio" class="portfolio section-bg">
+    <div class="container" data-aos="fade-up" style="height: fit-content;">
+
+      <header class="section-header">
+        <h3 class="section-title">Our Gallery</h3>
+
+      </header>
+      <!-- <div class="row">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s"
+          *ngFor="let data of requirementPostImages">
+          <div class="portfolio-wrap">
+            <img [src]="data?.fileData" class="img-fluid" alt="" style="height: 300px; width: 100% !important;">
+            <div class="portfolio-info">
+              <h4><a href="portfolio-details.html">Cuddalore School</a></h4>
+              <p>{{data?.fileName}}</p>
+              <div>
+                <a href="{{data?.fileData}}" class="link-preview portfolio-lightbox" data-gallery="portfolioGallery"
+                  title="Web 3"><i class="bi bi-plus"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200"
+        style="height: auto !important;">
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app" *ngFor="let data of requirementPostImages">
+          <div class="portfolio-wrap">
+            <img src="{{data?.fileData}}" class="img-fluid" alt="" style="height: 300px; width: 100% !important; ">
+            <div class="portfolio-info">
+              <h4><a href="javascript:;">{{data?.schoolName}}</a></h4>
+              <p>{{data?.fileName}}</p>
+              <!-- <div>
+                <a href="{{bloburl}}" data-gallery="portfolioGallery" title="App 1" class="link-preview portfolio-lightbox"><i
+                    class="bi bi-plus"></i></a>
+
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </section><!-- End Portfolio Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <!-- <section id="testimonials" class="testimonials">
+    <div class="container" data-aos="zoom-in">
+
+      <header class="section-header">
+        <h3>Testimonials</h3>
+      </header>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="assets/img/testimonial-1.png" class="testimonial-img" alt="">
+                  <h3>Ashok Kumar</h3>
+                  <h4>Ceo &amp; Founder</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div> -->
+
+  <!-- <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="assets/img/testimonial-2.png" class="testimonial-img" alt="">
+                  <h3>Sara Johnson</h3>
+                  <h4>Designer</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div> -->
+
+  <!-- End testimonial item -->
+
+  <!-- <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
+                  <h3>Prakash Babu</h3>
+                  <h4>Web Designer</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div> -->
+  <!-- End testimonial item -->
+
+  <!-- <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="assets/img/testimonial-4.png" class="testimonial-img" alt="">
+                  <h3>Balamurugan</h3>
+                  <h4>Freelancer</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div> -->
+  <!-- End testimonial item -->
+
+  <!-- </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section> -->
+  <!-- End Testimonials Section -->
+
+
+
+  <!-- ======= Team Section ======= -->
+  <!-- <section id="team" class="team section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h3>Team</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="member">
+            <img src="assets/img/team-1.png" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Ramaswamy</h4>
+                <span>Chief Admin</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="member">
+            <img src="assets/img/team-2.png" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Vijayalakshmi</h4>
+                <span>Super User</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="member">
+            <img src="assets/img/team-3.png" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Niranjana</h4>
+                <span>Product Owner</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="member">
+            <img src="assets/img/team-4.png" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Kumaraswamy</h4>
+                <span>Accountant</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+   -->
+  <!-- End Team Section -->
+
+  <!-- ======= F.A.Q Section ======= -->
+  <section id="faq" class="faq">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header">
+        <h3>FAQ</h3>
+
+      </header>
+
+      <ul class="faq-list" data-aso="fade-up" data-aos-delay="100">
+
+        <li>
+          <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">What are the roles and
+            responsibilities of Beneficiary and Annual member? <i class="bi bi-chevron-down icon-show"></i><i
+              class="bi bi-chevron-up icon-close"></i></div>
+          <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Beneficiary can add school and requirements. Whereas Annual Member can manage & monitor the activities
+              within the trust for all the requests from Beneficiary and other users within the admin system.Also there
+              will be annual membership fee(to be decided at the beginning of financial year) to be collected from
+              Annual Member, but Beneficiary need not pay any amount for registration.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">What is the purpose of this website and
+            how to utilize it? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              This website will support to develop or revamp the existing government schools within Tamilnadu preferably
+              in the villages/towns.Public Users can register as beneficiary in the website with valid details. Once
+              user approved, authorized beneficiary to add school and its requirements with relevant proof and also its
+              beneficiary's responsibility to get all the required approvals to proceed with the requirement for the
+              school added. Once this process is completed, Admin & Team will identify the right source to fulfill the
+              requirement by raising funds from the public within the state/country/abroad and once fund collected, will
+              complete the project and submit all the proofs with expenses and implementation proof in the system for
+              all the donors to know where exactly the money is spent.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">What is Track Your Money?
+            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              When Donor's make donation to a particular school, we give them a unique tracking number / ID after every
+              successful transaction. Using the Tracking number / ID, Donor can get know the current status/progress of
+              the school development and after completion, they can view the Pre & Post implementation picture of the
+              school condition along with Receipts detailing the payments made to the vendors for fulfilling the
+              requirements.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div data-bs-toggle="collapse" href="#faq4" class="collapsed question"> Can I provide materials or things for
+            free or no cost to schools through this trust or website?
+            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Yes. However still needs to go through the website, here zero amount workorder to be generated and still
+              pre image and post image to be uploaded for everyone's reference.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">What happens if funds are not collected
+            from the public to the schools registered? <i class="bi bi-chevron-down icon-show"></i><i
+              class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq5" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              If fund collection is not achievable through donations from public, trust authorities to decide if they
+              can add any considerable amount to fulfill the requirement, if that is not possible, Trust will notify
+              Beneficiary/DEO/CEO of school and the school contacts that requirements could not be fulfilled. There is
+              no liability for the Trust to fulfill the needs of the school.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Can I add government aided schools for
+            revamp/development of the school? <i class="bi bi-chevron-down icon-show"></i><i
+              class="bi bi-chevron-up icon-close"></i></div>
+          <div id="faq6" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              For now, we are serving only Govt Schools. In future, we will support govt aided based on the decision
+              made within the trust authorities.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <div data-bs-toggle="collapse" href="#faq7" class="collapsed question">Can anyone from trust or volunteers be
+            vendors to supply the materials? <i class="bi bi-chevron-down icon-show"></i><i
+              class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq7" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Yes. However if the quotation is selected, from the selected amount there needs to be mandatory discount
+              of 10% to be given.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <div data-bs-toggle="collapse" href="#faq8" class="collapsed question">How are the payments made to vendors?
+            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq8" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              No payment is made by cash/cheque/card. All payments are done via payment processing through the system
+              and no manual intervention is required.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <div data-bs-toggle="collapse" href="#faq9" class="collapsed question">Does this trust or website collects
+            open donations? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+          </div>
+          <div id="faq9" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Putholi Trust never collects any Open donations, all donations are to any particular school and does not
+              accept cash or cheque payments. All payments are to be made by online via the putholitrust.com. Any
+              transactions through any other channel, trust will not take the responsibility.
+            </p>
+          </div>
+        </li>
+
+
+
+
+      </ul>
+
+    </div>
+  </section><!-- End F.A.Q Section -->
+
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="section-bg">
+  <div class="footer-top">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-6">
+
+          <div class="row">
+
+            <div class="col-sm-12">
+
+              <div class="footer-info">
+                <h4>Contact Info</h4>
+
+                <div class="mapouter">
+                  <div class="gmap_canvas">
+                    <!-- <iframe width="500" height="250" id="gmap_canvas"
+                      src="https://maps.google.com/maps?q=Bangalore&t=&z=11&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                      scrolling="no" marginheight="0" marginwidth="0"></iframe> -->
+
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9762510469236!2d80.2054534710391!3d12.909247888420612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525de3cc89d00f%3A0x52c313ac7fc08d3!2sPULSE%20Academy!5e0!3m2!1sen!2sin!4v1670509827436!5m2!1sen!2sin"
+                      width="600" height="450" style="border:0;"></iframe>
+
+                    <a href="https://www.online-timer.net"></a><br>
+                    <style>
+                      .mapouter {
+                        position: relative;
+                        text-align: right;
+
+                      }
+                    </style>
+                    <style>
+                      .gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+
+                      }
+                    </style>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+
+              <div class="footer-links">
+                <h4>Contact Us</h4>
+                <p>
+                  <strong>Putholi Trust Office</strong> <br>
+                  Pulse Academy<br>
+                  Plot No : 9, Sekaran Nagar, <br>
+                  Perumbakkam, Chennai 600100 <br>
+                  <strong>Landmark: </strong>Near Flowers and Petals Apartment.<br>
+                  <strong>Phone Number: </strong>7530071434<br>
+                  <strong>Email ID: </strong>emailputholitrust@gmail.com
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="form">
+
+            <h4>Send us a message</h4>
+            <!-- Form -->
+            <form id="contact-form" class="php-email-form" #contactForm="ngForm"
+              (ngSubmit)='onContact(contactForm,contactData)'>
+              <!-- row -->
+              <div class="form-group">
+                <!-- input for your name -->
+                <app-nspl-text [data]="contactData.contactName" [(ngModel)]="contactData.contactName"
+                  placeholder="Your Name" [required]="true" name="contactName" [isErrorMsg]="false" NsplAplhaWithSpac>
+                </app-nspl-text>
+              </div>
+              <!-- /row -->
+
+              <!-- row -->
+              <div class="form-group mt-3">
+                <app-nspl-text [data]="contactData.contactEmail" [(ngModel)]="contactData.contactEmail"
+                  placeholder="Your Email" [required]="true" name="contactEmail" [isErrorMsg]="false"
+                  [controlInput]="'Email'">
+                </app-nspl-text>
+              </div>
+              <!-- /row -->
+
+              <!-- row -->
+              <div class="form-group mt-3">
+                <app-nspl-number [data]="contactData.phoneNumber" [(ngModel)]="contactData.phoneNumber"
+                  placeholder="Your Phone Number" [required]="true" name="phoneNumber" [isErrorMsg]="false">
+                </app-nspl-number>
+              </div>
+              <!-- /row -->
+
+              <!-- row -->
+              <div class="form-group mt-3">
+                <!-- input for subject -->
+                <app-nspl-text [data]="contactData.subject" [(ngModel)]="contactData.subject" placeholder="Subject"
+                  [required]="true" name="subject" [isErrorMsg]="false">
+                </app-nspl-text>
+              </div>
+              <!-- /row -->
+
+              <!-- row -->
+              <div class="form-group mt-3">
+                <!-- input for text area -->
+                <app-nspl-multiline-text [data]="contactData.contactComment" [(ngModel)]="contactData.contactComment"
+                  [required]="true" placeholder="Message" [isErrorMsg]="false" name="contactComment">
+                </app-nspl-multiline-text>
+              </div>
+              <!-- /row -->
+
+
+              <!-- row -->
+              <div class="form-group mt-3">
+                <div class="col-md-12" style="margin-bottom: 0px">
+                  <!-- captcha -->
+                  <app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+                </div>
+              </div>
+              <!-- /row -->
+
+              <div class="text-center" style="margin-top: 15px;">
+                <button type="submit" [disabled]="contactForm.invalid">Send Message</button>&nbsp;&nbsp;
+                <button type="reset" class="reset">Clear</button>
+              </div>
+            </form>
+            <!-- /Form -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="http://newrta.com/">NEWRTA</a>
+    </div>
+  </div>
+</footer>
+<!-- End  Footer -->

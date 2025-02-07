@@ -1,0 +1,16 @@
+.col-form-label {
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: -1.75rem !important;
+}
+
+p {
+    margin-top: 8px;
+}
+
+.portfolio-container {
+    position: relative;
+    height: auto !important;
+}

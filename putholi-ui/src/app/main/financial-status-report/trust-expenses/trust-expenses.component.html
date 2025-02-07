@@ -1,0 +1,51 @@
+<div bsModal #expenses="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+
+    <!-- modal dialog -->
+    <div class="modal-dialog modal-lg">
+
+        <!-- modal content -->
+        <div class="modal-content">
+
+            <!-- modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{'FINANCIAL.TrustExpenses'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- /modal header -->
+            <hr />
+            <!-- modal body -->
+            <div class="modal-body">
+
+                <!-- table-reponsive -->
+                <div class="table-responsive">
+                    <!-- table -->
+                    <table class="table datatable-basic table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th>{{'MANAGESCHOOL.SchoolName'|translate }}</th>
+                                <th>{{'REPORT.Amount'|translate}}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let data of trustExpenses">
+                                <td>{{data?.schoolName}}</td>
+                                <td>{{data?.amount}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <!-- /table -->
+                </div>
+                <!-- /table-responsive -->
+            </div>
+            <!-- /modal-body -->
+        </div>
+        <!-- /modal content -->
+    </div>
+    <!-- /modal dialog -->
+</div>

@@ -1,0 +1,15 @@
+.form-control {
+    margin-bottom: 10px;
+}
+
+.pull-right {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .dataTables_paginate {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      
+  }

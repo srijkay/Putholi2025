@@ -1,0 +1,14 @@
+.captcha-container {
+  width:280px;
+}
+
+.captcha-actions a {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #222;
+}
+
+

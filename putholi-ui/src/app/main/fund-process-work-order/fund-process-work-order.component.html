@@ -1,0 +1,313 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'WORKORDER.WorkOrder'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/fund-allotment/fund-allotment-list']"
+                    class="breadcrumb-item">
+                    {{'FUNDALLOTMENT.FundAllotment'|translate}}</a>
+                <a class="breadcrumb-item active">{{'WORKORDER.WorkOrder'|translate}}</a>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'WORKORDER.GenerateWorkOrder'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- School Information -->
+            <div>
+                <h5 class="text-muted">{{'MANAGESCHOOL.SchoolInformation'|translate}}</h5>
+                <div class="form-group row">
+
+                    <!-- label for registration number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'|translate}}
+                        :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{schoolInfo?.schoolRegNo}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- label for school name -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'|translate}}
+                        :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{schoolInfo?.schoolName}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+                <div class="form-group row">
+
+                    <!-- label for Locality -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'|translate}}
+                        :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                    <!-- label for Pincode -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode'|translate}}
+                        :</label>
+                    <div class="form-inline col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /School Information -->
+            <!-- Form -->
+            <form class="form-horizontal" #requirementform="ngForm">
+                <div class="form-body">
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- selected requirement -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'WORKORDER.SelectRequirement'|translate}}<span
+                                class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="requirement" [items]="selectRequirementList" class="chosen-select"
+                                bindLabel="assetNameDescription" bindValue="assetName"
+                                [(ngModel)]="requirementData.requirement" #requirement="ngModel" [clearable]='true'
+                                [searchable]='false' (change)="selectRequirement($event)" [dropdownPosition]="'auto'"
+                                placeholder="{{'COMMON.Select'|translate}}" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Selected quotation -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'WORKORDER.SelectedQuotation'|translate}}<span
+                                class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="quotationData.companyName"
+                                placeholder="{{'WORKORDER.SelectedQuotation'|translate}}"
+                                [(ngModel)]="quotationData.companyName" [disabled]="true" name="companyName">
+                            </app-nspl-text>
+                        </div>
+                        <!-- generate workorder button -->
+
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <button type="button" data-toggle="modal" [disabled]="requirementform.invalid"
+                                (click)="openWorkOrder(workOrder)"
+                                class="btn btn-success">{{'WORKORDER.GenerateWorkOrder'|translate}}</button>
+                            &nbsp;
+                            <button type="button" [routerLink]="['/main/fund-allotment']"
+                                class="btn btn-danger">{{'COMMON.GoBackToHome'|translate}}</button>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+            </form>
+            <!-- /Form -->
+        </div>
+    </div>
+</div>
+<!-- /content area -->
+
+<!-- Work Order Modal -->
+<div bsModal #workOrder="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" id="htmlData">
+                <!-- Quotation template -->
+                <div class="card-header bg-transparent header-elements-inline py-0">
+                    <h6 class="card-title py-3">{{'WORKORDER.WorkOrder'|translate}} {{'PAGINATION.to'|translate}}
+                        {{quotationData.companyName}}</h6>
+                    <div class="header-elements">
+                        <button type="button" class="btn btn-light btn-sm" (click)="generateWorkOrder('SAVE')"><i class="icon-file-check mr-2"></i>
+                            {{"SENDMAIL.Save"|translate}}</button>
+                       
+                    </div>
+                </div>
+                <div id="Quotation">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span class="text-muted">{{'QUOTATION.QuotationFrom'|translate}} :</span>
+
+                                <div class="mb-4">
+
+                                    <ul class="list list-unstyled mb-0">
+                                        <h5 class="my-2">Putholi Project</h5>
+                                        <li>{{schoolInfo?.addressInfo?.addressLine1}}</li>
+                                        <li>{{schoolInfo?.addressInfo?.addressLine2}}</li>
+                                        <li>{{schoolInfo?.contactsInfo?.primaryNumber}}</li>
+                                        <li><a href="javascript:;">{{schoolInfo?.contactsInfo?.primaryEmail}}</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="mb-4">
+                                    <div class="text-sm-right">
+                                        <h4 class="text-primary mb-2 mt-lg-2">{{'QUOTATION.Quotation'|translate}}</h4>
+                                        <ul class="list list-unstyled mb-0">
+
+                                            <li>{{'QUOTATION.ExpectedStartDate'|translate}}: <span
+                                                    class="font-weight-semibold">{{quotationData?.quotationDate|
+                                                    date:'dd/MM/yyyy'}}</span>
+                                            </li>
+                                            <li>{{'QUOTATION.ExpectedEndDate'|translate}}: <span
+                                                    class="font-weight-semibold">{{quotationData?.quotationValidDate |
+                                                    date:'dd/MM/yyyy'}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-lg-flex flex-lg-wrap">
+                            <div class="mb-4 mb-lg-2">
+                                <span class="text-muted">{{'QUOTATION.QuotationTo'|translate}}:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <h5 class="my-2">{{quotationData?.companyName}}</h5>
+                                    </li>
+                                    <li>{{quotationData?.address}}</li>
+                                    <li>{{quotationData?.city}}</li>
+                                    <li>{{quotationData?.pincode}}</li>
+                                    <li>{{quotationData?.phoneNumber}}</li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{'REQUIREMENT.Requirement'|translate}}</th>
+                                    <th>{{'QUOTATION.Quantity'|translate}}</th>
+                                    <th>{{'QUOTATION.Unit'|translate}}</th>
+                                    <th>{{'QUOTATION.SubmittedDate'|translate}}</th>
+                                    <th>{{'QUOTATION.Description'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <!-- <h6 class="mb-0">Create UI design model</h6> -->
+                                        <span class="text-muted">{{requirementInfo?.assetNameDescription}}</span>
+                                    </td>
+                                    <td>{{requirementInfo.quantity}}</td>
+                                    <td>{{schoolInfo?.consolidateRefInfo?.noOfRequirements}}</td>
+                                    <td><span
+                                            class="font-weight-semibold">{{requirementInfo?.createdDate|date:'dd/MM/yyyy'}}</span>
+                                    </td>
+                                    <td>{{quotationData?.itemDescription}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-lg-flex flex-lg-wrap">
+                            <div class="pt-2 mb-3">
+                                <h5 class="mb-3">{{'QUOTATION.Termsandconditions'|translate}}</h5>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" [disabled]="true"
+                                        placeholder="{{'QUOTATION.Termsandconditions'|translate}}">
+                                </div>
+
+                                <ul class="list-unstyled text-muted">
+                                    <li>{{'QUOTATION.VolunteerName'|translate}}: {{schoolInfo?.volunteerName}}</li>
+                                    <li>{{'QUOTATION.ContactNumber'|translate}}: {{userData?.mobileNumber}}</li>
+                                    <li>{{'QUOTATION.Email'|translate}}: {{userData?.emailId}}</li>
+                                </ul>
+                            </div>
+
+                            <div class="pt-2 mb-3 wmin-lg-400 ml-auto">
+                                <h6 class="mb-3">{{'QUOTATION.AmountDue'|translate}}: {{quotationData?.createdDate|
+                                    date:'dd/MM/yyyy'}}</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{'QUOTATION.Tax'|translate}}:</th>
+                                                <td class="text-right">Rs.{{tax}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'QUOTATION.Shipping'|translate}}:</th>
+                                                <td class="text-right">Rs.{{quotationData?.shippingCost}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'QUOTATION.Total'|translate}}:</th>
+                                                <td class="text-right text-primary">
+                                                    <h5 class="font-weight-semibold">Rs.{{quotationData?.totalAmount}}
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="generateWorkOrder('DOWNLOAD')" class="btn btn-primary"><i
+                        class="fa fa-download"></i>&nbsp;{{'COMMON.Submit'|translate}}
+                    {{'WORKORDER.WorkOrder'|translate}}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="closeWorkOrder()">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Quotation template -->
+        </div>
+    </div>
+</div>
+<!-- /Work Order Modal -->

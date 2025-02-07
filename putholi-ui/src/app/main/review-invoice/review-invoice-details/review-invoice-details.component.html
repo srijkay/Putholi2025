@@ -1,0 +1,1084 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'UPLOAD.ReviewInvoice'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+
+                <a href="javascript:;" [routerLink]="['/main/review-invoice/review-invoice-list']"
+                    class="breadcrumb-item">
+                    {{'UPLOAD.ReviewInvoice'|translate}}</a>
+                <span class="breadcrumb-item active">{{'INVOICE.ReviewInvoiceDetails'|translate}}</span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'UPLOAD.ReviewInvoice'|translate}}</h5>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+
+        <!-- Card Body -->
+        <div class="card-body">
+
+            <tabset #staticTabs>
+                <!-- Tab_1_1 -->
+                <tab heading="{{'MANAGESCHOOL.SchoolInformation'|translate}}">
+                    <div class="card-body">
+                        <!-- School Information  -->
+
+                        <h5>{{'MANAGESCHOOL.SchoolInformation' | translate}}</h5>
+                        <hr />
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for registration number -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.schoolRegNo}}</p>
+                            </div>
+
+                            <!-- label for school name -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.schoolName}}</p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for school type -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.schoolType}}</p>
+                            </div>
+
+                            <!-- label for no.of students -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.noOfStudents}}</p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for no.of teachers -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.noOfTeachers}}</p>
+                            </div>
+
+                            <!-- label for no.of teachers -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.educationalDistrict}}</p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                        <!-- /School Information  -->
+
+                        <!-- Contact Information -->
+
+                        <h5>{{'MANAGESCHOOL.ContactInformation' | translate}}</h5>
+                        <hr />
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for primary contact name -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.primaryName}}</p>
+                            </div>
+
+                            <!-- label for secondary contact name -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.secondaryName}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for primary contact number -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                            </div>
+
+                            <!-- label for secondary contact number -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.secondaryNumber}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for primary contact email -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                                | translate}}<span class="">:</span></label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.primaryEmail}}</p>
+                            </div>
+
+                            <!-- label for secondary contact email -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.contactsInfo?.secondaryEmail}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+                        <!-- /contact information -->
+
+
+                        <!-- Address Information -->
+
+                        <h5>{{'MANAGESCHOOL.AddressInformation' | translate}}</h5>
+                        <hr />
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Address line 1 -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.addressLine1}}</p>
+                            </div>
+
+                            <!-- label for address line 2 -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.addressLine2}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for locality -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                            </div>
+
+                            <!-- label for city -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City'
+                                |
+                                translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.city}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for district -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.district}}</p>
+                            </div>
+
+                            <!-- label for state -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p *ngIf="schoolInfo?.addressInfo?.state=='TN'">Tamil Nadu</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for country -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country'
+                                |
+                                translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>India</p>
+                            </div>
+
+                            <!-- label for pincode -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode'
+                                |
+                                translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <h5>{{'MANAGESCHOOL.SchoolImages' | translate }}</h5>
+                            <hr />
+                            <!-- row -->
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                            <th>{{"INVOICE.Attachments"|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of imagesList; index as i">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.fileType}}</td>
+                                            <td>{{data?.fileName}}</td>
+                                            <td class="text-center">
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="onSchoolTemplate(template, data?.attachmentId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                        class="far fa-eye"></i></a>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!imagesList?.length)">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-primary" (click)="onClickNext('SI')">
+                                            {{'COMMON.Continue'|translate}}
+                                        </button> &nbsp;
+
+                                        <button type="button" class="btn btn-danger"
+                                            [routerLink]="['/main/review-invoice']">
+                                            {{'COMMON.Cancel'|translate}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- /Tab_1_1 -->
+
+                <!-- Tab_1_2 -->
+                <tab heading="{{'REQUIREMENT.RequirementInformation'|translate}}">
+                    <div class="card-body">
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for consolidate reference -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.ConsolidateReference'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.consolidateRefInfo?.consolidateId}}</p>
+                            </div>
+
+                            <!-- label for submitted date -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.SubmittedDate'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{schoolInfo?.consolidateRefInfo?.createdDate|date:'dd/MM/yyyy'}}</p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for requirementId -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementId'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{requirementInfoById?.requirementId}}</p>
+                            </div>
+
+                            <!-- label for RequirementType -->
+                            <label
+                                class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementType'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{requirementInfoById?.requirementType=='NE'?'New':'maintenance'}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- label for AssetType -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetType'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{requirementInfoById?.assetType}}</p>
+                            </div>
+
+
+
+                            <!-- label for AssetName -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName'
+                                | translate}} :</label>
+                            <div class="col-md-3">
+                                <p>{{requirementInfoById?.assetName}}</p>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+
+
+                        <!-- row -->
+                        <div class="form-group row">
+
+                            <!-- label for Quantity -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Quantity'
+                                | translate}} :</label>
+                            <div class="form-inline col-md-3">
+                                <p>{{requirementInfoById?.quantity}}</p>
+                            </div>
+
+                            <!-- label for View Images -->
+                            <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.ViewImages'
+                                | translate}} :</label>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-info"
+                                    (click)="clickReqImages(template, requirementInfoById?.requirementId)">
+                                    {{'COMMON.ClickHeretoViewImages'|translate}}</button>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-primary" (click)="onClickNext('RI')">
+                                            {{'COMMON.Continue'|translate}}
+                                        </button>&nbsp;
+
+                                        <button type="button" class="btn btn-danger" (click)="onClickPrevoius('RI')">
+                                            {{'COMMON.Back'|translate}}
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </tab>
+                <!-- /Tab_1_2 -->
+
+                <!-- Tab_1_5 -->
+                <tab heading="{{'QUOTATION.PostImages'|translate}}">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <br />
+                            <table class="table datatable-basic table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                        <th>{{"INVOICE.Attachments"|translate}}</th>
+                                        <th>{{'COMMON.Action'|translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX" *ngFor="let data of preImages; index as i">
+                                        <td>{{i+1}}</td>
+                                        <td>{{data.fileType}}</td>
+                                        <td>{{data?.fileName}}</td>
+                                        <td class="text-center">
+                                            <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                (click)="clickPreImages(template,'PO', data?.attachmentId)"><i
+                                                    data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                    class="far fa-eye"></i></a>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <tr class="odd" *ngIf="(!preImages?.length)">
+                                        <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                {{'RECORDS.NoRecords'|translate}}</b>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-primary" (click)="onClickNext('PO')">
+                                            {{'COMMON.Continue'|translate}}
+                                        </button>&nbsp;
+
+                                        <button type="button" class="btn btn-danger" (click)="onClickPrevoius('PO')">
+                                            {{'COMMON.Back'|translate}}
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </tab>
+                <!-- /Tab_1_5 -->
+
+                <!-- Tab_1_6 -->
+                <tab heading="{{'INVOICE.ReviewInvoiceDetails'|translate}}">
+                    <div class="table-responsive">
+                        <br />
+
+                        <table class="table datatable-basic table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>{{'INVOICE.InvoiceId'|translate }}</td>
+                                    <th>{{"INVOICE.CompanyName"|translate}}</th>
+                                    <th>{{'INVOICE.InvoicePreparedBy'|translate}}</th>
+                                    <th>{{"INVOICE.ApprovedAmount"|translate}}</th>
+                                    <th>{{"INVOICE.CurrentInvoiceAmount"|translate}}</th>
+                                    <th>Paid Invoice Amount</th>
+                                    <th>{{'COMMON.Status'|translate}}</th>
+                                    <th>{{'COMMON.Action'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of invoiceList">
+                                    <td>{{data?.invoiceId}}</td>
+                                    <td>{{data?.companyName}}</td>
+                                    <td>{{data?.invoicePreparedBy}}</td>
+                                    <th>{{quotationInfoList[0]?.totalAmount}}</th>
+                                    <td>{{data?.invoiceAmount}}</td>
+                                    <td>{{invoiceTotalAmount}}</td>
+                                    <td *ngIf="invoiceStatus!='REJINV'"><span
+                                            class="badge badge-warning">{{data?.description}}</span></td>
+                                    <td *ngIf="invoiceStatus=='REJINV'"><span
+                                            class="badge badge-danger">{{data?.description}}</span></td>
+                                    <td class="text-center">
+                                        <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                            (click)="addInvoice(invoiceTemplate, data?.invoiceId)"
+                                            *ngIf="data?.invoiceStatus!='ADMREC'"><i data-toggle="modal"
+                                                data-toggle="tooltip" tooltip="Action" class="far fa-edit"></i></a>
+
+                                        <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                            (click)="uploadReceipt(data?.invoiceId)"
+                                            *ngIf="data?.invoiceStatus=='ADMREC'"><i data-toggle="modal"
+                                                data-toggle="tooltip" tooltip="Action" class="far fa-edit"></i></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="odd" *ngIf="(!invoiceList?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-actions fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary"
+                                        [routerLink]="['/main/review-invoice']">
+                                        {{'COMMON.GoBackToHome'|translate}}
+                                    </button>&nbsp;
+
+                                    <button type="button" class="btn btn-danger" (click)="onClickPrevoius('II')">
+                                        {{'COMMON.Back'|translate}}
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </tab>
+
+                <!-- /Tab_1_6 -->
+            </tabset>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<!-- view Images -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title" *ngIf="isSchool">{{'MANAGESCHOOL.ViewSchoolImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isReq">{{'REQUIREMENT.ViewRequirementImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isPreImg">{{'QUOTATION.ViewPreImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isPostImg">{{'QUOTATION.ViewPostImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isInvoiceImg">{{'INVOICE.ViewInvoiceImages'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="quotateModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal">
+        <div class="modal-body">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngIf="base64Image">
+                        <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                    </div>
+                </div>
+
+                <div class="carousel-inner" *ngIf="!base64Image">
+                    <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="quotateModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /form -->
+</ng-template>
+
+<!-- /view Images -->
+
+
+<!-- open modal for View Invoice -->
+<div bsModal #invoiceTemplate="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'UPLOAD.ViewInvoices'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="invoiceModalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal" (ngSubmit)="onSubmitInvoiceForm(invoiceForm,ApprovalInvoiceData)"
+                #invoiceForm="ngForm">
+                <div class="modal-body roll">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for company name -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.CompanyName'|translate}}
+                            <span class="">:</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.companyName}}</p>
+                        </div>
+
+                        <!-- label for quotation date -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.InvoiceDate'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.invoiceDate|date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for address -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Address'|translate}}
+                            <span class="">:</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.address}}</p>
+                        </div>
+                        <!-- label for quantity -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Quantity'|translate}}<span
+                                class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quantity}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for street -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Street'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.street}}</p>
+                        </div>
+
+                        <!-- label for unit price -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.UnitPrice'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedUnitPrice}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for city -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.City'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.city}}</p>
+                        </div>
+
+                        <!-- label for tax -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Tax'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedTax}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for pincode -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Pincode'|translate}}<span class="required"> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.pincode}}</p>
+                        </div>
+                        <!-- label for shipping cost -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.ShippingCost'|translate}}<span
+                                class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedShippingCost}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for phone number -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PhoneNumber'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.phoneNumber}}</p>
+                        </div>
+                        <!-- label for total amount -->
+                        <label
+                            class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.TotalAmount'|translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.quotedAmount}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for comments -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Comment/SpecialInstruction'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.comments}}</p>
+                        </div>
+                        <!-- label for Bank Name -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.BankName'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.bankName?.description}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for comments -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountType'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.accountType?.description}}</p>
+                        </div>
+                        <!-- label for vendor code -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.VendorCode'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.vendorCode}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for invoice prepared by -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.InvoicePreparedBy'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.invoicePreparedBy}}</p>
+                        </div>
+                        <!-- label for IFSC code -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.IFSCCode'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.ifscCode}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for work status details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.WorkStatus'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.workStatus?.description}}</p>
+                        </div>
+                        <!-- label for payment mode details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PaymentMode'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.paymentMode?.description}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Discount details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.DiscountDetails'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.discountDetails}}</p>
+                        </div>
+
+                        <!-- label for Account details -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountNumber'|translate}} <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.accountNumber}}</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for item description -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.ItemDescription'|translate}}<span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <p>{{invoiceData?.itemDescription}}</p>
+                        </div>
+
+                        <!-- label for warranty -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.ViewInvoiceImages'|translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <button type="button" data-toggle="modal" class="btn btn-info"
+                                (click)="clickPreImages(template, 'II', invoiceData?.invoiceId)">
+                                {{'COMMON.ClickHere'|translate}}</button>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+
+                    <!-- row -->
+                    <div class="form-group row" *ngIf="invoiceData?.invoiceStatus =='PAYINI'">
+                        <!-- label for  Update Payment Info -->
+                        <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICEPAYMENT.UpdatePaymentInfo'|translate}}
+                            <span class=""> :</span></label>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <button type="button" data-toggle="modal" class="btn btn-info"
+                                (click)="uploadPaymentInfo(paymentTemplate)">
+                                Update Payment Info</button>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                    <h5>{{'COMMON.ApprovalHistory' | translate }}</h5>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tempTable">
+                            <thead>
+                                <tr>
+                                    <th>{{'COMMON.ActionBy' | translate }}</th>
+                                    <th>{{'COMMON.ActionDate&Time' | translate }}</th>
+                                    <th>{{'MANAGEUSER.Role'|translate}}</th>
+                                    <th>{{'COMMON.Status' | translate }}</th>
+                                    <th>{{'COMMON.Remarks' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let data of approvalHistDtlsDTOs">
+                                    <td>{{data?.actionBy}}</td>
+                                    <td>{{data?.actionDate |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{data?.role}}</td>
+                                    <td *ngIf="data?.status =='APR'"><span class="badge badge-success">Approved</span>
+                                    </td>
+                                    <td *ngIf="data?.status =='REJ'"><span class="badge badge-danger">Rejected</span>
+                                    </td>
+                                    <td>{{data?.remarks}}</td>
+
+                                </tr>
+                                <tr class="odd" *ngIf="(!approvalHistDtlsDTOs?.length)">
+                                    <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                            {{'RECORDS.NoRecords'|translate}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div *ngIf="invoiceData?.invoiceStatus !='PAYINI'">
+                        <h5>{{'MANAGESCHOOL.Approval' | translate }}</h5>
+                        <hr />
+                        <div class="form-group row">
+                            <label
+                                class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}
+                                <span class="required"> *</span></label>
+                            <div class="form-inline col-md-3" style="margin-bottom: 9px;">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio3" #status="ngModel"
+                                        [(ngModel)]="ApprovalInvoiceData.status" value="APR" name="customRadio"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio3">{{'COMMON.Approve' |
+                                        translate
+                                        }}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadio4" #status="ngModel"
+                                        [(ngModel)]="ApprovalInvoiceData.status" value="REJ" name="customRadio"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio4">{{'COMMON.Reject' | translate
+                                        }}</label>
+                                </div>
+
+                            </div>
+                            <div class="error-block" *ngIf="(status.touched && status.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+                        <div class="form-group row">
+
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'COMMON.Remarks'
+                                | translate}}<span class="required"> *</span></label>
+                            <div class="col-lg-4 col-sm-12 col-form-label">
+                                <app-nspl-multiline-text [data]="ApprovalInvoiceData.remarks"
+                                    [(ngModel)]="ApprovalInvoiceData.remarks" [required]="true"
+                                    placeholder="{{'COMMON.EnterRemarks'|translate}}" name="remarks">
+                                </app-nspl-multiline-text>
+
+                            </div>
+                        </div>
+                        <!-- row -->
+                        <div class="form-group row">
+                            <!-- Label for Terms and Conditions -->
+                            <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and
+                                Conditions:</label>
+                            <div class="col-lg-7 col-sm-12 col-form-label">
+                                <p>I hereby agree & confirm that, I have taken enough effort to double check the
+                                    presented
+                                    details here
+                                    and taking decisions without any favoritism to anyone involved for this activity.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                        *ngIf="invoiceData?.invoiceStatus !='PAYINI'"
+                        [disabled]="invoiceForm.invalid || isClickedOnce">{{'COMMON.Submit'|translate}}</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- open modal for View Invoice -->
+<div bsModal #paymentTemplate="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> {{'INVOICEPAYMENT.UpdatePaymentInfo'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="uploadPayRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal" (ngSubmit)="submitUploadPayForm(paymentInfoForm,uploadPaymentData, success)"
+                #paymentInfoForm="ngForm">
+                <div class="modal-body ">
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for status -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'COMMON.Status'|translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                                name="uploadImage" [isErrorMsg]="false" [maxlength]="'1'" [accept]="'xls, .xlsx'"
+                                [allowedExtensions]="['.xlsx', '.xls']">
+                            </app-nspl-file-browse>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                        [disabled]="paymentInfoForm.invalid">{{'COMMON.Submit'|translate}}</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="uploadPayRef.hide()">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="receipt">
+    <app-upload-receipt [invoiceId]="invoiceId" (invoiceStatus)="getInvoice($event)"></app-upload-receipt>
+</div>
+
+
+<ng-template #success>
+    <div class="centered">
+        <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+        <div class="content">
+            <h3>{{invoiceResponse?.apiStatusDesc}}</h3>
+            <div class="modal-body">
+                <p class="text-center">
+                    Total Records are: <b>{{invoiceResponse?.id}}</b><br />
+                    Success Records are: <b>{{invoiceResponse?.successCount}}</b><br />
+                    Failure Records are : <b>{{invoiceResponse?.failureCount}}</b><br />
+                    <span *ngIf="invoiceResponse.refNo!=null">{{invoiceResponse.refNo}}</span>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal" (click)="closeModel()">Ok</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,1314 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{'COMMON.Home' |
+                    translate}}</span> - {{'UPLOAD.UploadQuotation&UploadInvoice' | translate }} </h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" class="breadcrumb-item" [routerLink]="['/main/dashboard']"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home' | translate }}</a>
+                <a class="breadcrumb-item" href="javascript:;"
+                    [routerLink]="['/main/pending-workflow']">{{'SIDEBAR.ManageRequirement' | translate }}
+                </a>
+                <span class="breadcrumb-item active">{{'UPLOAD.UploadQuotation&UploadInvoice' | translate }}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+
+
+
+<div class="content">
+
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{'UPLOAD.UploadQuotation&UploadInvoice' | translate }}</h5>
+                </div>
+                <div class="text-right">
+
+                </div>
+            </div>
+        </div>
+        <form action="#" class="form-horizontal">
+
+            <div class="card-body">
+                <tabset #staticTabs>
+                    <!-- Tab_1_1 -->
+                    <tab heading="{{'MANAGESCHOOL.SchoolInformation'|translate}}">
+                        <div class="card-body">
+                            <!-- School Information  -->
+
+                            <h5>{{'MANAGESCHOOL.SchoolInformation' | translate}}</h5>
+                            <hr />
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for registration number -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.schoolRegNo}}</p>
+                                </div>
+
+                                <!-- label for school name -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.schoolName}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for school type -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.schoolType}}</p>
+                                </div>
+
+                                <!-- label for no.of students -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.noOfStudents}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for no.of teachers -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.noOfTeachers}}</p>
+                                </div>
+
+                                <!-- label for no.of teachers -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.educationalDistrict}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <!-- /School Information  -->
+
+                            <!-- Contact Information -->
+
+                            <h5>{{'MANAGESCHOOL.ContactInformation' | translate}}</h5>
+                            <hr />
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for primary contact name -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.primaryName}}</p>
+                                </div>
+
+                                <!-- label for secondary contact name -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.secondaryName}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for primary contact number -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                                </div>
+
+                                <!-- label for secondary contact number -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.secondaryNumber}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for primary contact email -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                                    | translate}}<span class="required">:</span></label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.primaryEmail}}</p>
+                                </div>
+
+                                <!-- label for secondary contact email -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.contactsInfo?.secondaryEmail}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+                            <!-- /contact information -->
+
+
+                            <!-- Address Information -->
+
+                            <h5>{{'MANAGESCHOOL.AddressInformation' | translate}}</h5>
+                            <hr />
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for Address line 1 -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.addressLine1}}</p>
+                                </div>
+
+                                <!-- label for address line 2 -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.addressLine2}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for locality -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                                </div>
+
+                                <!-- label for city -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.city}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for district -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.district}}</p>
+                                </div>
+
+                                <!-- label for state -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p *ngIf="schoolInfo?.addressInfo?.state=='TN'">Tamil Nadu</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for country -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>India</p>
+                                </div>
+
+                                <!-- label for pincode -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for country -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedBy' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.createdBy}}</p>
+                                </div>
+
+                                <!-- label for Message To School Trust -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600"
+                                    *ngIf="schoolInfo?.comments">
+                                    {{'MANAGESCHOOL.MessageToTrust' | translate}} :</label>
+                                <div class="col-md-3" *ngIf="schoolInfo?.comments">
+                                    <p>{{schoolInfo?.comments}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <h5>{{'MANAGESCHOOL.SchoolImages' | translate }}</h5>
+                                <hr />
+                                <!-- row -->
+                                <div class="table-responsive">
+                                    <br />
+                                    <table class="table datatable-basic table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                                <th>{{"INVOICE.Attachments"|translate}}</th>
+                                                <th>{{'COMMON.Action'|translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX" *ngFor="let data of imagesList; index as i">
+                                                <td>{{i+1}}</td>
+                                                <td>{{data.fileType}}</td>
+                                                <td>{{data?.fileName}}</td>
+                                                <td class="text-center">
+                                                    <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                        (click)="onSchoolTemplate(template, data?.attachmentId)"><i
+                                                            data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                            class="far fa-eye"></i></a>
+                                                </td>
+
+
+                                            </tr>
+
+                                            <tr class="odd" *ngIf="(!imagesList?.length)  ">
+                                                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                        {{'RECORDS.NoRecords'|translate}}</b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('SI')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button> &nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                [routerLink]="['/main/pending-workflow']">
+                                                {{'COMMON.Cancel'|translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_1 -->
+
+                    <!-- Tab_1_2 -->
+                    <tab heading="{{'REQUIREMENT.RequirementInformation'|translate}}">
+                        <div class="card-body">
+                            <!-- row -->
+                            <div class="form-group row">
+                                <!-- label for consolidate reference -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Noofrequirements'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.consolidateRefInfo?.noOfRequirements}}</p>
+                                </div>
+
+                                <!-- label for submitted date -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.SubmittedDate'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{schoolInfo?.consolidateRefInfo?.createdDate|date:'dd/MM/yyyy'}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for requirementId -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementId'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.requirementId}}</p>
+                                </div>
+
+                                <!-- label for RequirementType -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementType'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.requirementType=='NE'?'New':'maintenance'}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for AssetType -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetType'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.assetType}}</p>
+                                </div>
+
+
+                                <!-- label for AssetName -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.assetName}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for Quantity -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Quantity' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.quantity}}</p>
+                                </div>
+
+                                <!-- label for View Images -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.ViewImages'
+                                    |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info"
+                                        (click)="clickReqImages(template, requirementInfoById?.requirementId)">
+                                        {{'COMMON.ClickHeretoViewImages'|translate}}</button>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+
+                            <div class="form-group row" *ngIf="showInvoice">
+
+                                <!-- label for work order images -->
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">View work order images
+                                    :</label>
+                                <div class="col-md-3">
+                                    <button type="button" (click)="clickWorkOrder(workOrder)"
+                                        class="btn btn-primary">Click
+                                        here</button>
+                                </div>
+                            </div>
+
+                            <!-- /row -->
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('RI')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('SI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_2 -->
+
+                    <!-- Tab_1_3 -->
+                    <tab heading="{{'QUOTATION.PreImages'|translate}}">
+                        <div class="card-body">
+                            <div class="float-right" *ngIf="preImages.length<5">
+                                <button style="margin-left: 87px;" type="button" class="btn btn-success"
+                                    (click)="addPreImages(images, 'ADD', 0)" data-toggle="modal"
+                                    *ngIf="requirementInfoById?.reqStatus=='VOLACP'">{{'COMMON.AddPreImages' |
+                                    translate}}</button>
+
+                            </div>
+
+
+                            <div *ngIf="requirementInfoById?.reqStatus=='VOLACP'">
+                                <p><b>Note: </b><span>Minimum 2 Pre-Images are required</span></p>
+                            </div>
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                            <th>{{"INVOICE.Attachments"|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of preImages; index as i">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.fileType}}</td>
+                                            <td>{{data?.fileName}}</td>
+                                            <td class="text-center">
+                                                <a href="javascript:;" class="list-icons-item"
+                                                    [hidden]="requirementInfoById?.reqStatus!='VOLACP' && requirementInfoById?.reqStatus!='REJQUO'"
+                                                    (click)="addPreImages(images, 'EDIT', data?.attachmentId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                        class="far fa-edit"></i></a>
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="clickPreImages(template, 'VIEW', data?.attachmentId, 'PI')"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                        class="far fa-eye"></i></a>
+
+                                                <a class="list-icons-item" href="javascript:;"
+                                                    [hidden]="requirementInfoById?.reqStatus!='VOLACP' && requirementInfoById?.reqStatus!='REJQUO'"
+                                                    (click)="deletePreImages(data?.attachmentId, 'PI')">
+                                                    <i data-toggle="tooltip" tooltip="Delete"
+                                                        class="far fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!preImages?.length)">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('PI')"
+                                                [hidden]="showInvoice" [disabled]="clickPreImagesButton">
+                                                {{'APPROVALWORKFLOW.Save&Continue'|translate}}
+                                            </button>&nbsp;
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('PI')"
+                                                [hidden]="!showInvoice" [disabled]="clickPreImagesButton">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('RI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_3 -->
+
+                    <!-- Tab_1_4 -->
+                    <tab heading="{{'UPLOAD.UploadQuotation'|translate}}">
+
+                        <div class="card-body">
+                            <div class="float-right" *ngIf="quotationInfoList.length<4">
+                                <button type="button" style="margin-left: 87px;" class="btn btn-success"
+                                    (click)="addquotates('ADD', 0)" data-toggle="modal"
+                                    [hidden]="requirementInfoById?.reqStatus !='VOLACP' && requirementInfoById?.reqStatus !='ADMQUO' &&  requirementInfoById?.reqStatus !='REJQUO'">
+                                    {{'COMMON.AddQuotations' | translate}}</button>
+
+                            </div>
+
+                            <div
+                                [hidden]="requirementInfoById?.reqStatus !='VOLACP' && requirementInfoById?.reqStatus !='ADMQUO' &&  requirementInfoById?.reqStatus !='REJQUO'">
+                                <p><b>Note: </b><span> Minimum 2 Quotations are required</span></p>
+                            </div>
+                            <div class="table-responsive">
+                                <br />
+                                <table id="quotationTableList" class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{"QUOTATION.CompanyName"|translate}}</th>
+                                            <th>{{"QUOTATION.Address"|translate}}</th>
+                                            <th>{{'QUOTATION.PhoneNumber' |translate}}</th>
+                                            <th>{{'UPLOAD.QuotationBy'|translate}}</th>
+                                            <th>{{'REQUIREMENT.TotalAmount'|translate}}</th>
+                                            <th>{{'COMMON.Status'|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of quotationInfoList">
+                                            <td>{{data?.companyName}}</td>
+                                            <td>{{data?.address}}</td>
+                                            <td>{{data?.phoneNumber}}</td>
+                                            <td>{{data?.quotationPreparedBy}}</td>
+                                            <td>{{data?.totalAmount|number : '1.2-2'}}</td>
+                                            <!-- status -->
+                                            <td *ngIf="data?.quotateStatus!='REJQUO'"> <span
+                                                    class="badge badge-warning">
+                                                    {{data?.description}} </span> </td>
+                                            <td *ngIf="data?.quotateStatus=='REJQUO'"> <span class="badge badge-danger">
+                                                    {{data?.description}}
+                                                </span> </td>
+                                            <!-- actions -->
+                                            <td class="text-center">
+                                                <a href="javascript:;" class="list-icons-item"
+                                                    *ngIf="data?.quotateStatus=='REJQUO'"
+                                                    (click)="addquotates('EDIT', data?.quotationId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                        class="far fa-edit"></i></a>
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="viewquotates(data?.quotationId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a>
+
+                                                <a class="list-icons-item" href="javascript:;"
+                                                    (click)="deleteQuotate(data?.quotationId)">
+                                                    <i data-toggle="tooltip" tooltip="Delete"
+                                                        *ngIf="(data?.quotateStatus=='ADMQUO' || data?.quotateStatus=='REJQUO') && ( requirementInfoById?.reqStatus=='VOLACP'||requirementInfoById?.reqStatus=='REJQUO')"
+                                                        class="far fa-trash-alt"></i></a>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr class="odd" *ngIf="(!quotationInfoList?.length)  ">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- buttons -->
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('QI')"
+                                                [hidden]="showInvoice" [disabled]="clickQuotationButton">
+                                                {{'COMMON.Submit'|translate}}
+                                            </button>&nbsp;
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('QI')"
+                                                [hidden]="!showInvoice" [disabled]="clickQuotationButton">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('PI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_4 -->
+                    <!-- Tab_1_5 -->
+                    <tab heading="{{'QUOTATION.PostImages'|translate}}" *ngIf="showInvoice">
+                        <div class="card-body">
+
+                            <div class="float-right">
+                                <button style="margin-left: 87px;" type=" button" class="btn btn-success"
+                                    (click)="addPreImages(images, 'ADD', 0)"
+                                    data-toggle="modal">{{'COMMON.AddPostImages' |
+                                    translate}}</button>
+
+                            </div>
+                            <div>
+                                <p><b>Note: </b><span>Minimum 2 post images are required for each invoice</span></p>
+                            </div>
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                            <th>{{"INVOICE.Attachments"|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of postImages; index as i">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.fileType}}</td>
+                                            <td>{{data?.fileName}}</td>
+                                            <td class="text-center">
+                                                <a href="javascript:;" class="list-icons-item"
+                                                    *ngIf="requirementInfoById?.reqStatus=='ORDINI' "
+                                                    (click)="addPreImages(images, 'EDIT', data?.attachmentId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="Edit"
+                                                        class="far fa-edit"></i></a>
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="clickPreImages(template, 'VIEW', data?.attachmentId, 'PO')"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                        class="far fa-eye"></i></a>
+
+                                                <a class="list-icons-item" href="javascript:;"
+                                                    *ngIf="requirementInfoById?.reqStatus=='ORDINI' "
+                                                    (click)="deletePreImages(data?.attachmentId, 'PO')">
+                                                    <i data-toggle="tooltip" tooltip="Delete"
+                                                        class="far fa-trash-alt"></i></a>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!postImages?.length)  ">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('PO')"
+                                                [disabled]="clickPostImagesButton">
+                                                {{'APPROVALWORKFLOW.Save&Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('QI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_5 -->
+
+                    <!-- Tab_1_6 -->
+                    <tab heading="{{'INVOICE.UploadInvoiceDetails'|translate}}" *ngIf="showInvoice">
+                        <div class="card-body">
+
+                            <div class="float-right" *ngIf="invoiceTotalAmount!=0 && !workStatus">
+                                <button style="margin-left: 121px;" type="button" class="btn btn-success"
+                                    (click)="addInvoice('ADD', 0)" data-toggle="modal">{{'INVOICE.AddInvoice' |
+                                    translate}} </button>
+
+                            </div>
+                            <div>
+                                <p><b>Note: </b><span>Minimum 2 post images are required for each invoice</span></p>
+                            </div>
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{"INVOICE.InvoiceId" |translate}}</th>
+                                            <th>{{"INVOICE.CompanyName"|translate}}</th>
+                                            <th>{{'INVOICE.InvoicePreparedBy'|translate}}</th>
+                                            <th>{{"INVOICE.ApprovedAmount"|translate}}</th>
+                                            <th>{{'INVOICE.CurrentInvoiceAmount'|translate}}</th>
+                                            <th>{{'COMMON.Status'|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of invoiceList">
+                                            <td>{{data?.invoiceId}}</td>
+                                            <td>{{data?.companyName}}</td>
+                                            <td>{{data?.invoicePreparedBy}}</td>
+                                            <td>{{approvedAmount?.totalAmount}}</td>
+                                            <td>{{data?.invoiceAmount}}</td>
+                                            <td *ngIf="data?.invoiceStatus!='REJINV' && data?.invoiceStatus!='RECREJ' && data?.invoiceStatus!='APR'
+                                                 && data?.invoiceStatus!='APRREC' &&data?.invoiceStatus !='PAYFAL'">
+                                                <span class="badge badge-warning">{{data?.description}}</span>
+                                            </td>
+                                            <td
+                                                *ngIf="data?.invoiceStatus=='REJINV' || data?.invoiceStatus=='RECREJ' || data?.invoiceStatus =='PAYFAL'">
+                                                <span class="badge badge-danger">{{data?.description}}</span>
+                                            </td>
+                                            <td *ngIf="data?.invoiceStatus=='APR' || data?.invoiceStatus=='APRREC'">
+                                                <span class="badge badge-success">{{data?.description}}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="javascript:;" class="list-icons-item"
+                                                    *ngIf="(data?.invoiceStatus =='REJINV')&&(requirementInfoById?.reqStatus!='ADMINV')"
+                                                    (click)="addInvoice('EDIT', data?.invoiceId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="Edit"
+                                                        class="far fa-edit"></i></a>
+
+                                                <a href="javascript:;" class="list-icons-item"
+                                                    *ngIf="data?.invoiceStatus =='PAYCMP' || data?.invoiceStatus=='RECREJ' "
+                                                    (click)="uploadReceipt(data?.invoiceId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="Upload Receipt"
+                                                        class="fas fa-file"></i></a>
+
+                                                <!-- <a href="javascript:;" class="list-icons-item"
+                                                    *ngIf="data?.invoiceStatus =='APR'"
+                                                    (click)="addPayment(data?.invoiceId, data?.invoiceAmount)"><i
+                                                        data-toggle="modal" data-toggle="tooltip"
+                                                        tooltip="Upload Payment Details"
+                                                        class="fa fa-rupee-sign"></i></a> -->
+
+                                                <!-- <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="viewInvoice(data?.invoiceId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a> -->
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="viewInvoice(data?.invoiceId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a>
+
+                                                <!-- <a class="list-icons-item" href="javascript:;"
+                                                    (click)="deleteInvoice(data?.invoiceId)"
+                                                    *ngIf="(data?.invoiceStatus=='ADMINV' ||  data?.invoiceStatus =='RECINV')&&requirementInfoById?.reqStatus!='ADMINV'">
+                                                    <i data-toggle="tooltip" tooltip="Delete"
+                                                        class="far fa-trash-alt"></i></a> -->
+                                            </td>
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!invoiceList?.length)">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- buttons -->
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary"
+                                                [routerLink]="['/main/pending-workflow']">
+                                                {{'COMMON.GoBackToHome'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('PO')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-warning" (click)="onClickNext('II')"
+                                                [disabled]="clickInvoiceButton">
+                                                {{'COMMON.Next'|translate}}
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_6 -->
+
+                    <!-- Tab_1_7 -->
+                    <tab heading="{{'INVOICE.CompletionofRequirements'|translate}}" *ngIf="showInvoice">
+                        <div class="card-body">
+
+                            <form class="form-horizontal"
+                                (ngSubmit)="onCompletion(requirementForm,requirementCompletion)"
+                                #requirementForm="ngForm">
+
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- label for choose quotation -->
+                                    <div class="col-md-1"></div>
+                                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                        {{'INVOICE.DateofCompletion'|translate}} <span class="required">*</span></label>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 files">
+                                        <input class="form-control" type="text" name="dateOfCompletion"
+                                            id="dateOfCompletion" placeholder="{{'INVOICE.DateofCompletion'|translate}}"
+                                            class="form-control" bsDatepicker [bsConfig]="dateOfCompl"
+                                            autocomplete="off" [(ngModel)]="requirementCompletion.dateOfCompletion"
+                                            [required]="true" #dateOfCompletion="ngModel">
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- label for choose quotation -->
+                                    <div class="col-md-1"></div>
+
+                                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                        {{'INVOICE.Completionofpayment'|translate}}<span
+                                            class="required">*</span></label>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 files">
+                                        <ng-select [items]="rangeList" bindLabel="name" bindValue="id"
+                                            placeholder="{{'COMMON.Status'|translate}}"
+                                            [(ngModel)]="requirementCompletion.completionOfPayment"
+                                            [ngModelOptions]="{standalone: true}" [clearable]='false'
+                                            [searchable]='false' [dropdownPosition]="'down'" required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- label for choose quotation -->
+                                    <div class="col-md-1"></div>
+
+                                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                        {{'COMMON.Remarks'|translate}}<span class="required">*</span></label>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 files">
+                                        <app-nspl-multiline-text [data]="requirementCompletion.remarks"
+                                            [(ngModel)]="requirementCompletion.remarks" [required]="true"
+                                            placeholder="{{'COMMON.Remarks'|translate}}" name="remarks" [maxlength]="255">
+                                        </app-nspl-multiline-text>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                                <div class="form-actions fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="float-right">
+                                                <button type="submit"
+                                                    [disabled]="requirementForm.invalid || clickCompletionOfReq"
+                                                    class="btn btn-primary">
+                                                    {{'COMMON.Submit'|translate}}
+                                                </button>&nbsp;
+
+                                                <button type="button" class="btn btn-danger"
+                                                    (click)="onClickPrevoius('CR')">
+                                                    {{'COMMON.Back'|translate}}
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+                            <!-- buttons -->
+
+
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_7 -->
+                </tabset>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title" *ngIf="isSchool">{{'MANAGESCHOOL.ViewSchoolImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isReq">{{'REQUIREMENT.ViewRequirementImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isPreImg">{{'QUOTATION.ViewPreImages'|translate}}</h4>
+        <h4 class="modal-title" *ngIf="isPostImg">{{'QUOTATION.ViewPostImages'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="quotateModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal">
+        <div class="modal-body">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngIf="base64Image">
+                        <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                    </div>
+                </div>
+
+                <div class="carousel-inner" *ngIf="!base64Image">
+                    <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="quotateModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /form -->
+</ng-template>
+
+<ng-template #images>
+
+    <div class="modal-header">
+        <h4 *ngIf="requirementInfoById?.reqStatus !='ORDINI'" class="modal-title">{{'QUOTATION.PreImages'|translate}}
+        </h4>
+        <h4 *ngIf="requirementInfoById?.reqStatus =='ORDINI'" class="modal-title">{{'QUOTATION.PostImages'|translate}}
+        </h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addModelRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal" #preImagesform="ngForm">
+        <div class="modal-body">
+            <!-- form group -->
+            <div class="form-group form-group-feedback form-group-feedback-left">
+                <!-- row -->
+                <div class="row">
+                    <!-- Upload -->
+                    <label *ngIf="requirementInfoById?.reqStatus !='ORDINI'"
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'QUOTATION.UploadPreImages'|translate}}<span
+                            class="required"> *</span></label>
+                    <div *ngIf="requirementInfoById?.reqStatus !='ORDINI'" class="col-lg-9 col-md-12 col-sm-12">
+                        <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                            name="uploadImage" [isErrorMsg]="false" [maxlength]="'1'"
+                            [accept]="'image/png, image/jpg, image/jpeg'"
+                            [allowedExtensions]="['.png', '.jpg', '.jpeg']">
+                        </app-nspl-file-browse>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="row">
+                    <!-- Upload -->
+                    <label *ngIf="requirementInfoById?.reqStatus =='ORDINI'"
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'INVOICE.UploadPostImages'|translate}}<span
+                            class="required"> *</span></label>
+                    <div *ngIf="requirementInfoById?.reqStatus =='ORDINI'" class="col-lg-9 col-md-12 col-sm-12">
+                        <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                            name="uploadImage" [isErrorMsg]="false" [maxlength]="'1'"
+                            [accept]="'image/png, image/jpg, image/jpeg'"
+                            [allowedExtensions]="['.png', '.jpg', '.jpeg']">
+                        </app-nspl-file-browse>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /form group -->
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" [disabled]="isClickedOnce || uploadImage==null || this.uploadImage[0] == undefined"
+                id="submit-button" class="btn btn-primary"
+                (click)="uploadPreImages(requirementInfoById?.requirementId)">
+                {{'COMMON.Submit'|translate}}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="addModelRef.hide()">{{'COMMON.Cancel' | translate}}</button>
+        </div>
+    </form>
+    <!-- /form -->
+
+</ng-template>
+
+
+
+<!-- open modal for add quotations -->
+<div *ngIf="addQuotate">
+    <app-quotation-details [quotationId]="quotationId" [quotateType]="quotateType" [requirementId]="requirementId"
+        (modalStatus)="closeQuotation($event)"></app-quotation-details>
+</div>
+
+<!-- open modal for view quotations -->
+<div *ngIf="isViewQuotation">
+    <app-view-quotation [quotationId]="quotationId" (modalStatus)="closeQuotation($event)"></app-view-quotation>
+</div>
+
+
+
+<!-- open modal for add Invoice -->
+<div *ngIf="isInvoice">
+    <app-invoice-details [invoiceId]="invoiceId" (modalStatus)="closeInvoice($event)" [requirementId]="requirementId"
+        [invoiceType]="invoiceType" [quotationInfo]="approvedQuotation"
+        [invoiceTotalAmount]="invoiceTotalAmount"></app-invoice-details>
+</div>
+
+<!-- open modal for View Invoice -->
+<div *ngIf="isviewInvoice">
+    <app-invoice-view [invoiceId]="invoiceId" (modalStatus)="closeInvoice($event)"></app-invoice-view>
+</div>
+
+<div *ngIf="paymentInvoice">
+    <app-payment-details [invoiceId]="invoiceId" [paymentInvoiceAmount]="paymentInvoiceAmount"
+        (modalStatus)="closeInvoice($event)"></app-payment-details>
+</div>
+
+<div *ngIf="receipt">
+    <app-upload-receipt [invoiceId]="invoiceId" [requirementId]="requirementId" (invoiceStatus)="getInvoice($event)">
+    </app-upload-receipt>
+</div>
+
+
+<!-- Work Order Modal -->
+<div bsModal #workOrder="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" id="htmlData">
+                <!-- Quotation template -->
+                <div class="card-header bg-transparent header-elements-inline py-0">
+                    <h6 class="card-title py-3">{{'WORKORDER.WorkOrder'|translate}} {{'PAGINATION.to'|translate}}
+                        {{quodationWorkOrder?.companyName}}</h6>
+                    <div class="header-elements">
+                        <button type="button" class="btn btn-light btn-sm"><i class="icon-file-check mr-2"></i>
+                            {{"SENDMAIL.Save"|translate}}</button>
+                        <button type="button" class="btn btn-light btn-sm ml-3"><i class="icon-printer mr-2"></i>
+                            {{'SENDMAIL.Print'|translate}}</button>
+                    </div>
+                </div>
+                <div id="Quotation">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span class="text-muted">{{'QUOTATION.QuotationFrom'|translate}} :</span>
+
+                                <div class="mb-4">
+
+                                    <ul class="list list-unstyled mb-0">
+                                        <h5 class="my-2">Putholi Project</h5>
+                                        <li>{{schoolInfo?.addressInfo?.addressLine1}}</li>
+                                        <li>{{schoolInfo?.addressInfo?.addressLine2}}</li>
+                                        <li>{{schoolInfo?.contactsInfo?.primaryNumber}}</li>
+                                        <li><a href="javascript:;">{{schoolInfo?.contactsInfo?.primaryEmail}}</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="mb-4">
+                                    <div class="text-sm-right">
+                                        <h4 class="text-primary mb-2 mt-lg-2">{{'QUOTATION.Quotation'|translate}}
+                                        </h4>
+                                        <ul class="list list-unstyled mb-0">
+                                            <li>{{'QUOTATION.ExpectedStartDate'|translate}}: <span
+                                                    class="font-weight-semibold">{{quodationWorkOrder?.quotationDate|
+                                                    date:'dd/MM/yyyy'}}</span>
+                                            </li>
+                                            <li>{{'QUOTATION.ExpectedEndDate'|translate}}: <span
+                                                    class="font-weight-semibold">{{quodationWorkOrder?.quotationValidDate
+                                                    |
+                                                    date:'dd/MM/yyyy'}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-lg-flex flex-lg-wrap">
+                            <div class="mb-4 mb-lg-2">
+                                <span class="text-muted">{{'QUOTATION.QuotationTo'|translate}}:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <h5 class="my-2">{{quodationWorkOrder?.companyName}}</h5>
+                                    </li>
+                                    <li>{{quodationWorkOrder?.address}}</li>
+                                    <li>{{quodationWorkOrder?.city}}</li>
+                                    <li>{{quodationWorkOrder?.pincode}}</li>
+                                    <li>{{quodationWorkOrder?.phoneNumber}}</li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{'REQUIREMENT.Requirement'|translate}}</th>
+                                    <th>{{'QUOTATION.Quantity'|translate}}</th>
+                                    <th>{{'QUOTATION.Unit'|translate}}</th>
+                                    <th>{{'QUOTATION.SubmittedDate'|translate}}</th>
+                                    <th>{{'QUOTATION.Description'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <!-- <h6 class="mb-0">Create UI design model</h6> -->
+                                        <span class="text-muted">{{requirementInfoById?.assetName}}</span>
+                                    </td>
+                                    <td>{{requirementInfoById?.quantity}}</td>
+                                    <td>{{schoolInfo?.consolidateRefInfo?.noOfRequirements}}</td>
+                                    <td><span
+                                            class="font-weight-semibold">{{requirementInfoById?.createdDate|date:'dd/MM/yyyy'}}</span>
+                                    </td>
+                                    <td>{{quodationWorkOrder?.itemDescription}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-lg-flex flex-lg-wrap">
+                            <div class="pt-2 mb-3">
+                                <h5 class="mb-3">{{'QUOTATION.Termsandconditions'|translate}}</h5>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" [disabled]="true"
+                                        placeholder="{{'QUOTATION.Termsandconditions'|translate}}">
+                                </div>
+
+                                <ul class="list-unstyled text-muted">
+                                    <li>{{'QUOTATION.VolunteerName'|translate}}: {{schoolInfo?.volunteerName}}</li>
+                                    <li>{{'QUOTATION.ContactNumber'|translate}}: {{userData?.mobileNumber}}</li>
+                                    <li>{{'QUOTATION.Email'|translate}}: {{userData?.emailId}}</li>
+                                </ul>
+                            </div>
+
+                            <div class="pt-2 mb-3 wmin-lg-400 ml-auto">
+                                <h6 class="mb-3">{{'QUOTATION.AmountDue'|translate}}: {{quodationWorkOrder?.createdDate
+                                    | date:'dd/MM/yyyy' }}</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{'QUOTATION.Tax'|translate}}:</th>
+                                                <td class="text-right">Rs.{{tax}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'QUOTATION.Shipping'|translate}}:</th>
+                                                <td class="text-right">Rs.{{quodationWorkOrder?.shippingCost}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>{{'QUOTATION.Total'|translate}}:</th>
+                                                <td class="text-right text-primary">
+                                                    <h5 class="font-weight-semibold">
+                                                        Rs.{{quodationWorkOrder?.totalAmount}}
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="workOrder.hide()">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+
+            <!-- /Quotation template -->
+
+
+        </div>
+
+    </div>
+</div>
+<!-- /Work Order Modal -->

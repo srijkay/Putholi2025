@@ -1,0 +1,158 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                <span *ngIf="isNew"> {{'COMMON.AddNew'|translate}}</span><span *ngIf="!isNew">-{{'MODULE.Edit
+                    Module'|translate}}</span>
+            </h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{"COMMON.Home"|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/module/module-list']" class="breadcrumb-item">
+                    {{'MODULE.Module Management'|translate}}</a>
+
+                <span class="breadcrumb-item active" *ngIf="isNew">{{'COMMON.AddNew'|translate}}</span>
+                <span class="breadcrumb-item active" *ngIf="!isNew">{{'MODULE.Edit Module'|translate}}</span>
+
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="isNew">
+                        {{'COMMON.AddNew'|translate}}</h6>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="!isNew">
+                        {{'MODULE.Edit Module'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <!-- Form -->
+
+        <form class="form-horizontal" (ngSubmit)="submitForm(moduleDetailsForm,moduleDetails)"
+            #moduleDetailsForm="ngForm">
+
+            <div class="card-body">
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Code -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module
+                        Code'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="moduleDetails.moduleCode"
+                            placeholder="{{'MODULE.Module Code'|translate}}" [(ngModel)]="moduleDetails.moduleCode"
+                            [required]="true" name="code">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module
+                        Description'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="moduleDetails.moduleDesc"
+                            [(ngModel)]="moduleDetails.moduleDesc"
+                            placeholder="{{'MODULE.Module Description'|translate}}" [required]="true" name="moduleDesc">
+                        </app-nspl-multiline-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Description Others -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Module Description
+                        Other'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-multiline-text [data]="moduleDetails.moduleDescOther"
+                            [(ngModel)]="moduleDetails.moduleDescOther"
+                            placeholder="{{'MODULE.Module Description Other'|translate}}" [required]="true"
+                            name="moduleDescOther">
+                        </app-nspl-multiline-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Order Number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MODULE.Order
+                        Number'|translate}}<span class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <app-nspl-text [data]="moduleDetails.orderNo" placeholder="{{'MODULE.Order Number'|translate}}"
+                            [(ngModel)]="moduleDetails.orderNo" [required]="true" name="orderNo">
+                        </app-nspl-text>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- Status -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}<span
+                            class="required"> *</span></label>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <ng-select name="active" [items]="statusDetails" class="chosen-select" bindLabel="name"
+                            bindValue="code" [(ngModel)]="moduleDetails.active" #active="ngModel" [clearable]='true'
+                            [searchable]='false' [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}" required>
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button *ngIf="isNew" type="submit" [disabled]="moduleDetailsForm.invalid"
+                    class="btn btn-primary">{{"COMMON.Submit"|translate}}</button>&nbsp;&nbsp;
+                <button *ngIf="!isNew" type="submit" [disabled]="moduleDetailsForm.invalid"
+                    class="btn btn-primary">{{"COMMON.Update"|translate}}</button>&nbsp;&nbsp;
+                <button type="button" [routerLink]="['/main/module/module-list']"
+                    class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+
+        <!-- /Form -->
+
+    </div>
+
+
+
+</div>
+<!-- /content area -->

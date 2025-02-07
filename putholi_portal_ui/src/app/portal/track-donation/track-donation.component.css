@@ -1,0 +1,15 @@
+.icon_eye {
+    color: black;
+    position: relative;
+    text-align: unset;
+    float: right;
+    margin-top: -29px;
+    margin-right: 13px;
+    cursor: pointer;
+}
+
+
+.loginrow {
+    display: flex;
+    justify-content: space-evenly;
+}

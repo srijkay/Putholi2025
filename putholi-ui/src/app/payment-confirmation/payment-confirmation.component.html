@@ -1,0 +1,47 @@
+<!-- container -->
+<div class="container" *ngIf="statusMessage=='Success'">
+    <div class="centered">
+        <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+        <div class="content">
+            <br>
+            <h3>Payment Success !</h3>
+            <div class="modal-body">
+                <p class="text-center font-weight-600">
+                    Thankyou for your interest<br />
+                    You will get an update within 7 days!! <br />
+                    Your Bank Reference Number is <b>{{keyValuePairs["bank_ref_no"]}}</b>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" style="background: none;  display: block; width: 100%;">
+                    <button class="btn btn-success btn-block" data-dismiss="modal" [routerLink]="[envservice.adminUrl]">
+                        Go to Login </button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /container -->
+
+
+<!-- container -->
+<div class="container" *ngIf="statusMessage!='Success'">
+    <div class="centered">
+        <div class="check" style="background-color: #d7141a; box-shadow: 0px 2px 2px #d7141a;"><i class="fa fa-times"
+                aria-hidden="true"></i></div>
+        <div class="content">
+            <br>
+            <h3>Payment Failed !</h3>
+            <div class="modal-body">
+                <p class="text-center font-weight-600" style="color: red;">Your payment has failed. Please try again</p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-info btn-block" data-dismiss="modal"
+                    [routerLink]="['/summary/', this.getToken('username')]">
+                    Retry Payment</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /container -->

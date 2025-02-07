@@ -1,0 +1,209 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                class="img-fluid"></a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                         <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                        <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                        <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                        <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                        <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+              <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                        <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                    </ul>
+                </li> -->
+                <!-- <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+                        Money</a></li>
+                <li><a class="nav-link active scrollto" href="javascript:;"
+                        [routerLink]="['/portal/school-list']">Donate</a>
+                </li>
+                <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+
+
+    </div>
+</header>
+<!-- End Header -->
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" style="margin-top:10px;">
+                    <h2>Track Your Donation</h2>
+                </div>
+                <div class="col-lg-6" style="display: flex;justify-content: right;margin-top:15px;">
+                    <ol>
+                        <li><a href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                        <li>Track Your Donation</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="portfolio-info" *ngIf="!isShowTracking">
+
+                    <form class="form-horizontal" (ngSubmit)="onLogin(loginform,loginData)" #loginform="ngForm">
+
+                        <div class="row mb-3 ">
+                            <label class="col-sm-4 col-md-4  col-lg-2 col-form-label">Email ID<span class="required">
+                                    *</span></label>
+                            <div class="col-sm-8 col-md-6 col-lg-4">
+                                <app-nspl-text [data]="loginData.username" [(ngModel)]="loginData.username"
+                                    placeholder="User ID/Email" [required]="true" name="username"
+                                    [controlInput]="'Email'">
+                                </app-nspl-text>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-md-4 col-lg-2 col-form-label">Password
+                                <span class="required"> *</span></label>
+                            <div class="col-sm-8 col-md-6 col-lg-4">
+                                <!-- password -->
+                                <input [type]="show?'text':'password'" class="form-control" name="secretKey"
+                                    id="secretKey" placeholder="Password" [(ngModel)]="loginData.secretKey" required
+                                    #secretKey="ngModel" autocomplete="off"
+                                    [ngClass]="{ 'isInvalid': (secretKey.touched) && secretKey.invalid }"
+                                    maxlength="25" />
+                                <span class="icon_eye" style="margin-top: -1px;" (click)="onClick('secret')">
+                                    <i class="bi bi-eye-fill icon_eye" *ngIf="!show"></i>
+                                    <i class="bi bi-eye-slash icon_eye" aria-hidden="true" *ngIf="show"></i>
+                                </span>
+
+                                <div class="error-block" *ngIf="((secretKey.touched) && secretKey.invalid)">
+                                    This field cannot be left blank
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- label for captcha -->
+                        <div class="form-group form-group-feedback form-group-feedback-left">
+                            <div class="row">
+                                <label class="col-sm-4 col-md-4 col-lg-2"></label>
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-4 col-lg-8" style="float:right;">
+                            <a href="javascript:;" [routerLink]="['/portal/forget-password/', 0]" class="ml-auto">Forgot
+                                password?</a>
+                        </div>
+
+                        <!-- row -->
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-2">
+                                <button type="submit" [disabled]="loginform.invalid || !isValidCaptcha"
+                                    class="form-button bt-2" style="width:78px;">Login</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="form-button" style="width:78px;"
+                                    [routerLink]="['/home']">Cancel</button>
+                            </div>
+                        </div>
+                        <!-- /row -->
+
+                    </form>
+
+                </div>
+
+                <div class="col-lg-12" style="margin-bottom:40px;" *ngIf="isShowTracking">
+                    <div class="portfolio-info">
+                        <h3>Provide your tracking number to view the status of your contribution and the school
+                            progress.</h3>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form class="form-horizontal" (ngSubmit)="onTrack(trackDonationform,trackDonationData)"
+                                    #trackDonationform="ngForm">
+                                    <div class="row mb-3">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">Enter Tracking
+                                            Number</label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="trackDonationData.paymentId"
+                                                [(ngModel)]="trackDonationData.paymentId"
+                                                placeholder="Enter Tracking Number" [required]="true" name="paymentId">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-5">
+                                            <button type="submit" [disabled]="trackDonationform.invalid"
+                                                class="form-button">Get Your Track Details</button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" class="form-button" href="javascript:;"
+                                                [routerLink]="['/home']" style="width:100px;">Back</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- End Portfolio Details Section -->
+
+</main><!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" style="margin-top:55px" class="section-bg">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="http://newrta.com/">NEWRTA</a>
+        </div>
+    </div>
+</footer>
+<!-- End  Footer -->

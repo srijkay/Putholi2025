@@ -1,0 +1,15 @@
+.content-inner {
+  height: calc(100vh - 24px - 0px - -24px);
+  max-height: fit-content;
+ 
+}
+
+.content-login {
+ padding: 1.25rem 1.25rem;
+ -ms-flex-positive: 1;
+ flex-grow: 1;
+
+}
+.mb-0{
+  width:40%
+}

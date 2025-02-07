@@ -1,0 +1,314 @@
+<!-- page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{"COMMON.Home"|translate}} -
+                    {{'MANAGESCHOOL.SchoolDetails' | translate}}</span></h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i> {{'COMMON.Home' | translate }}</a>
+                <a href="javascript:;" [routerLink]="['/main/search-school']" class="breadcrumb-item">
+                    {{'SIDEBAR.searchSchool'| translate}}</a>
+                <span class="breadcrumb-item active"> {{'MANAGESCHOOL.SchoolDetails' | translate}} </span>
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0"> {{'MANAGESCHOOL.SchoolDetails' | translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form -->
+        <form action="#" class="form-horizontal">
+
+            <!-- Card Body -->
+            <div class="card-body" style="margin-left: 12px;">
+
+                <!-- School Information  -->
+
+                <h5 style="margin-top: -25px;">{{'MANAGESCHOOL.SchoolInformation'|translate}} </h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for registration number -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.RegistrationNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolRegNo}}</p>
+                    </div>
+
+                    <!-- label for school name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolName}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for school type -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SchoolType'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.schoolType}}</p>
+                    </div>
+
+                    <!-- label for no.of students -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofStudents'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.noOfStudents}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for no.of teachers -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.NumberofTeachers'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.noOfTeachers}}</p>
+                    </div>
+
+                    <!-- label for no.of teachers -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.EducationalDistrict'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.educationalDistrict}}</p>
+                    </div>
+                </div>
+                <!-- /row -->
+
+                <!-- /School Information  -->
+
+                <!-- Contact Information -->
+
+                <h5>{{'MANAGESCHOOL.ContactInformation'|translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact name -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryName}}</p>
+                    </div>
+
+                    <!-- label for secondary contact name -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactName'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryName}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for primary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryNumber}}</p>
+                    </div>
+
+                    <!-- label for secondary contact number -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryMobileNumber'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryNumber}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+                    <!-- label for primary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.PrimaryContactEmail'
+                        | translate}}<span class=""> :</span></label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.primaryEmail}}</p>
+                    </div>
+
+                    <!-- label for secondary contact email -->
+                    <label
+                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.SecondaryContactEmail'
+                        | translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.contactsInfo?.secondaryEmail}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                <!-- /contact information -->
+
+
+                <!-- Address Information -->
+
+                <h5>{{'MANAGESCHOOL.AddressInformation'|translate}}</h5>
+                <hr />
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for Address line 1 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine1' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.addressLine1}}</p>
+                    </div>
+
+                    <!-- label for address line 2 -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.AddressLine2' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.addressLine2}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for locality -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Locality' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.locality}}</p>
+                    </div>
+
+                    <!-- label for city -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.City' | translate}}
+                        :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.city}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for district -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.District' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.district}}</p>
+                    </div>
+
+                    <!-- label for state -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.State' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p *ngIf="schoolInfo?.addressInfo?.state=='TN'">Tamil Nadu</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+
+                <!-- row -->
+                <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Country' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>India</p>
+                    </div>
+
+                    <!-- label for pincode -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'MANAGESCHOOL.Pincode' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.addressInfo?.pincode}}</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+
+                  <!-- row -->
+                  <div class="form-group row">
+
+                    <!-- label for country -->
+                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.CreatedBy' |
+                        translate}} :</label>
+                    <div class="col-md-3">
+                        <p>{{schoolInfo?.createdBy}}</p>
+                    </div>
+
+                  
+                </div>
+                <!-- /row -->
+
+
+            </div>
+
+            <!--/Card Body -->
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+
+                <button type="button" class="btn btn-danger"
+                    [routerLink]="['/main/search-school']">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer -->
+        </form>
+        <!-- /Form -->
+    </div>
+
+
+
+</div>
+<!-- /Content area -->

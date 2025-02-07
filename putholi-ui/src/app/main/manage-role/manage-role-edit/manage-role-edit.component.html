@@ -1,0 +1,269 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{"MANAGEROLE.AddRole"|translate}}</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{"MANAGEROLE.EditRole"|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/role-mgnt/role-list']" class="breadcrumb-item">
+                    {{"MANAGEROLE.ManageRole"|translate}}</a>
+                <span *ngIf="isNew" class="breadcrumb-item active">{{"MANAGEROLE.AddRole"|translate}}</span>
+                <span *ngIf="!isNew" class="breadcrumb-item active">{{"MANAGEROLE.EditRole"|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 *ngIf="isNew" class="fs-17 font-weight-600 mb-0">{{"MANAGEROLE.AddRoleManagement"|translate}}
+                    </h6>
+                    <h6 *ngIf="!isNew" class="fs-17 font-weight-600 mb-0">{{"MANAGEROLE.EditRoleManagement"|translate}}
+                    </h6>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+        <form class="form-horizontal" (ngSubmit)="onRole(roleEditform,roleEditData)" #roleEditform="ngForm">
+
+            <!-- Card Body -->
+            <div class="card-body">
+
+                <div class="portlet-body">
+                    <!-- ul -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#tab_1_1"
+                                data-toggle="tab">{{"MANAGEROLE.RoleDetails"|translate}}</a>
+                        </li>&nbsp;
+                        <li class="nav-item"><a class="nav-link" href="#tab_1_2"
+                                data-toggle="tab">{{"MANAGEROLE.RolePrivileges"|translate}}</a></li>
+                    </ul>
+                    <!-- /ul -->
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+
+                        <!-- Tab_1_1 -->
+                        <div class="tab-pane active in" id="tab_1_1">
+                            <br>
+                            <!-- Form -->
+
+
+                            <div class="form-body">
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- Code -->
+                                    <label
+                                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{"MANAGEROLE.Code"|translate}}<span
+                                            class="required">*</span></label>
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="roleEditData.roleCode"
+                                            placeholder="{{'MANAGEROLE.Code'|translate}}"
+                                            [(ngModel)]="roleEditData.roleCode" [required]="true" name="roleCode">
+                                        </app-nspl-text>
+
+                                    </div>
+                                </div>
+                                <!--/ row -->
+
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- Role Name (English)-->
+                                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                        {{"MANAGEROLE.RoleName"|translate}} <span class="required">*</span></label>
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="roleEditData.roleDesc"
+                                            [(ngModel)]="roleEditData.roleDesc"
+                                            placeholder="{{'MANAGEROLE.RoleName'|translate}}" [required]="true"
+                                            name="roleDesc" NsplAplhaWithSpac>
+                                        </app-nspl-text>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- Role Description (English) -->
+                                    <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                        {{"MANAGEROLE.RoleDescription"|translate}} <span
+                                            class="required">*</span></label>
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <app-nspl-text [data]="roleEditData.roleDescOther"
+                                            [(ngModel)]="roleEditData.roleDescOther"
+                                            placeholder="{{'MANAGEROLE.RoleDescription'|translate}}" [required]="true"
+                                            name="roleDescOther" NsplAplhaWithSpac>
+                                        </app-nspl-text>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+                                
+                                <!-- row -->
+                                <div class="form-group row">
+                                    <!-- Status -->
+                                    <label
+                                        class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'COMMON.Status'|translate}}<span
+                                            class="required">*</span></label>
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <ng-select name="status" [items]="statusList" class="chosen-select"
+                                            bindLabel="name" bindValue="code" [(ngModel)]="roleEditData.status"
+                                            #status="ngModel" [clearable]='true' [searchable]='false'
+                                            [dropdownPosition]="'auto'" placeholder="{{'COMMON.Status'|translate}}"
+                                            required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                            </div>
+
+                        </div>
+
+                        <!-- Tab_1_2 -->
+                        <div class="tab-pane fade" id="tab_1_2">
+
+                            <div class="portlet-body">
+
+                                <div id="page-wrap">
+                                    <!-- TreeView -->
+                                    <ul class="treeview">
+                                        <li>
+                                            <input type="checkbox" name="tall" id="tall">
+                                            <label for="tall" class="custom-unchecked">Employee
+                                                Management</label>
+
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" name="tall-1" id="tall-1">
+                                                    <label for="tall-1" class="custom-unchecked" checked="">Manage
+                                                        Employee</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="tall-2" id="tall-2">
+                                                    <label for="tall-2" class="custom-unchecked">Assign
+                                                        Manager</label>
+                                                    <ul>
+                                                        <li>
+                                                            <input type="checkbox" name="tall-2-1" id="tall-2-1">
+                                                            <label for="tall-2-1" class="custom-unchecked">View</label>
+                                                        </li>
+                                                        <li class="last">
+                                                            <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                            <label for="tall-2-2" class="custom-unchecked">Edit</label>
+                                                        </li>
+                                                        <li class="last">
+                                                            <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                            <label for="tall-2-2"
+                                                                class="custom-unchecked">Delete</label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="tall-3" id="tall-3">
+                                                    <label for="tall-3" class="custom-unchecked">Transfer
+                                                        Manager</label>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <br>
+                                        <li class="last">
+                                            <input type="checkbox" name="short" id="short">
+                                            <label for="short" class="custom-unchecked">PMS</label>
+
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" name="short-1" id="short-1">
+                                                    <label for="short-1" class="custom-unchecked">Search
+                                                        KRA</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="short-2" id="short-2">
+                                                    <label for="short-2" class="custom-unchecked">Approve
+                                                        KRA</label>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="short-3" id="short-3">
+                                                    <label for="short-3" class="custom-unchecked">Final
+                                                        Signature</label>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!-- /TreeView -->
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- /Tab_1_2 -->
+                    </div>
+
+
+
+
+
+                </div>
+                <!-- /Tab_1_1 -->
+
+
+
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <button type="submit" [disabled]="roleEditform.invalid" class="btn btn-primary mr-1"
+                    *ngIf="isNew">{{'COMMON.Submit'|translate}}</button>&nbsp;&nbsp;
+                <button type="submit" [disabled]="roleEditform.invalid" class="btn btn-primary mr-1"
+                    *ngIf="!isNew">{{'COMMON.Update'|translate}}</button>&nbsp;&nbsp;
+
+                <button href="javascript:;" [routerLink]="['/main/role-mgnt/role-list']" type="button"
+                    class="btn btn-danger">{{'COMMON.Cancel'|translate}}</button>&nbsp;&nbsp;
+            </div>
+            <!-- /Card Footer -->
+
+        </form>
+        <!-- Tab Content -->
+
+    </div>
+
+</div>
+<!-- /Card Body -->
+
+
+
+<!-- /content area -->

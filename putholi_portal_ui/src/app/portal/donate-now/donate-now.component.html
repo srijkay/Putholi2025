@@ -1,0 +1,937 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                class="img-fluid"></a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                        <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                        <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                        <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                        <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+                       <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                        <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                    </ul>
+                </li> -->
+                <!-- <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+                        Money</a></li>
+                <li><a class="nav-link active scrollto" href="javascript:;"
+                        [routerLink]="['/portal/school-list']">Donate</a>
+                </li>
+                <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+    </div>
+</header>
+<!-- End Header -->
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="titleparent">
+                    <div class="titleleft margin-right-auto">
+                        <h2>Donate Now</h2>
+                    </div>
+                    <div class="titleright">
+                        <ol>
+                            <li><a href="javascript:;" [routerLink]="['/portal/folioDetail/',schoolDetailsId]">School
+                                    Requirements</a></li>
+                            <li>Donate Now</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-12" style="margin-bottom:40px;">
+                    <div class="portfolio-info">
+                        <h3>Appreciate your interest in Donating fund for development of the school. <br>Please use the
+                            payment gateway to pay the fund.</h3>
+
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <!-- Form -->
+                                <form>
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for school name -->
+                                        <label class="col-sm-4 col-form-label">School name<span class="required">
+                                                *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="schoolDetails.schoolName" disabled
+                                                [(ngModel)]="schoolDetails.schoolName" [required]="true"
+                                                name="schoolName">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for estimated total amount -->
+                                        <label class="col-sm-4 col-form-label">Estimated total
+                                            amount<span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-number [(ngModel)]="quotateAmount"
+                                                placeholder="Estimated Total Amount" name="quotateAmount" disabled>
+                                            </app-nspl-number>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Collected amount
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-number [data]="showingEstimatedAmount.collectedAmount"
+                                                [(ngModel)]="showingEstimatedAmount.collectedAmount"
+                                                placeholder="Collected Amount" [required]="true" disabled
+                                                name="collectedAmount" NsplNumbersOnly>
+                                            </app-nspl-number>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">You can contribute upto
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-number [data]="showingEstimatedAmount.YouCanContribute"
+                                                [(ngModel)]="showingEstimatedAmount.YouCanContribute"
+                                                placeholder="You can contribute upto" [required]="true" disabled
+                                                name="YouCanContribute" NsplNumbersOnly>
+                                            </app-nspl-number>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Your contribution in.
+                                            Rs<span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-number [data]="showingEstimatedAmount.YouCanContributeinRs"
+                                                [(ngModel)]="showingEstimatedAmount.YouCanContributeinRs"
+                                                placeholder="Your contribution in.Rs" [required]="true"
+                                                name="YouCanContributeinRs"
+                                                [maxvalue]="showingEstimatedAmount.YouCanContribute">
+                                            </app-nspl-number>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row mb-3" style="margin-top:50px;">
+                                    <label class="col-sm-4 col-form-label">
+                                        <h6><strong>Already Registered Donor?</strong></h6>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="flexRadioDisabled"
+                                                id="flexRadioDisabled" (click)="individualForm()" value="Y" />&nbsp;
+                                            <label class="form-check-label" for="flexRadioDisabled"> Yes </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="flexRadioDisabled"
+                                                id="flexRadioCheckedDisabled" (click)="organzForm()" value="N" />&nbsp;
+                                            <label class="form-check-label" for="flexRadioCheckedDisabled"> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Donor Login Form -->
+                                <form class="form-horizontal" (ngSubmit)="onLogin(loginform,loginData)"
+                                    #loginform="ngForm">
+
+                                    <div *ngIf="isOrganzn">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4 col-form-label">Email ID<span class="required">
+                                                    *</span></label>
+                                            <div class="col-sm-8">
+                                                <app-nspl-text [data]="loginData.username"
+                                                    [(ngModel)]="loginData.username" placeholder="Enter Email id"
+                                                    [required]="true" name="username" [controlInput]="'Email'"
+                                                    (email)="getEmail($event)" [submitted]="submitted">
+                                                </app-nspl-text>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4 col-form-label">Password
+                                                <span class="required"> *</span></label>
+                                            <div class="col-sm-8">
+                                                <!-- password -->
+                                                <input [type]="show?'text':'password'" class="form-control"
+                                                    name="secretKey" id="secretKey" placeholder="Password"
+                                                    [(ngModel)]="loginData.secretKey" required #secretKey="ngModel"
+                                                    autocomplete="off"
+                                                    [ngClass]="{ 'isInvalid': (secretKey.touched) && secretKey.invalid }"
+                                                    maxlength="25" appBlockCopyPaste />
+                                                <span class="icon_eye" style="margin-top: -1px;"
+                                                    (click)="onClick('secret')">
+                                                    <i class="bi bi-eye-fill icon_eye" *ngIf="!show"></i>
+                                                    <i class="bi bi-eye-slash icon_eye" aria-hidden="true"
+                                                        *ngIf="show"></i>
+                                                </span>
+
+                                                <div class="error-block"
+                                                    *ngIf="(secretKey.touched && secretKey.invalid)">
+                                                    This field cannot be left blank
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- label for captcha -->
+                                        <div class="form-group form-group-feedback form-group-feedback-left">
+                                            <div class="row">
+                                                <div class="col-lg-4"></div>
+                                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                                    <app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="float:right;">
+                                            <a href="javascript:;"
+                                                [routerLink]="['/portal/forget-password/', schoolDetailsId]"
+                                                class="ml-auto">Forgot password?</a>
+                                        </div>
+                                        <!-- row -->
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-4" style="margin-left: 11px;"></div>
+                                            <div class="col-sm-2" style="padding:3px">
+                                                <button type="submit"
+                                                    [disabled]="loginform.invalid||showingEstimatedAmount.YouCanContributeinRs > showingEstimatedAmount.YouCanContribute || !isValidCaptcha || !isValidEmail"
+                                                    class="form-button bt-2" style="width:92px;">Login</button>
+                                            </div> &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div class="col-sm-2" style="padding:3px">
+                                                <button type="button" class="form-button" style="width:92px;"
+                                                    (click)="paymentCancel()">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <!-- /row -->
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <!-- /Donor Login Form -->
+
+                            <!-- Form for Corporate -->
+                            <div class="row mb-3" *ngIf="isForm">
+                                <label class="col-sm-4 col-form-label">User Type
+                                    <span class="required"> *</span></label>
+                                <div class="col-sm-8">
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" id="flexIndividual"
+                                            (click)="donationForm()" name="flexLogin" value="DBI" />&nbsp;
+                                        <label class="form-check-label" for="donateBy"> Donation by
+                                            Individual</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" id="flexCorporate"
+                                            (click)="donationCorporate()" name="flexLogin" value="DBC" />&nbsp;
+                                        <label class="form-check-label" for="donateBy">Donation by
+                                            Corporate</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- form -->
+                            <form class="form-horizontal" (ngSubmit)="onDonate(donateNowform,donateNowData, success)"
+                                #donateNowform="ngForm">
+
+                                <!-- Form for Individual -->
+                                <div id="register-form" *ngIf="isRegister">
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for firstname -->
+                                        <label class="col-sm-4 col-form-label">First
+                                            Name<span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.firstName"
+                                                [(ngModel)]="donateNowData.firstName" placeholder="First Name"
+                                                [required]="true" name="firstName" NsplAphaOnly [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for lastname -->
+                                        <label class="col-sm-4 col-form-label">Last Name<span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.lastName"
+                                                [(ngModel)]="donateNowData.lastName" placeholder="Last Name"
+                                                name="lastName" NsplAphaOnly [required]="true" [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for emailId -->
+                                        <label class="col-sm-4 col-form-label">Email ID
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.emailId"
+                                                [(ngModel)]="donateNowData.emailId" placeholder="Email ID"
+                                                [required]="true" name="emailId" [controlInput]="'Email'"
+                                                [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for address -->
+                                        <label class="col-sm-4 col-form-label">Address
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.address"
+                                                [(ngModel)]="donateNowData.address" placeholder="Address"
+                                                [required]="true" name="address" [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for PAN Number -->
+                                        <label class="col-sm-4 col-form-label">PAN Number
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.panNumber" [maxlength]="'15'"
+                                                [(ngModel)]="donateNowData.panNumber" placeholder="PAN Number"
+                                                [required]="true" name="panNumber" [submitted]="submitted">
+                                            </app-nspl-text>
+                                            <p style="font-weight: 600;">Enter Valid PAN to issue Tax Deduction
+                                                Certificate</p>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3" style="margin-top: -25px;">
+                                        <!-- label for city -->
+                                        <label class="col-sm-4 col-form-label">City
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.city" [(ngModel)]="donateNowData.city"
+                                                placeholder="City" [required]="true" name="city" NsplAplhaWithSpac
+                                                [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for country -->
+                                        <label class="col-sm-4 col-form-label">Country
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <ng-select [items]="countryList" class="chosen-select" placeholder="Country"
+                                                [clearable]='true' [searchable]='true'
+                                                [(ngModel)]="donateNowData.country" bindLabel="description"
+                                                bindValue="code" [dropdownPosition]="'auto'" name="country"
+                                                #country="ngModel"
+                                                [ngClass]="{ 'isInvalid': (submitted ||country.touched) && country.invalid }"
+                                                required>
+                                            </ng-select>
+                                            <div class="error-block"
+                                                *ngIf="((submitted || country.touched) && country.invalid)">
+                                                This field cannot be left blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for phone number -->
+                                        <label class="col-sm-4 col-form-label">Phone
+                                            Number<span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <intl-input-phone [ConfigurationOption]="configOption1" id="phoneNumber"
+                                                name="phoneNumber" [(ngModel)]="donateNowData.phoneNumber"
+                                                #phoneNumber="ngModel" [submitted]="submitted" class="intlPhone"
+                                                [ngClass]="{ 'isInvalid':  (submitted || phoneNumber.touched) && phoneNumber.invalid }"
+                                                required>
+                                            </intl-input-phone>
+                                            <span class="error-block"
+                                                *ngIf="((submitted || phoneNumber.touched) && phoneNumber.invalid)">
+                                                This field cannot be left blank
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- Label for password -->
+                                        <label class="col-sm-4 col-form-label">Password
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <input [type]="show?'text':'password'" class="form-control" name="secretKey"
+                                                id="secretKey" placeholder="Password"
+                                                [(ngModel)]="donateNowData.secretKey" required #secretKey="ngModel"
+                                                autocomplete="off"
+                                                [ngClass]="{ 'isInvalid': (submitted || secretKey.touched) && secretKey.invalid }"
+                                                maxlength="25" appBlockCopyPaste />
+                                            <span (click)="onClick('secret')">
+                                                <i class="bi bi-eye-fill icon_eye" *ngIf="!show"></i>
+                                                <i class="bi bi-eye-slash icon_eye" aria-hidden="true" *ngIf="show"></i>
+                                            </span>
+
+                                            <div class="error-block"
+                                                *ngIf="((submitted || secretKey.touched) && secretKey.invalid)">
+                                                This field cannot be left blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+
+                                    <!-- label for confirm password -->
+                                    <div class="form-group form-group-feedback form-group-feedback-left">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4  col-form-label ">Confirm
+                                                Password
+                                                <span class="required">*</span></label>
+
+                                            <div class="col-sm-8">
+                                                <input [type]="display?'text':'password'" class="form-control"
+                                                    name="confirmPassword" id="confirmPassword"
+                                                    placeholder="Confirm Password"
+                                                    [(ngModel)]="donateNowData.confirmPassword" required
+                                                    #confirmPassword="ngModel" autocomplete="off"
+                                                    [ngClass]="{ 'isInvalid': (submitted || confirmPassword.touched) && confirmPassword.invalid }"
+                                                    maxlength="25" appBlockCopyPaste />
+                                                <span (click)="onClick('cnfrm')">
+                                                    <i class="bi bi-eye-fill icon_eye" *ngIf="!display"></i>
+                                                    <i class="bi bi-eye-slash icon_eye" aria-hidden="true"
+                                                        *ngIf="display"></i>
+                                                </span>
+                                                <div class="error-block"
+                                                    *ngIf="((submitted || confirmPassword.touched) && confirmPassword.invalid)">
+                                                    This field cannot be left blank
+                                                </div>
+
+                                                <div class="error-block"
+                                                    *ngIf="((submitted || confirmPassword.touched) && confirmPassword.valid &&(donateNowData.confirmPassword != donateNowData.secretKey))">
+                                                    Password and Confirm Password should be same
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-8">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="terms" class="custom-control-input"
+                                                    (change)="onSelect($event)">
+                                                <span class="custom-control-label">&nbsp; I agree with the <a
+                                                        href="assets/img/documents/Donation_Terms_Conditions.pdf"
+                                                        target="_blank">
+                                                        Terms
+                                                    </a>and<a href="javascript:;"> Privacy Policy
+                                                    </a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+                                    <br>
+
+                                    <!-- row -->
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-2">
+                                            <button type="submit" [disabled]="
+                                            (donateNowData.confirmPassword != donateNowData.secretKey)"
+                                                class="form-button">Register</button>
+
+                                        </div>&nbsp; &nbsp;
+                                        <div class="col-sm-4">
+                                            <button type="button" class="form-button" style="width:100px;"
+                                                (click)="paymentCancel()">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                </div>
+                                <!-- /Form for Individual -->
+
+
+                                <div id="register-form" *ngIf="isCorporate">
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for First Name -->
+                                        <label class="col-sm-4 col-form-label">First Name
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.firstName"
+                                                [(ngModel)]="donateNowData.firstName" placeholder="First Name"
+                                                [required]="true" name="firstName" [submitted]="submitted" NsplAphaOnly
+                                                [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Last Name -->
+                                        <label class="col-sm-4 col-form-label">Last Name <span class="required">
+                                                *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.lastName"
+                                                [(ngModel)]="donateNowData.lastName" placeholder="Last name"
+                                                name="lastName" [submitted]="submitted" NsplAphaOnly>
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Email -->
+                                        <label class="col-sm-4 col-form-label">Email ID
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.emailId"
+                                                [(ngModel)]="donateNowData.emailId" placeholder="Email Id"
+                                                [required]="true" name="emailId" [submitted]="submitted"
+                                                [submitted]="submitted" [controlInput]="'Email'"
+                                                (keypress)="RestrictSpace($event)">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for password -->
+                                        <label class="col-sm-4 col-form-label">Password
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+
+                                            <input [type]="show?'text':'password'" class="form-control" name="secretKey"
+                                                id="secretKey" placeholder="Password"
+                                                [(ngModel)]="donateNowData.secretKey" required #secretKey="ngModel"
+                                                autocomplete="off"
+                                                [ngClass]="{ 'isInvalid': (submitted || secretKey.touched) && secretKey.invalid }"
+                                                maxlength="25" appBlockCopyPaste />
+                                            <span (click)="onClick('secret')">
+
+                                                <i class="bi bi-eye-fill icon_eye" *ngIf="!show"></i>
+                                                <i class="bi bi-eye-slash icon_eye" aria-hidden="true" *ngIf="show"></i>
+                                            </span>
+                                            <div class="error-block"
+                                                *ngIf="((submitted || secretKey.touched) && secretKey.invalid)">
+                                                This field cannot be left blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="form-group form-group-feedback form-group-feedback-left">
+                                        <div class="row mb-3">
+                                            <!-- label for confirm password -->
+                                            <label class="col-sm-4  col-form-label ">Confirm
+                                                Password
+                                                <span class="required">*</span></label>
+
+                                            <div class="col-sm-8">
+                                                <input [type]="display?'text':'password'" class="form-control"
+                                                    name="confirmPassword" id="confirmPassword"
+                                                    placeholder="Confirm Password"
+                                                    [(ngModel)]="donateNowData.confirmPassword" required
+                                                    #confirmPassword="ngModel" autocomplete="off"
+                                                    [ngClass]="{ 'isInvalid': (submitted || confirmPassword.touched) && confirmPassword.invalid }"
+                                                    maxlength="25" appBlockCopyPaste />
+                                                <span (click)="onClick('cnfrm')">
+                                                    <i class="bi bi-eye-fill icon_eye" *ngIf="!display"></i>
+                                                    <i class="bi bi-eye-slash icon_eye" aria-hidden="true"
+                                                        *ngIf="display"></i>
+                                                </span>
+                                                <div class="error-block"
+                                                    *ngIf="((submitted || confirmPassword.touched) && confirmPassword.invalid)">
+                                                    This field cannot be left blank
+                                                </div>
+
+                                                <div class="error-block"
+                                                    *ngIf="((submitted || confirmPassword.touched) && confirmPassword.valid &&(donateNowData.confirmPassword != donateNowData.secretKey))">
+                                                    Password and Confirm Password should be same
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for PAN Number -->
+                                        <label class="col-sm-4 col-form-label">PAN Number
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.panNumber" [maxlength]="'15'"
+                                                [(ngModel)]="donateNowData.panNumber" placeholder="PAN Number"
+                                                [required]="true" name="panNumber" [submitted]="submitted">
+                                            </app-nspl-text>
+                                            <p style="font-weight: 600;">Enter Valid PAN to issue Tax Deduction
+                                                Certificate</p>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3" style="margin-top: -25px;">
+                                        <!-- label for city -->
+                                        <label class="col-sm-4 col-form-label">City
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.city" [(ngModel)]="donateNowData.city"
+                                                placeholder="City" [required]="true" name="city" NsplAplhaWithSpac
+                                                [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for country -->
+                                        <label class="col-sm-4 col-form-label">Country
+                                            <span class="required"> *</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <ng-select [items]="countryList" class="chosen-select" placeholder="Country"
+                                                [clearable]='true' [searchable]='true'
+                                                [(ngModel)]="donateNowData.country" bindLabel="description"
+                                                bindValue="code" [dropdownPosition]="'auto'" name="country"
+                                                #country="ngModel"
+                                                [ngClass]="{ 'isInvalid': (submitted ||country.touched) && country.invalid }"
+                                                required>
+                                            </ng-select>
+                                            <span class="error-block"
+                                                *ngIf="((submitted || country.touched) && country.invalid)">
+                                                This field cannot be left blank
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Phone Number -->
+                                        <label class="col-sm-4 col-form-label">Phone Number
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+
+                                            <intl-input-phone [ConfigurationOption]="configOption1" id="phoneNumber"
+                                                name="phoneNumber" [(ngModel)]="donateNowData.phoneNumber"
+                                                #phoneNumber="ngModel" class="intlPhone"
+                                                [ngClass]="{ 'isInvalid': (submitted || phoneNumber.touched) && phoneNumber.invalid }"
+                                                required>
+                                            </intl-input-phone>
+                                            <span class="error-block"
+                                                *ngIf="((submitted || phoneNumber.touched) && phoneNumber.invalid)">
+                                                This field cannot be left blank
+                                            </span>
+
+                                            <!-- /row -->
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Role/Designation -->
+                                        <label class="col-sm-4 col-form-label">Role/Designation
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.designation"
+                                                [(ngModel)]="donateNowData.designation" placeholder="Role / Designation"
+                                                [required]="true" name="designation" NsplAplhaWithSpac
+                                                [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Organization Name -->
+                                        <label class="col-sm-4 col-form-label">Organization Name
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.organizationName"
+                                                [(ngModel)]="donateNowData.organizationName"
+                                                placeholder="organization name" [required]="true"
+                                                name="organizationName" NsplAplhaWithSpac [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Organization Name -->
+                                        <label class="col-sm-4 col-form-label">Organization Address
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.organizationAddress"
+                                                [(ngModel)]="donateNowData.organizationAddress"
+                                                placeholder="organization address" [required]="true"
+                                                name="organizationAddress" NsplAplhaWithSpac [submitted]="submitted">
+                                            </app-nspl-text>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Organization Type -->
+                                        <label class="col-sm-4 col-form-label">Organization Type
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <ng-select name="organizationType" [items]="organizationList"
+                                                class="chosen-select" bindLabel="description" bindValue="code"
+                                                [(ngModel)]="donateNowData.organizationType" #organizationType="ngModel"
+                                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                                placeholder="organization type" required
+                                                [ngClass]="{ 'isInvalid': (submitted || organizationType.touched) && organizationType.invalid }">
+                                            </ng-select>
+
+                                            <div class="error-block"
+                                                *ngIf="((submitted || organizationType.touched) && organizationType.invalid)">
+                                                This field cannot be left blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Entity Type -->
+                                        <label class="col-sm-4 col-form-label">Entity Type
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <ng-select name="entityType" [items]="entityList" class="chosen-select"
+                                                bindLabel="description" bindValue="code"
+                                                [(ngModel)]="donateNowData.entityType" #entityType="ngModel"
+                                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                                placeholder="Entity type" required
+                                                [ngClass]="{ 'isInvalid': (submitted ||entityType.touched) && entityType.invalid }">
+                                            </ng-select>
+
+                                            <div class="error-block"
+                                                *ngIf="((submitted || entityType.touched) && entityType.invalid)">
+                                                This field cannot be left blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Registration Number -->
+                                        <label class="col-sm-4 col-form-label">Registration Number
+                                            <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-number [data]="donateNowData.registrationNumber"
+                                                [(ngModel)]="donateNowData.registrationNumber"
+                                                placeholder="Registration Number" [required]="true"
+                                                name="registrationNumber" [submitted]="submitted">
+                                            </app-nspl-number>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Branches in Other Countries -->
+                                        <label class="col-sm-4 col-form-label">Have branches in other
+                                            countries<span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input" [(ngModel)]="donateNowData.branches"
+                                                    type="radio" name="check" id="check1" value="Y" />&nbsp;
+                                                <label class="form-check-label" for="check1"> Yes </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input" [(ngModel)]="donateNowData.branches"
+                                                    type="radio" name="check" id="check2" value="N" />&nbsp;
+                                                <label class="form-check-label" for="check2">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                    <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for Money to be transferred in Indian Rupees Only -->
+                                        <label class="col-sm-4 col-form-label">Money to be transferred in indian
+                                            rupees only <span class="required"> *</span></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input"
+                                                    [(ngModel)]="donateNowData.moneyTransfer" (change)="onMoney($event)"
+                                                    type="radio" name="moneyTransfer" id="moneyTransfer1"
+                                                    value="Y" />&nbsp;
+                                                <label class="form-check-label" for="moneyTransfer1"> Yes </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input"
+                                                    [(ngModel)]="donateNowData.moneyTransfer" (change)="onMoney($event)"
+                                                    type="radio" name="moneyTransfer" id="moneyTransfer2"
+                                                    value="N" />&nbsp;
+                                                <label class="form-check-label" for="moneyTransfer2">No</label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /row -->
+
+
+                                    <!-- row -->
+                                    <div class="row ">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-8">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="terms" class="custom-control-input"
+                                                    (change)="onSelect($event)">
+                                                <span class="custom-control-label">&nbsp; I agree with the<a
+                                                        href="assets/img/documents/Donation_Terms_Conditions.pdf"
+                                                        download="Donation_Terms_and_conditions" target="_blank">
+                                                        Terms
+                                                    </a>and<a href="javascript:;"> Privacy Policy
+                                                    </a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+                                    <br>
+
+                                    <!-- row -->
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-2">
+                                            <button type="submit" [disabled]="
+                                                (donateNowData.confirmPassword != donateNowData.secretKey)"
+                                                class="form-button">Register</button>
+
+                                        </div> &nbsp;&nbsp;
+                                        <div class="col-sm-4">
+                                            <button type="button" class="form-button" style="width:100px;"
+                                                (click)="paymentCancel()">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
+                                </div>
+                                <!-- /Form for Corporate -->
+
+
+                            </form>
+                            <!-- /form -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Portfolio Details Section -->
+
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="section-bg">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="http://newrta.com/">NEWRTA</a>
+        </div>
+    </div>
+</footer>
+<!-- End  Footer -->
+
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
+
+<!-- show quotation Images-->
+<ng-template #success>
+    <div class="centered">
+        <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+        <div class="content">
+            <h3>Registration Success !</h3>
+            <div class="modal-body">
+                <p class="text-center">Thank you for Registration as Donor<br />
+                    Kindly Please login to your account.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal" (click)="closeModel()">Ok</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- /show quotation Images-->

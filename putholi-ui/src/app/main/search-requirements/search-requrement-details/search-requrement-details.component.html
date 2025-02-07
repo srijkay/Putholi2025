@@ -1,0 +1,473 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+            <h4> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'SIDEBAR.searchRequirementDetails'|translate}}</h4>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+
+                <a href="javascript:;" [routerLink]="['/main/search-requirements']"
+                    class="breadcrumb-item">{{'SIDEBAR.searchRequirements' | translate }}</a>
+
+                <span class="breadcrumb-item active">{{'SIDEBAR.searchRequirementDetails'|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+<div class="content">
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">{{'SIDEBAR.searchRequirementDetails'|translate}}</h6>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+
+        <form action="#" class="form-horizontal">
+
+            <div class="card-body">
+                <tabset #staticTabs>
+
+                    <!-- Tab_1_2 -->
+                    <tab heading="{{'REQUIREMENT.RequirementInformation'|translate}}">
+                        <div class="card-body">
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for requirementId -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementId'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.requirementId}}</p>
+                                </div>
+
+                                <!-- label for RequirementType -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.RequirementType'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.requirementType=='NE'?'New':'maintenance'}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for AssetType -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetType'
+                                    | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.assetType}}</p>
+                                </div>
+
+                              
+
+                                <!-- label for AssetName -->
+                                <label *ngIf="requirementInfoById?.assetType?.code == 'OTH'"
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName'
+                                    | translate}} :</label>
+                                <div class="col-md-3" *ngIf="requirementInfoById?.assetType?.code == 'OTH'">
+                                    <p>{{requirementInfoById?.assetName}}</p>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <!-- label for Quantity -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.Quantity' |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{requirementInfoById?.quantity}}</p>
+                                </div>
+
+                                <!-- label for View Images -->
+                                <label
+                                    class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.ViewImages'
+                                    |
+                                    translate}} :</label>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info"
+                                        (click)="clickImages(template,'REQ', requirementInfoById?.requirementId)">
+                                        {{'COMMON.ClickHeretoViewImages'|translate}}</button>
+                                </div>
+
+                            </div>
+                            <!-- /row -->
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('RI')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+                                            <button type="button" class="btn btn-danger" href="javascript:;"
+                                                [routerLink]="['/main/search-requirements']">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_2 -->
+
+                    <!-- Tab_1_3 -->
+                    <tab heading="{{'QUOTATION.PreImages'|translate}}">
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                            <th>{{"INVOICE.Attachments"|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of preImages; index as i">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.fileType}}</td>
+                                            <td>{{data?.fileName}}</td>
+                                            <td class="text-center">
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="clickImages(template, 'PI', data?.attachmentId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                        class="far fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!preImages?.length)  ">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('PI')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('RI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_3 -->
+
+                    <!-- Tab_1_4 -->
+                    <tab heading="{{'UPLOAD.UploadQuotation'|translate}}">
+
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{"UPLOAD.QuotationId"|translate}}</th>
+                                            <th>{{'UPLOAD.QuotationBy'|translate}}</th>
+                                            <th>{{'REQUIREMENT.TotalAmount'|translate}}</th>
+                                            <th>{{'COMMON.Status'|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of quotationInfoList">
+                                            <td>{{data?.quotationId}}</td>
+                                            <td>{{data?.quotationPreparedBy}}</td>
+                                            <td>{{data?.totalAmount}}</td>
+                                            <!-- status -->
+                                            <td *ngIf="data?.quotateStatus!='REJQUO'"> <span
+                                                    class="badge badge-warning">
+                                                    {{data?.description}} </span> </td>
+                                            <td *ngIf="data?.quotateStatus=='REJQUO'"> <span class="badge badge-danger">
+                                                    {{data?.description}}
+                                                </span> </td>
+                                            <!-- actions -->
+                                            <td class="text-center">
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="viewquotates(data?.quotationId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr class="odd" *ngIf="(!quotationInfoList?.length)  ">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- buttons -->
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('QI')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('PI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_4 -->
+                    <!-- Tab_1_5 -->
+                    <tab heading="{{'QUOTATION.PostImages'|translate}}">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{'UPLOAD.ImageDescription'|translate}}</th>
+                                            <th>{{"INVOICE.Attachments"|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of preImages; index as i">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.fileType}}</td>
+                                            <td>{{data?.fileName}}</td>
+                                            <td class="text-center">
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="clickImages(template, 'PO', data?.attachmentId)"><i
+                                                        data-toggle="modal" data-toggle="tooltip" tooltip="View"
+                                                        class="far fa-eye"></i></a>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!preImages?.length)  ">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" (click)="onClickNext('PO')">
+                                                {{'COMMON.Continue'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('QI')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_5 -->
+
+                    <!-- Tab_1_6 -->
+                    <tab heading="{{'INVOICE.UploadInvoiceDetails'|translate}}">
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <br />
+                                <table class="table datatable-basic table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{"INVOICE.CompanyName"|translate}}</th>
+                                            <th>{{'INVOICE.InvoicePreparedBy'|translate}}</th>
+                                            <th>{{"INVOICE.ApprovedAmount"|translate}}</th>
+                                            <th>{{'INVOICE.CurrentInvoiceAmount'|translate}}</th>
+                                            <th>{{'COMMON.Status'|translate}}</th>
+                                            <th>{{'COMMON.Action'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor="let data of invoiceList">
+                                            <td>{{data?.companyName}}</td>
+                                            <td>{{data?.invoicePreparedBy}}</td>
+                                            <td>{{approvedAmount[0]?.totalAmount}}</td>
+                                            <td>{{data?.invoiceAmount}}</td>
+                                            <td *ngIf="data?.quotateStatus!='REJINV'"> <span
+                                                    class="badge badge-warning">
+                                                    {{data?.description}} </span> </td>
+                                            <td *ngIf="data?.quotateStatus=='REJINV'"> <span class="badge badge-danger">
+                                                    {{data?.description}}
+                                                </span> </td>
+                                            <td class="text-center">
+
+                                                <a href="javascript:;" data-toggle="modal" class="list-icons-item"
+                                                    (click)="viewInvoice(data?.invoiceId)"><i data-toggle="modal"
+                                                        data-toggle="tooltip" tooltip="View" class="far fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+
+                                        <tr class="odd" *ngIf="(!invoiceList?.length)">
+                                            <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                    {{'RECORDS.NoRecords'|translate}}</b>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- buttons -->
+
+                            <div class="form-actions fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" href="javascript:;"
+                                                [routerLink]="['/main/search-requirements']">
+                                                {{'COMMON.Close'|translate}}
+                                            </button>&nbsp;
+
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onClickPrevoius('PO')">
+                                                {{'COMMON.Back'|translate}}
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- /Tab_1_6 -->
+
+
+                </tabset>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title">{{'QUOTATION.ViewPreImages'|translate}}</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="imagesTemplate.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- form -->
+    <form class="form-horizontal">
+        <div class="modal-body">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngIf="base64Image">
+                        <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
+                    </div>
+                </div>
+    
+                <div class="carousel-inner" *ngIf="!base64Image">
+                    <iframe [src]="transform()" width="100%" height="500px"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <!-- /form -->
+</ng-template>
+
+
+<!-- open modal for view quotations -->
+<div *ngIf="isViewQuotation">
+    <app-view-quotation [quotationId]="quotationId" (modalStatus)="closeQuotation($event)"></app-view-quotation>
+</div>
+
+<!-- open modal for View Invoice -->
+<div *ngIf="isviewInvoice">
+    <app-invoice-view [invoiceId]="invoiceId" (modalStatus)="closeInvoice($event)"></app-invoice-view>
+</div>

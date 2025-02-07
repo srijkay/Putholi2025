@@ -1,0 +1,350 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-lg-inline">
+        <div class="page-title d-flex">
+
+
+            <h4 *ngIf="isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'MANAGEUSER.AddUser'|translate}}</h4>
+            <h4 *ngIf="!isNew"> <i class="icon-arrow-left52 mr-2"></i> <span
+                    class="font-weight-semibold">{{'COMMON.Home'|translate}}</span> -
+                {{'MANAGEUSER.EditUser'|translate}}</h4>
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+
+        </div>
+
+         
+    </div>
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <a href="javascript:;" [routerLink]="['/main/dashboard']" class="breadcrumb-item"><i
+                        class="icon-home2 mr-2"></i>
+                    {{'COMMON.Home'|translate}}</a>
+                <a href="javascript:;" [routerLink]="['/main/manage-user/user-list']" class="breadcrumb-item">
+                    {{'MANAGEUSER.ManageUser'|translate}}</a>
+                <span class="breadcrumb-item active" *ngIf="isNew">{{'MANAGEUSER.AddUser'|translate}}</span>
+                <span class="breadcrumb-item active" *ngIf="!isNew">{{'MANAGEUSER.EditUser'|translate}}</span>
+
+            </div>
+
+            <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
+        </div>
+
+        
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+    <div class="card">
+        <!-- Card Header -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="isNew">{{'MANAGEUSER.AddUserManagement'|translate}}
+                    </h6>
+                    <h6 class="fs-17 font-weight-600 mb-0" *ngIf="!isNew">{{'MANAGEUSER.EditUserManagement'|translate}}
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <!-- /Card Header -->
+        <br>
+
+        <!-- Form  -->
+        <form class="form-horizontal" (ngSubmit)="onUser(userEditform,userEditData)" #userEditform="ngForm">
+            <div class="card-body">
+                <!-- Form Body-->
+                <div class="form-body">
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for first name -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGEUSER.Firstname'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.firstName"
+                                placeholder="{{'MANAGEUSER.Firstname'|translate}}" [disabled]="!isNew"
+                                [(ngModel)]="userEditData.firstName" name="firstName" [required]="true" NsplAphaOnly>
+                            </app-nspl-text>
+                        </div>
+                        <!-- label for middle Name -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Middlename'|translate}}<span
+                                class="required"></span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.middleName"
+                                placeholder="{{'MANAGEUSER.Middlename'|translate}}"
+                                [(ngModel)]="userEditData.middleName" name="middleName" NsplAphaOnly>
+                            </app-nspl-text>
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for last name -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Lastname'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.lastName"
+                                placeholder="{{'MANAGEUSER.Lastname'|translate}}" [(ngModel)]="userEditData.lastName"
+                                [required]="true" name="lastName" NsplAphaOnly>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for username -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Username'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.userName"
+                                placeholder="{{'MANAGEUSER.Username'|translate}}" [disabled]="!isNew "
+                                [(ngModel)]="userEditData.userName" [required]="true" name="userName" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Gender -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGEUSER.Gender'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select [disabled]="!isNew" name="gender" [items]="genderList" class="chosen-select"
+                                bindLabel="name" bindValue="code" [(ngModel)]="userEditData.gender" #gender="ngModel"
+                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                placeholder="{{'MANAGEUSER.Gender'|translate}}" required>
+                            </ng-select>
+                        </div>
+
+                        <!-- label for Mobile Number -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.MobileNumber'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="userEditData.mobileNumber"
+                                placeholder="{{'MANAGEUSER.MobileNumber'|translate}}"
+                                [(ngModel)]="userEditData.mobileNumber" [required]="true" name="mobileNumber"
+                                [maxlength]="'10'" [minlength]="'10'">
+                            </app-nspl-number>
+                        </div>
+
+
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- Email -->
+
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Email<span class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.emailId" placeholder="Email"
+                                [(ngModel)]="userEditData.emailId" [disabled]="!isNew" [required]="true" name="emailId"
+                                [controlInput]="'Email'">
+                            </app-nspl-text>
+
+                        </div>
+
+                        <!-- label for AddressLine 1 -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGEUSER.AddressLine1'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.addressLine1" [(ngModel)]="userEditData.addressLine1"
+                                placeholder=" {{'MANAGEUSER.AddressLine1'|translate}}" [required]="true"
+                                name="addressLine1">
+                            </app-nspl-text>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for AddressLine 2 -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGEUSER.AddressLine2'|translate}}</label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.addressLine2" [(ngModel)]="userEditData.addressLine2"
+                                placeholder=" {{'MANAGEUSER.AddressLine2'|translate}}" name="addressLine2">
+                            </app-nspl-text>
+                        </div>
+
+
+
+                        <!-- lable for locality -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGESCHOOL.Locality'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.locality" [(ngModel)]="userEditData.locality"
+                                placeholder=" {{'MANAGESCHOOL.Locality'|translate}}" [required]="true" name="locality"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for city -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'MANAGEUSER.City'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="userEditData.city" [(ngModel)]="userEditData.city"
+                                placeholder="{{'MANAGEUSER.City'|translate}}" [required]="true" name="city"
+                                NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for district -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.District'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select [items]="DistrictList" class="chosen-select"
+                                placeholder="{{'MANAGEUSER.District'|translate}}" [clearable]='true'
+                                [searchable]='false' [(ngModel)]="userEditData.district" bindLabel="description"
+                                bindValue="code" [dropdownPosition]="'auto'" name="district" #district="ngModel"
+                                [disabled]="true" [ngClass]="{ 'isInvalid': district.touched && district.invalid }">
+                            </ng-select>
+                            <span class="error-block" *ngIf="(district.touched && district.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </span>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for state -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.State'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [disabled]="!isNew" [data]="userEditData.state"
+                                [(ngModel)]="userEditData.state" placeholder="{{'MANAGEUSER.State'|translate}}"
+                                [disabled]="true" name="state" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for Country  -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Country'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select [items]="countryList" class="chosen-select"
+                                placeholder="{{'MANAGEUSER.Country'|translate}}" [clearable]='true' [searchable]='false'
+                                [(ngModel)]="userEditData.country" bindLabel="description" bindValue="code"
+                                [dropdownPosition]="'auto'" name="country" #country="ngModel" [disabled]="true"
+                                [ngClass]="{ 'isInvalid': country.touched && country.invalid }">
+                            </ng-select>
+                            <span class="error-block" *ngIf="(country.touched && country.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </span>
+                        </div>
+
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+
+
+                        <!-- Role -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Current Role<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+
+                            <ng-select [items]="rolesList" class="chosen-select" [disabled]="true"
+                                placeholder="{{'MANAGEUSER.Role'|translate}}" [clearable]='true' [searchable]='false'
+                                [(ngModel)]="userEditData.role" bindLabel="description" bindValue="code"
+                                [dropdownPosition]="'auto'" name="role" #role="ngModel" required
+                                [ngClass]="{ 'isInvalid': role.touched && role.invalid }">
+                            </ng-select>
+                            <span class="error-block" *ngIf="(role.touched && role.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </span>
+                        </div>
+
+                        <!-- label for pincode -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'MANAGEUSER.Pincode'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="userEditData.pincode" [(ngModel)]="userEditData.pincode"
+                                placeholder="{{'MANAGEUSER.Pincode'|translate}}" [maxlength]="'6'" [minlength]="'6'"
+                                [required]="true" name="pincode">
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <!-- Change Request Role -->
+                        <label
+                            *ngIf="(userEditData.role!='BENIF') && (this.getToken('role')=='SUUSR' || this.getToken('role')=='ADMIN' )&& userEditData.referredBy==null "
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">Change Role<span class="required">
+                            </span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12"
+                            *ngIf=" (userEditData.role!='BENIF') && (this.getToken('role')=='SUUSR' || this.getToken('role')=='ADMIN') && userEditData.referredBy==null">
+
+                            <ng-select [items]="changeRolesList" class="chosen-select"
+                                placeholder="{{'MANAGEUSER.ChangeReqRole'|translate}}" [clearable]='true'
+                                [searchable]='false' [(ngModel)]="userEditData.changeRequestRole"
+                                bindLabel="description" bindValue="code" [dropdownPosition]="'auto'"
+                                name="changeRequestRole" #changeRequestRole="ngModel"
+                                [ngClass]="{ 'isInvalid': changeRequestRole.touched && changeRequestRole.invalid }">
+                            </ng-select>
+                            <span class="error-block" *ngIf="(changeRequestRole.touched && changeRequestRole.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+
+                </div>
+                <!-- /Form Body-->
+            </div>
+
+
+            <!-- Card Footer-->
+            <div class="card-footer">
+                <button *ngIf="isNew" type="submit" href="javascript:;" [disabled]="userEditform.invalid"
+                    class="btn btn-primary">{{'COMMON.Submit'|translate}}</button> &nbsp;&nbsp;
+                <button *ngIf="!isNew" type="submit" [disabled]="userEditform.invalid" href="javascript:;"
+                    class="btn btn-primary">{{'COMMON.Update'|translate}}</button> &nbsp;&nbsp;
+                <button type="button" href="javascript:;" class="btn btn-danger"
+                    [routerLink]="['/main/manage-user/user-list']">{{'COMMON.Cancel'|translate}}</button>
+            </div>
+            <!-- /Card Footer-->
+
+
+        </form>
+        <!-- /Form  -->
+    </div>
+</div>
+<!-- /content area -->

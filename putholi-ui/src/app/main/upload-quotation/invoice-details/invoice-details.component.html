@@ -1,0 +1,455 @@
+<div bsModal #invoice="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true" [config]="{backdrop:'static', keyboard:false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 *ngIf="invoiceType == 'ADD'" class="modal-title">{{'INVOICE.AddInvoice'|translate}}</h4>
+                <h4 *ngIf="invoiceType == 'EDIT'" class="modal-title">{{'INVOICE.EditInvoice'|translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="clickCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="form-horizontal" (ngSubmit)="onSubmitInvoice(invoiceForm,invoiceData)" #invoiceForm="ngForm">
+                <div class="modal-body">
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for choose quotation -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 files" id="files4">
+                            <app-nspl-file-browse [data]="uploadImage" [required]="true" [(ngModel)]="uploadImage"
+                                name="uploadImage" [maxlength]="'1'">
+                            </app-nspl-file-browse>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for company name -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.CompanyName'|translate}}
+                            <span class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.companyName"
+                                placeholder="{{'INVOICE.CompanyName'|translate}}" [disabled]="true"
+                                [(ngModel)]="invoiceData.companyName" name="companyName">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for quotation date -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.InvoiceDate'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <input class='form-control' autocomplete="off" type="text" name="invoiceDate" bsDatepicker
+                                [bsConfig]="invoiceValidDate" [(ngModel)]="invoiceData.invoiceDate"
+                                placeholder="DD/MM/YYYY" id="invoiceDate" required #invoiceDate="ngModel"
+                                [ngClass]="{ 'isInvalid': invoiceDate.touched && invoiceDate.invalid }" />
+
+
+                            <div class="error-block" *ngIf="((invoiceDate.touched) && invoiceDate.invalid)">
+                                This field cannot be left blank
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for address -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Address'|translate}}
+                            <span class="required">*</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.address" placeholder="{{'INVOICE.Address'|translate}}"
+                                [disabled]="true" [(ngModel)]="invoiceData.address" name="address">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for quantity -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Quantity'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quantity" [data]="invoiceData.quantity"
+                                [(ngModel)]="invoiceData.quantity" [disabled]="true"
+                                placeholder="{{'INVOICE.Quantity'|translate}}">
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for street -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Street'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.street" placeholder="{{'INVOICE.Street'|translate}}"
+                                [(ngModel)]="invoiceData.street" name="street" [disabled]="true">
+                            </app-nspl-text>
+                        </div>
+
+
+                        <!-- label for unit price -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.UnitPrice'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quotedUnitPrice" [data]="invoiceData.quotedUnitPrice"
+                                [(ngModel)]="invoiceData.quotedUnitPrice" [disabled]="true"
+                                placeholder="{{'INVOICE.UnitPrice'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for city -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.City'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.city" placeholder="{{'INVOICE.City'|translate}}"
+                                [(ngModel)]="invoiceData.city" name="city" [disabled]="true">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for tax -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Tax'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quotedTax" [data]="invoiceData.quotedTax"
+                                [(ngModel)]="invoiceData.quotedTax" [disabled]="true"
+                                placeholder="{{'INVOICE.Tax'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for pincode -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.Pincode'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+
+                            <app-nspl-number name="pincode" [data]="invoiceData.pincode" [disabled]="true"
+                                [(ngModel)]="invoiceData.pincode" placeholder="{{'INVOICE.Pincode'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+                        <!-- label for shipping cost -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.ShippingCost'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quotedShippingCost" [data]="invoiceData.quotedShippingCost"
+                                [(ngModel)]="invoiceData.quotedShippingCost" [disabled]="true"
+                                placeholder="{{'INVOICE.ShippingCost'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for phone number -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PhoneNumber'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="phoneNumber" [data]="invoiceData.phoneNumber"
+                                [(ngModel)]="invoiceData.phoneNumber" [disabled]="true"
+                                [maxlength]="'10'" [minlength]="'10'" 
+                                placeholder="{{'INVOICE.PhoneNumber'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+
+                        <!-- label for total amount -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.QuotedAmount'|translate}}
+                            <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="quotedAmount" [data]="invoiceData.quotedAmount"
+                                [(ngModel)]="invoiceData.quotedAmount" [disabled]="true"
+                                placeholder="{{'INVOICE.QuotedAmount'|translate}}">
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.Comment/SpecialInstruction'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="invoiceData.comments" [(ngModel)]="invoiceData.comments"
+                                [disabled]="true" placeholder=" {{'INVOICE.Comment/SpecialInstruction'|translate}}"
+                                name="comments">
+                            </app-nspl-multiline-text>
+                        </div>
+
+
+                        <!-- label for Bank Name -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.BankName'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="bankName" [items]="bankList" class="chosen-select" bindLabel="description"
+                                bindValue="code" [(ngModel)]="invoiceData.bankName" #bankName="ngModel"
+                                [clearable]='true' [searchable]='false' [dropdownPosition]="'auto'"
+                                placeholder="{{'COMMON.Select' | translate}}" required
+                                [ngClass]="{ 'isInvalid': bankName.touched && bankName.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="(bankName.touched && bankName.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for comments -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountType'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="accountType" [items]="AccountDetails" class="chosen-select"
+                                bindLabel="description" bindValue="code" [(ngModel)]="invoiceData.accountType"
+                                #accountType="ngModel" [clearable]='true' [searchable]='false'
+                                [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select' | translate}}" required
+                                [ngClass]="{ 'isInvalid': accountType.touched && accountType.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="(accountType.touched && accountType.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </div>
+                        </div>
+
+
+                        <!-- label for vendor code -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.VendorCode'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="vendorCode" [data]="invoiceData.vendorCode" [maxlength]="'30'"
+                                [(ngModel)]="invoiceData.vendorCode" [required]="true" appBlockCopyPaste
+                                placeholder="{{'INVOICE.VendorCode'|translate}}">
+                            </app-nspl-number>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+
+                        <!-- label for invoice prepared by -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.InvoicePreparedBy'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.invoicePreparedBy"
+                                placeholder="{{'INVOICE.InvoicePreparedBy'|translate}}"
+                                [(ngModel)]="invoiceData.invoicePreparedBy" [required]="true" name="invoicePreparedBy"
+                                [maxlength]="'25'" NsplAplhaWithSpac>
+                            </app-nspl-text>
+                        </div>
+
+
+                        <!-- label for IFSC code -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.IFSCCode'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text name="ifscCode" [data]="invoiceData.ifscCode" [maxlength]="'15'"
+                                [(ngModel)]="invoiceData.ifscCode" [required]="true" appBlockCopyPaste
+                                placeholder="{{'INVOICE.IFSCCode'|translate}}">
+                            </app-nspl-text>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for work status details -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.WorkStatus'|translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="workStatus" [items]="PaymentDetails" class="chosen-select"
+                                bindLabel="description" bindValue="code" [(ngModel)]="invoiceData.workStatus"
+                                #workStatus="ngModel" [clearable]='true' [searchable]='false'
+                                [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select' | translate}}" required
+                                [ngClass]="{ 'isInvalid': workStatus.touched && workStatus.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="(workStatus.touched && workStatus.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </div>
+                        </div>
+
+                        <!-- label for payment mode details -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.PaymentMode'|translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ng-select name="paymentMode" [items]="cardDetails" class="chosen-select"
+                                bindLabel="description" bindValue="code" [(ngModel)]="invoiceData.paymentMode"
+                                #paymentMode="ngModel" [clearable]='true' [searchable]='false'
+                                [dropdownPosition]="'auto'" placeholder="{{'COMMON.Select' | translate}}" required
+                                [ngClass]="{ 'isInvalid': paymentMode.touched && paymentMode.invalid }">
+                            </ng-select>
+
+                            <div class="error-block" *ngIf="(paymentMode.touched && paymentMode.invalid)">
+                                {{'COMMON.ERRORMESSAGES.Required'|translate}}
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Discount details -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.DiscountDetails'|translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-text [data]="invoiceData.discountDetails"
+                                placeholder="{{'INVOICE.DiscountDetails'|translate}}" [maxlength]="'100'"
+                                [(ngModel)]="invoiceData.discountDetails" [disabled]="true" name="discountDetails">
+                            </app-nspl-text>
+                        </div>
+
+                        <!-- label for Account details -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.AccountNumber'|translate}} <span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number [data]="invoiceData.accountNumber" appBlockCopyPaste
+                                placeholder="{{'INVOICE.AccountNumber'|translate}}" [maxlength]="'25'"
+                                [(ngModel)]="invoiceData.accountNumber" [required]="true" name="accountNumber">
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for item description -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">
+                            {{'INVOICE.ItemDescription'|translate}}<span class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-multiline-text [data]="invoiceData.itemDescription"
+                                placeholder=" {{'INVOICE.ItemDescription'|translate}}"
+                                [(ngModel)]="invoiceData.itemDescription" [disabled]="true" name="itemDescription">
+                            </app-nspl-multiline-text>
+
+                        </div>
+                        <!-- label for unit price -->
+                        <!-- <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.InvoiceUnitPrice'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="invoiceUnitPrice" [data]="invoiceData.invoiceUnitPrice"
+                                [(ngModel)]="invoiceData.invoiceUnitPrice" [required]="true" appBlockCopyPaste
+                                placeholder="{{'INVOICE.InvoiceUnitPrice'|translate}}" >
+                            </app-nspl-number>
+                        </div> -->
+
+
+                        <!-- label for tax -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.InvoiceTax'|translate}}<span
+                                class="required">
+                                *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="invoiceTax" [data]="invoiceData.invoiceTax"
+                                [(ngModel)]="invoiceData.invoiceTax" [required]="true" [maxlength]="'3'"
+                                [maxvalue]="'100'" placeholder="{{'INVOICE.InvoiceTax'|translate}}" appBlockCopyPaste>
+                            </app-nspl-number>
+                        </div>
+
+                    </div>
+                    <!-- /row -->
+
+
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- label for Invoice Shipping Cost -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.InvoiceShippingCost'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="invoiceShippingCost" [data]="invoiceData.invoiceShippingCost"
+                                [(ngModel)]="invoiceData.invoiceShippingCost" [required]="true" appBlockCopyPaste
+                                placeholder="{{'INVOICE.InvoiceShippingCost'|translate}}" [maxlength]="'3'">
+                            </app-nspl-number>
+                        </div>
+
+                        <!-- label for Invoice Amount -->
+                        <label
+                            class="col-lg-2 col-sm-12 col-form-label font-weight-600">{{'INVOICE.InvoiceAmount'|translate}}<span
+                                class="required"> *</span></label>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <app-nspl-number name="invoiceAmount" [data]="invoiceData.invoiceAmount"
+                                [(ngModel)]="invoiceData.invoiceAmount" [required]="true" appBlockCopyPaste
+                                placeholder="{{'INVOICE.InvoiceAmount'|translate}}" [maxlength]="'12'"
+                                [maxvalue]="invoiceTotalAmount">
+                            </app-nspl-number>
+                        </div>
+                    </div>
+
+                    <br>
+                    <!-- row -->
+                    <div class="form-group row">
+                        <!-- Label for Terms and Conditions -->
+                        <label class="col-lg-2 col-sm-12 col-form-label font-weight-600">Terms and Conditions:</label>
+                        <div class="col-lg-10 col-sm-12 col-form-label">
+                            <p>I hereby agree & confirm that, I have taken enough effort to double check the presented details here and submitting
+                                 details without any favoritism to anyone involved for this activity.</p>
+                        </div>
+                    </div>
+                    <!-- /row -->
+
+                </div>
+                <!-- /row -->
+
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="invoiceForm.invalid || invoiceData.invoiceAmount>invoiceTotalAmount || invoiceData.invoiceTax>100"
+                        *ngIf="invoiceType == 'ADD'">{{'COMMON.Submit'|translate}}</button>
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="invoiceForm.invalid || invoiceData.invoiceAmount>invoiceTotalAmount || invoiceData.invoiceTax>100"
+                        *ngIf="invoiceType != 'ADD'">{{'COMMON.Update'|translate}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="clickCancel()">{{'COMMON.Cancel'|translate}}</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,232 @@
+<!-- Page content -->
+<div class="page-content login-cover">
+
+	<!-- Main content -->
+	<div class="content-wrapper">
+
+		<!-- Inner content -->
+		<div class="content-inner">
+
+			<!-- Content area -->
+			<div class="content-login d-flex justify-content-center align-items-center">
+
+				<!-- Login form -->
+				<div class="card mb-0">
+					<div class="card-body">
+
+						<!-- login form -->
+						<div *ngIf="isLogin" class="content">
+							<!-- Form -->
+							<form class="login-form modal-body" (ngSubmit)="submitLoginForm(loginform,loginData)"
+								#loginform="ngForm">
+								<div class="text-center mb-3">
+									<img src="assets/images/logo.png" style="margin-top: -20px;">
+									<br /><br />
+									<h5 class="mb-0">Login to your account</h5>
+									<span class="d-block text-muted">Your credentials</span>
+								</div>
+
+								<!-- row -->
+								<div class="form-group form-group-feedback form-group-feedback-left">
+									<!-- username -->
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<app-nspl-text [data]="loginData.username" placeholder="User Name"
+												[(ngModel)]="loginData.username" [required]="true" name="username"
+												[maxlength]="'25'" (keypress)="RestrictSpace($event)">
+											</app-nspl-text>
+
+											<div class="form-control-feedback">
+												<i class="icon-user text-muted"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /row -->
+
+								<!-- row -->
+								<div class="form-group form-group-feedback form-group-feedback-left">
+									<!-- password -->
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input [type]="show?'text':'password'" class="form-control" name="secretKey"
+												id="secretKey" placeholder="Password" [(ngModel)]="loginData.secretKey"
+												required #secretKey="ngModel" autocomplete="off"
+												(keypress)="RestrictSpace($event)"
+												[ngClass]="{ 'isInvalid': (secretKey.touched) && secretKey.invalid }"
+												maxlength="25" pattern="\S+" appBlockCopyPaste />
+											<span style="position:absolute; right:31px; top:9px; cursor: pointer;"
+												(click)="onClick('secret')">
+												<i class="fa fa-eye" style="color: black" *ngIf="!show"></i>
+												<i class="fa fa-eye-slash" style="color: black" aria-hidden="true"
+													*ngIf="show"></i>
+											</span>
+
+											<div class="form-control-feedback">
+												<i class="icon-lock2 text-muted"></i>
+											</div>
+
+											<div class="error-block" *ngIf="(secretKey.touched && secretKey.invalid)">
+												Password field is required
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /row -->
+
+
+								<!-- label for captcha -->
+								<div class="form-group form-group-feedback form-group-feedback-left">
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+
+										</div>
+
+									</div>
+								</div>
+
+
+								<!-- row -->
+								<div class="form-group d-flex align-items-center">
+									<!-- remember -->
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" name="remember" class="custom-control-input">
+										<span class="custom-control-label">Remember</span>
+									</label>
+									<!-- forget password -->
+									<a href="javascript:;" (click)="forgotPassword('F')" class="ml-auto"
+										id="forget">Forgot password?</a>
+								</div>
+								<!-- /row-->
+
+								<!-- create account for beneficiary -->
+								<div class="form-group form-group-feedback form-group-feedback-left">
+									<a href="javascript:;" class="ml-auto"
+										[routerLink]="['/beneficiary-register']">Register as New Beneficiary</a>
+								</div>
+								<!-- /create account for beneficiary -->
+
+								<!-- row -->
+								<div class="form-group">
+									<!-- register as new member -->
+									<a href="javascript:;" [routerLink]="['/register']" class="ml-auto"
+										id="forget">Register as New Member</a>
+								</div>
+								<!-- /row -->
+
+								<!-- sign in button-->
+								<div class="form-group">
+									<button type="submit" [disabled]="loginform.invalid || !isValidCaptcha"
+										class="btn btn-primary btn-block">Sign in</button>
+								</div>
+								<!-- /sign in button -->
+
+								<!-- <div class="text-center">(OR)</div> -->
+								<!-- <h4>Sign in Using</h4> -->
+								<!-- <div>
+									<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"
+										(click)="signInWithFB()"><i class="icon-facebook"></i></button>
+									&nbsp;
+									<button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i
+											class="icon-twitter"></i></button>
+									&nbsp;
+									<button type="button" class="btn btn-social-icon btn-linkedin btn-rounded"><i
+											class="icon-linkedin2"></i></button>
+								</div> -->
+
+								<!-- <h4>About Me</h4>
+								<h3>{{user.name}}</h3>
+								<h5>Photo of me:</h5>
+								<div class="fakeimg"><img src="{{user.photoUrl}}"></div> -->
+								<!-- 
+								<a href="javascript:;" class="icon-button google-plus"
+									(click)="socialSignIn('google')"><i class="icon-google-plus"></i><span></span></a>
+
+								<a href="javascript:;" class="icon-button facebook" (click)="socialSignIn('facebook')">
+									<i class="icon-facebook"></i><span></span></a>
+
+								<a href="javascript:;" class="icon-button twitter"><i
+										class="icon-twitter"></i><span></span></a>
+
+								<a href="javascript:;" class="icon-button linkedin2"><i
+										class="icon-linkedin2"></i><span></span></a> -->
+
+							</form>
+							<!-- /Form -->
+						</div>
+
+						<!-- /login form -->
+
+						<!-- Forget FORM -->
+						<div *ngIf="isForget" class="content">
+							<!-- Form -->
+							<form class="forget-form modal-body" (ngSubmit)="submitforgetForm(forgetform,forgetData)"
+								#forgetform="ngForm">
+								<div class="text-center mb-3">
+									<img src="assets/images/logo.png" style="margin-top: -37px;">
+									<br /><br />
+
+									<h5 class="mb-0"> Forget Password </h5>
+									<span class="d-block text-muted">Enter your e-mail address below to reset your
+										password.</span>
+									<br />
+
+									<!-- row -->
+									<div class="form-group form-group-feedback form-group-feedback-left">
+										<!-- email -->
+										<app-nspl-text [data]="forgetData.emailid" placeholder="Email"
+											[(ngModel)]="forgetData.emailid" [required]="true" name="emailid"
+											[controlInput]="'Email'" (email)="getEmail($event)">
+										</app-nspl-text>
+										<div class="form-control-feedback">
+											<i class="icon-envelope text-muted"></i>
+										</div>
+
+									</div>
+									<!-- /row -->
+
+									<!-- row -->
+									<div class="form-group form-group-feedback form-group-feedback-left">
+										<!-- captcha -->
+										<app-captcha (captcha)="getCaptcha($event)"></app-captcha>
+									</div>
+									<!-- /row -->
+
+									<!-- row -->
+									<div class="form-group row">
+										<!-- back button -->
+										<div class="col-md-5">
+											<a href="javascript:;" id="back" (click)="forgotPassword('B')"><button
+													type="button" class="btn btn-danger btn-block">Back</button></a>
+										</div>
+										<!-- submit button -->
+										<div class="col-md-5 ml-auto">
+											<button type="submit"
+												[disabled]="forgetform.invalid || !isValidCaptcha || !isValidEmail"
+												class="btn btn-primary btn-block">Submit</button>
+										</div>
+									</div>
+									<!-- /row -->
+								</div>
+							</form>
+							<!-- /Form -->
+						</div>
+
+						<!-- /Forget FORM -->
+					</div>
+				</div>
+
+
+			</div>
+			<!-- /content area -->
+
+		</div>
+		<!-- /inner content -->
+
+	</div>
+	<!-- /main content -->
+
+</div>
+
+<ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>

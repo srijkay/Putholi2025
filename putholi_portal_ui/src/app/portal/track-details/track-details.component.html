@@ -1,0 +1,613 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent-subpage">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:;" class="logo me-auto"><img src="assets/img/logo-small.png" id="myDiv"
+                class="img-fluid"></a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/home']">Home</a></li>
+                <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
+                        <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#features" class="nav-link scrollto"><span>Features</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#features" class="nav-link scrollto">Philosophy</a></li>
+                        <li><a href="#vision" class="nav-link scrollto">Vision / Mission</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                        <!-- <li><a href="#vision" class="nav-link scrollto">Mission</a></li> -->
+                        <!-- <li><a href="javascript:;" class="nav-link scrollto">Working Model</a></li> -->
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#portfolio" class="nav-link scrollto"><span>Gallery</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#portfolio" class="nav-link scrollto">Pictures</a></li>
+                        <!-- <li><a href="#" class="nav-link scrollto">Videos</a></li>
+              <li><a href="#" class="nav-link scrollto">Stories</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li class="dropdown"><a href="#faq" class="nav-link scrollto"><span>Blogs</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#team" class="nav-link scrollto">Teams</a></li>
+                        <li><a href="#testimonials" class="nav-link scrollto">Testimonials</a></li>
+                        <li><a href="#faq" class="nav-link scrollto">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#footer">Contact</a></li> -->
+                <li><a class="nav-link scrollto" href="javascript:;" [routerLink]="['/portal/trackingdonation']">Track
+                        Money</a></li>
+                <li><a class="nav-link active scrollto" href="javascript:;"
+                        [routerLink]="['/portal/school-list']">Donate</a>
+                </li>
+                <li><a class="nav-link scrollto" [href]="env.adminUrl">Login/Register</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+
+
+    </div>
+</header>
+<!-- End Header -->
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" style="margin-top:10px;">
+                    <h2>Track Details</h2>
+                </div>
+                <div class="col-lg-6" style="display: flex;justify-content: right;margin-top:15px;">
+                    <ol>
+                        <li><a href="javascript:;" [routerLink]="['/portal/trackingdonation']">Tracking Your
+                                Donation</a></li>
+                        <li>Track Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-12">
+                    <div class="portfolio-info">
+                        <h3>School Progress -
+                            {{schoolDetails?.schoolStatus=='QUOARV'? "Fund Collection is in Progress":schoolDetails?.schoolStatus?.description}} </h3>
+
+                        <div class="row">
+                            <div class="col-sm-12 tabs">
+                                <div class="portlet-body">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#tab_1" data-toggle="tab">School
+                                                Information</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_2" data-toggle="tab">Requirement
+                                                Information</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_3" data-toggle="tab">Pre-Images</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_4" data-toggle="tab">Fund Raised Details</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_5" data-toggle="tab">Expense / Invoice
+                                                Details</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_6" data-toggle="tab">Post Images</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- School Information -->
+                                        <div id="tab_1" class="tab-pane active in"><br>
+                                            <h3>{{schoolDetails?.schoolName}}, {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+                                            <!-- row -->
+
+                                            <h5>School Information</h5>
+                                            <hr />
+                                            <div class="form-group row">
+
+                                                <!-- label for registration number -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Registration Number
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.schoolRegNo}}</p>
+                                                </div>
+
+                                                <!-- label for school name -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">School Name :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.schoolName}}</p>
+                                                </div>
+                                            </div>
+                                            <!-- /row -->
+
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for school type -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">School Type :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.schoolType?.description}}</p>
+                                                </div>
+
+                                                <!-- label for no.of students -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Number of Students
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.noOfStudents}}</p>
+                                                </div>
+                                            </div>
+                                            <!-- /row -->
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+                                                <!-- label for no.of teachers -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Number of Teachers
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.noOfTeachers}}</p>
+                                                </div>
+
+                                                <!-- label for no.of teachers -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Educational District
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.educationalDistrict?.description}}</p>
+                                                </div>
+                                            </div>
+                                            <!-- /row -->
+                                            <!-- /School Information  -->
+                                            <br>
+                                            <!-- Contact Information -->
+
+                                            <h5>Contact Information</h5>
+                                            <hr />
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for primary contact name -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Primary Contact Name
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.primaryName}}</p>
+                                                </div>
+
+                                                <!-- label for secondary contact name -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">DEO/BEO/CEO Name
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.secondaryName}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for primary contact number -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Primary Mobile Number
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.primaryNumber}}</p>
+                                                </div>
+
+                                                <!-- label for secondary contact number -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">DEO/BEO/CEO Number
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.secondaryNumber}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+                                                <!-- label for primary contact email -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Primary
+                                                    Contact Email :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.primaryEmail}}</p>
+                                                </div>
+
+                                                <!-- label for secondary contact email -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">DEO/BEO/CEO
+                                                    Email:</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.contactsInfo?.secondaryEmail}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+                                            <!-- /contact information -->
+                                            <br>
+
+                                            <!-- Address Information -->
+
+                                            <h5>Address Information</h5>
+                                            <hr />
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for Address line 1 -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Address Line1
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.addressLine1}}</p>
+                                                </div>
+
+                                                <!-- label for address line 2 -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Address Line2
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.addressLine2}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for locality -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Locality
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.locality}}</p>
+                                                </div>
+
+                                                <!-- label for city -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">City
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.city}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for district -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">District
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.district?.description}}</p>
+                                                </div>
+
+                                                <!-- label for state -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">State
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p *ngIf="schoolDetails?.addressInfo?.state == 'TN'">TamilNadu</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+
+                                            <!-- row -->
+                                            <div class="form-group row">
+
+                                                <!-- label for country -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Country
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.country?.description}}</p>
+                                                </div>
+
+                                                <!-- label for pincode -->
+                                                <label class="col-lg-3 col-sm-12 col-form-label">Pincode
+                                                    :</label>
+                                                <div class="col-md-3">
+                                                    <p>{{schoolDetails?.addressInfo?.pincode}}</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- /row -->
+
+                                        </div>
+                                        <!-- /School Information -->
+
+                                        <!-- Requirement Information -->
+                                        <div id="tab_2" class="tab-pane fade"><br>
+                                            <h3>{{schoolDetails?.schoolName}}, {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+
+                                            <!-- table -->
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped"
+                                                    style="border:solid 1px #dedede;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="6">Requirement Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Requirement Type</th>
+                                                            <th>Asset Name</th>
+                                                            <th>Asset Type</th>
+                                                            <th>Quantity</th>
+                                                            <th>Comments</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr *ngFor="let data of requirementInfo, index as i">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{data?.requirementType}}</td>
+                                                            <td>{{data?.assetName}}</td>
+                                                            <td>{{data?.assetType}}</td>
+                                                            <td>{{data?.quantity}}</td>
+                                                            <td>{{data?.comments}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /table -->
+
+                                        </div>
+                                        <!-- /Requirement Information -->
+
+                                        <!-- Pre-Images -->
+                                        <div id="tab_3" class="tab-pane fade"><br>
+                                            <h3>{{schoolDetails?.schoolName}}, {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+
+                                            <div class="row portfolio-container" data-aos="fade-up"
+                                                data-aos-delay="100">
+
+                                                <div class="col-lg-4 col-md-6 portfolio-item filter-app odd gradeX"
+                                                    *ngFor="let data of requirementImages">
+                                                    <div class="portfolio-wrap">
+                                                        <img src="{{data?.fileData}}" class="img-fluid" alt=""
+                                                            style="height: 300px; width: 100% !important; padding: 10px;">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- /Pre-Images -->
+
+                                        <!-- Fund Raised Details -->
+                                        <div id="tab_4" class="tab-pane fade"><br>
+                                            <h3>{{schoolDetails?.schoolName}},
+                                                {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped"
+                                                    style="border:solid 1px #dedede">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="5">Fund Raising Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Name</th>
+                                                            <th>Donor Type</th>
+                                                            <th>Amount</th>
+                                                            <th>Current Status</th>
+                                                            <th>Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let data of fundRaisedDetails, index as i">
+
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{data?.name}}</td>
+                                                            <td>{{data?.organizationType == null? 'Individual' :
+                                                                'corporate' }}</td>
+
+                                                            <td>{{data?.amount}}</td>
+                                                            <td>{{data?.remarks}}</td>
+                                                            <td>Thanks for your contribution</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="estimatedAmount>adjustableAmount.configValue">
+                                                            <td>{{fundRaisedDetails?.length+1}}</td>
+                                                            <td>Total Remaining Amount</td>
+                                                            <td></td>
+                                                            <td>{{estimatedAmount}}</td>
+                                                            <td>Partially Collected</td>
+                                                            <td>
+                                                                <a
+                                                                    [routerLink]="['/portal/donate/', schoolDetails?.schoolInfoId]">Click
+                                                                    here to Donate
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- /Fund Raised Details -->
+
+                                        <!-- Expense / Invoice Details -->
+                                        <div id="tab_5" class="tab-pane fade"><br>
+                                            <h3>{{schoolDetails?.schoolName}},
+                                                {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped"
+                                                    style="border:solid 1px #dedede;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="6">Expense Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Requirement List</th>
+                                                            <th>Vendor Name</th>
+                                                            <th>Quotation Amount</th>
+                                                            <th>Invoice Amount</th>
+                                                            <th>Units</th>
+                                                            <th>Amount Spent</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Comments</th>
+                                                            <th>View Receipts/Bills</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="(!requirementInfo?.invoiceDetails?.length)">
+                                                        <ng-container
+                                                            *ngFor="let reqInfo of requirementInfo, index as i">
+                                                            <tr
+                                                                *ngFor="let data of reqInfo.invoiceDetails; index as in">
+                                                                <td>{{i+1+in}}</td>
+                                                                <td>{{reqInfo?.assetName}}</td>
+                                                                <td>{{data?.invoicePreparedBy}}</td>
+                                                                <td>{{data?.quotedAmount}}</td>
+                                                                <td>{{data?.invoiceAmount}}</td>
+                                                                <td>{{data?.quantity}}</td>
+                                                                <td>{{data?.invoiceAmount}}</td>
+                                                                <td *ngIf="data?.workStatus == 'FC'">Fully Completed
+                                                                </td>
+                                                                <td *ngIf="data?.workStatus == 'PC'">Partially Completed
+                                                                </td>
+                                                                <td>{{data?.comments}}</td>
+                                                                <!-- <td *ngIf="receiptList"><a href="javascript:;"
+                                                                    (click)="onReceiptTemplate(receiptImages, data?.invoiceId)">Click
+                                                                    here</a></td> -->
+
+                                                                <td *ngIf="data?.receiptImage"><a href="javascript:;"
+                                                                        (click)="download(data.invoiceId)">Click
+                                                                        here to download</a></td>
+
+                                                            </tr>
+
+                                                        </ng-container>
+
+                                                        <tr class="odd" *ngIf="(!invoiceDetails?.length)">
+                                                            <td style="text-align: center" colspan="10"
+                                                                class="dataTables_empty"><b>
+                                                                    No Records Found</b>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- / Expense / Invoice Details -->
+
+                                        <!-- Post Images -->
+                                        <div id="tab_6" class="tab-pane fade"><br>
+                                            <h3>{{schoolDetails?.schoolName}},
+                                                {{schoolDetails?.addressInfo?.locality}}
+                                                (Dist).</h3>
+
+                                            <div class="row portfolio-container" data-aos="fade-up"
+                                                data-aos-delay="100">
+                                                <div class="col-lg-4 col-md-6 portfolio-item filter-app odd gradeX"
+                                                    *ngFor="let data of requirementPostImages">
+                                                    <div class="portfolio-wrap">
+                                                        <img src="{{data?.fileData}}" class="img-fluid" alt=""
+                                                            style="height: 300px; width: 100% !important; padding: 10px;">
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                            <tr class="odd" *ngIf="(!requirementPostImages?.length)">
+                                                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                                                        No Records Found</b>
+                                                </td>
+                                            </tr>
+
+                                        </div>
+                                        <!-- /Post Images -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+</main><!-- End #main -->
+
+
+
+<!-- /view Images -->
+
+<!-- show quotation Images-->
+<ng-template #receiptImages>
+    <div class="modal-header">
+
+        <h4 class="modal-title">Receipt Images</h4>
+
+        <span type="button" class="close pull-right" aria-hidden="true" aria-label="Close" (click)="modalRef.hide()">
+            <i class="fa fa-times"></i>
+        </span>
+
+    </div>
+
+    <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 295px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalRef.hide()">Cancel</button>
+    </div>
+</ng-template>
+<!-- // show quotation Images-->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="section-bg">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Putholi</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="http://newrta.com/">NEWRTA</a>
+        </div>
+    </div>
+</footer>
+<!-- End  Footer -->

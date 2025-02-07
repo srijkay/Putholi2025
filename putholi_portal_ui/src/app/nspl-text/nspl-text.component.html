@@ -1,0 +1,8 @@
+<input [type]="controlType" autocomplete="off" [required]="required" class="form-control" [disabled]="disabled"
+    [minlength]="minlength" [(ngModel)]="data" #name="ngModel" (input)="onChange()" [placeholder]="placeholder"
+    (change)="onChange()" (focus)="onFocus()" (blur)="onBlur(data)" [ngStyle]="styleObject()" [maxlength]="maxlength"
+    autocomplete="off" [ngClass]="{ 'isInvalid': (name.touched|| submitted) && name.invalid }" />
+
+<span *ngIf="((name.touched||submitted) && name.invalid)" class="help-block-error">
+   This field cannot be left blank</span>
+<span *ngIf="(helpText != null && showHelpText)" class="help-block">{{helpText}}</span>
