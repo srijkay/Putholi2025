@@ -25,7 +25,7 @@ This document provides an overview of the technologies and tools used in the pro
 
 Ensure the following dependencies are installed:
 
-- **Java 11 or later** (for Spring Boot)
+- **Java 1.7** (for Spring Boot)
 - **Node.js v14** and **npm** (for frontend and server dependencies)
 - **Angular CLI** (for managing the Angular project)
 - **Maven** (for building and running the backend)
@@ -44,7 +44,7 @@ Ensure the following dependencies are installed:
    ```sh
    cd backend
    mvn clean install
-   mvn spring-boot:run
+   java -jar target\putholi-api-0.0.1-RELEASE.jar 
    ```
 
 3. **Frontend Setup (Angular 10):**
@@ -55,13 +55,6 @@ Ensure the following dependencies are installed:
    ng serve
    ```
 
-4. **Node.js Server Setup:**
-
-   ```sh
-   cd server
-   npm install
-   node server.js
-   ```
 
 ## Deployment Strategy
 
