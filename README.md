@@ -1,74 +1,81 @@
-# Putholi2025
+**Project Documentation**
 
-Project Documentation
-
-Project Overview
+## Project Overview
 
 This document provides an overview of the technologies and tools used in the project, including backend, frontend, build tools, and deployment strategies.
 
-Technologies Used
+## Technologies Used
 
-Backend
+### Backend
 
-Spring Boot: Used for developing the backend REST APIs.
+- **Spring Boot**: Used for developing the backend REST APIs.
+- **Maven**: Used for dependency management and project build automation.
 
-Maven: Used for dependency management and project build automation.
+### Frontend
 
-Frontend
+- **Angular 10**: Used for developing the frontend application.
 
-Angular 10: Used for developing the frontend application.
+### Server
 
-Server
+- **Node.js v14**: Used for handling server-side logic and API interactions.
 
-Node.js v14: Used for handling server-side logic and API interactions.
+## Development Environment
 
-Development Environment
-
-Prerequisites
+### Prerequisites
 
 Ensure the following dependencies are installed:
 
-Java 1.7v
+- **Java 11 or later** (for Spring Boot)
+- **Node.js v14** and **npm** (for frontend and server dependencies)
+- **Angular CLI** (for managing the Angular project)
+- **Maven** (for building and running the backend)
 
-Node.js v14 and npm (for frontend and server dependencies)
+### Setting Up the Project
 
-Angular CLI (for managing the Angular project)
+1. **Clone the Repository:**
 
-Maven (for building and running the backend)
+   ```sh
+   git clone <repository-url>
+   cd <project-directory>
+   ```
 
-Setting Up the Project
+2. **Backend Setup (Spring Boot + Maven):**
 
-Clone the Repository:
+   ```sh
+   cd backend
+   mvn clean install
+   mvn spring-boot:run
+   ```
 
-git clone <repository-url>
-cd <project-directory>
+3. **Frontend Setup (Angular 10):**
 
-Backend Setup (Spring Boot + Maven):
+   ```sh
+   cd frontend
+   npm install
+   ng serve
+   ```
 
-cd backend
-mvn clean install
+4. **Node.js Server Setup:**
 
-Frontend Setup (Angular 10):
+   ```sh
+   cd server
+   npm install
+   node server.js
+   ```
 
-cd <frontend-project-directory>
-npm install
-ng serve
+## Deployment Strategy
 
+- **Version Control:** The project is hosted on **GitHub**.
+- **Build & Deployment:**
+  - Spring Boot applications are packaged as JAR files and deployed on a server.
+  - Angular applications are built using `ng build --prod` and deployed to a web server.
+  - Node.js server is hosted on a cloud platform or an internal server.
 
-Deployment Strategy
+## Additional Information
 
-Version Control: The project is hosted on GitHub.
+- **Database:** PostgreSQL (if applicable)
+- **Authentication & Security:** JWT-based authentication (if implemented)
+- **API Documentation:** Swagger/OpenAPI (if applicable)
 
-Build & Deployment:
-
-Spring Boot applications are packaged as JAR files and deployed on a server.
-
-Angular applications are built using ng build --prod and deployed to a web server.
-
-
-Additional Information
-
-Database: PostgreSQL (if applicable)
-
-
+For further details, refer to the repository README or project wiki.
 
