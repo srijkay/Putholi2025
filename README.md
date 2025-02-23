@@ -17,7 +17,7 @@ This document provides an overview of the technologies and tools used in the pro
 
 ### Database
 
-- ** PostgreSQL**
+- **PostgreSQL**
 
 
 ### Prerequisites
@@ -62,10 +62,6 @@ Ensure the following dependencies are installed:
   - Spring Boot applications are packaged as JAR files and deployed on a server.
   - Angular applications are built using `ng build --prod` and deployed to a web server.
 
-## Additional Information
-
--  - **Authentication & Security:** JWT-based authentication (if implemented)
-- **API Documentation:** Swagger/OpenAPI (if applicable)
 
 For further details, refer to the repository README or project wiki.
 
