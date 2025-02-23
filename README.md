@@ -15,11 +15,10 @@ This document provides an overview of the technologies and tools used in the pro
 
 - **Angular 10**: Used for developing the frontend application.
 
-### Server
+### Database
 
-- **Node.js v14**: Used for handling server-side logic and API interactions.
+- ** PostgreSQL**
 
-## Development Environment
 
 ### Prerequisites
 
@@ -62,12 +61,10 @@ Ensure the following dependencies are installed:
 - **Build & Deployment:**
   - Spring Boot applications are packaged as JAR files and deployed on a server.
   - Angular applications are built using `ng build --prod` and deployed to a web server.
-  - Node.js server is hosted on a cloud platform or an internal server.
 
 ## Additional Information
 
-- **Database:** PostgreSQL (if applicable)
-- **Authentication & Security:** JWT-based authentication (if implemented)
+-  - **Authentication & Security:** JWT-based authentication (if implemented)
 - **API Documentation:** Swagger/OpenAPI (if applicable)
 
 For further details, refer to the repository README or project wiki.
