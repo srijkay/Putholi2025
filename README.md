@@ -1,12 +1,12 @@
 # Putholi2025
 
-Project Documentation
+**Project Documentation**
 
-Project Overview
+**Project Overview**
 
 This document provides an overview of the technologies and tools used in the project, including backend, frontend, build tools, and deployment strategies.
 
-Technologies Used
+**Technologies Used**
 
 Backend
 
