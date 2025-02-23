@@ -24,7 +24,7 @@ This document provides an overview of the technologies and tools used in the pro
 
 Ensure the following dependencies are installed:
 
-- **Java 1.7** (for Spring Boot)
+- **Java 1.8** (for Spring Boot)
 - **Node.js v14** and **npm** (for frontend and server dependencies)
 - **Angular CLI** (for managing the Angular project)
 - **Maven** (for building and running the backend)
