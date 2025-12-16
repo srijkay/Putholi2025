@@ -22,7 +22,7 @@ export class ForgetPasswordComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.loadScript('assets/js/main.js');
 
-    this._http.get<{ ip: string }>('https://jsonip.com')
+    this._http.get<{ ip: string }>('https://api64.ipify.org?format=json')
       .subscribe(data => {
         this.ipAddress = data
       })
