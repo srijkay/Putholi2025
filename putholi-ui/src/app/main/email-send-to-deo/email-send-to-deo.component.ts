@@ -33,11 +33,13 @@ export class EmailSendToDEOComponent extends BaseComponent implements OnInit {
       console.log(this.requirementList);
     }, 1000);
 
-    this._http.get<{ ip: string }>('https://jsonip.com')
+    this._http.get<{ ip: string }>('https://api64.ipify.org?format=json')
       .subscribe(data => {
         this.ipAddress = data
       })
 
+      console.log(this.ipAddress);
+      
   }
 
 
@@ -76,6 +78,8 @@ export class EmailSendToDEOComponent extends BaseComponent implements OnInit {
   mailData: any = {}
   mailContent: any = ""
   getMailData() {
+    console.log("email sending");
+
     let mailCc: any
 
     if (this.mailData.mailcc != undefined) {
@@ -93,6 +97,9 @@ export class EmailSendToDEOComponent extends BaseComponent implements OnInit {
         }
       }
     }
+
+    console.log("----sending email", this.mailData);
+
     if (this.Valid == true) {
 
       // this.mailData.message = this.mailData.message.replace(/[/]/g, '%2F');

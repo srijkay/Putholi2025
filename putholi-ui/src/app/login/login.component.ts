@@ -169,7 +169,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     else if (type == 'F') {
       this.isLogin = false;
       this.isForget = true;
-      this._http.get<{ ip: string }>('https://jsonip.com')
+      this._http.get<{ ip: string }>('https://api64.ipify.org?format=json')
         .subscribe(data => {
           this.ipAddress = data
         })
