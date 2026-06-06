@@ -217,9 +217,7 @@ public class SchoolApprovalHistoryServiceImpl implements SchoolApprovalHistorySe
 		List<UserRegisterDetails> userDetails = userRegisterService.findByRole(role);
 
 		ApplicationConfig config = applicationService.fetchApplicationConfig(null, configValue);
-		
-		
-		
+
 		if (config != null) {
 			int value = Integer.parseInt(config.getConfigValue());
 			for (int i = 0; i < userDetails.size(); i++) {
@@ -236,7 +234,7 @@ public class SchoolApprovalHistoryServiceImpl implements SchoolApprovalHistorySe
 					model.put("roleName", roleName);
 					model.put("isRejected", isReject);
 					model.put("description", description);
-					
+
 					jmsTemplate.convertAndSend(CommonsConstants.MAIL_BOX,
 							new MailDTO(mailFrom, userRegisterDetails.getEmailId(),
 									"Approvals (or) Rejections Information", "expensesApproved", model));

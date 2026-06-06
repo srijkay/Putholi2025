@@ -154,7 +154,7 @@ public class DonorServiceFacadeImpl implements DonorInfoServiceFacade {
 		ApiResultDTO userAuthDTO;
 
 		/* Verifying email id already exists in the system */
-		if (donorInfoService.verifyEmailExists(donorInfoDTO.getEmailId())) {
+		if (donorInfoService.verifyEmailExistsAndActive(donorInfoDTO.getEmailId(), "Y")) {
 			List<Object> objArray = new ArrayList<>();
 			objArray.add(donorInfoDTO.getEmailId());
 

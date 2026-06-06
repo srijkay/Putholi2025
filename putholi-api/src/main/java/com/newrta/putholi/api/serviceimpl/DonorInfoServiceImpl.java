@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newrta.putholi.api.constants.CommonsConstants;
 import com.newrta.putholi.api.domain.DonorInfo;
+import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.repository.DonorInfoRepository;
 import com.newrta.putholi.api.service.DonorInfoService;
 import com.newrta.putholi.api.util.CommonsUtil;
@@ -33,9 +35,17 @@ public class DonorInfoServiceImpl implements DonorInfoService {
 	 */
 
 	@Override
-	public boolean verifyEmailExists(String emailId) {
+	public ApiResultDTO verifyEmailExists(String locale, String emailId, String active) {
 		log.info("DonorInfoServiceImpl-verifyEmailExists");
-		return donorInfoRepository.existsByEmailIdIgnoreCase(emailId);
+
+		if (!donorInfoRepository.existsByEmailIdIgnoreCaseAndActive(emailId, "Y")) {
+			return ApiResultDTO.builder().apiStatusCode(CommonsConstants.ERROR)
+					.apiStatusDesc("Email id " + emailId + " is not found, please enter a valid Email id ").build();
+		} else {
+			return ApiResultDTO.builder().apiStatusCode(CommonsConstants.SUCCESS)
+					.apiStatusDesc("Entered emailId is valid").build();
+		}
+
 	}
 
 	/**
@@ -92,5 +102,11 @@ public class DonorInfoServiceImpl implements DonorInfoService {
 	public List<DonorInfo> getDonorDetails() {
 		log.info("DonorInfoServiceImpl-getDonorDetails");
 		return donorInfoRepository.findAll();
+	}
+
+	@Override
+	public boolean verifyEmailExistsAndActive(String emailId, String active) {
+		log.info("DonorInfoServiceImpl-verifyEmailExistsAndActive");
+		return donorInfoRepository.existsByEmailIdIgnoreCaseAndActive(emailId, active);
 	}
 }

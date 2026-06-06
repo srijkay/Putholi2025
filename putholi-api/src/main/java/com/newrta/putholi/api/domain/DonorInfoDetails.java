@@ -38,5 +38,9 @@ public class DonorInfoDetails {
 
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
+	
+	@Column(name = "PAN_NUMBER")
+	private String panNumber;
+
 
 }

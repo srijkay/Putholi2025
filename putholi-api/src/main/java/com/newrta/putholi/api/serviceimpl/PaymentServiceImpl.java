@@ -137,6 +137,7 @@ public class PaymentServiceImpl implements PaymentService {
 						+ "redirect_url" + "=" + redirectUrl + "&" + "cancel_url" + "=" + cancelUrl + "&" + "language"
 						+ "=" + "EN";
 
+		log.info("ccaRequest info------{}", ccaRequest);
 		AesCryptUtil aesUtil = new AesCryptUtil(workingKey);
 		String encRequest = aesUtil.encrypt(ccaRequest);
 

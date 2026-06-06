@@ -37,4 +37,5 @@ public class DonorInfoViewDetailsDTO extends GenericSearchDTO {
 
 	private Date todate;
 
+	private String panNumber;
 }

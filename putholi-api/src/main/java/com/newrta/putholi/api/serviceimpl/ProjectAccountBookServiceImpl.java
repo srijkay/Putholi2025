@@ -232,4 +232,13 @@ public class ProjectAccountBookServiceImpl implements ProjectAccountBookService 
 		return projectBookRepo.findByCreatedDateBetween(beginDate, endDate);
 	}
 
+	/**
+	 *
+	 */
+	@Override
+	public List<ProjectAccountBook> findByCreatedBy(String createdBy) {
+		log.info("TrustAccountBookServiceImpl-findByCreatedBy", createdBy);
+		return projectBookRepo.findByCreatedByIgnoreCaseOrderByCreatedDateDesc(createdBy);
+	}
+
 }

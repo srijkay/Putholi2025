@@ -22,7 +22,7 @@ public interface DonorInfoRepository extends JpaRepository<DonorInfo, Long> {
 	 * @param emailId
 	 * @return
 	 */
-	boolean existsByEmailIdIgnoreCase(String emailId);
+	boolean existsByEmailIdIgnoreCaseAndActive(String emailId, String active);
 
 	/**
 	 * @param emailid

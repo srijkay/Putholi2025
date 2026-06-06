@@ -87,6 +87,19 @@ public class DonorInfoResource {
 
 		return new ResponseEntity<>(donorInfoService.getDonorInfoByEmailId(emailId), HttpStatus.OK);
 	}
+	
+	
+	
+	@CrossOrigin
+	@GetMapping(value = "validate/{emailid}")
+	public ResponseEntity<ApiResultDTO> donorInfoByEmailId(
+			@RequestHeader(CommonsConstants.ACCEPT_LANGUAGE) String locale,
+			@RequestHeader(CommonsConstants.AUTHORIZATION) String authorization,
+			@PathVariable("emailid") String emailId) {
+		log.info("DonorInfoResource-getDonorInfoByEmailId");
+
+		return new ResponseEntity<>(donorInfoService.verifyEmailExists(locale, emailId, "Y"), HttpStatus.OK);
+	}
 
 	/**
 	 * 

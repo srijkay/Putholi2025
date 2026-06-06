@@ -3,18 +3,13 @@ package com.newrta.putholi.api.service;
 import java.util.List;
 
 import com.newrta.putholi.api.domain.DonorInfo;
+import com.newrta.putholi.api.model.ApiResultDTO;
 
 /**
  * @author NEWRTA SOLUTIONS
  *
  */
 public interface DonorInfoService {
-
-	/**
-	 * @param emailId
-	 * @return
-	 */
-	boolean verifyEmailExists(String emailId);
 
 	/**
 	 * 
@@ -50,10 +45,24 @@ public interface DonorInfoService {
 	 * @return
 	 */
 	DonorInfo findByOrderId(String orderId);
-	
+
 	/**
 	 * @return
 	 */
 	List<DonorInfo> getDonorDetails();
+
+	/**
+	 * @param emailId
+	 * @param active
+	 * @return
+	 */
+	boolean verifyEmailExistsAndActive(String emailId, String active);
+
+	/**
+	 * @param emailId
+	 * @param active
+	 * @return
+	 */
+	ApiResultDTO verifyEmailExists(String locale, String emailId, String active);
 
 }

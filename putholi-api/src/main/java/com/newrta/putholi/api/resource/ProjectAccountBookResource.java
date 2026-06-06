@@ -83,4 +83,19 @@ public class ProjectAccountBookResource {
 		return new ResponseEntity<>(projectBookService.findByCreatedDateBetween(endDate), HttpStatus.OK);
 	}
 
+	/**
+	 * @param authorization
+	 * @param loggedUser
+	 * @param createdBy
+	 * @return
+	 */
+	@CrossOrigin
+	@GetMapping(value = "/emailId/{email}")
+	public ResponseEntity<List<ProjectAccountBook>> findByCreatedBy(@RequestHeader String authorization,
+			@RequestHeader String loggedUser, @PathVariable("email") String createdBy) {
+		log.info("ProjectAccountBookResource-findByCreatedBy{}", createdBy);
+
+		return new ResponseEntity<>(projectBookService.findByCreatedBy(createdBy), HttpStatus.OK);
+	}
+
 }

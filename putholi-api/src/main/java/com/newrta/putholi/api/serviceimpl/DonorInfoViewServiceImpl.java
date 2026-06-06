@@ -53,7 +53,7 @@ public class DonorInfoViewServiceImpl implements DonorInfoViewService {
 		} catch (JsonProcessingException jpe) {
 			log.error("DonorInfoViewServiceImpl-searchDonorInfo-JsonProcessingException {} {}", jpe.getCause(), jpe);
 		}
-		
+	
 		return donorInfoRepo.searchDonorInfo(searchDTO);
 	}
 

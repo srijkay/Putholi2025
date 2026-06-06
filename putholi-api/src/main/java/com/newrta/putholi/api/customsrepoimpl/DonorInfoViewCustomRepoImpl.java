@@ -58,6 +58,10 @@ public class DonorInfoViewCustomRepoImpl implements DonorInfoViewCustomRepo {
 		if (donorInfoDTO.getAmount() != null) {
 			predicates.add(cb.equal((root.get("amount")), donorInfoDTO.getAmount()));
 		}
+		
+		if (donorInfoDTO.getPanNumber() != null) {
+			predicates.add(cb.equal((root.get("panNumber")), donorInfoDTO.getPanNumber()));
+		}
 
 		if (donorInfoDTO.getFromDate() != null && donorInfoDTO.getTodate() != null) {
 			predicates.add(cb.between(root.get("createdDate"), donorInfoDTO.getFromDate(), donorInfoDTO.getTodate()));

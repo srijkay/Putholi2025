@@ -42,4 +42,9 @@ public interface ProjectAccountBookRepository extends JpaRepository<ProjectAccou
 	 */
 	List<ProjectAccountBook> findByCreatedDateBetween(Date startDate, Date endDate);
 
+	/**
+	 * @param createdBy
+	 * @return
+	 */
+	List<ProjectAccountBook> findByCreatedByIgnoreCaseOrderByCreatedDateDesc(String createdBy);
 }

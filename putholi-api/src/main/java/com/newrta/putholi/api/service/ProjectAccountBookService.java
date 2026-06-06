@@ -44,4 +44,10 @@ public interface ProjectAccountBookService {
 	 * @return
 	 */
 	List<ProjectAccountBook> findByCreatedDateBetween(Date endDate);
+
+	/**
+	 * @param createdBy
+	 * @return
+	 */
+	List<ProjectAccountBook> findByCreatedBy(String createdBy);
 }
