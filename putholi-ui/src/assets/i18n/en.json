@@ -385,11 +385,11 @@
     "UnselectedQuotations": "Unselected Quotations",
     "UploadPreImages": "Upload Pre Images",
     "DDMMYYYY": "DD/MM/YYYY",
-    "QuotationFrom": "Quotation From",
+    "QuotationFrom": "Order From",
     "OrderID": "Order Id",
     "ExpectedStartDate": "Expected Start Date",
     "ExpectedEndDate": "Expected End Date",
-    "QuotationTo": "Quotation To",
+    "QuotationTo": "Order To",
     "Description": "Description",
     "Unit": "Unit",
     "SubmittedDate": "Submitted Date",
@@ -642,7 +642,8 @@
     "Amount": "Amount",
     "FeeType": "Fee Type",
     "ToDate": "To Date",
-    "FromDate": "From Date"
+    "FromDate": "From Date",
+    "PanNumber":"Pan Number"
   },
   "INVOICEPAYMENT": {
     "AddInvoice": "Add Invoice",

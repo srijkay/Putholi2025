@@ -289,7 +289,7 @@
 
                 <!-- Reports -->
                 <li class="nav-item nav-item-submenu" id="submenu"
-                    *ngIf="this.getToken('role')=='ADMIN' || this.getToken('role')=='REVIEW'||this.getToken('role')=='APPRV' || this.getToken('role')=='SUADM' ||this.getToken('role')=='SUUSR'">
+                    *ngIf="this.getToken('role')=='ADMIN' || this.getToken('role')=='REVIEW'||this.getToken('role')=='APPRV' || this.getToken('role')=='SUADM' ||this.getToken('role')=='SUUSR'||this.getToken('role')=='TRUSTM'">
                     <a href="javascript:;" class="nav-link"><i class="fa fa-file"></i> <span>
                             {{'SIDEBAR.Reports'|translate}}</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
@@ -305,7 +305,7 @@
                         </li> -->
 
                         <!--  School Reports -->
-                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR'">
+                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR' && this.getToken('role')!='TRUSTM'">
                             <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-school']"
                                 routerLinkActive="active">
                                 <!-- <i class="icon-folder-search"></i> -->
@@ -316,7 +316,7 @@
                         </li>
 
                         <!-- Requirements Report -->
-                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR'">
+                        <li class="nav-item" *ngIf="this.getToken('role')!='SUADM' && this.getToken('role')!='SUUSR' && this.getToken('role')!='TRUSTM'">
                             <a href="javascript:;" class="nav-link " [routerLink]="['/main/search-requirements']"
                                 routerLinkActive="active">
                                 <!-- <i class="icon-folder-search"></i> -->
@@ -327,14 +327,14 @@
                         </li>
 
                         <!-- Vendor's Report -->
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="this.getToken('role')!='TRUSTM'">
                             <a href="javascript:;" class="nav-link" [routerLink]="['/main/reports']"
                                 routerLinkActive="active">{{'REPORT.Reports'|translate}}
                             </a>
                         </li>
 
                         <!-- Registration Fee Details -->
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="this.getToken('role')!='TRUSTM'">
                             <a href="javascript:;" class="nav-link" [routerLink]="['/main/collection-reports']"
                                 routerLinkActive="active">{{'SIDEBAR.CollectionAmountReport'|translate}}
                             </a>
@@ -348,7 +348,7 @@
                         </li>
 
                         <!-- Cleanup Report -->
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="this.getToken('role')!='TRUSTM'">
                             <a href="javascript:;" class="nav-link" [routerLink]="['/main/deleted-reports']"
                                 routerLinkActive="active">{{'SIDEBAR.DeleteReport'|translate}}
                             </a>

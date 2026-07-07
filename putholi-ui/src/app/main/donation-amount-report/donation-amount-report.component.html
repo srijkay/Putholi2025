@@ -103,16 +103,19 @@
                     <thead>
                         <tr>
                             <th>{{'LOGIN.Username'|translate}}</th>
+                            <th>{{'REPORT.PanNumber'|translate}}</th>
                             <th>{{"MANAGEUSER.City"|translate}}</th>
                             <th>{{'MANAGEUSER.Country' |translate}}</th>
                             <th>{{'REPORT.Amount'|translate}}</th>
                             <th>{{'COMMON.CreatedDate'|translate}}</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <ngx-ui-loader hasProgressBar=false fgsType="three-strings"></ngx-ui-loader>
                         <tr class="odd gradeX" *ngFor="let data of donationList">
                             <td>{{data?.emailId}}</td>
+                            <td>{{data?.panNumber}}</td>
                             <td>{{data?.city}}</td>
                             <td>{{data?.country}}</td>
                             <td>{{data?.amount}}</td>

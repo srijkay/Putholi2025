@@ -62,7 +62,7 @@
     "NoRecords": "பதிவேடுகள் எதுவும் காணப்படவில்லை"
   },
   "LOGIN": {
-    "username": "பயனர் பெயர்",
+    "Username": "பயனர் பெயர்",
     "Password": "கடவுச்சொல்",
     "Beneficiary": "பயனாளிக்கான தகவலை உருவாக்கவும்",
     "Remember": "நினைவில் கொள்க",
@@ -639,7 +639,9 @@
     "CollectionAmountReport": "வசூல் தொகை அறிக்கை",
     "DonationAmountReport": "நன்கொடை தொகை அறிக்கை",
     "ToDate": "இன்று வரை",
-    "FromDate": "தேதியிலிருந்து"
+    "FromDate": "தேதியிலிருந்து",
+    "PanNumber":"பான் எண்",
+     "Amount": "தொகை"
   },
   "INVOICEPAYMENT": {
     "AddInvoice": "விலைப்பட்டியல் சேர்",
