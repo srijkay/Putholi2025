@@ -1,9 +1,11 @@
 package com.newrta.putholi.api.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.newrta.putholi.api.customsrepo.RequirementInfoCustomRepo;
 import com.newrta.putholi.api.domain.RequirementInfo;
+import com.newrta.putholi.api.model.ProjectDetailsDTO;
 
 /**
  * @author NEWRTA SOLUTIONS
@@ -143,7 +146,8 @@ public interface RequirementInfoRepository extends JpaRepository<RequirementInfo
 			+ "(SELECT m.description FROM MasterCodeDetails m WHERE m.code = r.requirementType AND m.codeType ='REQTY') as requirementType, "
 			+ "(SELECT m.description FROM MasterCodeTypeDetails m WHERE m.codeType = r.assetType AND m.codeType IN ('INF', 'SPR', 'OTH')) as assetType,  CASE WHEN r.assetType = 'OTH' THEN assetName ELSE (SELECT m.description FROM MasterCodeDetails m  WHERE m.code = r.assetName AND m.codeType in ('INF', 'SPR')) END as assetName,  r.quantity, (SELECT m.description FROM MasterCodeDetails m WHERE m.code = r.reqStatus AND m.codeType ='STS') as reqStatus) "
 			+ "From RequirementInfo r where  r.requirementId =:requirementId and r.reqStatus =:reqStatus")
-	List<RequirementInfo> findByReqDescription(@Param("reqStatus") String reqStatus, @Param("requirementId") Long requirementId);
+	List<RequirementInfo> findByReqDescription(@Param("reqStatus") String reqStatus,
+			@Param("requirementId") Long requirementId);
 
 	/**
 	 * @param assetName
@@ -164,4 +168,21 @@ public interface RequirementInfoRepository extends JpaRepository<RequirementInfo
 			+ " and EXISTS (select 1 FROM InvoiceDetails f WHERE f.invoiceStatus IN :invoiceStatus and e.requirementId= f.requirementDetails.requirementId)")
 	int checkInvoiceAndRequirementStatus(@Param("reqStatus") List<String> reqStatus,
 			@Param("invoiceStatus") List<String> invoiceStatus);
+
+	/**
+	 * @param reqStatusCode
+	 * @return
+	 */
+	@Query(value = "SELECT SUM(q.totalAmount) FROM RequirementInfo r LEFT JOIN QuotationInfo q ON q.quotateStatus = 'QUOARV'"
+			+ "WHERE q.requirementInfo.requirementId = r.requirementId AND r.reqStatus=:reqStatusCode")
+	BigDecimal contributedAmount(@Param("reqStatusCode") String reqStatusCode);
+
+	/**
+	 * @param status
+	 * @return
+	 */
+	@Query("SELECT new com.newrta.putholi.api.model.ProjectDetailsDTO( p.paymentId, p.projectId) FROM ProjectAccountBook p JOIN ConsolidateRefInfo c ON c.status=:status"
+			+ " where p.projectIncExpId = (SELECT MAX(p2.projectIncExpId) FROM ProjectAccountBook p2 WHERE p2.projectId = c.consolidateId AND p2.paymentId IS NOT NULL)")
+	List<ProjectDetailsDTO> getCompletedProjects(@Param("status") String status, Pageable pageable);
+
 }

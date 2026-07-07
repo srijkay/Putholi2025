@@ -1,8 +1,11 @@
 package com.newrta.putholi.api.serviceimpl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.domain.UserRegisterDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.MailDTO;
 import com.newrta.putholi.api.model.MasterCodeResultDTO;
 import com.newrta.putholi.api.model.RequirementDTO;
@@ -590,5 +594,24 @@ public class RequirementServiceImpl implements RequirementService {
 		}
 
 		return requirementInfo;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public List<CompletedProjectDto> getTheCompletedProjects(String status) {
+
+		List<CompletedProjectDto> results = viewRepo.getTheCompletedProjects(status);
+
+		List<Object[]> assetResults = viewRepo.getAssetNamesByStatus(status);
+		
+		Map<Long, String> assetMap = assetResults.stream()
+				.collect(Collectors.groupingBy(row -> ((Number) row[0]).longValue(),
+						Collectors.mapping(row -> (String) row[1], Collectors.joining(", "))));
+
+		results.forEach(dto -> dto.setAssetName(assetMap.get(dto.getConsolidateId())));
+
+		return results;
 	}
 }

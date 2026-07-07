@@ -92,4 +92,10 @@ public interface ConsolidateRefService {
 	 * @return
 	 */
 	int checkRequirementPendingStatus(Long consolidateId, String reqStatus);
+
+	/**
+	 * @param status
+	 * @return
+	 */
+	int pendingSchoolCount(String status);
 }

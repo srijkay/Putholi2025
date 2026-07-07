@@ -6,9 +6,25 @@ import com.newrta.putholi.api.model.ApiResultDTO;
  *
  */
 import com.newrta.putholi.api.model.CompletionofRequirementsDTO;
+import com.newrta.putholi.api.model.ProjectCountDTO;
 
+/**
+ * @author vijaya
+ *
+ */
 public interface CompletionofRequirementsService {
 
-	ApiResultDTO saveCompletionofRequirementsInfo(String loggedUser, CompletionofRequirementsDTO completionofrequirementsDTO);
+	/**
+	 * @param loggedUser
+	 * @param completionofrequirementsDTO
+	 * @return
+	 */
+	ApiResultDTO saveCompletionofRequirementsInfo(String loggedUser,
+			CompletionofRequirementsDTO completionofrequirementsDTO);
 
+	/**
+	 * @param loggedUser
+	 * @return
+	 */
+	ProjectCountDTO summaryCount(String loggedUser);
 }

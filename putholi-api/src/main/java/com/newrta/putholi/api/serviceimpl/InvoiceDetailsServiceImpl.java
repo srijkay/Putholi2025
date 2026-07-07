@@ -327,7 +327,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 	 */
 	@Override
 	public Long updateInvoicePayment(InvoiceDetailsDTO invoiceDTO) {
-		log.info("InvoiceDetailsServiceImpl-findByInvoiceStatus");
+		log.info("InvoiceDetailsServiceImpl-findByInvoiceStatus ===={}", invoiceDTO);
 
 		InvoiceDetails invoiceDetails = modelMapper.map(invoiceDTO, InvoiceDetails.class);
 

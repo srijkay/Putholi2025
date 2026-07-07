@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.RequirementDTO;
 import com.newrta.putholi.api.model.RequirementSearchDTO;
 import com.newrta.putholi.api.model.SchoolApprovalHistoryDTO;
@@ -307,5 +308,13 @@ public class RequirementRefResource {
 		log.info("RequirementRefResource-fetchRequirementInfoDescription {}", id);
 
 		requirementService.updateApprovalDetails(id, reqStatus);
+	}
+	
+	@CrossOrigin
+	@GetMapping(value = "/completed-projects")
+	public ResponseEntity<List<CompletedProjectDto>> getCompletedProjects(@RequestHeader String authorization, @RequestHeader String loggedUser) {
+		log.info("RequirementRefResource-getCompletedProjects");
+
+		return new ResponseEntity<>(requirementService.getTheCompletedProjects("CMPLTD"), HttpStatus.OK);
 	}
 }

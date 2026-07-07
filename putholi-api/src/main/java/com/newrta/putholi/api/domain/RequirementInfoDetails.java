@@ -36,8 +36,14 @@ public class RequirementInfoDetails {
 	@Column(name = "LOCALITY")
 	private String locality;
 
+	@Column(name = "city")
+	private String city;
+
 	@Column(name = "DISTRICT")
 	private String district;
+
+	@Column(name = "DISTRICT_DESC")
+	private String districtDesc;
 
 	@Column(name = "CONSOLIDATE_ID")
 	private Long consolidateId;

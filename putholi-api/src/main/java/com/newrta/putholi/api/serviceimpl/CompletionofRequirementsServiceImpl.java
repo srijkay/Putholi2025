@@ -1,5 +1,7 @@
 package com.newrta.putholi.api.serviceimpl;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,8 @@ import com.newrta.putholi.api.domain.UserRegisterDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.model.CompletionofRequirementsDTO;
 import com.newrta.putholi.api.model.MailDTO;
+import com.newrta.putholi.api.model.ProjectCountDTO;
+import com.newrta.putholi.api.model.ProjectDetailsDTO;
 import com.newrta.putholi.api.repository.CompletionofRequirementsRepository;
 import com.newrta.putholi.api.repository.RequirementInfoRepository;
 import com.newrta.putholi.api.service.CompletionofRequirementsService;
@@ -274,5 +279,26 @@ public class CompletionofRequirementsServiceImpl implements CompletionofRequirem
 		jmsTemplate.convertAndSend(CommonsConstants.MAIL_BOX,
 				new MailDTO(mailFrom, emailId, "Completion Of Requirements", "completionReq", model));
 
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public ProjectCountDTO summaryCount(String loggedUser) {
+		log.info("RequirementApprovalHistoryFacadeImpl-summaryCount ");
+
+		String[] status = { "REDALL", "GNRORD", "ORDINI", "ADMINV", "INVAPR", "PARAPR", "ADMINV", "INVAPR", "INVREV",
+				"PARPAY", "PAYINI", "PARREJ", "PARREC", "ADMREC", "RECREJ", "APRREC", "PROCES", "PARFAL", "PAYFAL",
+				"PAYCMP" };
+
+		long reqCount = requirementInfoRepository.checkPendingReqStatus(Arrays.asList("CMPLTD"), "Y");
+		long schoolCompletedCount = consolidateService.pendingSchoolCount("CMPLTD");
+		long progressCount = consolidateService.checkPendingStatus(Arrays.asList(status));
+		BigDecimal contributedAmout = requirementInfoRepository.contributedAmount("CMPLTD");
+		List<ProjectDetailsDTO> paymentIds = requirementInfoRepository.getCompletedProjects("CMPLTD", PageRequest.of(0, 5));
+
+		return ProjectCountDTO.builder().requirementsCompleted(reqCount).schoolsCount(schoolCompletedCount)
+				.progressSchoolCount(progressCount).projectDetailsDTO(paymentIds).contributeAmount(contributedAmout).build();
 	}
 }

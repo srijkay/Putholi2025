@@ -66,4 +66,7 @@ public interface ConsolidateRefRepository extends JpaRepository<ConsolidateRefIn
 	@Query("From ConsolidateRefInfo c where c.schoolInfo.schoolInfoId = :schoolInfoId and c.status =:status")
 	List<ConsolidateRefInfo> findConsolidateDetailsBySchoolId(@Param("schoolInfoId") Long schoolInfoId, @Param("status") String status);
 
+	
+	@Query(value = "SELECT COUNT(*) FROM ConsolidateRefInfo r WHERE r.status = :status")
+	int pendingSchoolCount(@Param("status") String status);
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.RequirementDTO;
 import com.newrta.putholi.api.model.RequirementSearchDTO;
 
@@ -71,7 +72,7 @@ public interface RequirementService {
 	 * 
 	 * @param requirementId
 	 * @param status
-	 * @return 
+	 * @return
 	 */
 
 	void updateApprovalDetails(Long requirementId, String reqStatus);
@@ -82,8 +83,7 @@ public interface RequirementService {
 	 * @return
 	 */
 	List<RequirementInfo> findAllByRequirementInfoList(String loggedUser, Long consolidateId);
-	
-	
+
 	/**
 	 * @param loggedUser
 	 * @return
@@ -134,7 +134,7 @@ public interface RequirementService {
 	 * @param consolidateId
 	 * @return
 	 */
-	void deleteRequirementDetails(String loggedUser, String active,String reqStatus, Long consolidateId);
+	void deleteRequirementDetails(String loggedUser, String active, String reqStatus, Long consolidateId);
 
 	/**
 	 * @param requirementId
@@ -175,7 +175,11 @@ public interface RequirementService {
 	 * @return
 	 */
 	List<RequirementInfo> findRequirementsByConsolidateId(String loggedUser, Long consolidateId);
-	
-	
-	
+
+	/**
+	 * @param reqStatusCode
+	 * @return
+	 */
+	List<CompletedProjectDto> getTheCompletedProjects(String reqStatusCode);
+
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.model.CompletionofRequirementsDTO;
+import com.newrta.putholi.api.model.ProjectCountDTO;
 import com.newrta.putholi.api.service.CompletionofRequirementsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,5 +48,14 @@ public class CompletionofRequirementsResource {
 		return new ResponseEntity<>(
 				completionservice.saveCompletionofRequirementsInfo(loggedUser, completionofrequirementsDTO),
 				HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@GetMapping("/count")
+	public ResponseEntity<ProjectCountDTO> summaryCount(@RequestHeader String authorization,
+			@RequestHeader String loggedUser) {
+		log.info("CompletionofRequirementsResource-summaryCount {}");
+
+		return new ResponseEntity<>(completionservice.summaryCount(loggedUser), HttpStatus.OK);
 	}
 }

@@ -199,7 +199,7 @@ public class ProjectAccountBookServiceImpl implements ProjectAccountBookService 
 	 */
 	@Override
 	public ProjectAccountBook findTopByOrderByIdDesc() {
-		log.info("ProjectAccountBookServiceImpl-findTopByOrderByIdDesc");
+		log.info("ProjectAccountBookServiceImpzl-findTopByOrderByIdDesc");
 
 		return projectBookRepo.findTopByOrderByProjectIncExpIdDesc();
 	}

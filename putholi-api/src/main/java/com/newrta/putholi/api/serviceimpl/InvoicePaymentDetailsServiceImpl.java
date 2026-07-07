@@ -202,7 +202,12 @@ public class InvoicePaymentDetailsServiceImpl implements InvoicePaymentDetailsSe
 				try {
 
 					// get the UTR date
-					String dateString = row.getCell(26).toString();
+					Cell cell = row.getCell(26);
+
+					String dateString = null;
+					if (cell != null) {
+						dateString = cell.toString().trim();
+					}
 					Date inputDateFormat = null;
 
 					if (dateString != null && !dateString.isEmpty()) {
@@ -215,11 +220,10 @@ public class InvoicePaymentDetailsServiceImpl implements InvoicePaymentDetailsSe
 					}
 
 					// get reference number (Invoice Id)
-					;
 
 					// get the UTR Number
-					long longValueutr;
-					long longValue;
+					long longValueutr = 0;
+					long longValue = 0;
 					if (row.getCell(28).getCellType() == CellType.NUMERIC) {
 						double doubleUtrValue = row.getCell(28).getNumericCellValue();
 						longValueutr = (long) doubleUtrValue;
@@ -229,14 +233,18 @@ public class InvoicePaymentDetailsServiceImpl implements InvoicePaymentDetailsSe
 						longValue = (long) doubleValue;
 
 					} else {
-						String utrCellValue = row.getCell(28).toString();
-						double doubleUtrValue = Double.parseDouble(utrCellValue);
-						longValueutr = (long) doubleUtrValue;
+						if (row.getCell(28) != null && !cell.toString().trim().isEmpty()) {
+							String utrCellValue = row.getCell(28).toString();
+							double doubleUtrValue = Double.parseDouble(utrCellValue);
+							longValueutr = (long) doubleUtrValue;
+						}
 
 						// get invoice id
-						String cellValue = row.getCell(14).toString();
-						double doubleValue = Double.parseDouble(cellValue);
-						longValue = (long) doubleValue;
+						if (row.getCell(14) != null) {
+							String cellValue = row.getCell(14).toString();
+							double doubleValue = Double.parseDouble(cellValue);
+							longValue = (long) doubleValue;
+						}
 					}
 
 					Cell statusCell = row.getCell(21);

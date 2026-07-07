@@ -283,4 +283,13 @@ public class ConsolidateRefServiceImpl implements ConsolidateRefService {
 		return requirementRepo.checkPendingStatus(consolidateId, reqStatus, "Y");
 	}
 
+	/**
+	 *
+	 */
+	@Override
+	public int pendingSchoolCount(String status) {
+		log.info("RequirementServiceImpl-pendingSchoolCount{}", status);
+		return consolidateRefRepository.pendingSchoolCount(status);
+	}
+
 }

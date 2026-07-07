@@ -171,7 +171,8 @@ public class DonorServiceFacadeImpl implements DonorInfoServiceFacade {
 		/* generate the user login for registered user */
 		UserLogin donorLogin = new UserLogin();
 		donorLogin.setUserName(donorInfoResult.getEmailId());
-		donorLogin.setPassword(passwordEncoder.encode(donorInfoDTO.getSecretKey()));
+		
+		donorLogin.setPassword(passwordEncoder.encode(CommonsUtil.randomAlphaNumeric(RANDOM_NUM_LENGTH)));
 		donorLogin.setAccountEnabled(true);
 		donorLogin.setRoles("DONOR");
 
