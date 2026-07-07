@@ -4,7 +4,6 @@
   // API url (LOCAL ENVIRONMENT)
   // window.__env.apiUrl = 'http://localhost:9000/api';
   // window.__env.adminUrl = "http://localhost:4200/admin";
-
   // API url (PROD ENVIRONMENT)
   window.__env.apiUrl = 'https://putholitrust.com/api';
   window.__env.adminUrl = "https://putholitrust.com/admin";
