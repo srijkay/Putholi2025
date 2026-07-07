@@ -19,7 +19,10 @@ export class CommonService {
 		this.platformId = platformId;
 		this._apiUrl = this.envservice.apiUrl;
 		// this._apiUrl=window.location.href.split('#')[0];
-		// this._apiUrl = "http://localhost:8081";		
+		// this._apiUrl = "http://localhost:8081";	
+		
+		console.log(this._apiUrl, "fghj");
+		
 	}
 
 

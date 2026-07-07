@@ -14,6 +14,10 @@ export class TrackDonationComponent extends BaseComponent implements OnInit {
   public trackDonationData: any = {}
   consolidateId: any
   schoolDetails: any = {}
+  pageNumber: number = 1
+  page: any = 1;
+  pageSize: any
+  pagesize: any = 10
 
   constructor(inj: Injector, private sanitizer: DomSanitizer) {
     super(inj)
@@ -55,6 +59,7 @@ export class TrackDonationComponent extends BaseComponent implements OnInit {
             this.isShowTracking = false
           } else {
             this.isShowTracking = true
+            this.getTheTrackingDetails(successData.emailId)
             this.toastr.successToastr(successData.statusDescription, "Success")
           }
         } else {
@@ -64,6 +69,28 @@ export class TrackDonationComponent extends BaseComponent implements OnInit {
         this.toastr.errorToastr(e.error.statusDescription, 'Oops!')
       })
     }
+  }
+
+  projectBookData: any = {}
+  collectedDonationAmount: any = 0
+  getTheTrackingDetails(email: any) {
+    this.commonService.callApi('projectbook/emailId/' + email, "", 'get', false, true, 'LOG').then(success => {
+      let successData: any = success;
+      if (successData) {
+        this.projectBookData = successData
+        this.pageSize = this.projectBookData.length
+
+
+        this.collectedDonationAmount = this.projectBookData.reduce((sum: any, current: any) => sum + current.amount, 0);
+
+      console.log(this.projectBookData, this.collectedDonationAmount);
+
+      } else {
+        this.toastr.errorToastr(successData.statusDescription, 'Error');
+      }
+    }).catch(e => {
+      this.toastr.errorToastr(e.error.statusDescription, 'Oops!')
+    })
   }
 
   /****************************************************************************
@@ -87,7 +114,33 @@ export class TrackDonationComponent extends BaseComponent implements OnInit {
   }
 
   /****************************************************************************/
+  showPassword: boolean = false
+  emailValidateion(form: any, loginData: any) {
+    if (form.valid) {
+      this.commonService.callApi('donorauthenticate/validate/' + loginData.username, "", 'get', false, true, 'LOG').then(success => {
+        let successData: any = success;
+        if (successData.apiStatusCode === "SUCCESS") {
+          // this.showPassword = true
+          this.setToken('emailId', loginData.username)
+          this.isShowTracking = true
+          this.getTheTrackingDetails(loginData.username)
+          this.toastr.successToastr(successData.statusDescription, "Success")
+        } else {
+          // this.showPassword = false
+          this.isShowTracking = false
+          this.toastr.errorToastr(successData.apiStatusDesc, 'Oops!')
+        }
+      }).catch(e => {
+        this.ngxLoader.stop();
+        console.log(e);
+        this.toastr.errorToastr(e.error.statusDescription, 'Oops!')
+      })
+    } else {
+      this.submitted = true;
+      this.toastr.errorToastr("Please provide the required data", "Oops!")
+    }
 
+  }
   /****************************************************************************
  @PURPOSE      : captcha validation
  @PARAMETERS   : NA

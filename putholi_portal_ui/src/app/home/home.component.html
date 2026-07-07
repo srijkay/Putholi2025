@@ -88,7 +88,7 @@
                     </div>
                     <!-- End imagescrolls item -->
                   </div>
-                 
+
                 </div>
               </div>
             </div>
@@ -97,8 +97,43 @@
         </section><!-- End Testimonials Section -->
       </div>
 
-      <div class="col-lg-6 intro-img order-lg-last order-first" data-aos="zoom-out" data-aos-delay="100">
-        <img src="assets/img/intro-img.svg" alt="" class="img-fluid img-margin">
+      <div class="col-lg-6 intro-info order-lg-last order-first" data-aos="zoom-out" data-aos-delay="100">
+        <div class="table-responsive">
+          <table class="table table-hover table-striped table-bordered" style="border:solid 1px #dedede;">
+            <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+              <tr>
+                <th>S.NO</th>
+                <th>Summary of Activities as of {{formattedDate}}</th>
+                <th>Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of completedProjects; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data.name }}</td>
+                <td *ngIf="i !== completedProjects.length - 1"> {{ data.value }}</td>
+
+
+                <!-- Last row: display all payment IDs -->
+                <td *ngIf="i === completedProjects.length - 1" >
+                  <ng-container *ngFor="let project of data?.value" >
+                    <a class="payment-cell" [routerLink]="['/portal/track-details', project.projectId]">
+                      {{ project.paymentId }}
+                    </a>
+                  </ng-container> 
+
+                </td>
+
+
+              </tr>
+              <tr class="odd" *ngIf="(!completedProjects?.length)">
+                <td style="text-align: center" colspan="10" class="dataTables_empty"><b>
+                    No Records Found</b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -144,26 +179,26 @@
           <div class="documents-content" data-aos="fade-left" data-aos-delay="100">
             <h2>Putholi Policy Documents</h2>
 
-            <div >
-              <a id="doc" [routerLink]="['/privacy-policy']"  >
+            <div>
+              <a id="doc" [routerLink]="['/privacy-policy']">
                 Privacy policy
               </a>
             </div>
             <br>
             <div>
-              <a id="doc" [routerLink]="['/refund-cancellation']" >
+              <a id="doc" [routerLink]="['/refund-cancellation']">
                 Refund and cancellation Policy
               </a>
             </div>
             <br>
             <div>
-              <a id="doc" [routerLink]="['/terms-and-conditions']" >
+              <a id="doc" [routerLink]="['/terms-and-conditions']">
                 Terms and Conditions
               </a>
             </div>
             <br>
             <div>
-              <a id="doc" [routerLink]="['/registration-policy']"  >
+              <a id="doc" [routerLink]="['/registration-policy']">
                 Registration Policy
               </a>
             </div>
@@ -171,8 +206,35 @@
           </div>
         </div>
         <div class="col-lg-5 col-md-6">
-          <div class="documents-img" data-aos="fade-right" data-aos-delay="100">
-            <img src="assets/img/documentsImage.jpg" alt="" >
+          <div class="documents-content" data-aos="fade-left" data-aos-delay="100">
+            <h2>Financials</h2>
+            <div class="card" style="margin-bottom:5px" *ngFor="let report of reports">
+              <ng-container *ngIf="report.pdfUrl">
+                <a [href]="report.pdfUrl" target="_blank" class="text-decoration-none text-dark">
+                  <div class="card-body">
+                    <i class="fa fa-folder" aria-hidden="true"></i> &nbsp; &nbsp;
+                    <span class="card-title" style="font-weight: 600;">{{ report.year }}</span>
+                    <p class="card-text" style="margin: revert; padding:0px">{{ report.title }}</p>
+
+                    <div class="d-flex">
+                      <p class="card-text mb-0" style="margin-bottom: 0rem !important; padding:0px">View Report</p>
+                      <button class="form-button btn btn-primary ms-auto" type="button">Open PDF</button>
+                    </div>
+                  </div>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="!report.pdfUrl">
+                <div class="card-body">
+                  <i class="fa fa-folder" aria-hidden="true"></i> &nbsp; &nbsp;
+                  <span class="card-title" style="font-weight: 600;">{{ report.year }}</span>
+                  <p class="card-text" style="margin: revert; padding:0px">{{ report.title }}</p>
+
+                  <div class="d-flex">
+                    <p class="card-text mb-0" style="margin-bottom: 0rem !important; padding:0px">{{ report.alt }}</p>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
           </div>
         </div>
       </div>
@@ -367,8 +429,7 @@
 
       </div> -->
 
-      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200"
-        style="height: auto !important;">
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" style="height: auto !important;">
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app" *ngFor="let data of requirementPostImages">
           <div class="portfolio-wrap">

@@ -29,7 +29,7 @@ import { PreGalleryComponent } from './portal/pre-gallery/pre-gallery.component'
 import { PostGalleryComponent } from './portal/post-gallery/post-gallery.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
@@ -101,6 +101,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PaginationModule.forRoot(),
     NgbModule,
     BrowserAnimationsModule,
+    NgbPaginationModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

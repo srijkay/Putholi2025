@@ -85,7 +85,9 @@
                 <div class="col-lg-12">
                     <div class="portfolio-info">
                         <h3>School Progress -
-                            {{schoolDetails?.schoolStatus=='QUOARV'? "Fund Collection is in Progress":schoolDetails?.schoolStatus?.description}} </h3>
+                            {{schoolDetails?.schoolStatus=='QUOARV'? "Fund Collection is in
+                            Progress":schoolDetails?.schoolStatus?.description}}
+                        </h3>
 
                         <div class="row">
                             <div class="col-sm-12 tabs">
@@ -111,6 +113,10 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#tab_6" data-toggle="tab">Post Images</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#tab_7" data-toggle="tab">Latest Projects
+                                                Completed</a>
                                         </li>
                                     </ul>
 
@@ -551,6 +557,49 @@
 
                                         </div>
                                         <!-- /Post Images -->
+
+
+                                        <!-- Latest completed projects -->
+                                        <div id="tab_7" class="tab-pane fade"><br>
+
+
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped"
+                                                    style="border:solid 1px #dedede;">
+
+                                                    <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+                                                        <tr>
+                                                            <th>S.NO</th>
+                                                            <th>School Name</th>
+                                                            <th>Project Name</th>
+                                                            <th> City, District</th>
+                                                            <th>Project Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr *ngFor="let data of completedProjects; index as i">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{data?.schoolName}}</td>
+                                                            <td>{{data?.assetName}}</td>
+                                                            <td>{{data?.city}}, {{data?.districtDesc}}</td>
+                                                            <td>{{data?.totalAmount}}</td>
+                             
+                                                        </tr>
+
+
+                                                        <tr class="odd" *ngIf="(!completedProjects?.length)">
+                                                            <td style="text-align: center" colspan="10"
+                                                                class="dataTables_empty"><b>
+                                                                    No Records Found</b>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- /Latest completed projects -->
 
                                     </div>
                                 </div>

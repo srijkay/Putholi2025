@@ -175,7 +175,7 @@
                                 </div>
 
                                 <!-- Donor Login Form -->
-                                <form class="form-horizontal" (ngSubmit)="onLogin(loginform,loginData)"
+                                <form class="form-horizontal" (ngSubmit)="getValidEmail(loginform,loginData)"
                                     #loginform="ngForm">
 
                                     <div *ngIf="isOrganzn">
@@ -186,16 +186,16 @@
                                                 <app-nspl-text [data]="loginData.username"
                                                     [(ngModel)]="loginData.username" placeholder="Enter Email id"
                                                     [required]="true" name="username" [controlInput]="'Email'"
-                                                    (email)="getEmail($event)" [submitted]="submitted">
+                                                    [submitted]="submitted">
                                                 </app-nspl-text>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
+                                        <!-- <div class="row mb-3" *ngIf="showPassword">
                                             <label class="col-sm-4 col-form-label">Password
                                                 <span class="required"> *</span></label>
                                             <div class="col-sm-8">
-                                                <!-- password -->
+                                                password
                                                 <input [type]="show?'text':'password'" class="form-control"
                                                     name="secretKey" id="secretKey" placeholder="Password"
                                                     [(ngModel)]="loginData.secretKey" required #secretKey="ngModel"
@@ -214,7 +214,7 @@
                                                     This field cannot be left blank
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <!-- label for captcha -->
                                         <div class="form-group form-group-feedback form-group-feedback-left">
@@ -228,18 +228,18 @@
                                             </div>
                                         </div>
 
-                                        <div style="float:right;">
+                                        <!-- <div style="float:right;" *ngIf="showPassword">
                                             <a href="javascript:;"
                                                 [routerLink]="['/portal/forget-password/', schoolDetailsId]"
                                                 class="ml-auto">Forgot password?</a>
-                                        </div>
+                                        </div> -->
                                         <!-- row -->
                                         <br>
                                         <div class="row">
                                             <div class="col-sm-4" style="margin-left: 11px;"></div>
                                             <div class="col-sm-2" style="padding:3px">
                                                 <button type="submit"
-                                                    [disabled]="loginform.invalid||showingEstimatedAmount.YouCanContributeinRs > showingEstimatedAmount.YouCanContribute || !isValidCaptcha || !isValidEmail"
+                                                    [disabled]="loginform.invalid||showingEstimatedAmount.YouCanContributeinRs > showingEstimatedAmount.YouCanContribute || !isValidCaptcha"
                                                     class="form-button bt-2" style="width:92px;">Login</button>
                                             </div> &nbsp;&nbsp;&nbsp;&nbsp;
                                             <div class="col-sm-2" style="padding:3px">
@@ -324,6 +324,23 @@
                                     </div>
                                     <!-- /row -->
 
+                                     <!-- row -->
+                                    <div class="row mb-3">
+                                        <!-- label for PAN Number -->
+                                        <label class="col-sm-4 col-form-label">PAN Number
+                                           
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <app-nspl-text [data]="donateNowData.panNumber" [maxlength]="'15'"
+                                                [(ngModel)]="donateNowData.panNumber" placeholder="PAN Number"
+                                                name="panNumber">
+                                            </app-nspl-text>
+                                            <p style="font-weight: 600;">Enter Valid PAN to issue Tax Deduction
+                                                Certificate</p>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+
                                     <!-- row -->
                                     <div class="row mb-3">
                                         <!-- label for address -->
@@ -339,22 +356,7 @@
                                     </div>
                                     <!-- /row -->
 
-                                    <!-- row -->
-                                    <div class="row mb-3">
-                                        <!-- label for PAN Number -->
-                                        <label class="col-sm-4 col-form-label">PAN Number
-                                            <span class="required"> *</span>
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <app-nspl-text [data]="donateNowData.panNumber" [maxlength]="'15'"
-                                                [(ngModel)]="donateNowData.panNumber" placeholder="PAN Number"
-                                                [required]="true" name="panNumber" [submitted]="submitted">
-                                            </app-nspl-text>
-                                            <p style="font-weight: 600;">Enter Valid PAN to issue Tax Deduction
-                                                Certificate</p>
-                                        </div>
-                                    </div>
-                                    <!-- /row -->
+                                   
 
                                     <!-- row -->
                                     <div class="row mb-3" style="margin-top: -25px;">
@@ -403,8 +405,9 @@
                                             <intl-input-phone [ConfigurationOption]="configOption1" id="phoneNumber"
                                                 name="phoneNumber" [(ngModel)]="donateNowData.phoneNumber"
                                                 #phoneNumber="ngModel" [submitted]="submitted" class="intlPhone"
+                                                 [NumberTextValue]="maskingNumber"
                                                 [ngClass]="{ 'isInvalid':  (submitted || phoneNumber.touched) && phoneNumber.invalid }"
-                                                required>
+                                                required [SelectedCountryISOCode]="maskingNumber=='----- -----' ?'IN':''">
                                             </intl-input-phone>
                                             <span class="error-block"
                                                 *ngIf="((submitted || phoneNumber.touched) && phoneNumber.invalid)">
@@ -415,8 +418,7 @@
                                     <!-- /row -->
 
                                     <!-- row -->
-                                    <div class="row mb-3">
-                                        <!-- Label for password -->
+                                    <!-- <div class="row mb-3">
                                         <label class="col-sm-4 col-form-label">Password
                                             <span class="required"> *</span></label>
                                         <div class="col-sm-8">
@@ -436,12 +438,12 @@
                                                 This field cannot be left blank
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- /row -->
 
 
                                     <!-- label for confirm password -->
-                                    <div class="form-group form-group-feedback form-group-feedback-left">
+                                    <!-- <div class="form-group form-group-feedback form-group-feedback-left">
                                         <div class="row mb-3">
                                             <label class="col-sm-4  col-form-label ">Confirm
                                                 Password
@@ -471,7 +473,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- /row -->
 
                                     <!-- row -->
@@ -497,9 +499,7 @@
                                     <div class="row">
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-2">
-                                            <button type="submit" [disabled]="
-                                            (donateNowData.confirmPassword != donateNowData.secretKey)"
-                                                class="form-button">Register</button>
+                                            <button type="submit" class="form-button">Register</button>
 
                                         </div>&nbsp; &nbsp;
                                         <div class="col-sm-4">
@@ -560,8 +560,7 @@
                                     <!-- /row -->
 
                                     <!-- row -->
-                                    <div class="row mb-3">
-                                        <!-- label for password -->
+                                    <!-- <div class="row mb-3">
                                         <label class="col-sm-4 col-form-label">Password
                                             <span class="required"> *</span></label>
                                         <div class="col-sm-8">
@@ -582,13 +581,12 @@
                                                 This field cannot be left blank
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- /row -->
 
                                     <!-- row -->
-                                    <div class="form-group form-group-feedback form-group-feedback-left">
+                                    <!-- <div class="form-group form-group-feedback form-group-feedback-left">
                                         <div class="row mb-3">
-                                            <!-- label for confirm password -->
                                             <label class="col-sm-4  col-form-label ">Confirm
                                                 Password
                                                 <span class="required">*</span></label>
@@ -617,19 +615,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- /row -->
 
                                     <!-- row -->
                                     <div class="row mb-3">
                                         <!-- label for PAN Number -->
                                         <label class="col-sm-4 col-form-label">PAN Number
-                                            <span class="required"> *</span>
+                                            <span> </span>
                                         </label>
                                         <div class="col-sm-8">
                                             <app-nspl-text [data]="donateNowData.panNumber" [maxlength]="'15'"
                                                 [(ngModel)]="donateNowData.panNumber" placeholder="PAN Number"
-                                                [required]="true" name="panNumber" [submitted]="submitted">
+                                                name="panNumber">
                                             </app-nspl-text>
                                             <p style="font-weight: 600;">Enter Valid PAN to issue Tax Deduction
                                                 Certificate</p>
@@ -684,9 +682,9 @@
 
                                             <intl-input-phone [ConfigurationOption]="configOption1" id="phoneNumber"
                                                 name="phoneNumber" [(ngModel)]="donateNowData.phoneNumber"
-                                                #phoneNumber="ngModel" class="intlPhone"
+                                                #phoneNumber="ngModel" class="intlPhone"  [NumberTextValue]="maskingNumber"
                                                 [ngClass]="{ 'isInvalid': (submitted || phoneNumber.touched) && phoneNumber.invalid }"
-                                                required>
+                                                required [SelectedCountryISOCode]="maskingNumber=='----- -----' ?'IN':''">
                                             </intl-input-phone>
                                             <span class="error-block"
                                                 *ngIf="((submitted || phoneNumber.touched) && phoneNumber.invalid)">
@@ -872,9 +870,7 @@
                                     <div class="row">
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-2">
-                                            <button type="submit" [disabled]="
-                                                (donateNowData.confirmPassword != donateNowData.secretKey)"
-                                                class="form-button">Register</button>
+                                            <button type="submit" class="form-button">Register</button>
 
                                         </div> &nbsp;&nbsp;
                                         <div class="col-sm-4">

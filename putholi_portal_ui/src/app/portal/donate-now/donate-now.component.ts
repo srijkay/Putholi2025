@@ -20,6 +20,8 @@ export class DonateNowComponent extends BaseComponent implements OnInit {
   public isRupees: boolean = false;
   rePassword: any = "password";
   display = false;
+  maskingNumber: string = "----- -----"
+  alternateMaskingNumber: string = "----- -----"
 
 
   configOption1: ConfigurationOptions;
@@ -259,9 +261,40 @@ export class DonateNowComponent extends BaseComponent implements OnInit {
    ****************************************************************************/
   isValidEmail: boolean
   getEmail(event) {
+
+    console.log(event)
     this.isValidEmail = event
 
+    // this.getValidEmail(this.loginData.username)
   }
+
+  showPassword: boolean = false
+  getValidEmail(form: any, loginData: any) {
+
+      if (form.valid && this.showingEstimatedAmount.YouCanContributeinRs) {
+        this.commonService.callApi('donorauthenticate/validate/' + loginData.username, "", 'get', false, true, 'LOG').then(success => {
+          let successData: any = success;
+          if (successData.apiStatusCode === "SUCCESS") {
+            // this.showPassword = true
+            this.setToken('emailId', loginData.username)
+            this.router.navigate(['/portal/summary/', this.schoolDetailsId]);
+            this.setToken("donatedAmount", this.showingEstimatedAmount.YouCanContributeinRs)
+            this.toastr.successToastr(successData.statusDescription, "Success")
+          } else {
+            this.showPassword = false
+            this.toastr.errorToastr(successData.apiStatusDesc, 'Oops!')
+          }
+        }).catch(e => {
+          this.ngxLoader.stop();
+          console.log(e);
+          this.toastr.errorToastr(e.error.statusDescription, 'Oops!')
+        })
+      } else {
+        this.submitted = true;
+        this.toastr.errorToastr("Please provide the required data", "Oops!")
+      }
+
+    }
 
   /******************************************************************/
   /****************************************************************************
@@ -270,111 +303,111 @@ export class DonateNowComponent extends BaseComponent implements OnInit {
          @RETURN       : NA
   ****************************************************************************/
   password: any = "password";
-  show = false;
+    show = false;
 
-  onClick(type) {
-    if (type === 'secret') {
-      if (this.password === 'password') {
-        this.password = 'text';
-        this.show = true;
-      } else {
-        this.password = 'password';
-        this.show = false;
-      }
-    }
-
-    if (type === 'cnfrm') {
-      if (this.rePassword === 'password') {
-        this.rePassword = 'text';
-        this.display = true;
-      } else {
-        this.rePassword = 'password';
-        this.display = false;
-      }
-    }
-  }
-
-  /****************************************************************************/
-
-
-  organzForm() {
-    this.isOrganzn = false;
-    this.isRegister = false;
-    this.isForm = true;
-
-  }
-  individualForm() {
-    this.isOrganzn = true;
-    this.isRegister = false;
-    this.isForm = false;
-    this.isCorporate = false;
-  }
-  donationForm() {
-    this.isForm = true;
-    this.isRegister = true;
-    this.isCorporate = false;
-  }
-  donationCorporate() {
-    this.isForm = true;
-    this.isRegister = false;
-    this.isCorporate = true;
-  }
-  onMoney(e) {
-    if (e.target.value == 'N') {
-      this.toastr.errorToastr(" Could not accept other currencies at this moment.", "Sorry! ")
-    }
-  }
-  onTransfer() {
-    this.isRupees = false
-  }
-
-  paymentCancel() {
-    console.log("lkjhg");
-    this.isOrganzn = false;
-    this.isRegister = false;
-    this.isForm = false;
-    this.isCorporate = false;
-    $(".form-check-input").prop('checked', false);
-  }
-
-
-  paymentDetails(id) {
-    this.commonService.callApi("projectbook/" + id, '', 'get', false, true, 'LOG').then(success => {
-      let successData: any = success;
-      let sum = 0
-      for (let i = 0; i < successData.length; i++) {
-        sum += successData[i].amount;
-      }
-      this.showingEstimatedAmount.collectedAmount = sum
-      this.showingEstimatedAmount.YouCanContribute = this.quotateAmount - this.showingEstimatedAmount.collectedAmount
-      console.log(this.showingEstimatedAmount.YouCanContribute);
-    })
-  }
-
-  getSchoolList(id) {
-    this.commonService.callApi('schoolinfo/' + id, '', 'get', false, true, 'LOG').then(success => {
-      let successData: any = success
-      console.log(successData);
-      this.schoolDetails = successData
-      let id = this.schoolDetails.consolidateRefInfo.find(x => x.status != 'CMPLTD')
-      console.log(id);
-
-      this.paymentDetails(id.consolidateId)
-      let requirementInfo: any = id.requirementInfo.filter(x => x.reqStatus == 'QUOARV')
-
-      requirementInfo.forEach(e => {
-        console.log(e.quotationInfo);
-        let sum = 0;
-        let quotData: any = e.quotationInfo.filter(x => x.quotateStatus == 'QUOARV')
-        for (let i = 0; i < quotData.length; i++) {
-          console.log(quotData[i].totalAmount);
-          sum = quotData[i].totalAmount;
+    onClick(type) {
+      if (type === 'secret') {
+        if (this.password === 'password') {
+          this.password = 'text';
+          this.show = true;
+        } else {
+          this.password = 'password';
+          this.show = false;
         }
-        this.quotateAmount += sum
-        console.log(this.quotateAmount);
-        this.setToken("quotateAmount", this.quotateAmount)
-      });
+      }
 
-    })
+      if (type === 'cnfrm') {
+        if (this.rePassword === 'password') {
+          this.rePassword = 'text';
+          this.display = true;
+        } else {
+          this.rePassword = 'password';
+          this.display = false;
+        }
+      }
+    }
+
+    /****************************************************************************/
+
+
+    organzForm() {
+      this.isOrganzn = false;
+      this.isRegister = false;
+      this.isForm = true;
+
+    }
+    individualForm() {
+      this.isOrganzn = true;
+      this.isRegister = false;
+      this.isForm = false;
+      this.isCorporate = false;
+    }
+    donationForm() {
+      this.isForm = true;
+      this.isRegister = true;
+      this.isCorporate = false;
+    }
+    donationCorporate() {
+      this.isForm = true;
+      this.isRegister = false;
+      this.isCorporate = true;
+    }
+    onMoney(e) {
+      if (e.target.value == 'N') {
+        this.toastr.errorToastr(" Could not accept other currencies at this moment.", "Sorry! ")
+      }
+    }
+    onTransfer() {
+      this.isRupees = false
+    }
+
+    paymentCancel() {
+      console.log("lkjhg");
+      this.isOrganzn = false;
+      this.isRegister = false;
+      this.isForm = false;
+      this.isCorporate = false;
+      $(".form-check-input").prop('checked', false);
+    }
+
+
+    paymentDetails(id) {
+      this.commonService.callApi("projectbook/" + id, '', 'get', false, true, 'LOG').then(success => {
+        let successData: any = success;
+        let sum = 0
+        for (let i = 0; i < successData.length; i++) {
+          sum += successData[i].amount;
+        }
+        this.showingEstimatedAmount.collectedAmount = sum
+        this.showingEstimatedAmount.YouCanContribute = this.quotateAmount - this.showingEstimatedAmount.collectedAmount
+        console.log(this.showingEstimatedAmount.YouCanContribute);
+      })
+    }
+
+    getSchoolList(id) {
+      this.commonService.callApi('schoolinfo/' + id, '', 'get', false, true, 'LOG').then(success => {
+        let successData: any = success
+        console.log(successData);
+        this.schoolDetails = successData
+        let id = this.schoolDetails.consolidateRefInfo.find(x => x.status != 'CMPLTD')
+        console.log(id);
+
+        this.paymentDetails(id.consolidateId)
+        let requirementInfo: any = id.requirementInfo.filter(x => x.reqStatus == 'QUOARV')
+
+        requirementInfo.forEach(e => {
+          console.log(e.quotationInfo);
+          let sum = 0;
+          let quotData: any = e.quotationInfo.filter(x => x.quotateStatus == 'QUOARV')
+          for (let i = 0; i < quotData.length; i++) {
+            console.log(quotData[i].totalAmount);
+            sum = quotData[i].totalAmount;
+          }
+          this.quotateAmount += sum
+          console.log(this.quotateAmount);
+          this.setToken("quotateAmount", this.quotateAmount)
+        });
+
+      })
+    }
   }
-}

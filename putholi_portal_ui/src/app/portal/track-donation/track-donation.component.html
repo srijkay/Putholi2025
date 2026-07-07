@@ -9,7 +9,7 @@
                 <li class="dropdown"><a href="#about" class="nav-link scrollto"><span>About</span> <i
                             class="bi bi-chevron-down"></i></a>
                     <ul>
-                         <li><a href="#about" class="nav-link scrollto">About us</a></li>
+                        <li><a href="#about" class="nav-link scrollto">About us</a></li>
                         <li><a href="#footer" class="nav-link scrollto">Contact us</a></li>
                         <li><a href="#documents" class="nav-link scrollto">Putholi Policy Documents</a></li>
                     </ul>
@@ -83,7 +83,7 @@
 
                 <div class="portfolio-info" *ngIf="!isShowTracking">
 
-                    <form class="form-horizontal" (ngSubmit)="onLogin(loginform,loginData)" #loginform="ngForm">
+                    <form class="form-horizontal" (ngSubmit)="emailValidateion(loginform,loginData)" #loginform="ngForm">
 
                         <div class="row mb-3 ">
                             <label class="col-sm-4 col-md-4  col-lg-2 col-form-label">Email ID<span class="required">
@@ -91,16 +91,16 @@
                             <div class="col-sm-8 col-md-6 col-lg-4">
                                 <app-nspl-text [data]="loginData.username" [(ngModel)]="loginData.username"
                                     placeholder="User ID/Email" [required]="true" name="username"
-                                    [controlInput]="'Email'">
+                                    [controlInput]="'Email'" >
                                 </app-nspl-text>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3" *ngIf="showPassword">
                             <label class="col-sm-4 col-md-4 col-lg-2 col-form-label">Password
                                 <span class="required"> *</span></label>
                             <div class="col-sm-8 col-md-6 col-lg-4">
-                                <!-- password -->
+                                password
                                 <input [type]="show?'text':'password'" class="form-control" name="secretKey"
                                     id="secretKey" placeholder="Password" [(ngModel)]="loginData.secretKey" required
                                     #secretKey="ngModel" autocomplete="off"
@@ -115,7 +115,7 @@
                                     This field cannot be left blank
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- label for captcha -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
@@ -127,10 +127,10 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4 col-md-4 col-lg-8" style="float:right;">
+                        <!-- <div class="col-sm-4 col-md-4 col-lg-8" style="float:right;" *ngIf="showPassword">
                             <a href="javascript:;" [routerLink]="['/portal/forget-password/', 0]" class="ml-auto">Forgot
                                 password?</a>
-                        </div>
+                        </div> -->
 
                         <!-- row -->
                         <br>
@@ -153,13 +153,15 @@
 
                 <div class="col-lg-12" style="margin-bottom:40px;" *ngIf="isShowTracking">
                     <div class="portfolio-info">
-                        <h3>Provide your tracking number to view the status of your contribution and the school
+                        <h3>Please click on your tracking number to view the status of your contribution and the school
                             progress.</h3>
                         <div class="row">
-                            <div class="col-lg-6">
+                        <span style="font-weight:600; text-align:right;"> Total amount donated to Putholi Trust till date is RS. {{collectedDonationAmount}}</span>
+
+                            <div class="col-lg-12">
                                 <form class="form-horizontal" (ngSubmit)="onTrack(trackDonationform,trackDonationData)"
                                     #trackDonationform="ngForm">
-                                    <div class="row mb-3">
+                                    <!-- <div class="row mb-3">
                                         <label for="inputPassword" class="col-sm-4 col-form-label">Enter Tracking
                                             Number</label>
                                         <div class="col-sm-8">
@@ -168,16 +170,50 @@
                                                 placeholder="Enter Tracking Number" [required]="true" name="paymentId">
                                             </app-nspl-text>
                                         </div>
+                                    </div> -->
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped" style="border:solid 1px #dedede">
+
+                                            <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
+                                                <tr>
+                                                    <th>S.No</th>
+                                                    <th>Tracking Id</th>
+                                                    <th>Payment date</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- '/portal/track-details/', this.paymentList.consolidateId -->
+
+                                                <tr *ngFor="let data of projectBookData|slice: (pageNumber-1) * pagesize : (pageNumber-1) * pagesize + pagesize, index as i">
+                                                    <td>{{i+1}}</td>
+                                                    <td> <a href="javascript:;"
+                                                            [routerLink]="['/portal/track-details/', data?.projectId]">{{data?.paymentId}}
+                                                        </a></td>
+                                                    <td>{{data?.createdDate|date:"dd/MM/yyyy"}}</td>
+                                                    <td>{{data?.amount}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <br />
+                                        <div style="float: right;">
+                                            <ngb-pagination [collectionSize]="projectBookData.length" [(page)]="pageNumber"
+                                                [pageSize]="pagesize" [maxSize]="5" [rotate]="true" [ellipses]="false"
+                                                [boundaryLinks]="true">
+                                            </ngb-pagination>
+                                        </div>
                                     </div>
 
 
                                     <div class="row">
-                                        <div class="col-sm-4"></div>
+                                        <!--  <div class="col-sm-4"></div>
                                         <div class="col-sm-5">
                                             <button type="submit" [disabled]="trackDonationform.invalid"
                                                 class="form-button">Get Your Track Details</button>
-                                        </div>
-                                        <div class="col-sm-3">
+                                        </div> -->
+                                        <div class="col-sm-3 text-right">
                                             <button type="button" class="form-button" href="javascript:;"
                                                 [routerLink]="['/home']" style="width:100px;">Back</button>
                                         </div>

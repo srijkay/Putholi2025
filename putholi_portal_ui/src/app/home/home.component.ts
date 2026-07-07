@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { BaseComponent } from '../common/commonComponent';
+import { DatePipe } from '@angular/common';
 declare var $: any
 @Component({
   selector: 'app-home',
@@ -17,13 +18,37 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
   public submitted: boolean = false;
   public newsLetterData: any = {}
-  modalRef: BsModalRef;
+  modalRef: BsModalRef | undefined;
   public contactData: any = {}
   requirement: any = []
+  completedProjects: any = []
+  today: Date = new Date()
 
-  constructor(inj: Injector) {
+  reports = [
+    {
+      year: '2025 - 2026',
+      title: 'Financial Statements',
+      alt: "To Be Filed"
+    },
+    {
+      year: '2024 - 2025',
+      title: 'Financial Statements',
+      pdfUrl: 'assets/pdf/Financial Statement FY 2024-25.pdf',
+      alt: "To Be Filled"
+
+    },
+    {
+      year: '2023 - 2024',
+      title: 'Financial Statements',
+      pdfUrl: 'assets/pdf/Financial Statement FY 2023-24.pdf',
+      alt: "To Be Filled"
+
+    }
+  ];
+
+  constructor(inj: Injector, private datePipe: DatePipe) {
     super(inj)
-    this.clearToken() 
+    this.clearToken()
   }
 
   ngOnInit(): void {
@@ -44,6 +69,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.getSchoolImages()
     this.getSchoolInfo(this.data)
     this.getPostAttachments()
+    this.getCompletedProjectsCount()
   }
 
   /****************************************************************************
@@ -208,4 +234,63 @@ export class HomeComponent extends BaseComponent implements OnInit {
     script.defer = true;
     body.appendChild(script);
   }
+
+  getDaySuffix(day: number): string {
+    if (day > 3 && day < 21) return 'th';
+
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  }
+  get formattedDate(): string {
+    const day = this.today.getDate();
+    return `${day}${this.getDaySuffix(day)} ${this.datePipe.transform(this.today, 'MMMM yyyy')}`;
+  }
+
+
+  /****************************************************************************
+      @PURPOSE      : To get count of completed projects
+      @PARAMETERS   : form,formdata
+      @RETURN       : NA
+  ***************************************************************************/
+  projectDetails: any = []
+  getCompletedProjectsCount() {
+    this.commonService.callApi('completionofrequirements/count', '', 'get', false, true, 'LOG').then(success => {
+      let successData: any = success
+      this.projectDetails = successData;
+      this.completedProjects = [
+        {
+          name: 'Total Number of Projects Completed',
+          value: successData.requirementsCompleted
+        },
+        {
+          name: 'Total Number of Govt Schools Benefited',
+          value: successData.schoolsCount
+        },
+        {
+          name: 'Total Money Value Contributed for Govt Schools in Rs',
+          value: successData.contributeAmount
+        },
+        {
+          name: 'Total Number of Projects in Progress',
+          value: successData.progressSchoolCount
+        },
+         {
+          name: 'Click Here For Recent Activities',
+          value: this.projectDetails.projectDetailsDTO
+        }
+
+      ];
+
+      console.log(this.completedProjects);
+
+    }).catch(e => {
+      this.toastr.errorToastr(e.message, 'Oops!');
+    })
+  }
+  /*****************************************************************************/
+
 }

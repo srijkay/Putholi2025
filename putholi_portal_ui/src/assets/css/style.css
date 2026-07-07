@@ -452,7 +452,7 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
+  height: -webkit-fill-available;
   position: relative;
   background: #f5f8fd url("../img/intro-bg.png") center top no-repeat;
   background-size: cover;
@@ -1206,6 +1206,10 @@ section {
   padding: 0;
 }
 
+
+li.page-item.ng-star-inserted {
+    margin-top: 10px !important;
+}
 /* Testimonials Section
 --------------------------------*/
 #testimonials {

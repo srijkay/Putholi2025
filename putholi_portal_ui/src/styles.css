@@ -80,3 +80,9 @@
 viewer-toolbar {
     display: none !important;
 }
+
+
+
+::ng-deep .portfolio-details .portfolio-info ul.pagination li .page-link {
+    margin-top: 10px;
+}

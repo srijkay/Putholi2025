@@ -13,7 +13,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
 
   public submitted: boolean = false;
   public trackDonationData: any = {}
-  modalRef: BsModalRef;
+  modalRef: BsModalRef | undefined;
   schoolDetails: any = {}
   consolidateRefInfo: any = []
   requirementData: any = []
@@ -35,9 +35,24 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.consolidateRefInfoId = params['id']
     })
+
+    // this.activatedRoute.queryParams.subscribe(params => {
+
+    //   console.log(params)
+    //   const tab = params['tab'];
+
+    //   if (tab === 'tab_1') {
+    //     setTimeout(() => {
+    //       const element = document.querySelector('a[href="#tab_1"]') as HTMLElement;
+    //       element?.click();
+    //     }, 100);
+    //   }
+    // });
+
     this.getConsolidateInfo(this.data)
     this.getFundDetails(this.consolidateRefInfoId)
     this.getSchoolInfo(this.data)
+    this.getCompletedProjects()
 
   }
 
@@ -52,14 +67,15 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
 
   consolidateDetails: any
 
-  getConsolidateInfo(data) {
+  getConsolidateInfo(data: any) {
+    console.log(data)
     delete data.status
     data.consolidateId = this.consolidateRefInfoId
     this.commonService.callApi('consolidate/search', data, 'post', false, true, 'LOG').then(success => {
       let successData: any = success;
       setTimeout(() => {
         this.consolidateDetails = successData.content
-        this.consolidateDetails.forEach(e => {
+        this.consolidateDetails.forEach((e: any) => {
           this.getSchoolList(e.schoolInfoId)
 
         });
@@ -83,61 +99,62 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
   invoiceInfo: any
   estimatedAmount = 0
   invoiceDetails: any = []
-  getSchoolList(id) {
+  getSchoolList(id: any) {
+    console.log(id)
     this.commonService.callApi('schoolinfo/' + id, '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success
       this.schoolDetails = successData
 
-      this.schoolDetails.schoolType = this.Schoolstatus.find(x => x.code == this.schoolDetails.schoolType)
-      this.schoolDetails.addressInfo.country = this.allActiveList.find(x => x.code == this.schoolDetails.addressInfo.country)
-      this.schoolDetails.addressInfo.district = this.DistrictList.find(x => x.code == this.schoolDetails.addressInfo.district)
-      this.schoolDetails.schoolStatus = this.statusList.find(x => x.code == this.schoolDetails.schoolStatus)
-      this.schoolDetails.educationalDistrict = this.DistrictList.find(x => x.code == this.schoolDetails.educationalDistrict)
+      this.schoolDetails.schoolType = this.Schoolstatus.find((x: any) => x.code == this.schoolDetails.schoolType)
+      this.schoolDetails.addressInfo.country = this.allActiveList.find((x: any) => x.code == this.schoolDetails.addressInfo.country)
+      this.schoolDetails.addressInfo.district = this.DistrictList.find((x: any) => x.code == this.schoolDetails.addressInfo.district)
+      this.schoolDetails.schoolStatus = this.statusList.find((x: any) => x.code == this.schoolDetails.schoolStatus)
+      this.schoolDetails.educationalDistrict = this.DistrictList.find((x: any) => x.code == this.schoolDetails.educationalDistrict)
 
       this.consolidateInformation = this.schoolDetails.consolidateRefInfo
 
-      this.consolidateInformation.forEach(element => {
+      this.consolidateInformation.forEach((element: any) => {
         if (this.consolidateRefInfoId == element.consolidateId) {
-          this.requirementInfo = element.requirementInfo.filter(x => x.reqStatus != "APR" && x.reqStatus != "ADMQUO" && x.reqStatus != 'REVQUO' && x.reqStatus != 'APRQUO' && x.reqStatus != 'REJQUO' && x.reqStatus != 'VOLACP' && x.active == "Y")
+          this.requirementInfo = element.requirementInfo.filter((x: any) => x.reqStatus != "APR" && x.reqStatus != "ADMQUO" && x.reqStatus != 'REVQUO' && x.reqStatus != 'APRQUO' && x.reqStatus != 'REJQUO' && x.reqStatus != 'VOLACP' && x.active == "Y")
           this.getDashboardStatistics(element.consolidateId)
 
         }
       });
 
-      let require = this.allActiveList.filter(o1 => this.requirementInfo.some(o2 => o1.code === o2.assetName))
-      this.requirementInfo.forEach(function (checkbox) {
-        require.forEach(e => {
+      let require = this.allActiveList.filter((o1: any) => this.requirementInfo.some((o2: any) => o1.code === o2.assetName))
+      this.requirementInfo.forEach(function (checkbox: any) {
+        require.forEach((e: any) => {
           if (e.code == checkbox.assetName)
             checkbox.assetName = e.description
         });
       })
 
-      let type = this.sportsDescription.filter(o1 => this.requirementInfo.some(o2 => o1.code === o2.assetType))
-      this.requirementInfo.forEach(function (checkbox) {
-        type.forEach(e => {
+      let type = this.sportsDescription.filter((o1: any) => this.requirementInfo.some((o2: any) => o1.code === o2.assetType))
+      this.requirementInfo.forEach(function (checkbox: any) {
+        type.forEach((e: any) => {
           if (e.code == checkbox.assetType)
             checkbox.assetType = e.description
         });
       })
 
-      let list = this.allActiveList.filter(o1 => this.requirementInfo.some(o2 => o1.code === o2.requirementType))
-      this.requirementInfo.forEach(function (checkbox) {
-        list.forEach(e => {
+      let list = this.allActiveList.filter((o1: any) => this.requirementInfo.some((o2: any) => o1.code === o2.requirementType))
+      this.requirementInfo.forEach(function (checkbox: any) {
+        list.forEach((e: any) => {
           if (e.code == checkbox.requirementType)
             checkbox.requirementType = e.description
         });
       })
 
-      let status = this.allActiveList.filter(o1 => this.requirementInfo.some(o2 => o1.code === o2.reqStatus))
-      this.requirementInfo.forEach(function (checkbox) {
-        status.forEach(e => {
+      let status = this.allActiveList.filter((o1: any) => this.requirementInfo.some((o2: any) => o1.code === o2.reqStatus))
+      this.requirementInfo.forEach(function (checkbox: any) {
+        status.forEach((e: any) => {
           if (e.code == checkbox.reqStatus)
             checkbox.reqStatus = e.description
         });
       })
 
       setTimeout(() => {
-        this.requirementInfo.forEach(e => {
+        this.requirementInfo.forEach((e: any) => {
           this.getAttachments(e.requirementId)
           this.getPostAttachments(e.requirementId)
         })
@@ -151,7 +168,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
         }
       });
 
-      this.requirementInfo.forEach(e => {
+      this.requirementInfo.forEach((e: any) => {
 
         let sum = 0;
         let quotData: any = e.quotationInfo.filter(x => x.quotateStatus == 'QUOARV')
@@ -161,7 +178,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
         this.estimatedAmount += sum
       });
       // this.getDashboardStatistics(this.consolidateInformation.consolidateId)
-
+      console.log(this.estimatedAmount)
     }).catch(e => {
       this.toastr.errorToastr(e.message, 'Oops!')
     });
@@ -180,7 +197,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
   getFundDetails(id) {
     this.commonService.callApi('projectbook/' + id, '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success;
-      this.fundRaisedDetails = successData.filter(f => f.remarks != "School Expense")
+      this.fundRaisedDetails = successData.filter((f: any) => f.remarks != "School Expense")
       this.getDonorDetails()
     }).catch(e => {
       this.toastr.errorToastr(e.message, 'Oops!')
@@ -194,8 +211,8 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
       if (successData) {
         this.donorDetails = successData
 
-        this.donorDetails.forEach(d => {
-          this.fundRaisedDetails.forEach(e => {
+        this.donorDetails.forEach((d: any) => {
+          this.fundRaisedDetails.forEach((e: any) => {
             if (e.donorId == d.emailId) {
               e.name = d.firstName;
               e.organizationType = d.organizationType
@@ -209,7 +226,6 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
         });
       }
 
-      console.log(this.fundRaisedDetails);
 
 
     }).catch(e => {
@@ -223,9 +239,9 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
       @RETURN       : NA
    ****************************************************************************/
   invoice: any
-  onReceiptTemplate(receiptImages, id) {
+  onReceiptTemplate(receiptImages: string, id: any) {
     setTimeout(() => {
-      this.requirementInfo.forEach(e => {
+      this.requirementInfo.forEach((e: any) => {
         this.invoiceInfo = e.invoiceDetails[0]
         this.getReceiptInfo(this.invoiceInfo.invoiceId)
 
@@ -251,8 +267,8 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
   ****************************************************************************/
   receiptList: any = {}
   base64PDF: any
-  fileExtension: string;
-  getReceiptInfo(id) {
+  fileExtension: string | undefined;
+  getReceiptInfo(id: any) {
     this.commonService.callApi('attachments/invoice/' + id + '/UR', '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success
 
@@ -280,12 +296,11 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
       let data: any = []
       data.push(this.receiptList)
       for (let i = 0; i <= this.requirementInfo.length; i++) {
-        data.forEach(d => {
-          this.requirementInfo[i]?.invoiceDetails.forEach(e => {
+        data.forEach((d: any) => {
+          this.requirementInfo[i]?.invoiceDetails.forEach((e: any) => {
             if (d.invoiceId == e.invoiceId) {
               e.receiptImage = d
               console.log(e);
-
             }
           });
         });
@@ -305,7 +320,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
     @RETURN       : NA
   ****************************************************************************/
 
-  download(id) {
+  download(id: any) {
     this.getReceiptInfo(id)
     setTimeout(() => {
       console.log(this.fileExtension);
@@ -327,7 +342,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
     @RETURN       : ImagesDTO
   /***************************************************************************/
   requirementImages: any = []
-  getAttachments(id) {
+  getAttachments(id: any) {
     this.commonService.callApi('attachments/' + id + '/PI', '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success
       for (let i = 0; i < successData.length; i++) {
@@ -343,7 +358,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
    @RETURN       : ImagesDTO
  /***************************************************************************/
   requirementPostImages: any = []
-  getPostAttachments(id) {
+  getPostAttachments(id: any) {
     this.commonService.callApi('attachments/' + id + '/PO', '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success
       for (let i = 0; i < successData.length; i++) {
@@ -357,7 +372,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
 
 
   dashboardStatistics: any = {}
-  getDashboardStatistics(id) {
+  getDashboardStatistics(id: any) {
     this.commonService.callApi('dashboard/' + id, '', 'get', false, true, 'LOG').then(success => {
       let successData: any = success;
       this.dashboardStatistics = successData;
@@ -373,7 +388,7 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
       @RETURN       : School Status
     ***************************************************************************/
   schoolInfo: any = []
-  getSchoolInfo(data) {
+  getSchoolInfo(data: any) {
     this.commonService.callApi('schoolinfo/search', data, 'post', false, true, 'LOG').then(success => {
       let successData: any = success
       this.schoolInfo = successData.content
@@ -401,5 +416,32 @@ export class TrackDetailsComponent extends BaseComponent implements OnInit {
     script.async = false;
     script.defer = true;
     body.appendChild(script);
+  }
+
+  /****************************************************************************
+     @PURPOSE      : to get CompletedProjects
+     @PARAMETERS   : NA 
+     @RETURN       : NA
+****************************************************************************/
+  completedProjects: any
+  getCompletedProjects() {
+    this.commonService.callApi('requirement/completed-projects', '', 'get', false, true, 'LOG').then(success => {
+      let successData: any = success;
+      this.completedProjects = successData
+    }).catch(e => {
+      this.toastr.errorToastr(e.message, 'Oops!')
+    })
+  }
+  /****************************************************************************************/
+
+  redirectSamePage(id: any) {
+
+    this.router.navigate(['/portal/track-details/', id], { queryParams: { tab: 'tab_1' } })
+
+    this.getConsolidateInfo(this.data)
+    this.getFundDetails(this.consolidateRefInfoId)
+    this.getSchoolInfo(this.data)
+    this.getCompletedProjects()
+
   }
 }

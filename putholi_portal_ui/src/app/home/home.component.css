@@ -12,3 +12,42 @@
 #doc:hover{
     text-decoration: underline;
 }
+
+.recent-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: #e3f2fd;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+
+
+
+
+.payment-cell {
+  border-bottom: 1px solid #d6d6d6;
+  padding: 12px 8px;
+  text-align: center;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-cell:last-child {
+  border-bottom: none;
+}
+
+.payment-cell a {
+  text-decoration: none;
+}
+
+td{
+  vertical-align: middle;
+}
