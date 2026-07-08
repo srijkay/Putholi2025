@@ -75,20 +75,38 @@
             </header>
 
             <div class="row justify-content-center">
-              <div class="col-lg-9">
+              <div class="col-lg-12">
 
                 <div class="imagescrolls-slider swiper" data-aos="fade-up" data-aos-delay="100">
                   <div class="swiper-wrapper">
 
-                    <div class="swiper-slide" *ngFor="let data of schoolImages">
-                      <div class="imagescroll-item">
-                        <img src="{{data?.fileData}}" width="100%" height="240">
+                    <div class="swiper-slide" *ngFor="let item of groupedImages">
+                      <div class="imagescroll-pair">
+                        <div class="imagescroll-item">
+                          <div class="img-wrap">
+                            <img [src]="item.pre" width="100%" height="240" alt="Before">
+                            <span class="badge badge-before">BEFORE</span>
+                          </div>
+                        </div>
+                        <div class="imagescroll-item">
+                          <div class="img-wrap">
+                            <img [src]="item.post" width="100%" height="240" alt="After">
+                            <span class="badge badge-after">AFTER</span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="swiper-pagination"></div>
+
+                      <div class="pair-caption">
+                        <span>{{ item.schoolName }} - {{ item.city }}, {{ item.districtDesc }}</span>
+                        <!-- <span class="donor">Donor: {{ data?.donor }}</span> -->
+                      </div>
                     </div>
-                    <!-- End imagescrolls item -->
+
                   </div>
 
+                  <div class="swiper-pagination"></div>
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
                 </div>
               </div>
             </div>
@@ -103,7 +121,10 @@
             <thead style="background-image: linear-gradient(#d0f4ff, #30b5db);">
               <tr>
                 <th>S.NO</th>
-                <th>Summary of Activities as of {{formattedDate}}</th>
+                <th > 
+                  <div style="display: flex;  justify-content: center;">SUMMARY OF ACTIVITIES </div>
+                  <div style="display: flex;  justify-content: center;"> As of {{formattedDate}}</div>
+                </th>
                 <th>Values</th>
               </tr>
             </thead>
@@ -115,12 +136,12 @@
 
 
                 <!-- Last row: display all payment IDs -->
-                <td *ngIf="i === completedProjects.length - 1" >
-                  <ng-container *ngFor="let project of data?.value" >
+                <td *ngIf="i === completedProjects.length - 1">
+                  <ng-container *ngFor="let project of data?.value">
                     <a class="payment-cell" [routerLink]="['/portal/track-details', project.projectId]">
                       {{ project.paymentId }}
                     </a>
-                  </ng-container> 
+                  </ng-container>
 
                 </td>
 
@@ -201,6 +222,12 @@
               <a id="doc" [routerLink]="['/registration-policy']">
                 Registration Policy
               </a>
+            </div>
+            <br />
+            <div>
+              <span style="font-weight:700;"> Certificate Details </span>
+              <p style="margin:0px;">12A & 80G ID: AAETP1180CF2023101</p>
+              <p style="margin:0px;">Darpan ID: TN/2023/0349502</p>
             </div>
 
           </div>

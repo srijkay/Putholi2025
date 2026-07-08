@@ -51,3 +51,64 @@
 td{
   vertical-align: middle;
 }
+
+
+.imagescroll-pair {
+  display: flex;
+  gap: 16px;
+
+  .imagescroll-item {
+    flex: 1;
+  }
+}
+
+.pair-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.img-wrap {
+  position: relative;
+
+  img {
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 28px;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+  .badge-before { background: #2196f3; }
+  .badge-after  { background: #2196f3; }
+}
+
+.pair-caption {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right: 0px !important;
+    left: auto;
+}
+.swiper-button-next, .swiper-button-prev {
+  
+   width: calc(25px / 44 * 52) !important;
+    height: 20px !important;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+    left: 0px !important;
+    right: auto;
+}

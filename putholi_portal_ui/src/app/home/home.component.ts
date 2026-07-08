@@ -2,6 +2,10 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { BaseComponent } from '../common/commonComponent';
 import { DatePipe } from '@angular/common';
+import Swiper, { Navigation, Pagination, Autoplay  } from 'swiper';
+
+Swiper.use([Navigation, Pagination, Autoplay]);
+
 declare var $: any
 @Component({
   selector: 'app-home',
@@ -119,17 +123,52 @@ export class HomeComponent extends BaseComponent implements OnInit {
     @PARAMETERS   : form,formdata
     @RETURN       : NA
   ***************************************************************************/
-  schoolImages: any = []
+  groupedImages: { requirementId: number; pre?: string; post?: string; schoolName?: string; districtDesc?: string; city?: string }[] = [];
+  swiperInstance?: Swiper;
+
   getSchoolImages() {
-    this.commonService.callApi('attachments/fectchby/SI', '', 'get', false, true, 'LOG').then(success => {
-      let successData: any = success
-      for (let i = 0; i < successData.length; i++) {
-        successData[i].fileData = 'data:image/png;base64,' + successData[i].fileData;
+    this.commonService.callApi('requirement/pre-post-images', '', 'get', false, true, 'LOG').then(success => {
+      const successData: any = success;
+      const map = new Map<number, { requirementId: number; pre?: string; post?: string, schoolName?: string; districtDesc?: string; city?: string }>();
+
+      for (const item of successData) {
+        if (!map.has(item.requirementId)) {
+          map.set(item.requirementId, {
+            requirementId: item.requirementId,
+            schoolName: item.schoolName,
+            districtDesc: item.districtDesc,
+            city: item.city,
+          });
+        }
+        const entry = map.get(item.requirementId)!;
+        if (item.uploadFor === 'PI') entry.pre = 'data:image/png;base64,' + item.fileData;
+        else if (item.uploadFor === 'PO') entry.post = 'data:image/png;base64,' + item.fileData;
       }
-      this.schoolImages = successData
+
+      this.groupedImages = Array.from(map.values());
+
+      console.log('Grouped Images:', this.groupedImages);
+      // init Swiper AFTER *ngFor renders the grouped slides
+      setTimeout(() => this.initSwiper());
     }).catch(e => {
       this.toastr.errorToastr(e.message, 'Oops!');
-    })
+    });
+  }
+
+  initSwiper() {
+    this.swiperInstance?.destroy(true, true);
+    this.swiperInstance = new Swiper('.imagescrolls-slider', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: this.groupedImages.length > 1,
+      autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter : true,
+    },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    });
   }
   /*****************************************************************************/
 
@@ -278,7 +317,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
           name: 'Total Number of Projects in Progress',
           value: successData.progressSchoolCount
         },
-         {
+        {
           name: 'Click Here For Recent Activities',
           value: this.projectDetails.projectDetailsDTO
         }
