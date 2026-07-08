@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.AttachmentsDTO;
 import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.RequirementDTO;
 import com.newrta.putholi.api.model.RequirementSearchDTO;
@@ -309,12 +310,32 @@ public class RequirementRefResource {
 
 		requirementService.updateApprovalDetails(id, reqStatus);
 	}
-	
+
+	/**
+	 * @param authorization
+	 * @param loggedUser
+	 * @return
+	 */
 	@CrossOrigin
 	@GetMapping(value = "/completed-projects")
-	public ResponseEntity<List<CompletedProjectDto>> getCompletedProjects(@RequestHeader String authorization, @RequestHeader String loggedUser) {
+	public ResponseEntity<List<CompletedProjectDto>> getCompletedProjects(@RequestHeader String authorization,
+			@RequestHeader String loggedUser) {
 		log.info("RequirementRefResource-getCompletedProjects");
 
 		return new ResponseEntity<>(requirementService.getTheCompletedProjects("CMPLTD"), HttpStatus.OK);
+	}
+
+	/**
+	 * @param authorization
+	 * @param loggedUser
+	 * @return
+	 */
+	@CrossOrigin
+	@GetMapping(value = "/pre-post-images")
+	public ResponseEntity<List<AttachmentsDTO>> getCompletedProjectImages(@RequestHeader String authorization,
+			@RequestHeader String loggedUser) {
+		log.info("RequirementRefResource-getCompletedProjects");
+
+		return new ResponseEntity<>(requirementService.getCompletedProjectImages(), HttpStatus.OK);
 	}
 }

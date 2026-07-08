@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.AttachmentsDTO;
 import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.RequirementDTO;
 import com.newrta.putholi.api.model.RequirementSearchDTO;
@@ -181,5 +182,10 @@ public interface RequirementService {
 	 * @return
 	 */
 	List<CompletedProjectDto> getTheCompletedProjects(String reqStatusCode);
+
+	/**
+	 * @return
+	 */
+	List<AttachmentsDTO> getCompletedProjectImages();
 
 }

@@ -1,16 +1,15 @@
 package com.newrta.putholi.api.serviceimpl;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
@@ -25,6 +24,7 @@ import com.newrta.putholi.api.domain.RequirementInfo;
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
 import com.newrta.putholi.api.domain.UserRegisterDetails;
 import com.newrta.putholi.api.model.ApiResultDTO;
+import com.newrta.putholi.api.model.AttachmentsDTO;
 import com.newrta.putholi.api.model.CompletedProjectDto;
 import com.newrta.putholi.api.model.MailDTO;
 import com.newrta.putholi.api.model.MasterCodeResultDTO;
@@ -605,7 +605,7 @@ public class RequirementServiceImpl implements RequirementService {
 		List<CompletedProjectDto> results = viewRepo.getTheCompletedProjects(status);
 
 		List<Object[]> assetResults = viewRepo.getAssetNamesByStatus(status);
-		
+
 		Map<Long, String> assetMap = assetResults.stream()
 				.collect(Collectors.groupingBy(row -> ((Number) row[0]).longValue(),
 						Collectors.mapping(row -> (String) row[1], Collectors.joining(", "))));
@@ -613,5 +613,14 @@ public class RequirementServiceImpl implements RequirementService {
 		results.forEach(dto -> dto.setAssetName(assetMap.get(dto.getConsolidateId())));
 
 		return results;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public List<AttachmentsDTO> getCompletedProjectImages() {
+		log.info("RequirementServiceImpl-getCompletedProjectImages");
+		return viewRepo.getCompletedProjectImages(PageRequest.of(0, 10));
 	}
 }

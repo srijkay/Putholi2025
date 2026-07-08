@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.newrta.putholi.api.domain.RequirementInfoDetails;
+import com.newrta.putholi.api.model.AttachmentsDTO;
 import com.newrta.putholi.api.model.CompletedProjectDto;
 
 /**
@@ -41,4 +43,17 @@ public interface RequirementViewRepository extends JpaRepository<RequirementInfo
 	 */
 	@Query("SELECT r.consolidateId, r.assetName FROM RequirementInfoDetails r WHERE r.reqStatusCode = :reqStatusCode")
 	List<Object[]> getAssetNamesByStatus(@Param("reqStatusCode") String reqStatusCode);
+
+
+	/**
+	 * @param pageable
+	 * @return
+	 */
+	@Query("SELECT new com.newrta.putholi.api.model.AttachmentsDTO(a.requirementId, a.uploadFor, a.fileName, a.fileData, a.fileSize, a.fileType, r.schoolName, r.districtDesc, r.city)"
+			+ " FROM QuotationAttachments a, RequirementInfoDetails r"
+			+ " WHERE a.uploadFor IN ('PI', 'PO') AND a.requirementId = r.requirementId AND r.reqStatusCode = 'CMPLTD' "
+			+ " AND a.fileData = (SELECT MIN(b.fileData) FROM QuotationAttachments b"
+			+ "      WHERE b.requirementId = a.requirementId AND b.uploadFor = a.uploadFor )"
+			+ "ORDER BY a.requirementId, a.uploadFor ASC")
+	List<AttachmentsDTO> getCompletedProjectImages(Pageable pageable);
 }
