@@ -11,7 +11,7 @@
 
         </div>
 
-         
+
     </div>
 
     <div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
@@ -31,7 +31,7 @@
             <a href="javascript:;" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
         </div>
 
-        
+
     </div>
 </div>
 <!-- /page header -->
@@ -94,13 +94,11 @@
                                     <p>{{requirementInfoById?.assetType}}</p>
                                 </div>
 
-                              
-
                                 <!-- label for AssetName -->
-                                <label *ngIf="requirementInfoById?.assetType?.code == 'OTH'"
+                                <label
                                     class="col-lg-3 col-sm-12 col-form-label font-weight-600">{{'REQUIREMENT.AssetName'
                                     | translate}} :</label>
-                                <div class="col-md-3" *ngIf="requirementInfoById?.assetType?.code == 'OTH'">
+                                <div class="col-md-3">
                                     <p>{{requirementInfoById?.assetName}}</p>
                                 </div>
 
@@ -117,6 +115,23 @@
                                     translate}} :</label>
                                 <div class="col-md-3">
                                     <p>{{requirementInfoById?.quantity}}</p>
+                                </div>
+
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'QUOTATION.VolunteerName' | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{volunteerName}}</p>
+                                </div>
+                            </div>
+                            <!-- /row -->
+
+                            <!-- row -->
+                            <div class="form-group row">
+
+                                <label class="col-lg-3 col-sm-12 col-form-label font-weight-600">
+                                    {{'MANAGEUSER.MobileNumber' | translate}} :</label>
+                                <div class="col-md-3">
+                                    <p>{{userDetails?.mobileNumber}}</p>
                                 </div>
 
                                 <!-- label for View Images -->
@@ -450,7 +465,7 @@
                         <img class="d-block w-100" [src]="transform()" alt="First slide" style="height: 500px;">
                     </div>
                 </div>
-    
+
                 <div class="carousel-inner" *ngIf="!base64Image">
                     <iframe [src]="transform()" width="100%" height="500px"></iframe>
                 </div>

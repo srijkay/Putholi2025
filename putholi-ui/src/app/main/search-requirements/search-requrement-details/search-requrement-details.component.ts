@@ -12,6 +12,7 @@ import { BaseComponent } from 'src/app/common/commonComponent';
 export class SearchRequrementDetailsComponent extends BaseComponent implements OnInit {
   @ViewChild('staticTabs', { static: true }) staticTabs: TabsetComponent;
 
+  public volunteerName: string;
 
   constructor(inj: Injector, private sanitizer: DomSanitizer) {
     super(inj);
@@ -20,6 +21,8 @@ export class SearchRequrementDetailsComponent extends BaseComponent implements O
     this.getStatusList()
     this.activatedRoute.params.subscribe((params) => {
       let id = params['id']
+      this.volunteerName = params['name']
+      this.getViewId(this.volunteerName)
       this.getRequirementInfoById(id)
       this.getPreImagesInfo(id, 'PI')
       this.getPreImagesInfo(id, 'PO')
@@ -48,6 +51,17 @@ export class SearchRequrementDetailsComponent extends BaseComponent implements O
     })
   }
   /***************************************************************************************/
+
+  userDetails: any = {}
+  getViewId(username) {
+    this.commonService.callApi('authenticate/' + username, '', 'get', false, false, 'REG').then(success => {
+      this.userDetails = success;
+      console.log(this.userDetails);
+
+    }).catch(e => {
+      this.toastr.errorToastr(e.message, 'Oops!')
+    });
+  }
 
   imagesTemplate: BsModalRef
   clickImages(template, type, id) {

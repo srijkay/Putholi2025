@@ -66,11 +66,11 @@ export class SummaryComponent extends BaseComponent implements OnInit {
     }
 
 
-    if (data.payment_option == 'OPTUPI') {
-      this.setToken("bankCharges", 0)
-    } else {
-      this.setToken("bankCharges", this.bankCharges.configValue)
-    }
+    // if (data.payment_option == 'OPTUPI') {
+    //   this.setToken("bankCharges", 0)
+    // } else {
+    this.setToken("bankCharges", this.bankCharges.configValue)
+    // }
 
     this.setToken("paymentMode", this.applConfigData.paymentMode)
     console.log(data);
@@ -123,6 +123,11 @@ export class SummaryComponent extends BaseComponent implements OnInit {
   }
 
 
+  chooseMode(value: any) {
+    let paymentMode = value === 'UPI' ? 'UPI' : 'Bank_Processing_Fee';
+    this.getBankCharges(paymentMode)
+  }
+
 
 
 
@@ -135,7 +140,7 @@ export class SummaryComponent extends BaseComponent implements OnInit {
   getConfigId() {
     this.commonService.callApi('config/Trust_Member_Fee', '', 'get', false, true, 'LOG').then(success => {
       this.applConfigData = success;
-      this.getBankCharges()
+
     }).catch(e => {
       this.toastr.errorToastr(e.message, 'Oops!')
     })
@@ -144,8 +149,8 @@ export class SummaryComponent extends BaseComponent implements OnInit {
 
   bankCharges: any = {}
   Contribute: number
-  getBankCharges() {
-    this.commonService.callApi('config/Bank_Processing_Fee', '', 'get', false, true, 'LOG').then(success => {
+  getBankCharges(mode: any) {
+    this.commonService.callApi('config/' + mode, '', 'get', false, true, 'LOG').then(success => {
       this.bankCharges = success;
 
       let value = Math.round(Number(this.bankCharges.configValue) * 100);

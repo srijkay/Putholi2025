@@ -419,7 +419,7 @@ const routes: Routes = [
         pathMatch: "full",
       },
       {
-        path: "search-requirements-details/:id",
+        path: "search-requirements-details/:id/:name",
         component: SearchRequrementDetailsComponent,
         pathMatch: "full",
       },

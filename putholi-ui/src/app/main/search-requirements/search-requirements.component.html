@@ -125,12 +125,17 @@
                                     [defaultSort]="'asc'">
                                 </app-nspl-table-sort>
                             </th>
+                            <th>{{"MANAGEUSER.MobileNumber"|translate}}
+                                <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'primaryContact'"
+                                    [defaultSort]="'asc'">
+                                </app-nspl-table-sort>
+                            </th>
                             <th>{{'MANAGESCHOOL.District' | translate}}
                                 <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'district'"
                                     [defaultSort]="'asc'">
                                 </app-nspl-table-sort>
                             </th>
-                            <th>{{'REQUIREMENT.RequirementId'|translate}}</th>
+                            <th>{{'INVOICE.RequirementName'|translate}}</th>
 
                             <th> {{'REQUIREMENT.RequirementType' | translate}}
                                 <app-nspl-table-sort [sortCol]="requirementList" [sortTypeName]="'requirementType'"
@@ -159,8 +164,9 @@
                         <tr class="odd gradeX" *ngFor="let data of requirementList">
                             <td>{{data?.schoolRegNo}}</td>
                             <td>{{data?.schoolName}}</td>
+                            <td>{{data?.primaryContact}}</td>
                             <td>{{data?.district}}</td>
-                            <td>{{data?.requirementId}}</td>
+                            <td>{{data?.assetName}}</td>
                             <td>{{data?.requirementType=='NE'?'New':'Maintenance'}}</td>
                             <td>{{data?.volunteerName}}</td>
                             <td *ngIf="data?.schoolStatus=='REJECTED'"><span
@@ -171,7 +177,7 @@
 
                                 <a href="javascript:;" class="list-icons-item">
                                     <i tooltip="View" class="far fa-eye"
-                                        [routerLink]="['/main/search-requirements-details/', data?.requirementId]"></i>
+                                        [routerLink]="['/main/search-requirements-details/', data?.requirementId, data?.volunteerName]"></i>
                                 </a>
                             </td>
 
