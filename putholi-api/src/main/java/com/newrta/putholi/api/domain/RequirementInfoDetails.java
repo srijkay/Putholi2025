@@ -33,6 +33,9 @@ public class RequirementInfoDetails {
 	@Column(name = "SCHOOL_NAME")
 	private String schoolName;
 
+	@Column(name = "PRI_NUM")
+	private String primaryContact;
+
 	@Column(name = "LOCALITY")
 	private String locality;
 
@@ -59,7 +62,7 @@ public class RequirementInfoDetails {
 
 	@Column(name = "VOLUNTEER_NAME")
 	private String volunteerName;
-
+	
 	@Column(name = "CREATED_BY")
 	private String createdBy;
 

@@ -136,24 +136,23 @@ public class TrustMemberAccountBookServiceImpl implements TrustMemberAccountBook
 				if (trustMemberAccountBook.getFeeType() != null && trustMemberAccountBook.getFeeType().equals("INC")) {
 					trustMemberAccountBook
 							.setBalanceAmount(accuntBook.getBalanceAmount().add(trustMemberAccountBook.getAmount()));
-
-					if (trustMemberAccountBook.getRemarks().equals("RENPAY")) {
-						updateUserDetails(userRegisterDetails);
-					} else {
-						userRegistrationService.updateApprovalDetails(userRegisterDetails.getUserName(), "PENADM", "N");
-
-						// Calling email method after payment is success
-
-						memberAccountRegistrationEmail(null, null, null, userRegisterDetails.getEmailId(), null);
-
-					}
-
 				} else {
 					trustMemberAccountBook.setBalanceAmount(
 							accuntBook.getBalanceAmount().subtract(trustMemberAccountBook.getAmount()));
 				}
 			} else {
 				trustMemberAccountBook.setBalanceAmount(trustMemberAccountBook.getAmount());
+			}
+
+			if (trustMemberAccountBook.getRemarks().equals("RENPAY")) {
+				updateUserDetails(userRegisterDetails);
+			} else {
+				userRegistrationService.updateApprovalDetails(userRegisterDetails.getUserName(), "PENADM", "N");
+
+				// Calling email method after payment is success
+
+				memberAccountRegistrationEmail(null, null, null, userRegisterDetails.getEmailId(), null);
+
 			}
 
 			AuditDetails auditDetails = AuditDetails.builder().functionCode(CommonsConstants.INSERT)

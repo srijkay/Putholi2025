@@ -41,6 +41,9 @@ public class DonorInfoDetails {
 	
 	@Column(name = "PAN_NUMBER")
 	private String panNumber;
+	
+	@Column(name = "PHONE_NUMBER")
+	private String phoneNumber;
 
 
 }

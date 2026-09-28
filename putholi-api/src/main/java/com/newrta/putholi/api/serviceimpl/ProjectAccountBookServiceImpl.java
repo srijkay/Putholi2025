@@ -1,9 +1,14 @@
 package com.newrta.putholi.api.serviceimpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.newrta.putholi.api.domain.*;
 import com.newrta.putholi.api.service.*;
@@ -16,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newrta.putholi.api.constants.CommonsConstants;
 import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.model.ProjectAccountBookDTO;
+import com.newrta.putholi.api.model.TrackingDetailsDTO;
 import com.newrta.putholi.api.repository.ProjectAccountBookRepository;
 import com.newrta.putholi.api.repository.RequirementInfoRepository;
 import com.newrta.putholi.api.util.CommonQueueUtilService;
@@ -236,9 +242,23 @@ public class ProjectAccountBookServiceImpl implements ProjectAccountBookService 
 	 *
 	 */
 	@Override
-	public List<ProjectAccountBook> findByCreatedBy(String createdBy) {
-		log.info("TrustAccountBookServiceImpl-findByCreatedBy", createdBy);
-		return projectBookRepo.findByCreatedByIgnoreCaseOrderByCreatedDateDesc(createdBy);
-	}
+	public List<TrackingDetailsDTO> findByCreatedBy(String createdBy) {
 
+		log.info("TrustAccountBookServiceImpl-findByCreatedBy: {}", createdBy);
+
+		List<TrackingDetailsDTO> records = projectBookRepo.findByCreatedByIgnoreCaseOrderByCreatedDateDesc(createdBy);
+
+		Map<Long, TrackingDetailsDTO> result = new LinkedHashMap<>();
+
+		for (TrackingDetailsDTO dto : records) {
+			if (!result.containsKey(dto.getProjectIncExpId())) {
+				List<String> assetNames = requirementInfoRepository.findAssetNamesByConsolidateId(dto.getProjectId());
+				String assetName = assetNames.stream().filter(Objects::nonNull).collect(Collectors.joining(", "));
+				dto.setAssetName(assetName);
+				result.put(dto.getProjectIncExpId(), dto);
+			}
+		}
+
+		return new ArrayList<>(result.values());
+	}
 }

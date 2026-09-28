@@ -72,6 +72,10 @@ public class RequirementInfoCustomRepoImpl implements RequirementInfoCustomRepo 
 		if (requirementDTO.getConsolidateStatus() != null && !requirementDTO.getConsolidateStatus().isEmpty()) {
 			predicates.add(root.get("consolidateStatus").in(requirementDTO.getConsolidateStatus()).not());
 		}
+		
+		if (requirementDTO.getPrimaryContact() != null && !requirementDTO.getPrimaryContact().isEmpty()) {
+			predicates.add(root.get("primaryContact").in(requirementDTO.getPrimaryContact()).not());
+		}
 
 		if (requirementDTO.getReqStatus() != null && !requirementDTO.getReqStatus().isEmpty()) {
 			predicates.add(root.get("reqStatusCode").in(requirementDTO.getReqStatus()));
@@ -92,10 +96,10 @@ public class RequirementInfoCustomRepoImpl implements RequirementInfoCustomRepo 
 
 		}
 
-		if (requirementDTO.getLoggedUser() != null && !requirementDTO.getLoggedUser().isEmpty()) {
-			predicates.add(cb.equal(cb.lower(root.get("volunteerName")), requirementDTO.getLoggedUser().toLowerCase()));
+		if (requirementDTO.getVolunteerName() != null && !requirementDTO.getVolunteerName().isEmpty()) {
+			predicates.add(cb.equal(cb.lower(root.get("volunteerName")), requirementDTO.getVolunteerName().toLowerCase()));
 		}
-
+		
 		if (requirementDTO.getCreatedBy() != null && !requirementDTO.getCreatedBy().isEmpty()) {
 			predicates.add(cb.equal(cb.lower(root.get("createdBy")), requirementDTO.getCreatedBy().toLowerCase()));
 		}

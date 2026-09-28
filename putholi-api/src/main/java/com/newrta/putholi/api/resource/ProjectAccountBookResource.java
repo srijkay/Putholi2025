@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.newrta.putholi.api.domain.ProjectAccountBook;
 import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.model.ProjectAccountBookDTO;
+import com.newrta.putholi.api.model.TrackingDetailsDTO;
 import com.newrta.putholi.api.service.ProjectAccountBookService;
 
 import lombok.Data;
@@ -91,7 +92,7 @@ public class ProjectAccountBookResource {
 	 */
 	@CrossOrigin
 	@GetMapping(value = "/emailId/{email}")
-	public ResponseEntity<List<ProjectAccountBook>> findByCreatedBy(@RequestHeader String authorization,
+	public ResponseEntity<List<TrackingDetailsDTO>> findByCreatedBy(@RequestHeader String authorization,
 			@RequestHeader String loggedUser, @PathVariable("email") String createdBy) {
 		log.info("ProjectAccountBookResource-findByCreatedBy{}", createdBy);
 

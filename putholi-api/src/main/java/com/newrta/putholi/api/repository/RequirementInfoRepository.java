@@ -185,4 +185,12 @@ public interface RequirementInfoRepository extends JpaRepository<RequirementInfo
 			+ " where p.projectIncExpId = (SELECT MAX(p2.projectIncExpId) FROM ProjectAccountBook p2 WHERE p2.projectId = c.consolidateId AND p2.paymentId IS NOT NULL)")
 	List<ProjectDetailsDTO> getCompletedProjects(@Param("status") String status, Pageable pageable);
 
+	/**
+	 * @param consolidateId
+	 * @return
+	 */
+	@Query(value = " SELECT CASE WHEN r.assetType = 'OTH' THEN r.assetName ELSE m.description END FROM RequirementInfo r"
+			+ " LEFT JOIN MasterCodeDetails m ON m.code = r.assetName AND m.codeType = r.assetType WHERE r.consolidateRef.consolidateId = :consolidateId")
+	List<String> findAssetNamesByConsolidateId(@Param("consolidateId") Long consolidateId);
+
 }

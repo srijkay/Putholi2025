@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.newrta.putholi.api.domain.ProjectAccountBook;
+import com.newrta.putholi.api.model.TrackingDetailsDTO;
 
 /**
  * @author NEWRTA SOLUTIONS
@@ -46,5 +47,11 @@ public interface ProjectAccountBookRepository extends JpaRepository<ProjectAccou
 	 * @param createdBy
 	 * @return
 	 */
-	List<ProjectAccountBook> findByCreatedByIgnoreCaseOrderByCreatedDateDesc(String createdBy);
+	@Query("SELECT new com.newrta.putholi.api.model.TrackingDetailsDTO(p.projectIncExpId, p.projectId, "
+			+ "p.amount, p.paymentId, p.createdBy, p.createdDate, c.schoolInfo.schoolName, "
+			+ "(SELECT m.description  FROM MasterCodeDetails m WHERE m.code = c.schoolInfo.addressInfo.district  AND m.codeType = 'DIST') AS district, "
+			+ "c.schoolInfo.addressInfo.city) FROM ProjectAccountBook p "
+			+ "JOIN ConsolidateRefInfo c ON c.consolidateId = p.projectId JOIN c.requirementInfo r "
+			+ "WHERE LOWER(p.createdBy) = LOWER(:createdBy) ORDER BY p.createdDate DESC")
+	List<TrackingDetailsDTO> findByCreatedByIgnoreCaseOrderByCreatedDateDesc(String createdBy);
 }

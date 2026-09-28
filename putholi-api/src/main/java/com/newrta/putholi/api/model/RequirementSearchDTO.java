@@ -27,6 +27,8 @@ public class RequirementSearchDTO extends GenericSearchDTO {
 	private String schoolRegNo;
 
 	private String schoolName;
+	
+	private String primaryContact;
 
 	private String locality;
 
@@ -41,7 +43,7 @@ public class RequirementSearchDTO extends GenericSearchDTO {
 	private List<String> reqStatus;
 
 	private String volunteerName;
-
+	
 	private String createdBy;
 
 	private String active;

@@ -7,6 +7,7 @@ import java.util.List;
 import com.newrta.putholi.api.domain.ProjectAccountBook;
 import com.newrta.putholi.api.model.ApiResultDTO;
 import com.newrta.putholi.api.model.ProjectAccountBookDTO;
+import com.newrta.putholi.api.model.TrackingDetailsDTO;
 
 /**
  * @author NEWRTA SOLUTION
@@ -49,5 +50,5 @@ public interface ProjectAccountBookService {
 	 * @param createdBy
 	 * @return
 	 */
-	List<ProjectAccountBook> findByCreatedBy(String createdBy);
+	List<TrackingDetailsDTO> findByCreatedBy(String createdBy);
 }
