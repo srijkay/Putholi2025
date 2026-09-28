@@ -17,7 +17,6 @@ export class SummaryComponent extends BaseComponent implements OnInit {
   schoolInfoId: any
   constructor(inj: Injector, private envservice: EnvService) {
     super(inj)
-    this.getConfigId()
     this.getAllMasterList()
     this.activatedRoute.params.subscribe((params) => {
       let id = params['id']
@@ -96,7 +95,12 @@ export class SummaryComponent extends BaseComponent implements OnInit {
   clickPayment() {
     console.log(this.paymentData.paymentType);
 
+    if (this.paymentData.paymentType) {
+    }
+    else {
 
+
+    }
 
     let data: any = {
       amount: this.Contribute,
@@ -108,13 +112,13 @@ export class SummaryComponent extends BaseComponent implements OnInit {
     }
 
 
-    if (data.payment_option == 'OPTUPI') {
-      this.setToken("bankCharges", 0)
-      this.setToken("colectedforProject", this.Contribute)
-    } else {
-      this.setToken("bankCharges", this.applConfigData.configValue)
-      this.setToken("colectedforProject", this.Contribute - (this.applConfigData.configValue))
-    }
+    // if (data.payment_option == 'OPTUPI') {
+    //   this.setToken("bankCharges", 0)
+    //   this.setToken("colectedforProject", this.Contribute)
+    // } else {
+    this.setToken("bankCharges", this.applConfigData.configValue)
+    this.setToken("colectedforProject", this.Contribute - (this.applConfigData.configValue))
+    // }
 
     this.setToken("paymentMode", this.applConfigData.paymentMode)
 
@@ -167,22 +171,36 @@ export class SummaryComponent extends BaseComponent implements OnInit {
     this.setToken("payment", "true")
   }
 
+
+
+  chooseMode(value: any) {
+    let paymentMode = value === 'UPI' ? 'UPI' : 'Bank_Processing_Fee';
+    this.getConfigId(paymentMode);
+  }
+
+
+
   applConfigData: any = {}
+  configData: any = {}
   Contribute: number
-  getConfigId() {
-    this.commonService.callApi('config/Bank_Processing_Fee', '', 'get', false, true, 'LOG').then(success => {
-      this.applConfigData = success;
+  getConfigId(value: any) {
+    setTimeout(() => {
 
-      this.Contribute = Number(this.getToken('donatedAmount'))
-      let value = Math.round(Number(this.applConfigData.configValue) * 100);
-      this.applConfigData.configValue = Math.round((this.Contribute) * (value / 100))
+      this.commonService.callApi('config/' + value, '', 'get', false, true, 'LOG').then(success => {
+        this.configData = success;
+
+        this.Contribute = Number(this.getToken('donatedAmount'))
+        let value = Math.round(Number(this.configData.configValue) * 100);
+        this.applConfigData.configValue = Math.round((this.Contribute) * (value / 100))
 
 
 
-      // this.setToken("donatedAmount", this.applConfigData.configValue)
-    }).catch(e => {
-      this.toastr.errorToastr(e.message, 'Oops!')
-    })
+        // this.setToken("donatedAmount", this.applConfigData.configValue)
+      }).catch(e => {
+        this.toastr.errorToastr(e.message, 'Oops!')
+      })
+    }, 100);
+
   }
 
   onScanSuccess(result) {

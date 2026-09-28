@@ -120,7 +120,7 @@
 
                                                 <tr *ngIf="applConfigData.paymentMode">
                                                     <td>Donated Amount</td>
-                                                    <td *ngIf="applConfigData.paymentMode!='OPTUPI'"> Donation Amount :
+                                                    <td> Donation Amount :
                                                         <b>
                                                             {{this.getToken('donatedAmount')}}</b><br />
                                                         <span>Bank Processing Fee:
@@ -130,7 +130,7 @@
 
                                                     </td>
 
-                                                    <td *ngIf="applConfigData.paymentMode=='OPTUPI'"> Donation Amount :
+                                                    <!-- <td *ngIf="applConfigData.paymentMode=='OPTUPI'"> Donation Amount :
                                                         <b>
                                                             {{this.getToken('donatedAmount')}}</b><br />
                                                         Bank Processing Fee:
@@ -138,7 +138,7 @@
                                                         Amount to School : <b> {{Contribute -
                                                             0}}</b><br />
 
-                                                    </td>
+                                                    </td> -->
 
 
                                                 </tr>
@@ -149,7 +149,7 @@
                                                     <td> Donation Amount :
                                                         <b> {{this.getToken('donatedAmount')}}</b>
                                                         <br />
-                                                       
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -167,7 +167,8 @@
                                                             <input type="radio" id="customRadio1"
                                                                 [(ngModel)]="applConfigData.paymentMode" value="OPTCRDC"
                                                                 name="customRadio" #paymentMode="ngModel"
-                                                                class="custom-control-input" required>
+                                                                class="custom-control-input" required
+                                                                (change)="chooseMode('OPTCRDC')">
                                                             &nbsp;
                                                             <label class="custom-control-label"
                                                                 for="customRadio1">Credit Card</label>
@@ -179,7 +180,7 @@
                                                                 [(ngModel)]="applConfigData.paymentMode"
                                                                 value="OPTDBCRD" name="customRadio"
                                                                 #paymentMode="ngModel" class="custom-control-input"
-                                                                required> &nbsp;
+                                                                required (change)="chooseMode('OPTDBCRD')"> &nbsp;
                                                             <label class="custom-control-label" for="customRadio2">Debit
                                                                 Card</label>
                                                         </div>
@@ -190,7 +191,8 @@
                                                             <input type="radio" id="customRadio3"
                                                                 [(ngModel)]="applConfigData.paymentMode" value="OPTNBK"
                                                                 name="customRadio" #paymentMode="ngModel"
-                                                                class="custom-control-input" required> &nbsp;
+                                                                class="custom-control-input" required
+                                                                (change)="chooseMode('OPTNBK')"> &nbsp;
                                                             <label class="custom-control-label" for="customRadio3">Net
                                                                 Banking</label>
                                                         </div>
@@ -200,7 +202,8 @@
                                                             <input type="radio" id="customRadio4"
                                                                 [(ngModel)]="applConfigData.paymentMode" value="OPTUPI"
                                                                 name="customRadio" #paymentMode="ngModel"
-                                                                class="custom-control-input" required> &nbsp;
+                                                                class="custom-control-input" required
+                                                                (change)="chooseMode('UPI')"> &nbsp;
                                                             <label class="custom-control-label"
                                                                 for="customRadio4">UPI/Gpay/Phone Pe</label>
                                                         </div>
@@ -212,7 +215,7 @@
                                                                 [(ngModel)]="applConfigData.paymentMode"
                                                                 value="NEFT-RTGS" name="customRadio"
                                                                 #paymentMode="ngModel" class="custom-control-input"
-                                                                required> &nbsp;
+                                                                required (change)="chooseMode('NEFT-RTGS')"> &nbsp;
                                                             <label class="custom-control-label"
                                                                 for="customRadio5">NEFT-RTGS</label>
                                                         </div>

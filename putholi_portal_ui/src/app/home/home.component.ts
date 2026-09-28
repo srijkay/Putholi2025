@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { BaseComponent } from '../common/commonComponent';
 import { DatePipe } from '@angular/common';
-import Swiper, { Navigation, Pagination, Autoplay  } from 'swiper';
+import Swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 
 Swiper.use([Navigation, Pagination, Autoplay]);
 
@@ -32,6 +32,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     {
       year: '2025 - 2026',
       title: 'Financial Statements',
+      pdfUrl: 'assets/pdf/Financial Statement FY 2025-26.pdf',
       alt: "To Be Filed"
     },
     {
@@ -162,10 +163,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
       spaceBetween: 20,
       loop: this.groupedImages.length > 1,
       autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter : true,
-    },
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
       pagination: { el: '.swiper-pagination', clickable: true },
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
     });
